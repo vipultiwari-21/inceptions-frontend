@@ -29,7 +29,7 @@ function Events() {
             >
               {data.description}
             </p>
-            <Link to="" className={`btn ${data.color} btn-wide mt-8 `}>
+            <Link to={data.to} className={`btn ${data.color} btn-wide mt-8 `}>
               Details
             </Link>
           </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  data-theme="night">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -9,5 +9,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+
+window.onblur = function () {
+  document.title = "you went?";
+};
+
+window.onfocus = function () {
+  document.title = "Exceptions - 2023";
+};
+    </script>
   </body>
 </html>

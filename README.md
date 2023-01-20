@@ -52,3 +52,17 @@ After you have pushed the changes to the branch open the repo on the browser and
 
 - [x] Run the react app using vite
 - [x] Update the README.md file for contribution
+- [x] Installing the dependencies
+- [x] TailwindCss configurations
+- [x] DaisyUi Theme setup
+
+### Components:
+
+- [x] Landing Page
+  - [x] Home Banner
+  - [x] About Us
+  - [x] Events
+  - [x] Venue Map
+  - [x] Contact Us
+  - [x] Login
+  - [x] Register

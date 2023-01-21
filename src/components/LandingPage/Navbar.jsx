@@ -52,7 +52,7 @@ function Navbar() {
         <a>
           <img
             src={RvceLogo}
-            style={{ width: "50px", maxWidth: "120px", marginTop: "5px" }}
+            style={{ width: "35px", maxWidth: "120px", marginTop: "5px" }}
             className="rvce_logo"
           />
         </a>

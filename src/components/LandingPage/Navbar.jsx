@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/exceptions/png/E1.png";
-import RvceLogo from "/rvlogo.png";
+import RvceLogo from "/web_logo.png";
 
 function Navbar() {
   return (
@@ -52,7 +52,7 @@ function Navbar() {
         <a>
           <img
             src={RvceLogo}
-            style={{ width: "100px", maxWidth: "120px", marginTop: "5px" }}
+            style={{ width: "50px", maxWidth: "120px", marginTop: "5px" }}
             className="rvce_logo"
           />
         </a>

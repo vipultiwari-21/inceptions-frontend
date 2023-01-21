@@ -1,6 +1,6 @@
 import { Container } from "@mui/system";
 import React from "react";
-import RvceLogo from "/rvlogo.png";
+import RvceLogo from "/web_logo.png";
 function Footer() {
   return (
     <footer className="footer footer-center py-8 bg-primary text-primary-content mt-8">
@@ -8,7 +8,7 @@ function Footer() {
         <img
           src={RvceLogo}
           alt="rv logo"
-          style={{ width: "150px", height: "150px" }}
+          style={{ width: "120px", height: "120px" }}
         />
         <p className="font-bold">
           RV College of Engineering <br />

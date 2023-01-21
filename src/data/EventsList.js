@@ -73,8 +73,8 @@ const EventsList = [
       "Ideas shouldn't be kept, something must be done about it so bring out your inner creativity and imagination into action here at Exceptions 2023 - Constellation(UI/UX designing)",
     img: "/icons/ui.svg",
     direction: "flex-row",
-    color: "btn-success",
-    text: "text-success",
+    color: "btn-primary",
+    text: "text-primary",
   },
   {
     id: 8,
@@ -105,8 +105,8 @@ const EventsList = [
     description: "Why don't you come to the Venue and find out?",
     img: "/icons/mystery.svg",
     direction: "flex-row-reverse",
-    color: "btn-success",
-    text: "text-success",
+    color: "btn-primary",
+    text: "text-primary",
   },
 ];
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/exceptions/png/E1.png";
-import RvceLogo from "../../assets/images/rvce_logo.png";
+import RvceLogo from "/rvlogo.png";
 
 function Navbar() {
   return (
@@ -41,8 +41,8 @@ function Navbar() {
               <a href="#contact">Contact us</a>
             </li>
             <li>
-            <a href="#about">About</a>
-          </li>
+              <a href="#about">About</a>
+            </li>
             <li>
               <Link to="/login">Login</Link>
             </li>
@@ -52,7 +52,7 @@ function Navbar() {
         <a>
           <img
             src={RvceLogo}
-            style={{ width: "100px", maxWidth: "50px", marginTop: "5px" }}
+            style={{ width: "100px", maxWidth: "120px", marginTop: "5px" }}
             className="rvce_logo"
           />
         </a>
@@ -61,13 +61,13 @@ function Navbar() {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-xl text-neutral-content">
-        <li>
-        <a href="#about">About</a>
-      </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
           <li>
             <a href="#events">Events</a>
           </li>
-        {/*  <li>
+          {/*  <li>
             <a href="#sponsors">Sponsors</a>
           </li> */}
 
@@ -78,11 +78,10 @@ function Navbar() {
           <li>
             <a href="#contact">Contact us</a>
           </li>
-         
+
           <li>
             <Link to="/login">Login</Link>
           </li>
-         
         </ul>
       </div>
       <div className="navbar-end">

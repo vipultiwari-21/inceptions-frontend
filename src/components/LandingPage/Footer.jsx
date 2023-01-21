@@ -3,7 +3,7 @@ import React from "react";
 import RvceLogo from "../../assets/images/rvce_logo.png";
 function Footer() {
   return (
-    <footer className="footer footer-center pt-8 bg-primary text-primary-content mt-8">
+    <footer className="footer footer-center py-8 bg-primary text-primary-content mt-8">
       <div>
         <svg
           width="50"

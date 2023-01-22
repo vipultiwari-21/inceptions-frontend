@@ -7,10 +7,10 @@ import ImageTemp from "../../assets/images/img.jpg";
 import EventNavbar from "./EventNavbar";
 
 const DetailedEvents = () => {
-  const id = useParams();
+  const { id } = useParams();
   const [imgURL, setimgURL] = useState("");
 
-  console.log(id);
+  // console.log(id);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center overflow-hidden">
@@ -49,33 +49,33 @@ const DetailedEvents = () => {
             
              {event.requirements.length>0 ?  <span className="text-xl ">Requirements</span> : ""}
 
-            <ul className="list-decimal">
-            {event.requirements.map((requirement)=>{
-              return <li>{requirement}</li>
-             })}
-            </ul>
-             </p>
+                        <ul className="list-decimal">
+                          {event.requirements.map((requirement) => {
+                            return <li>{requirement}</li>;
+                          })}
+                        </ul>
+                      </p>
+                    ) : null}
 
 
              <p className="my-8">
             
              {event.contact.name!="" ?  <span className="text-xl ">Contact</span> : ""}
+                    {event.contact ? (
+                      <p className="my-8">
+                        <span className="text-xl ">Contact</span>
 
-             <ul>
-             <li>{event.contact.name}</li>
-             <li>{event.contact.phone}</li>
-             <li>{event.contact.email}</li>
-             </ul>
-            
-             </p>
-
-
-             
-             </Box>
-              )
-            }  
-          
-        })}
+                        <ul>
+                          <li>{event.contact.name}</li>
+                          <li>{event.contact.phone}</li>
+                          <li>{event.contact.email}</li>
+                        </ul>
+                      </p>
+                    ) : null}
+                  </Box>
+                );
+              }
+            })}
           </Box>
         </Box>
       </Box>

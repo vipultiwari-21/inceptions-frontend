@@ -37,8 +37,7 @@ const DetailedEvents = () => {
              <p className="my-8 text-justify text-md">{event.description}</p>
              <p className="my-8   ">
             
-             <span className="text-xl ">Rules</span>
-
+             {event.rules.length>0 ?  <span className="text-xl ">Rules</span> : ""}
             <ul className="list-decimal">
             {event.rules.map((rule)=>{
               return <li>{rule}</li>
@@ -48,7 +47,7 @@ const DetailedEvents = () => {
 
              <p className="my-8">
             
-             <span className="text-xl ">Requirements</span>
+             {event.requirements.length>0 ?  <span className="text-xl ">Requirements</span> : ""}
 
             <ul className="list-decimal">
             {event.requirements.map((requirement)=>{
@@ -60,7 +59,7 @@ const DetailedEvents = () => {
 
              <p className="my-8">
             
-             <span className="text-xl ">Contact</span>
+             {event.contact.name!="" ?  <span className="text-xl ">Contact</span> : ""}
 
              <ul>
              <li>{event.contact.name}</li>

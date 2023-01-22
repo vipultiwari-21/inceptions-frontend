@@ -2,6 +2,8 @@ import { Container } from "@mui/material";
 import React from "react";
 import MaleAstronaut from "../../assets/svg/male.svg";
 import FemaleAstronaut from "../../assets/svg/female.svg";
+import Faculty1 from '../../assets/svg/faculty1.svg'
+import Faculty2 from '../../assets/svg/faculty2.svg'
 import Grid from '@mui/material/Grid';
 import { Box } from "@mui/material";
 import EmailIcon from '@mui/icons-material/Email';
@@ -80,6 +82,7 @@ function Contact() {
           justifyContent="center"
           alignItems="center"
           flexDirection="column"    >
+          <img src={Faculty1} alt="male" className="img-contact" />
 
           <h3 className="text-center  text-xl text-bold">SAVITHA SHEELAVANTH</h3>
           <h4 className="text-center my-1 text-xl text-bold flex ">
@@ -97,6 +100,8 @@ function Contact() {
           alignItems="center"
           flexDirection="column"
         >
+        <img src={Faculty2} alt="male" className="img-contact" />
+
            <h3 className="text-center  text-xl text-bold">
            DR. SAVITHA R
           </h3>

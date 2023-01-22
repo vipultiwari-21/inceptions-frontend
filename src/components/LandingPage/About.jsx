@@ -1,19 +1,14 @@
-import { Container,Box } from "@mui/material";
+import { Container, Box } from "@mui/material";
 import React from "react";
 import HomeSvg from "../../assets/svg/taken.svg";
-import Grid from '@mui/material/Grid';
-
-
+import Grid from "@mui/material/Grid";
 
 function About() {
   return (
     <Container maxWidth=" my-16 text-neutral-content" id="about">
-      <h1 className="sub-heading text-secondary text-bold text-3xl " >
-        ABOUT
-      </h1>
-      
+      <h1 className="sub-heading text-secondary text-bold text-3xl ">ABOUT</h1>
 
-     {/*
+      {/*
      <Grid container className="lg:px-20" spacing={6}>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}  >
         <img src={HomeSvg} style={{ width: "500px" }} />
@@ -33,33 +28,34 @@ function About() {
       </Grid>
     */}
 
+      <Box className="flex justify-center items-center flex-col lg:flex-row  ">
+        <div className="w-3/4">
+          <img src={HomeSvg} style={{ width: "100%", maxWidth: "35rem" }} />
+        </div>
 
-    <Box className="flex justify-center items-center flex-col lg:flex-row  " >
-    <div className="w-3/4">
-    <img src={HomeSvg} style={{ width: "100%", maxWidth: "35rem" }} />
-
-    </div>
-
-    <div className="w-1/2" style={{width:'100%'}}>
-    <p className="text-neutral-content  text-2xl text-bold  text-justify text-neutral-content 
-    md:text-2xl" style={{width:'100%'}}>
-    R V College of Engineering holds its head high as one of the top
-              ten self-financing colleges in India. The Master of Computer
-              Applications Department of RVCE was established in the year 1997
-              and is affiliated to Visvesvaraya Technological University (VTU),
-              Belgaum. The department is a recognized VTU research center. The
-              MCA course is two year Post-Graduate program in Computer
-              Applications. The MCA Program of RVCE has been accredited by
-              National Board of Accreditation, New Delhi. <br />
-              <br /> Exposed to quantitative and qualitative analysis skills
-              which are inbuilt in the curriculum. Appropriate training is
-              provided to the students to equip themselves to be innovative and
-              creative. The graduates of this discipline also possess adequate
-              analytical, leadership and software skills. The MCA department of
-              RVCE maintains a record of 100% placements every academic year.
-  </p>
-    </div>
-    </Box>
+        <div className="w-1/2" style={{ width: "100%" }}>
+          <p
+            className="text-neutral-content  text-2xl text-bold  text-justify text-neutral-content 
+    md:text-2xl"
+            style={{ width: "100%" }}
+          >
+            R V College of Engineering holds its head high as one of the top ten
+            self-financing colleges in India. The Master of Computer
+            Applications Department of RVCE was established in the year 1997 and
+            is affiliated to Visvesvaraya Technological University (VTU),
+            Belgaum. The department is a recognized VTU research center. The MCA
+            course is two year Post-Graduate program in Computer Applications.
+            The MCA Program of RVCE has been accredited by National Board of
+            Accreditation, New Delhi. <br />
+            <br /> Exposed to quantitative and qualitative analysis skills which
+            are inbuilt in the curriculum. Appropriate training is provided to
+            the students to equip themselves to be innovative and creative. The
+            graduates of this discipline also possess adequate analytical,
+            leadership and software skills. The MCA department of RVCE maintains
+            a record of 100% placements every academic year.
+          </p>
+        </div>
+      </Box>
     </Container>
   );
 }

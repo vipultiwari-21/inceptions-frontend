@@ -30,15 +30,7 @@ const DetailedEvents = () => {
           
 
           {EventDetailList.map((event) => {
-            if (event.name != id.id) {
-              return (
-                <Box className="h-full  w-full font-bold text-3xl flex justify-center items-center " key={id}>
-                  <h1 className=" ">
-                    Event details were not found
-                  </h1>
-                </Box>
-              );
-            } else {
+            if (event.route == id.id) {
               return(
              <Box className="event-detail-container text-neutral font-bold lg:text-black text-white" key={event.id}>
              <h1 className="event-name">{event.name.toUpperCase()}</h1>

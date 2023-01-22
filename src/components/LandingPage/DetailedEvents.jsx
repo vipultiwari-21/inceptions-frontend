@@ -8,9 +8,9 @@ import EventNavbar from "./EventNavbar";
 
 const DetailedEvents = () => {
   const { id } = useParams();
-  const [imgURL, setimgURL] = useState("");
+  
 
-  // console.log(id);
+  
 
   return (
     <div className="flex w-screen h-screen justify-center items-center overflow-hidden">

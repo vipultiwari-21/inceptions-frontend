@@ -62,6 +62,52 @@ function Contact() {
           </Box>
         </Grid>
       </Grid>
+
+
+
+
+      {/* Faculty co ordinators */}
+
+      <h4 className="text-center my-16 text-2xl text-bold ">
+      Faculty Co-ordinators
+    </h4>
+
+
+      <Grid container className="lg:px-20 " spacing={6}>
+      <Grid item xs={12} sm={12} md={6} lg={6} xl={6}  >
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"    >
+
+          <h3 className="text-center  text-xl text-bold">SAVITHA SHEELAVANTH</h3>
+          <h4 className="text-center my-1 text-xl text-bold flex ">
+          <EmailIcon className="mr-3" style={{color:'#E6E6E6  '}} />
+          savitas.sheelavant@rvce.edu.in
+          </h4>
+          
+                 </Box>
+      </Grid>
+
+      <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+        >
+           <h3 className="text-center  text-xl text-bold">
+           DR. SAVITHA R
+          </h3>
+          <h4 className="text-center my-1 text-xl text-bold flex ">
+          <EmailIcon className="mr-3" style={{color:'#FFEEBE'}} />
+          savithar@rvce.edu.in
+          </h4>
+          </Box>
+      </Grid>
+    </Grid>
+
     </Container>
   );
 }

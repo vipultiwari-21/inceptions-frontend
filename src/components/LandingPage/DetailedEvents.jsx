@@ -27,64 +27,59 @@ const DetailedEvents = () => {
           <EventNavbar />
 
           <Box className="h-5/6 w-full p-5 lg:p-12 overflow-y-scroll">
-          
+            {EventDetailList.map((event) => {
+              if (event.name != id.id) {
+                return (
+                  <Box
+                    className="h-full  w-full font-bold text-3xl flex justify-center items-center "
+                    key={id}
+                  >
+                    <h1 className=" ">Event details were not found</h1>
+                  </Box>
+                );
+              } else {
+                return (
+                  <Box
+                    className="event-detail-container text-neutral font-bold lg:text-black text-white"
+                    key={event.id}
+                  >
+                    <h1 className="event-name">{event.name.toUpperCase()}</h1>
+                    <p className="my-8 text-justify text-md">
+                      {event.description}
+                    </p>
+                    <p className="my-8   ">
+                      <span className="text-xl ">Rules</span>
 
-          {EventDetailList.map((event) => {
-            if (event.name != id.id) {
-              return (
-                <Box className="h-full  w-full font-bold text-3xl flex justify-center items-center " key={id}>
-                  <h1 className=" ">
-                    Event details were not found
-                  </h1>
-                </Box>
-              );
-            } else {
-              return(
-             <Box className="event-detail-container text-neutral font-bold lg:text-black text-white" key={event.id}>
-             <h1 className="event-name">{event.name.toUpperCase()}</h1>
-             <p className="my-8 text-justify text-md">{event.description}</p>
-             <p className="my-8   ">
-            
-             <span className="text-xl ">Rules</span>
+                      <ul className="list-decimal">
+                        {event.rules.map((rule) => {
+                          return <li>{rule}</li>;
+                        })}
+                      </ul>
+                    </p>
 
-            <ul className="list-decimal">
-            {event.rules.map((rule)=>{
-              return <li>{rule}</li>
-             })}
-            </ul>
-             </p>
+                    <p className="my-8">
+                      <span className="text-xl ">Requirements</span>
 
-             <p className="my-8">
-            
-             <span className="text-xl ">Requirements</span>
+                      <ul className="list-decimal">
+                        {event.requirements.map((requirement) => {
+                          return <li>{requirement}</li>;
+                        })}
+                      </ul>
+                    </p>
 
-            <ul className="list-decimal">
-            {event.requirements.map((requirement)=>{
-              return <li>{requirement}</li>
-             })}
-            </ul>
-             </p>
+                    <p className="my-8">
+                      <span className="text-xl ">Contact</span>
 
-
-             <p className="my-8">
-            
-             <span className="text-xl ">Contact</span>
-
-             <ul>
-             <li>{event.contact.name}</li>
-             <li>{event.contact.phone}</li>
-             <li>{event.contact.email}</li>
-             </ul>
-            
-             </p>
-
-
-             
-             </Box>
-              )
-            }  
-          
-        })}
+                      <ul>
+                        <li>{event.contact.name}</li>
+                        <li>{event.contact.phone}</li>
+                        <li>{event.contact.email}</li>
+                      </ul>
+                    </p>
+                  </Box>
+                );
+              }
+            })}
           </Box>
         </Box>
       </Box>

@@ -62,6 +62,7 @@ After you have pushed the changes to the branch open the repo on the browser and
   - [x] Home Banner
   - [x] About Us
   - [x] Events
+    - [x] Events Details Page 
   - [x] Venue Map
   - [x] Contact Us
   - [x] Login

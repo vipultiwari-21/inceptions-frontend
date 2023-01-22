@@ -47,7 +47,7 @@ const EventDetailList = [
   {
     id: 3,
     name: "gen - geeks",
-    route: "gen-geeks",
+    route: "gengeeks",
     description:
       "Hola Geeks! Bring your cognitive skills to the arena as Exception is back with its highly anticipated quiz. Strap in for a crazy ride into the energetic universe of quizzing.",
     img: "/icons/manager.svg",
@@ -212,6 +212,7 @@ const EventDetailList = [
     id: 10,
     name: "event x",
     route: "eventx",
+    img: "/icons/manager.svg",
     description: "You Never Know What you Might have in the Store?",
   },
 ];

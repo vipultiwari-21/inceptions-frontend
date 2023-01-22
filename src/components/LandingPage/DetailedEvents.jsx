@@ -8,7 +8,7 @@ const DetailedEvents = () => {
   return (
     <div>
       {EventDetailList.map((event) => {
-        if (event.name === id)
+        if (event.route === id)
           return (
             <>
               <h1>Event: {event.name.toUpperCase()}</h1>
@@ -17,24 +17,26 @@ const DetailedEvents = () => {
               {<p>{event.description}</p>}
               <h4>RULES</h4>
               <ul>
-                {event.rules.map((rule) => (
-                  <li>{rule}</li>
-                ))}
+                {event.rules
+                  ? event.rules.map((rule) => <li>{rule}</li>)
+                  : null}
               </ul>
               <h4>REQUIREMENTS</h4>
               <ul>
-                {event.requirements.map((requirement) => (
-                  <li>{requirement}</li>
-                ))}
+                {event.requirements
+                  ? event.requirements.map((requirement) => (
+                      <li>{requirement}</li>
+                    ))
+                  : null}
               </ul>
               <h4>Contact:</h4>
-              {
+              {event.contact ? (
                 <>
                   <p>{event.contact.name}</p>
                   <p>{event.contact.email}</p>
                   <p>{event.contact.phone}</p>
                 </>
-              }
+              ) : null}
             </>
           );
       })}

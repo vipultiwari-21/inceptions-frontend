@@ -7,10 +7,10 @@ import ImageTemp from "../../assets/images/img.jpg";
 import EventNavbar from "./EventNavbar";
 
 const DetailedEvents = () => {
-  const id = useParams();
+  const { id } = useParams();
   const [imgURL, setimgURL] = useState("");
 
-  console.log(id);
+  // console.log(id);
 
   return (
     <div className="flex w-screen h-screen justify-center items-center overflow-hidden">
@@ -28,16 +28,7 @@ const DetailedEvents = () => {
 
           <Box className="h-5/6 w-full p-5 lg:p-12 overflow-y-scroll">
             {EventDetailList.map((event) => {
-              if (event.name != id.id) {
-                return (
-                  <Box
-                    className="h-full  w-full font-bold text-3xl flex justify-center items-center "
-                    key={id}
-                  >
-                    <h1 className=" ">Event details were not found</h1>
-                  </Box>
-                );
-              } else {
+              if (event.route == id) {
                 return (
                   <Box
                     className="event-detail-container text-neutral font-bold lg:text-black text-white"
@@ -47,35 +38,41 @@ const DetailedEvents = () => {
                     <p className="my-8 text-justify text-md">
                       {event.description}
                     </p>
-                    <p className="my-8   ">
-                      <span className="text-xl ">Rules</span>
+                    {event.rules ? (
+                      <p className="my-8   ">
+                        <span className="text-xl ">Rules</span>
 
-                      <ul className="list-decimal">
-                        {event.rules.map((rule) => {
-                          return <li>{rule}</li>;
-                        })}
-                      </ul>
-                    </p>
+                        <ul className="list-decimal">
+                          {event.rules.map((rule) => {
+                            return <li>{rule}</li>;
+                          })}
+                        </ul>
+                      </p>
+                    ) : null}
 
-                    <p className="my-8">
-                      <span className="text-xl ">Requirements</span>
+                    {event.requiremetns ? (
+                      <p className="my-8">
+                        <span className="text-xl ">Requirements</span>
 
-                      <ul className="list-decimal">
-                        {event.requirements.map((requirement) => {
-                          return <li>{requirement}</li>;
-                        })}
-                      </ul>
-                    </p>
+                        <ul className="list-decimal">
+                          {event.requirements.map((requirement) => {
+                            return <li>{requirement}</li>;
+                          })}
+                        </ul>
+                      </p>
+                    ) : null}
 
-                    <p className="my-8">
-                      <span className="text-xl ">Contact</span>
+                    {event.contact ? (
+                      <p className="my-8">
+                        <span className="text-xl ">Contact</span>
 
-                      <ul>
-                        <li>{event.contact.name}</li>
-                        <li>{event.contact.phone}</li>
-                        <li>{event.contact.email}</li>
-                      </ul>
-                    </p>
+                        <ul>
+                          <li>{event.contact.name}</li>
+                          <li>{event.contact.phone}</li>
+                          <li>{event.contact.email}</li>
+                        </ul>
+                      </p>
+                    ) : null}
                   </Box>
                 );
               }

@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Temporary from "./Temporary";
 import DetailedEvents from "./components/LandingPage/DetailedEvents";
+import Registration from "./components/auth/Registration";
+import Login from './components/auth/Login'
+
 
 function App() {
   const [count, setCount] = useState(0);

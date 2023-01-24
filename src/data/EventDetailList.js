@@ -101,7 +101,6 @@ const EventDetailList = [
       "Participants shall carry their own phone and laptop chargers.",
       "Install required software prior to the event",
     ],
-    requirements:[],
     contact: {
       name: "Aishwarya Kamble",
       email: "aishwaryakk.mca21@rvce.edu.in",
@@ -177,7 +176,6 @@ const EventDetailList = [
       "Participants are expected to act ethically and refrain from any illegal or unethical behavior such as hacking or cheating.",
       "Team members should inform one of the organizers before leaving the venue, failure to do so will result in disqualification of the entire team.",
     ],
-    requirements:[],
     contact: {
       name: "Prajwal K",
       email: "prajwalk.mca21@rvce.edu.in",
@@ -204,7 +202,6 @@ const EventDetailList = [
       "At the end of the hackathon, participants must submit their projects and provide all required documentation.",
       "The decision of the judges will be final, and no correspondence will be entered into regarding their decision.",
     ],
-    requirements:[],
     contact: {
       name: "Puneeth Kumar V",
       email: "puneethkv.mca21@rvce.edu.in",
@@ -217,13 +214,6 @@ const EventDetailList = [
     route: "eventx",
     img: "/icons/manager.svg",
     description: "You Never Know What you Might have in the Store?",
-    rules:[],
-    requirements:[],
-    contact: {
-      name: "",
-      email: "",
-      phone: "",
-    },
   },
 ];
 

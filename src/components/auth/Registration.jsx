@@ -1,7 +1,7 @@
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Formik,Field } from "formik";
+import { Formik, Field } from "formik";
 import Logo from "../../assets/exceptions/png/E.png";
 import Background from "../custom_styling/Background";
 import { useNavigate } from "react-router-dom";
@@ -13,37 +13,77 @@ import { State } from "country-state-city";
 
 function Registration() {
   const states = State.getStatesOfCountry("IN");
-  const [loading,setLoading]=useState(false)
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const url = "";
-
 
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
     password: yup.string().required("required"),
   });
-  const initialValues={
+  const initialValues = {
     email: "",
     firstName: "",
     lastName: "",
     contactNumber: "",
     password: "",
-    confirmPassword:"",
+    confirmPassword: "",
     collegeName: "",
     usn: "",
     state: "",
     city: "",
     zip: "",
-  }
+  };
 
+  const loginAuth = async (values) => {
 
-  
-  const loginAuth = async (values) => {};
+   
+  };
 
-  const handleFormSubmit = async (values, { setSubmitting }) => {
-    console.log("values", values);
-    const data = await loginAuth(values);
-    console.log("data", data);
+  const handleFormSubmit = async (values, { setSubmitting , resetForm } ) => {
+    try {
+      setLoading(true);
+      // console.log(import.meta.env.VITE_API_ENDPOINT);
+
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_ENDPOINT}auth/register-participant`,
+        {
+          email: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          contactNumber: values.contactNumber,
+          password: values.password,
+          collegeName: values.collegeName,
+          usn: values.usn,
+          state: values.state,
+          city: values.city,
+          zip: values.zip,
+        }
+      );
+
+      console.log(data)
+      
+      try{
+        await axios.post(
+          `${import.meta.env.VITE_API_ENDPOINT}auth/send-confirmation-email`,
+          {
+            "userId": data.userId
+          }
+          )
+          alert("We have sent you a confirmation email, please verify your email before logging in")
+      }catch(err){
+        alert(err.response.data.error)
+      }
+        
+       setLoading(false)
+
+    } catch (err) {
+      setLoading(false)
+      console.log(err)
+      alert(err.response.data.error)
+    }
+
+    resetForm()
+
   };
 
   return (
@@ -61,7 +101,7 @@ function Registration() {
          "
               >
                 <div className="lg:flex lg:flex-wrap g-0 w-full">
-                  <div className="lg:w-6/12 px-4 md:px-0 w-full" >
+                  <div className="lg:w-6/12 px-4 md:px-0 w-full">
                     <div className="md:p-12 md:mx-6 w-full">
                       <div className="text-center">
                         <img className="mx-auto w-36" src={Logo} alt="logo" />
@@ -92,172 +132,162 @@ function Registration() {
                               Lets create an account
                             </p>
                             <div className="flex justify-around items-center  w-full flex-wrap">
-
-
-
-                            <div className="mb-4 basis-full lg:basis-1/2 ">
-                              <input
-                                type="text"
-                                name="firstName"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.firstName}
-                                placeholder="First Name"
-                                className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                              />
-                              </div>
-
-
-                              <div className="mb-4 basis-full lg:basis-1/2">
-                              <input
-                                type="text"
-                                name="lastName"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.lastName}
-                                placeholder="Last Name"
-                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                              />
+                              <div className="mb-4 basis-full lg:basis-1/2 ">
+                                <input
+                                  type="text"
+                                  name="firstName"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.firstName}
+                                  placeholder="First Name"
+                                  className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
-                              <input
-                                type="text"
-                                name="contactNumber"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.contactNumber}
-                                placeholder="Contact Number"
-                                className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                              />
+                                <input
+                                  type="text"
+                                  name="lastName"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.lastName}
+                                  placeholder="Last Name"
+                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                />
                               </div>
 
-                            
-                            <div className="mb-4 basis-full lg:basis-1/2">
-                              <input
-                                type="email"
-                                name="email"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email}
-                                placeholder="Email ID"
-                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                              />
-                            </div>
+                              <div className="mb-4 basis-full lg:basis-1/2">
+                                <input
+                                  type="text"
+                                  name="contactNumber"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.contactNumber}
+                                  placeholder="Contact Number"
+                                  className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                />
+                              </div>
 
-                            <div className="mb-4 basis-full ">
-                            <input
-                              type="text"
-                              name="collegeName"
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={values.collegeName}
-                              placeholder="College Name "
-                              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            />
-                            </div>
+                              <div className="mb-4 basis-full lg:basis-1/2">
+                                <input
+                                  type="email"
+                                  name="email"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.email}
+                                  placeholder="Email ID"
+                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                />
+                              </div>
 
-                            <div className="mb-4 basis-full ">
-                            <input
-                              type="text"
-                              name="usn"
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={values.usn}
-                              placeholder="University number "
-                              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            />
-                            </div>
+                              <div className="mb-4 basis-full ">
+                                <input
+                                  type="text"
+                                  name="collegeName"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.collegeName}
+                                  placeholder="College Name "
+                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                />
+                              </div>
 
+                              <div className="mb-4 basis-full ">
+                                <input
+                                  type="text"
+                                  name="usn"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.usn}
+                                  placeholder="University number "
+                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                />
+                              </div>
 
-                            <div className="mb-4 basis-full lg:basis-1/2">
-                            <input
-                              type="text"
-                              name="city"
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={values.city}
-                              placeholder="City"
-                              className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            />
-                            </div>
+                              <div className="mb-4 basis-full lg:basis-1/2">
+                                <input
+                                  type="text"
+                                  name="city"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.city}
+                                  placeholder="City"
+                                  className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                />
+                              </div>
 
-                           
+                              <div className="mb-4 basis-full lg:basis-1/2">
+                                <input
+                                  type="text"
+                                  name="zip"
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  value={values.zip}
+                                  placeholder="Zip code"
+                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                />
+                              </div>
 
+                              <div className="mb-4 basis-full ">
+                                <Field
+                                  name="state"
+                                  as="select"
+                                  className="form-control block state-selector w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                >
+                                  <option value="">Select State</option>
+                                  {states.map((state) => {
+                                    return (
+                                      <option
+                                        value={state.name}
+                                        key={state.name}
+                                      >
+                                        {state.name}
+                                      </option>
+                                    );
+                                  })}
+                                </Field>
+                              </div>
 
-                            <div className="mb-4 basis-full lg:basis-1/2">
-                            <input
-                              type="text"
-                              name="city"
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={values.zip}
-                              placeholder="Zip code"
-                              className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            />
-                            </div>
+                              <div className="mb-4 basis-full lg:basis-1/2">
+                                <input
+                                  type="password"
+                                  onChange={handleChange}
+                                  name="password"
+                                  className="form-control block w-full  lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  id="exampleFormControlInput1"
+                                  placeholder="Password"
+                                  value={values.password}
+                                />
+                              </div>
 
-                            <div className="mb-4 basis-full ">
-                            <Field
-                              name="state"
-                              as="select"
-                              className="form-control block state-selector w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            >
-                              <option value="">Select State</option>
-                              {states.map((state) => {
-                                return (
-                                  <option value={state.name} key={state.name}>
-                                    {state.name}
-                                  </option>
-                                );
-                              })}
-                            </Field>
-                          </div>
-    
+                              <div className="mb-4 basis-full lg:basis-1/2 ">
+                                <input
+                                  type="password"
+                                  onChange={handleChange}
+                                  name="confirmPassword"
+                                  className="form-control block w-full  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  id="exampleFormControlInput1"
+                                  placeholder="Confirm Password"
+                                  value={values.confirmPassword}
+                                />
+                              </div>
 
-                            <div className="mb-4 basis-full lg:basis-1/2">
-                              <input
-                                type="password"
-                                onChange={handleChange}
-                                name="password"
-                                className="form-control block w-full  lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                id="exampleFormControlInput1"
-                                placeholder="Password"
-                                value={values.password}
-                              />
-                            </div>
-
-                            <div className="mb-4 basis-full lg:basis-1/2 ">
-                            <input
-                              type="password"
-                              onChange={handleChange}
-                              name="confirmPassword"
-                              className="form-control block w-full  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                              id="exampleFormControlInput1"
-                              placeholder="Confirm Password"
-                              value={values.confirmPassword}
-                            />
-                          </div>
-
-                          
-
-
-                            <div className="text-center pt-1 mb-6 basis-full pb-1">
-                              <button
-                                className={` py-2.5 text-neutral btn btn-outline btn-warning
+                              <div className="text-center pt-1 mb-6 basis-full pb-1">
+                                <button
+                                  className={` py-2.5 text-neutral btn btn-outline btn-warning
                                 text-neutral font-bold btn-register
                                text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg 
                                focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition
                                 duration-150 ease-in-out w-full  ${
                                   loading ? "loading" : null
                                 } `}
-                                type="submit"
-                                data-mdb-ripple="true"
-                                data-mdb-ripple-color="light"
-                              >
-                                Register
-                              </button>
-                            </div>
+                                  type="submit"
+                                  data-mdb-ripple="true"
+                                  data-mdb-ripple-color="light"
+                                >
+                                  Register
+                                </button>
+                              </div>
                             </div>
 
                             <div className="">

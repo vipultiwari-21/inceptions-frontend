@@ -107,7 +107,7 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: {xs:"#000",sm:'#000',md:"#000",lg:"#000"}, display: "block",fontWeight:'bold',ml:{lg:10} }}
+                sx={{ my: 2, color: {xs:"#fff",sm:'#fff',md:"#fff",lg:"#fff"}, display: "block",fontWeight:'bold',ml:{lg:10} }}
               >
             
 

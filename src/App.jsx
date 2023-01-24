@@ -9,14 +9,14 @@ import Login from './components/auth/Login'
 
 
 function App() {
-  const [count, setCount] = useState(0);
+  
 
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/login" element={<Temporary />} />
-        <Route exact path="/register" element={<Temporary />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Registration />} />
         <Route path="/details/:id" element={<DetailedEvents />} />
       </Routes>
     </BrowserRouter>

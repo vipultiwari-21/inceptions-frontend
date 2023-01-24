@@ -12,25 +12,26 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import * as yup from "yup";
-import { Button,Modal } from "@mui/material";
-
+import { Button, Modal } from "@mui/material";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const url = ""
+  const url = "";
 
   const [role, setRole] = useState("");
-  const [emailVal,setEmailVal]=useState("")
-  const [resetloading,setResetLoading]=useState("")
-  const [open,setOpen]=useState("")
+  const [emailVal, setEmailVal] = useState("");
+  const [resetloading, setResetLoading] = useState("");
 
-  const handleOpen=()=>{
-    setOpen(true)
-  }
-  const handleClose=()=>{
-    setOpen(false)
-  }
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState("");
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
@@ -41,23 +42,20 @@ function Login() {
     password: "",
   };
 
-
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
   const handleForgotPassword = async () => {
-    setResetLoading(true)
+    setResetLoading(true);
     await axios
       .post(
         `https://exceptions-website-backend.vercel.app/auth/reset-password`,
@@ -67,45 +65,49 @@ const style = {
       )
       .then((data) => {
         console.log(data);
-        setResetLoading(false)
-        setOpen(false)
-        alert("Check your mail for password reset link")
-        setEmailVal('')
+        setResetLoading(false);
+        setOpen(false);
+        alert("Check your mail for password reset link");
+        setEmailVal("");
       })
-      .catch((err) =>
-       {alert(err)
-      setResetLoading(false)
-      setEmailVal('')
-      setOpen(false)
+      .catch((err) => {
+        alert(err);
+        setResetLoading(false);
+        setEmailVal("");
+        setOpen(false);
       });
-      
   };
 
-  const loginAuth = async (values) => {
+  const loginAuth = async (values) => {};
+
+  const handleFormSubmit = async (values, { setSubmitting }) => {
+    console.log("values", values);
+    // const data = await loginAuth(values);
+    // console.log("data", data);
+
     try {
-      console.log(process.env.REACT_APP_API);
+      setLoading(true);
+      console.log(import.meta.env.VITE_API_ENDPOINT);
+
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API}auth/login`,
+        `${import.meta.env.VITE_API_ENDPOINT}auth/login`,
         {
           email: values.email,
           password: values.password,
         }
       );
-      // console.log(data);
+
       dispatch(addTodo(true));
       dispatch(accessTokenModifier(data.accessToken));
       Cookies.set("token", data.accessToken);
       Cookies.set("auth", true);
       window.location.href = "user/profile";
+      setLoading(false);
     } catch (err) {
-      alert(err);
+      alert(err.response.data.error);
+      setLoading(false)
+      
     }
-  };
-
-  const handleFormSubmit = async (values, { setSubmitting }) => {
-    console.log("values", values);
-    const data = await loginAuth(values);
-    console.log("data", data);
   };
 
   return (
@@ -177,29 +179,25 @@ const style = {
                             </div>
                             <div className="text-center pt-1 mb-6 pb-1">
                               <button
-                                className="inline-block px-6 py-2.5 text-neutral btn btn-outline btn-warning
-                       text-neutral font-bold
-                      text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg 
-                      focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition
-                       duration-150 ease-in-out w-full mb-3"
+                                className={`px-6 py-2.5 text-neutral btn btn-outline btn-warning
+                                text-neutral font-bold btn-register
+                               text-sm leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg 
+                               focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition
+                                duration-150 ease-in-out w-72  ml-3 ${
+                                  loading ? "loading" : null
+                                } `}
                                 type="submit"
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                               >
                                 Log in
                               </button>
-                              <Button onClick={handleOpen} >
-                              <span className="text-primary  font-bold">
-                                Forgot password ?
-                              </span>
-                            </Button>
-
-                           
-                          
-                           
+                              <Button onClick={handleOpen}>
+                                <span className="text-primary  font-bold">
+                                  Forgot password ?
+                                </span>
+                              </Button>
                             </div>
-
-                            
 
                             <div className="">
                               <p className="mb-0 font-bold login-link ">

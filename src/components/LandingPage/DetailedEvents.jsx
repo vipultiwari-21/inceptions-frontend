@@ -13,10 +13,10 @@ const DetailedEvents = () => {
   
 
   return (
-    <div className="flex w-screen h-screen justify-center items-center overflow-hidden">
+    <div className="flex w-screen h-screen justify-center items-center ">
       <Background />
 
-      <Box className="lg:bg-white w-10/12 h-5/6 flex lg:flex-row flex-col">
+      <Box className="bg-neutral  lg:w-10/12 lg:h-5/6 w-full h-full px-3 lg:p-0  flex lg:flex-row flex-col">
         <img
           src={ImageTemp}
           alt="temp"
@@ -31,18 +31,18 @@ const DetailedEvents = () => {
               if (event.route == id) {
                 return (
                   <Box
-                    className="event-detail-container text-neutral font-bold lg:text-black text-white"
+                    className="event-detail-container text-neutral font-bold  text-white"
                     key={event.id}
                   >
-                    <h1 className="event-name">{event.name.toUpperCase()}</h1>
-                    <p className="my-8 text-justify text-md">
+                    <h4 className="event-name text-3xl lg:text-5xl text-primary">{event.name.toUpperCase()}</h4>
+                    <p className="my-8 text-justify text-md ">
                       {event.description}
                     </p>
                     {event.rules ? (
-                      <p className="my-8   ">
-                        <span className="text-xl ">Rules</span>
+                      <p className="my-8 ">
+                        <span className="text-xl text-secondary ">Rules</span>
 
-                        <ul className="list-decimal">
+                        <ul className="list-disc">
                           {event.rules.map((rule) => {
                             return <li>{rule}</li>;
                           })}
@@ -52,9 +52,9 @@ const DetailedEvents = () => {
 
                     {event.requiremetns ? (
                       <p className="my-8">
-                        <span className="text-xl ">Requirements</span>
+                        <span className="text-xl text-secondary">Requirements</span>
 
-                        <ul className="list-decimal">
+                        <ul className="list-disc">
                           {event.requirements.map((requirement) => {
                             return <li>{requirement}</li>;
                           })}
@@ -64,7 +64,7 @@ const DetailedEvents = () => {
 
                     {event.contact ? (
                       <p className="my-8">
-                        <span className="text-xl ">Contact</span>
+                        <span className="text-xl text-secondary">Contact</span>
 
                         <ul>
                           <li>{event.contact.name}</li>

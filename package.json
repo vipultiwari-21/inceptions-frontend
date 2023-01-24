@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
+    
   },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+},
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -48,6 +52,7 @@
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4",
-    "vite": "^4.0.0"
+    "vite": "^4.0.0",
+    "react-error-overlay": "6.0.9" 
   }
 }

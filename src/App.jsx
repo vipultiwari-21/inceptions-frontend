@@ -8,7 +8,7 @@ import Registration from "./components/auth/Registration";
 import Login from "./components/auth/Login";
 
 function App() {
-  const [count, setCount] = useState(0);
+  
 
   return (
     <BrowserRouter>

@@ -6,7 +6,11 @@
 }
 
 
-
+@media screen and (max-width: 768px){
+  ::-webkit-scrollbar {
+      -webkit-appearance: none;
+  }
+}
 
 body {
   overflow-x: hidden;
@@ -19,7 +23,7 @@ body {
 }
 
 .active{
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #fff;
   padding-bottom: 10px;
 }
 
@@ -91,7 +95,6 @@ font-weight: bold;
 
 .event-detail-container .event-name{
 font-family: gallient;
-font-size: 3rem;
 }
 
 
@@ -100,7 +103,9 @@ font-size: 3rem;
 
 @media (min-width:600px){
 
-
+  /* Track */
+  
+  
 
 
   .img-banner{
@@ -129,6 +134,11 @@ font-size: 3rem;
 
 
 
+
+  ::-webkit-scrollbar {
+    -webkit-appearance: none !important;
+}
+
 .logo{
   width:50px !important;
 }
@@ -146,7 +156,8 @@ font-size: 3rem;
     line-height: 1.7 !important;
   }
 
-  
+
+
 
 
 
@@ -233,20 +244,20 @@ html {
   width: 10px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+
+ ::-webkit-scrollbar-track {
+  background: #818CF8;
+} 
+
+
+ ::-webkit-scrollbar-thumb {
+  background: gainsboro;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+ ::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+}  
 
 
 

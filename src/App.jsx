@@ -15,8 +15,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Registration />} />
+        <Route exact path="/login" element={<Temporary />} />
+        <Route exact path="/register" element={<Temporary />} />
         <Route path="/details/:id" element={<DetailedEvents />} />
       </Routes>
     </BrowserRouter>

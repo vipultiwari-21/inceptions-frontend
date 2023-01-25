@@ -4,7 +4,7 @@ export const Authentication = createSlice({
   name: 'auth',
   initialState: [],
   reducers: {
-    addTodo: (state, action) => {
+    stateModifier: (state, action) => {
       const authenticator = {
         text: action.payload || false,
         
@@ -24,7 +24,7 @@ export const Authentication = createSlice({
 });
 
 // this is for dispatch
-export const {addTodo} = Authentication.actions;
+export const {stateModifier} = Authentication.actions;
 
 // this is for configureStore
 export default Authentication.reducer;

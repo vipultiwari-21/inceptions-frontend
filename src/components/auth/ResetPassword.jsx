@@ -1,92 +1,62 @@
-import { Container } from "@mui/system";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Formik } from "formik";
-import Logo from "../../assets/exceptions/png/E.png";
-import Background from "../custom_styling/Background";
-import { useNavigate } from "react-router-dom";
-import Exceptions from "../../assets/svg/male.svg";
-import {  stateModifier } from "../../features/reducers/slice";
-import { accessTokenModifier } from "../../features/reducers/accessToken";
-import Cookies from "js-cookie";
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import * as yup from "yup";
-import { Button, Modal } from "@mui/material";
+import React,{useEffect,useState} from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Container } from '@mui/system';
+import Background from '../custom_styling/Background';
+import Logo from '../../assets/exceptions/png/E.png'
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import Exceptions from '../../assets/svg/taken.svg' 
+import axios from 'axios'
 
 
-function Login() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const url = "";
+function ResetPassword() {
+    
+    const [queryParameters] = useSearchParams()
+    const jwtToken=queryParameters.get("jwtToken")
+    const userID=queryParameters.get("userId")
+    const [loading,setLoading]=useState(false)
+    const navigate=useNavigate()
 
-  const [role, setRole] = useState("");
-  const [emailVal, setEmailVal] = useState("");
- 
+    useEffect(()=>{
+        console.log("JWT TOKEN : ",jwtToken)
+        console.log("USER ID : ",userID)
+    },[])
 
-  const [loading, setLoading] = useState(false);
-
-  const checkoutSchema = yup.object().shape({
-    email: yup.string().email("invalid email").required("required"),
-    password: yup.string().required("required"),
-  });
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-
-  const handleForgotPassword =  () => {
-    navigate("/forgot-password")
-  };
-
-  const loginAuth = async (values) => {};
-
-  const handleFormSubmit = async (values, { setSubmitting }) => {
-    console.log("values", values);
-    // const data = await loginAuth(values);
-    // console.log("data", data);
-
-    try {
-      setLoading(true);
-      console.log(import.meta.env.VITE_API_ENDPOINT);
-
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_ENDPOINT}auth/login`,
-        {
-          email: values.email,
-          password: values.password,
-        }
-      );
-
-      dispatch(stateModifier(true));
-      dispatch(accessTokenModifier(data.accessToken));
-      Cookies.set("token", data.accessToken);
-      Cookies.set("auth", true);
-      window.location.href = "user/profile";
-      setLoading(false);
-    } catch (err) {
-      alert(err.response.data.error);
-      setLoading(false)
-      
+    const initialValues = {
+        password: '',
+        cpassword: ''
     }
 
-    setLoading(false)
-  };
+    const checkoutSchema = yup.object().shape({
+        password: yup.string().required("required"),
+        cpassword: yup.string().required("required")
+
+    });
+
+    const handleResetPassword=async(values)=>{
+        try{
+            const {data}= await axios.post(`${import.meta.env.VITE_API_ENDPOINT}auth/update-password?jwtToken=${jwtToken}&userId=${userID}`,{
+                "newPassword": values.password
+                
+            }) 
+            alert(data.message)
+        }catch(err){
+            alert("Token has expired ! request a new token");
+            navigate("/forgot-password")
+
+        }
+    }
+
+    const handleFormSubmit = async (values, { setSubmitting , resetForm}) => {
+        setLoading(true)
+        console.log("values", values);
+         handleResetPassword(values)
+         resetForm()
+         setLoading(false)
+    };
 
   return (
-    <Container maxWidth="xl">
+      <Container maxWidth="xl">
       <Background />
       <section className="h-full gradient-form  md:h-screen login-container text-center">
         <div className="container py-12 px-6 h-full">
@@ -132,12 +102,12 @@ function Login() {
                             </p>
                             <div className="mb-4">
                               <input
-                                type="email"
-                                name="email"
+                                type="password"
+                                name="password"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.email}
-                                placeholder="Email ID"
+                                value={values.password}
+                                placeholder="New password"
                                 className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               />
                             </div>
@@ -145,11 +115,11 @@ function Login() {
                               <input
                                 type="password"
                                 onChange={handleChange}
-                                name="password"
+                                name="cpassword"
                                 className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 id="exampleFormControlInput1"
-                                placeholder="Password"
-                                value={values.password}
+                                placeholder="Confirm password"
+                                value={values.cpassword}
                               />
                             </div>
                             <div className="text-center pt-1 mb-6 pb-1">
@@ -165,28 +135,12 @@ function Login() {
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                               >
-                                Log in
+                                Update password
                               </button>
-                              <Button >
-                                <span className="text-primary  font-bold" onClick={handleForgotPassword}>
-                                  Forgot password ?
-                                </span>
-                              </Button>
+                             
                             </div>
 
-                            <div className="">
-                              <p className="mb-0 font-bold login-link ">
-                                Don't have an account?{" "}
-                                <Link to="/register" className="text-warning">
-                                  Click here
-                                </Link>
-                              </p>
-
-                              <p className="text-primary font-bold  underline text-center mt-3">
-                                {" "}
-                                <Link to="/">Back Home</Link>
-                              </p>
-                            </div>
+                            
                           </form>
                         )}
                       </Formik>
@@ -214,7 +168,8 @@ function Login() {
         </div>
       </section>
     </Container>
-  );
+  
+  )
 }
 
-export default Login;
+export default ResetPassword

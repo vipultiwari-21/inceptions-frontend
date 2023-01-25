@@ -8,16 +8,16 @@ import { useNavigate } from "react-router-dom";
 import Exceptions from "../../assets/svg/male.svg";
 import axios from "axios";
 import * as yup from "yup";
-import { State } from "country-state-city";
 
-function Registration() {
-  const states = State.getStatesOfCountry("IN");
+function RegisterPrivate() {
   const [loading, setLoading] = useState(false);
-  const url = "";
 
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
     password: yup.string().required("required"),
+    firstName: yup.string().required("required"),
+    lastName: yup.string().required("required"),
+    contactNumber: yup.string().required("required"),
   });
   const initialValues = {
     email: "",
@@ -26,63 +26,53 @@ function Registration() {
     contactNumber: "",
     password: "",
     confirmPassword: "",
-    collegeName: "",
-    usn: "",
-    state: "",
-    city: "",
-    zip: "",
+    role:""
   };
 
-  const loginAuth = async (values) => {
-
-   
-  };
-
-  const handleFormSubmit = async (values, { setSubmitting , resetForm } ) => {
+  const performRegistration = async (api, values) => {
+    setLoading(true);
     try {
-      setLoading(true);
-      // console.log(import.meta.env.VITE_API_ENDPOINT);
-
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_ENDPOINT}auth/register-participant`,
-        {
-          email: values.email,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          contactNumber: values.contactNumber,
-          password: values.password,
-          collegeName: values.collegeName,
-          usn: values.usn,
-          state: values.state,
-          city: values.city,
-          zip: values.zip,
-        }
-      );
-
-      console.log(data)
-      
+      const { data } = await axios.post(api, {
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        contactNumber: values.contactNumber,
+        password: values.password,
+      });
+      console.log(data);
       try{
-        await axios.post(
-          `${import.meta.env.VITE_API_ENDPOINT}auth/send-confirmation-email`,
-          {
-            "userId": data.userId
-          }
-          )
-          alert("We have sent you a confirmation email, please verify your email before logging in")
+        await axios.post(`${import.meta.env.VITE_API_ENDPOINT}auth/send-confirmation-email`,{
+            userId:data.userId,
+            
+        })
+        alert("Please check your mail , we have sent a verification email")
       }catch(err){
-        alert(err.response.data.error)
-      }
-        
-       setLoading(false)
+        alert(err.response.data.error);
 
+      }
     } catch (err) {
-      setLoading(false)
-      console.log(err)
-      alert(err.response.data.error)
+      alert(err.response.data.error);
+    }
+    setLoading(false);
+  };
+
+  const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
+    if (values.role == "admin") {
+      const api = `${import.meta.env.VITE_API_ENDPOINT}auth/register-admin/`;
+      performRegistration(api, values);
+    } else if (values.role == "volunteer") {
+      const api = `${
+        import.meta.env.VITE_API_ENDPOINT
+      }auth/register-coordinator/`;
+      performRegistration(api, values);
+    } else if (values.role == "coordinator") {
+      const api = `${
+        import.meta.env.VITE_API_ENDPOINT
+      }auth/register-volunteer/`;
+      performRegistration(api, values);
     }
 
-    resetForm()
-
+    resetForm();
   };
 
   return (
@@ -131,6 +121,21 @@ function Registration() {
                               Lets create an account
                             </p>
                             <div className="flex justify-around items-center  w-full flex-wrap">
+                              <div className="mb-4 basis-full ">
+                                <Field
+                                  name="role"
+                                  as="select"
+                                  className="form-control block state-selector w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                >
+                                  <option value="">Select Role</option>
+                                  <option value="admin">Admin</option>
+                                  <option value="coordinator">
+                                    Co ordinator
+                                  </option>
+                                  <option value="volunteer">Volunteer</option>
+                                </Field>
+                              </div>
+
                               <div className="mb-4 basis-full lg:basis-1/2 ">
                                 <input
                                   type="text"
@@ -179,74 +184,6 @@ function Registration() {
                                 />
                               </div>
 
-                              <div className="mb-4 basis-full ">
-                                <input
-                                  type="text"
-                                  name="collegeName"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.collegeName}
-                                  placeholder="College Name "
-                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                />
-                              </div>
-
-                              <div className="mb-4 basis-full ">
-                                <input
-                                  type="text"
-                                  name="usn"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.usn}
-                                  placeholder="University number "
-                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                />
-                              </div>
-
-                              <div className="mb-4 basis-full lg:basis-1/2">
-                                <input
-                                  type="text"
-                                  name="city"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.city}
-                                  placeholder="City"
-                                  className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                />
-                              </div>
-
-                              <div className="mb-4 basis-full lg:basis-1/2">
-                                <input
-                                  type="text"
-                                  name="zip"
-                                  onChange={handleChange}
-                                  onBlur={handleBlur}
-                                  value={values.zip}
-                                  placeholder="Zip code"
-                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                />
-                              </div>
-
-                              <div className="mb-4 basis-full ">
-                                <Field
-                                  name="state"
-                                  as="select"
-                                  className="form-control block state-selector w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                >
-                                  <option value="">Select State</option>
-                                  {states.map((state) => {
-                                    return (
-                                      <option
-                                        value={state.name}
-                                        key={state.name}
-                                      >
-                                        {state.name}
-                                      </option>
-                                    );
-                                  })}
-                                </Field>
-                              </div>
-
                               <div className="mb-4 basis-full lg:basis-1/2">
                                 <input
                                   type="password"
@@ -290,14 +227,7 @@ function Registration() {
                             </div>
 
                             <div className="">
-                              <p className="mb-0 font-bold login-link ">
-                                Already have an account?{" "}
-                                <Link to="/login" className="text-warning">
-                                  Click here
-                                </Link>
-                              </p>
-
-                              <p className="text-primary font-bold  underline text-center mt-3">
+                              <p className="text-primary font-bold  underline text-center">
                                 {" "}
                                 <Link to="/">Back Home</Link>
                               </p>
@@ -332,4 +262,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default RegisterPrivate;

@@ -6,14 +6,13 @@ import Logo from "../../assets/exceptions/png/E.png";
 import Background from "../custom_styling/Background";
 import { useNavigate } from "react-router-dom";
 import Exceptions from "../../assets/svg/male.svg";
-import {  stateModifier } from "../../features/reducers/slice";
+import { stateModifier } from "../../features/reducers/slice";
 import { accessTokenModifier } from "../../features/reducers/accessToken";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import * as yup from "yup";
 import { Button, Modal } from "@mui/material";
-
 
 function Login() {
   const navigate = useNavigate();
@@ -22,7 +21,6 @@ function Login() {
 
   const [role, setRole] = useState("");
   const [emailVal, setEmailVal] = useState("");
- 
 
   const [loading, setLoading] = useState(false);
 
@@ -47,8 +45,8 @@ function Login() {
     p: 4,
   };
 
-  const handleForgotPassword =  () => {
-    navigate("/forgot-password")
+  const handleForgotPassword = () => {
+    navigate("/forgot-password");
   };
 
   const loginAuth = async (values) => {};
@@ -78,11 +76,10 @@ function Login() {
       setLoading(false);
     } catch (err) {
       alert(err.response.data.error);
-      setLoading(false)
-      
+      setLoading(false);
     }
 
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
@@ -167,8 +164,11 @@ function Login() {
                               >
                                 Log in
                               </button>
-                              <Button >
-                                <span className="text-primary  font-bold" onClick={handleForgotPassword}>
+                              <Button>
+                                <span
+                                  className="text-primary  font-bold"
+                                  onClick={handleForgotPassword}
+                                >
                                   Forgot password ?
                                 </span>
                               </Button>

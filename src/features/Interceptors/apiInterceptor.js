@@ -11,7 +11,9 @@ const CreateApiInterceptor = () => {
 
   const accessToken = Cookies.get("token");
 
-  const axiosApiInstance = axios.create({ baseURL: process.env.REACT_APP_API });
+  const axiosApiInstance = axios.create({
+    baseURL: import.meta.env.VITE_API_ENDPOINT,
+  });
   axiosApiInstance.interceptors.request.use(
     async (config) => {
       config.headers = {

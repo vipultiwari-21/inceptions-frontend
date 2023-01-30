@@ -18,8 +18,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        <Route path="/login/temp" element={<Login />} />
-        <Route path="/register/temp" element={<Registration />} />
+        <Route path="/logintemp" element={<Login />} />
+        <Route path="/registertemp" element={<Registration />} />
         <Route path="/register" element={<Temporary />} />
         <Route path="/login" element={<Temporary />} />
         {/* <Route exact path="/login" element={<Login />} />

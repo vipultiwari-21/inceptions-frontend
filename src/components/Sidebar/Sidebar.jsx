@@ -106,8 +106,16 @@ const Sidebar = () => {
         "& .pro-inner-item:hover": {
           color: "#868dfb !important",
         },
+        "& .MuiBox-root": {
+          padding: "0px !important",
+        },
+        "& .pro-menu-item": {
+          padding: "0px !important",
+          borderBottom: "0px !important",
+        },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          // color: "#6870fa !impor  tant",
+          color: "#fff !important",
           background: "#38BDF8",
         },
       }}
@@ -120,7 +128,7 @@ const Sidebar = () => {
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
-              //   color: colors.grey[100],
+              color: "#fff",
             }}
           >
             {!isCollapsed && (

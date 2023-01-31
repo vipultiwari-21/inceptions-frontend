@@ -1,27 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
-import { stateModifier } from "../../features/reducers/slice";
+import { Route, Routes } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
+import TeamInfo from "./TeamInfo";
+import Topbar from "./Topbar";
 
 function UserProfile() {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    Cookies.remove("Token");
-    dispatch(stateModifier(false));
-  };
-
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", width: "100vw" }}>
       <div>
         <Sidebar />
       </div>
-      <div>
-        <h1>Hello</h1>
-        <button className="btn btn-error btn-outline" onClick={handleLogout}>
-          Logout
-        </button>
+      <div style={{ flex: 1 }}>
+        <Topbar />
+
+        {/* <Routes>
+          <Route path="team-name" element={<TeamInfo />} />
+        </Routes> */}
       </div>
     </div>
   );

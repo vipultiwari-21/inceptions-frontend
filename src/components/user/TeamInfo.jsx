@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
   Typography,
   useTheme,
@@ -14,6 +17,7 @@ import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@mui/icons-material/Error";
+import CreateApiInterceptor from "../../features/Interceptors/apiInterceptor";
 
 const TeamInfo = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -21,39 +25,41 @@ const TeamInfo = () => {
   const [isActive, setIsActive] = useState(false);
   const [error, setError] = useState("");
   const eventTypes = ["General Champtionships", "Non General Champtionship"];
+  const [teamData, setTeamData] = useState([]);
+
+  const getTeam = async () => {
+    const { data } = await CreateApiInterceptor().get(
+      "/team/get-team-of-current-user"
+    );
+    setTeamData(data);
+  };
+
+  useEffect(() => {
+    getTeam();
+    console.log("teamData", teamData);
+  }, []);
 
   const handleFormSubmit = async (values) => {
     try {
       setLoading(true);
-      const { data } = await API.post("/auth/login", values);
-      // console.log(data);
-      API.interceptors.request.use((req) => {
-        req.headers.authorization = `Bearer ${data.accessToken}`;
-        // console.log(req);
-        return req;
-      });
-      let profileData = await API.get("/profile/me", { headers: {} });
-      // console.log(profileData.data, data.accessToken);
-      let profile = profileData.data;
-      profile["accessToken"] = data.accessToken;
-      profile["refreshToken"] = data.refreshToken;
-      // let obj = { profile, accessToken, refreshToken };
+      // console.log(values.eventType === values.eventType.toLowerCase())
+      let isGCConsidered =
+        values.eventType.toLowerCase().replace(/ +/g, "") ===
+        "generalchamptionships";
+      let obj = {
+        name: values.name,
+        isGCConsidered,
+      };
+      console.log(obj);
+      CreateApiInterceptor();
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_ENDPOINT}team/add`,
+        obj
+      );
+      console.log(CreateApiInterceptor());
+      console.log(data);
 
-      localStorage.setItem("profile", JSON.stringify(profile));
-
-      setIsActive(true);
-      window.location.href = "/devices";
       setLoading(false);
-      // let profiles = JSON.parse(localStorage.getItem("profiles"));
-      // if (profiles.email == values.email) {
-      //   profiles.accessToken = data.accessToken;
-      //   profiles.refreshToken = data.refreshToken;
-      //   // let profile = {...profiles, profiles.accessToken: data.accessToken, profiles.refreshToken: data.refreshToken};
-      //   localStorage.setItem("profile", JSON.stringify(profiles));
-      //   window.location.href = "/";
-      // }
-
-      // console.log(profile);
     } catch (err) {
       console.log(err);
       setError(err.message);
@@ -165,28 +171,45 @@ const TeamInfo = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Email"
+                  label="Team Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.email}
-                  name="email"
-                  error={!!touched.email && !!errors.email}
-                  helperText={touched.email && errors.email}
+                  value={values.name}
+                  name="name"
+                  id="name"
+                  error={!!touched.name && !!errors.name}
+                  helperText={touched.name && errors.name}
                   sx={{ gridColumn: "span 4" }}
                 />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="password"
-                  label="Password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.password}
-                  name="password"
-                  error={!!touched.password && !!errors.password}
-                  helperText={touched.password && errors.password}
-                  sx={{ gridColumn: "span 4" }}
-                />
+                <div
+                  style={{
+                    gridColumn: "span 4",
+                    width: "100%",
+                  }}
+                >
+                  <InputLabel id="tenantId">Event Type</InputLabel>
+                  <Select
+                    fullWidth
+                    variant="filled"
+                    // type="text"
+                    label="Event Type"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.eventType}
+                    name="eventType"
+                    labelId="Event Type"
+                    id="eventType"
+                    error={!!touched.eventType && !!errors.eventType}
+                    helperText={touched.eventType && errors.eventType}
+                    sx={{ gridColumn: "span 4" }}
+                  >
+                    {eventTypes.map((event, id) => (
+                      <MenuItem value={event} key={id}>
+                        {event}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </div>
                 {/* <TextField
                 fullWidth
                 variant="filled"
@@ -235,6 +258,22 @@ const TeamInfo = () => {
               >
                 {loading ? (
                   <CircularProgress />
+                ) : teamData.length ? (
+                  <Button
+                    disabled
+                    type="submit"
+                    color="secondary"
+                    variant="contained"
+                    sx={{
+                      padding: "10px 20px",
+                      width: "100%",
+                      fontSize: "16px",
+                      letterSpacing: "0.15rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Already Registered
+                  </Button>
                 ) : (
                   <Button
                     type="submit"
@@ -248,7 +287,7 @@ const TeamInfo = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    Login
+                    Register team
                   </Button>
                 )}
               </Box>
@@ -261,7 +300,7 @@ const TeamInfo = () => {
 };
 
 const checkoutSchema = yup.object().shape({
-  name: yup.string().email("invalid email").required("required"),
+  name: yup.string().required("required"),
   eventType: yup.string().required("required"),
 });
 const initialValues = {

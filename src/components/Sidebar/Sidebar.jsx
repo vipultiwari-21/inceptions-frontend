@@ -226,6 +226,13 @@ const Sidebar = () => {
                   icon={<PersonAddAltIcon />}
                   selected={selected}
                   setSelected={setSelected}
+                />{" "}
+                <Item
+                  title="Show Team Members"
+                  to="display-team"
+                  icon={<PersonAddAltIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
                 />
               </>
             )}

@@ -18,6 +18,7 @@ import Topbar from "./components/user/Topbar";
 import TeamInfo from "./components/user/TeamInfo";
 import UpdateTeamInfo from "./components/user/UpdateTeamInfo";
 import AddParticipant from "./components/user/AddParticipant";
+import DisplayTeam from "./components/user/DisplayTeam";
 
 function App() {
   const user = Cookies.get("token");
@@ -52,6 +53,7 @@ function App() {
           <Route path="team-info" element={<TeamInfo />} />
           <Route path="update-team" element={<UpdateTeamInfo />} />
           <Route path="add-participant" element={<AddParticipant />} />
+          <Route path="display-team" element={<DisplayTeam />} />
 
           {/*Backend Routed */}
 

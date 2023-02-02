@@ -21,7 +21,7 @@ function Temporary() {
 
         <h3 className=" text-xl sm:text-none  pt-8  text-center font-bold  text-left text-primary">
           {" "}
-          Exceptions will go live soon{" "}
+          Exceptions will go live soon!{" "}
         </h3>
         <Link to="/" className="btn btn-warning btn-outline my-12 btn-wide">
           Back home

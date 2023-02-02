@@ -8,10 +8,12 @@ function UserProfile() {
   return (
     <div style={{ display: "flex", width: "100vw" }}>
       <div>
-        <Sidebar />
+        {/* <Sidebar />
+         */}
+        <h2>Hello from UserProfile</h2>
       </div>
       <div style={{ flex: 1 }}>
-        <Topbar />
+        {/* <Topbar /> */}
 
         {/* <Routes>
           <Route path="team-name" element={<TeamInfo />} />

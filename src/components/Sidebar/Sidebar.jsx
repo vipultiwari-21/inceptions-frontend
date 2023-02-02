@@ -23,6 +23,8 @@ import PeopleIcon from "@mui/icons-material/People";
 import EdgesensorHighIcon from "@mui/icons-material/EdgesensorHigh";
 import Logo from "../../assets/exceptions/png/E1.png";
 import CreateApiInterceptor from "../../features/Interceptors/apiInterceptor";
+import UpdateIcon from "@mui/icons-material/Update";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -206,15 +208,22 @@ const Sidebar = () => {
               <>
                 <Item
                   title="Set Team Name"
-                  to=""
-                  icon={<PersonAddAltIcon />}
+                  to="team-info"
+                  icon={<GroupsIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
                 <Item
-                  title="Add Devices"
-                  to=""
-                  icon={<AddToQueueIcon />}
+                  title="Update Team Name"
+                  to="update-team"
+                  icon={<UpdateIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Add Participants"
+                  to="add-participant"
+                  icon={<PersonAddAltIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />

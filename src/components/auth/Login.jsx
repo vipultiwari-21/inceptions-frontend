@@ -72,7 +72,7 @@ function Login() {
       dispatch(accessTokenModifier(data.accessToken));
       Cookies.set("token", data.accessToken);
       Cookies.set("auth", true);
-      window.location.href = "user/profile";
+      window.location.href = "/";
       setLoading(false);
     } catch (err) {
       alert(err.response.data.error);

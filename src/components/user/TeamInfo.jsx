@@ -51,13 +51,18 @@ const TeamInfo = () => {
         isGCConsidered,
       };
       console.log(obj);
-      CreateApiInterceptor();
-      const { data } = await axios.post(
+      const { data } = await CreateApiInterceptor().post(
         `${import.meta.env.VITE_API_ENDPOINT}team/add`,
         obj
       );
-      console.log(CreateApiInterceptor());
-      console.log(data);
+
+      // CreateApiInterceptor();
+      // const { data } = await axios.post(
+      //   `${import.meta.env.VITE_API_ENDPOINT}team/add`,
+      //   obj
+      // );
+      // console.log(CreateApiInterceptor());
+      console.log(res);
 
       setLoading(false);
     } catch (err) {

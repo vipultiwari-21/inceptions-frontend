@@ -98,7 +98,7 @@ function ResetPassword() {
                         }) => (
                           <form onSubmit={handleSubmit}>
                             <p className="mb-4 font-bold">
-                              Please login to your account
+                              Please change your password
                             </p>
                             <div className="mb-4">
                               <input

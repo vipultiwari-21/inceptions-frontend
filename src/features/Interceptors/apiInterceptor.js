@@ -1,32 +1,48 @@
-import axios from "axios";
-import CryptoJS from "crypto-js";
+ import axios from "axios";
 import Cookies from "js-cookie";
 
-const CreateApiInterceptor = () => {
-  //  const ciphertext=window.localStorage.getItem("token")
-  //  var bytes  = CryptoJS.AES.decrypt(ciphertext, 'ilovervce');
+// const CreateApiInterceptor = () => {
 
-  // const accessToken=bytes.toString(CryptoJS.enc.Utf8);
-  // console.log("Access Token : "+accessToken)
 
-  const accessToken = Cookies.get("token");
+const customAxios = axios.create({ baseURL: `${import.meta.env.VITE_API_ENDPOINT}` });
 
-  const axiosApiInstance = axios.create({ baseURL: process.env.REACT_APP_API });
-  axiosApiInstance.interceptors.request.use(
-    async (config) => {
-      config.headers = {
-        Authorization: `Bearer ${accessToken}`,
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      };
-      return config;
-    },
-    (error) => {
-      Promise.reject(error);
-    }
-  );
+//   axiosApiInstance.interceptors.request.use(
+//     async (config) => {
+//       config.headers = {
+//         Authorization: `Bearer ${accessToken}`,
+//         Accept: "application/json",
+//         "Content-Type": "application/x-www-form-urlencoded",
+//       };
+//       return config;
+//     },
+//     (error) => {
+//       Promise.reject(error);
+//     }
+//   );
 
-  return axiosApiInstance;
+//   return axiosApiInstance;
+// };
+
+// export default CreateApiInterceptor;
+
+
+
+
+
+const requestHandler = request => {
+  // Token will be dynamic so we can use any app-specific way to always   
+  // fetch the new token before making the call
+  request.headers.Authorization = `Bearer ${Cookies.get("token")}`;  
+  
+
+  return request;  
 };
 
-export default CreateApiInterceptor;
+customAxios.interceptors.request.use(
+  (request) => requestHandler(request),
+  (error) => errorHandler(error)
+);
+
+export default customAxios
+
+

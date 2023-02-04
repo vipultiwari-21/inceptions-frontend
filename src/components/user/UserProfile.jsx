@@ -1,24 +1,71 @@
-import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Sidebar from "../Sidebar/Sidebar";
-import TeamInfo from "./TeamInfo";
-import Topbar from "./Topbar";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { stateModifier } from "../../features/reducers/slice";
+import axios from "../../features/Interceptors/apiInterceptor";
 
 function UserProfile() {
-  return (
-    <div style={{ display: "flex", width: "100vw" }}>
-      <div>
-        {/* <Sidebar />
-         */}
-        <h2>Hello from UserProfile</h2>
-      </div>
-      <div style={{ flex: 1 }}>
-        {/* <Topbar /> */}
+  const dispatch = useDispatch();
+  const [userName, setUsername] = useState("");
+  const [teamName, setTeamName] = useState("");
 
-        {/* <Routes>
-          <Route path="team-name" element={<TeamInfo />} />
-        </Routes> */}
-      </div>
+  const getUser = async () => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_ENDPOINT}profile/me`
+    );
+
+    setUsername(data.firstName);
+    console.log(data.firstName);
+  };
+
+  const postEvent = async () => {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_API_ENDPOINT}team/add`,
+      {
+        name: "randomsdfsdedaskjdasdjkerrrrr",
+        isGCConsidered: true,
+      }
+    );
+    console.log(data);
+  };
+
+  useEffect(() => {
+    getUser();
+    // postEvent()
+  }, []);
+
+  const saveTeam = async () => {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_API_ENDPOINT}team/add`,
+      {
+        name: teamName,
+        isGCConsidered: true,
+      }
+    );
+    console.log(data);
+  };
+
+  const handleLogout = () => {
+    Cookies.remove("Token");
+    dispatch(stateModifier(false));
+  };
+
+  return (
+    <div>
+      <h1>Hello {userName ? userName : null}</h1>
+      <input
+        type="text"
+        placeholder="Enter team name"
+        value={teamName}
+        onChange={(e) => setTeamName(e.target.value)}
+      />
+      <br /> <br />
+      <button className="btn btn-outline btn-warning" onClick={saveTeam}>
+        Save team name
+      </button>
+      <button className="btn btn-error btn-outline" onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }

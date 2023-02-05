@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  FormControl,
   InputLabel,
   MenuItem,
   Select,
   TextField,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import * as yup from "yup";
 import Topbar from "./Topbar";
-import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@mui/icons-material/Error";
-import CreateApiInterceptor from "../../features/Interceptors/apiInterceptor";
+import axios from "../../features/Interceptors/apiInterceptor";
+import Header from "../Sidebar/Header";
 
 const TeamInfo = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [error, setError] = useState("");
-  const eventTypes = ["General Champtionships", "Non General Champtionship"];
-  const [teamData, setTeamData] = useState([]);
+  const eventTypes = ["General Champtionship", "Open Event"];
+  const [teamData, setTeamData] = useState([] || {});
 
   const getTeam = async () => {
-    const { data } = await CreateApiInterceptor().get(
-      "/team/get-team-of-current-user"
-    );
+    const { data } = await axios.get("/team/get-team-of-current-user");
+    // console.log(data);
     setTeamData(data);
   };
 
@@ -39,32 +36,29 @@ const TeamInfo = () => {
     console.log("teamData", teamData);
   }, []);
 
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = async (values, { resetForm }) => {
     try {
       setLoading(true);
       // console.log(values.eventType === values.eventType.toLowerCase())
       let isGCConsidered =
         values.eventType.toLowerCase().replace(/ +/g, "") ===
-        "generalchamptionships";
+        "generalchamptionship";
+      console.log("isGCConsidered", isGCConsidered);
       let obj = {
         name: values.name,
         isGCConsidered,
       };
       console.log(obj);
-      const { data } = await CreateApiInterceptor().post(
+      const { data } = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}team/add`,
         obj
       );
 
-      // CreateApiInterceptor();
-      // const { data } = await axios.post(
-      //   `${import.meta.env.VITE_API_ENDPOINT}team/add`,
-      //   obj
-      // );
-      // console.log(CreateApiInterceptor());
-      console.log(res);
+      console.log(data);
 
       setLoading(false);
+      resetForm(initialValues);
+      getTeam();
     } catch (err) {
       console.log(err);
       setError(err.message);
@@ -74,6 +68,10 @@ const TeamInfo = () => {
 
   return (
     <Box m="20px" sx={{ height: "85vh" }}>
+      <Header
+        title="ADD Team Details"
+        subtitle="Fill up the form with the Team details"
+      />
       <Box
         m="20px"
         sx={{
@@ -263,7 +261,7 @@ const TeamInfo = () => {
               >
                 {loading ? (
                   <CircularProgress />
-                ) : teamData.length ? (
+                ) : teamData.headUserId ? (
                   <Button
                     disabled
                     type="submit"

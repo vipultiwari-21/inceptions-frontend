@@ -22,7 +22,7 @@ import QueuePlayNextIcon from "@mui/icons-material/QueuePlayNext";
 import PeopleIcon from "@mui/icons-material/People";
 import EdgesensorHighIcon from "@mui/icons-material/EdgesensorHigh";
 import Logo from "../../assets/exceptions/png/E1.png";
-import CreateApiInterceptor from "../../features/Interceptors/apiInterceptor";
+import axios from "../../features/Interceptors/apiInterceptor";
 import UpdateIcon from "@mui/icons-material/Update";
 import GroupsIcon from "@mui/icons-material/Groups";
 
@@ -53,7 +53,7 @@ const Sidebar = () => {
   const [profile, setProfile] = useState({});
 
   const getRoleOrProfile = async (route) => {
-    const { data } = await CreateApiInterceptor().get(route);
+    const { data } = await axios.get(route);
     if (route === "profile/me") {
       setProfile(data);
     } else if (route === "/auth/my-role") {

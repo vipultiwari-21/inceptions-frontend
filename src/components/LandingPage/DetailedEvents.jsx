@@ -8,9 +8,6 @@ import EventNavbar from "./EventNavbar";
 
 const DetailedEvents = () => {
   const { id } = useParams();
-  
-
-  
 
   return (
     <div className="flex w-screen h-screen justify-center items-center ">
@@ -34,7 +31,9 @@ const DetailedEvents = () => {
                     className="event-detail-container text-neutral font-bold  text-white"
                     key={event.id}
                   >
-                    <h4 className="event-name text-3xl lg:text-5xl text-primary">{event.name.toUpperCase()}</h4>
+                    <h4 className="event-name text-3xl lg:text-5xl text-primary">
+                      {event.name.toUpperCase()}
+                    </h4>
                     <p className="my-8 text-justify text-md ">
                       {event.description}
                     </p>
@@ -52,7 +51,9 @@ const DetailedEvents = () => {
 
                     {event.requiremetns ? (
                       <p className="my-8">
-                        <span className="text-xl text-secondary">Requirements</span>
+                        <span className="text-xl text-secondary">
+                          Requirements
+                        </span>
 
                         <ul className="list-disc">
                           {event.requirements.map((requirement) => {

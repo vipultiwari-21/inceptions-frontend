@@ -139,10 +139,10 @@ const EventDetailList = [
     name: "strike force",
     route: "strikeforce",
     description:
-      "Join us for an exciting gaming event featuring the popular first-person shooter game, Counter-Strike: Global Offensive (CS:GO). Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it. Don't miss out on the chance to prove yourself as a top player in the CS:GO community. Register now and get ready to frag!",
+      "Join us for an exciting gaming event featuring the popular first-person shooter game, Valorant. Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it. Don't miss out on the chance to prove yourself as a top player in the Valorant community. Register now and get ready to frag!",
     img: "../assets/eventdetails/gaming.jpg",
     rules: [
-      "All games will be played on official Counter-Strike: Global Offensive servers to maintain authenticity.",
+      "All games will be played on official Valorant servers to maintain authenticity.",
       "Games will be played with the default settings for competition. If a game is played with non-default settings, the match will be replayed with corrections.",
       "Games will be played on the current competitive map pool. Map pick will be contingent",
       "On who wins a coin flip. CT/T side will also be contingent on a separate coinflip.",

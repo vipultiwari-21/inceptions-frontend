@@ -37,7 +37,7 @@ const EventsList = [
     name: "strike force",
     to: "/details/strikeforce",
     description:
-      "Join us for an exciting gaming event featuring the popular first-person shooter game, Counter-Strike: Global Offensive (CS:GO). Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it",
+      "Join us for an exciting gaming event featuring the popular first-person shooter game,Valorant. Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it",
     img: "/icons/gaming.svg",
     direction: "flex-row-reverse",
     color: "btn-warning",

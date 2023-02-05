@@ -10,8 +10,9 @@ const Topbar = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    Cookies.remove("Token");
+    Cookies.remove("token");
     dispatch(stateModifier(false));
+    window.location.href = "/";
   };
   return (
     <Box
@@ -23,17 +24,17 @@ const Topbar = () => {
     >
       {/* SEARCH BAR */}
       <Box display="flex" borderRadius="3px">
-        <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
+        {/* <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
         <IconButton type="button" sx={{ p: 1 }}>
           <SearchIcon />
-        </IconButton>
+        </IconButton> */}
       </Box>
 
       {/* ICONS */}
       <Box display="flex">
         <>
           <IconButton onClick={handleLogout}>
-            <LogoutIcon />
+            <LogoutIcon onClick={handleLogout} />
           </IconButton>
         </>
       </Box>

@@ -93,6 +93,7 @@ const Sidebar = () => {
     <Box
       sx={{
         minHeight: "100vh",
+
         // "& .pro-sidebar-inner": {
         //   background: `${colors.primary[400]} !important`,
         // },
@@ -197,8 +198,7 @@ const Sidebar = () => {
               Data
             </Typography> */}
             {/* <Item
-              title={role === "PARTICIPANT"}
-              to="/devices"
+              title={role === "PARTICIPANT"}              to="/devices"
               icon={<ChargingStationIcon />}
               selected={selected}
               setSelected={setSelected}

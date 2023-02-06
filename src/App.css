@@ -196,7 +196,9 @@ font-weight: bold;
     flex-direction: column-reverse;
   }
 }
-
+.datagrid {
+  color: #fff !important;
+}
 html {
   scroll-behavior: smooth;
 }

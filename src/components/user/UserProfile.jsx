@@ -1,13 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Cookies from "js-cookie";
-import { stateModifier } from "../../features/reducers/slice";
+import { makeStyles } from '@material-ui/core/styles';
 import axios from "../../features/Interceptors/apiInterceptor";
+import Header from "../Sidebar/Header";
+import { Box } from "@mui/system";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 
 function UserProfile() {
   const dispatch = useDispatch();
+  const isNonMobile = useMediaQuery("(min-width:600px)");
   const [userName, setUsername] = useState("");
   const [teamName, setTeamName] = useState("");
+  const [teamDetails,setTeamDetails]=useState([])
+  const [teamCount,setTeamCount]=useState(0)
+
+
+
+
+  
+
+  const getTeam = async () => {
+    const { data } = await axios.get("/team/get-team-of-current-user");
+    console.log(data);
+    setTeamDetails(data)
+      
+  };
+
 
   const getUser = async () => {
     const { data } = await axios.get(
@@ -18,55 +44,60 @@ function UserProfile() {
     console.log(data.firstName);
   };
 
-  const postEvent = async () => {
-    const { data } = await axios.post(
-      `${import.meta.env.VITE_API_ENDPOINT}team/add`,
-      {
-        name: "randomsdfsdedaskjdasdjkerrrrr",
-        isGCConsidered: true,
-      }
-    );
-    console.log(data);
+  const getTeamCount = async () => {
+    const { data } = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}teamMember/get`);
+     setTeamCount(data.length);
+    //setTeamData(data);
   };
+ 
+  
 
   useEffect(() => {
     getUser();
-    // postEvent()
+    getTeam()
+    getTeamCount()
   }, []);
 
-  const saveTeam = async () => {
-    const { data } = await axios.post(
-      `${import.meta.env.VITE_API_ENDPOINT}team/add`,
-      {
-        name: teamName,
-        isGCConsidered: true,
-      }
-    );
-    console.log(data);
-  };
 
-  const handleLogout = () => {
-    Cookies.remove("Token");
-    dispatch(stateModifier(false));
-  };
+
+ 
 
   return (
-    <div>
-      <h1>Hello {userName ? userName : null}</h1>
-      <input
-        type="text"
-        placeholder="Enter team name"
-        value={teamName}
-        onChange={(e) => setTeamName(e.target.value)}
-      />
-      <br /> <br />
-      <button className="btn btn-outline btn-warning" onClick={saveTeam}>
-        Save team name
-      </button>
-      <button className="btn btn-error btn-outline" onClick={handleLogout}>
-        Logout
-      </button>
-    </div>
+    <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}
+    
+    
+    
+
+    className="flex justify-center items-center flex-col">
+      <Header 
+      title={`Welcome, ${userName}`}
+        subtitle="Have a look at your team details"
+     
+     
+        />
+
+      <Table className="text text-primary font-bold ">
+      <TableRow >
+          <TableCell >Team ID</TableCell>
+          <TableCell>{teamDetails.teamId}</TableCell>
+      </TableRow>
+      <TableRow>
+          <TableCell>Team Name</TableCell>
+          <TableCell>{teamDetails.name}</TableCell>
+      </TableRow>
+      <TableRow>
+      <TableCell>Group championship</TableCell>
+      <TableCell>{teamDetails.isGCConsidered ? "Yes" : "No"}</TableCell>
+  </TableRow>
+
+  <TableRow>
+      <TableCell>Total participants</TableCell>
+      <TableCell>{teamCount}</TableCell>
+  </TableRow>
+
+  </Table>
+
+      </Box>
   );
 }
 

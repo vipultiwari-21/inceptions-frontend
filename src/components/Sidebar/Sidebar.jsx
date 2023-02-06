@@ -5,28 +5,24 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 // import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ChargingStationIcon from "@mui/icons-material/ChargingStation";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import AddToQueueIcon from "@mui/icons-material/AddToQueue";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import QueuePlayNextIcon from "@mui/icons-material/QueuePlayNext";
 import PeopleIcon from "@mui/icons-material/People";
-import EdgesensorHighIcon from "@mui/icons-material/EdgesensorHigh";
 import Logo from "../../assets/exceptions/png/E1.png";
 import axios from "../../features/Interceptors/apiInterceptor";
 import UpdateIcon from "@mui/icons-material/Update";
 import GroupsIcon from "@mui/icons-material/Groups";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
+
+ 
+
+
+
   return (
     <MenuItem
       active={selected === title}
@@ -46,11 +42,15 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
+
+  const isNonMobile = useMediaQuery("(max-width:700px)");
+  console.log("Break-Point : ",isNonMobile)
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState("");
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Set Team Name");
   const [profile, setProfile] = useState({});
+ 
 
   const getRoleOrProfile = async (route) => {
     const { data } = await axios.get(route);
@@ -58,6 +58,9 @@ const Sidebar = () => {
       setProfile(data);
     } else if (route === "/auth/my-role") {
       setRole(data.role);
+      if(data.role=='PARTICIPANT'){
+        setSelected('User Profile')
+      }
     }
   };
 
@@ -123,16 +126,19 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed} sx={{ minHeight: "100vh" }}>
+      <ProSidebar collapsed={isCollapsed} sx={{ minHeight: "100vh" }} 
+      
+      >
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            onClick={() => !isNonMobile ? setIsCollapsed(!isCollapsed) : null}
+            icon={isCollapsed ? <MenuOutlinedIcon /> : null}
             style={{
               margin: "10px 0 20px 0",
               color: "#fff",
             }}
+            
           >
             {!isCollapsed && (
               <Box
@@ -147,8 +153,14 @@ const Sidebar = () => {
                   style={{ width: "50px", maxWidth: "50px" }}
                 />
 
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)} >
+                  <MenuOutlinedIcon 
+                  style={{
+                    margin: "10px 0 20px 0",
+                    color: "#fff",
+                  }}
+                  />
+
                 </IconButton>
               </Box>
             )}
@@ -206,6 +218,15 @@ const Sidebar = () => {
 
             {role === "PARTICIPANT" && (
               <>
+
+              <Item
+              title="User Profile"
+              to="/"
+              icon={<WorkspacesIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
                 <Item
                   title="Set Team Name"
                   to="team-info"
@@ -213,13 +234,7 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                <Item
-                  title="Update Team Name"
-                  to="update-team"
-                  icon={<UpdateIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
+               
                 <Item
                   title="Add Participants"
                   to="add-participant"
@@ -230,7 +245,7 @@ const Sidebar = () => {
                 <Item
                   title="Show Team Members"
                   to="display-team"
-                  icon={<PersonAddAltIcon />}
+                  icon={<FilterListIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />

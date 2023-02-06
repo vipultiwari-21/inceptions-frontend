@@ -236,3 +236,16 @@ html {
   color: #000;
   background: #38bdf8;
 }
+
+
+
+.textfield{
+  color:#fff;
+  background-color: rgba(190, 190, 190, 0.2)
+}
+
+
+.textfield__label{
+  color:#fff !important;
+  
+}

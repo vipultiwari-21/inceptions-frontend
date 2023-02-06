@@ -24,11 +24,19 @@ const TeamInfo = () => {
   const [error, setError] = useState("");
   const eventTypes = ["General Champtionship", "Open Event"];
   const [teamData, setTeamData] = useState([] || {});
+  const [teamCount,setTeamCount]=useState(0)
 
   const getTeam = async () => {
     const { data } = await axios.get("/team/get-team-of-current-user");
-    // console.log(data);
+    //console.log(data);
     setTeamData(data);
+    
+  };
+
+  const getTeamCount = async () => {
+    const { data } = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}teamMember/get`);
+     setTeamCount(data.length);
+    //setTeamData(data);
   };
 
   useEffect(() => {
@@ -42,7 +50,7 @@ const TeamInfo = () => {
       // console.log(values.eventType === values.eventType.toLowerCase())
       let isGCConsidered =
         values.eventType.toLowerCase().replace(/ +/g, "") ===
-        "generalchamptionship";
+        "generalchampionship";
       console.log("isGCConsidered", isGCConsidered);
       let obj = {
         name: values.name,
@@ -67,239 +75,182 @@ const TeamInfo = () => {
   };
 
   return (
-    <Box m="20px" sx={{ height: "85vh" }}>
-      <Header
-        title="ADD Team Details"
-        subtitle="Fill up the form with the Team details"
-      />
-      <Box
-        m="20px"
-        sx={{
-          height: "80vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={checkoutSchema}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-          }) => (
-            <form
-              onSubmit={handleSubmit}
-              style={{
-                width: "100%",
-                maxWidth: "30rem",
-                boxShadow: isNonMobile
-                  ? "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
-                  : null,
-                // color: colors.grey[100],
-                marginTop: "2rem",
-                margin: "0 auto",
-                padding: isNonMobile ? "2rem" : null,
-                borderRadius: "6px",
-                // background: isNonMobile ? colors.primary[400] : null,
-                background: "white",
-              }}
+		<Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
+			<Header
+				title="Add Team"
+				subtitle="Fill up the form with the Event details"
+			/>
+			<Box
+				m="20px"
+				sx={{
+					height: isNonMobile ? "80vh" : "100%",
+					// display: "flex",
+					// justifyContent: "center",
+					// alignItems: "center",
+				}}
+			>
+				<Formik
+					onSubmit={handleFormSubmit}
+					initialValues={initialValues}
+					validationSchema={checkoutSchema}
+				>
+					{({
+						values,
+						errors,
+						touched,
+						handleBlur,
+						handleChange,
+						handleSubmit,
+					}) => (
+						<form
+							onSubmit={handleSubmit}
+							style={{
+								width: "100%",
+								// boxShadow: "7px 7px 9px 0px rgba(0,0,0,0.47)",
+								boxShadow: isNonMobile
+									? "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
+									: null,
+								maxWidth: "40rem",
+								color: "#e0e0e0",
+								margin: "0 auto",
+								padding: isNonMobile ? "2rem" : null,
+								borderRadius: "6px",
+								background: isNonMobile ? "#1F2A40" : null,
+								// display: "grid",
+								// placeItems: "center",
+								// height: "100%",
+							}}
+						>
+							<Typography
+								variant={isNonMobile ? "h4" : "h6"}
+								color="#e0e0e0"
+								fontWeight="bold"
+								mb="2rem"
+                
+							>
+								EXCEPTIONS - 2023
+							</Typography>
+							{error && (
+								<Box
+									mb="1rem"
+									sx={{
+										color: "#e87c03",
+										display: "flex",
+										// justifyContent: "center",
+										gap: "0.5rem",
+										alignItems: "center",
+										borderRadius: "5px",
+									}}
+									p=".5rem"
+								>
+									<ErrorIcon />
+									{error}
+								</Box>
+							)}
+							<Box
+								display="grid"
+								// placeItems="center"
+								color="#e0e0e0"
+								gap="30px"
+								gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+								sx={{
+									"& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+								}}
+							>
+
+              <TextField
+              
+              fullWidth
+              variant="filled"
+              type="text"
+              label="Team Name"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.teamName}
+              name="teamName"
+              error={!!touched.teamName && !!errors.teamName}
+              helperText={touched.teamName && errors.teamName}
+              sx={{ gridColumn: "span 8" }}
+              InputLabelProps={{className:'textfield__label'}}
+              InputProps={{className:'textfield__label'}}
+                className="textfield"
+              
+
+            />
+
+            <TextField
+            select
+            label="Select Event Type"
+            sx={{ gridColumn: "span 8",color:"#fff" }}
+            variant="filled"
+            color="primary"
+            InputLabelProps={{className:'textfield__label'}}
+            InputProps={{className:'textfield__label'}}
+            className="textfield"
+            name="eventName"
+          >
+          {eventTypes.map((event, id) => (
+            
+            <MenuItem value={event} key={id}>
+              {event}
+            </MenuItem>
+          ))}
+
+          </TextField>
+
+         
+								
+							
+        
+							</Box>
+              <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              mt="20px"
             >
-              <Typography
-                variant="h3"
-                // color={colors.grey[100]}
-                fontWeight="bold"
-                mb="2rem"
-              >
-                REGISTER TEAM
-              </Typography>
-              {error && (
-                <Box
-                  mb="1rem"
+              {loading ? (
+                <CircularProgress />
+              ) : teamData.headUserId ? (
+                <Button
+                  disabled
+                  type="submit"
+                  color="secondary"
+                  variant="contained"
                   sx={{
-                    color: "#e87c03",
-                    display: "flex",
-                    // justifyContent: "center",
-                    gap: "0.5rem",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                  }}
-                  p=".5rem"
-                >
-                  <ErrorIcon />
-                  {error}
-                </Box>
-              )}
-              <Box
-                display="grid"
-                gap="30px"
-                gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                // sx={{
-                //   "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-                // }}
-              >
-                {/* <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="First Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Last Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.lastName}
-                name="lastName"
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
-                sx={{ gridColumn: "span 2" }}
-              /> */}
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Team Name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.name}
-                  name="name"
-                  id="name"
-                  error={!!touched.name && !!errors.name}
-                  helperText={touched.name && errors.name}
-                  sx={{ gridColumn: "span 4" }}
-                />
-                <div
-                  style={{
-                    gridColumn: "span 4",
+                    padding: "10px 20px",
                     width: "100%",
+                    fontSize: "16px",
+                    letterSpacing: "0.15rem",
+                    fontWeight: "bold",
                   }}
                 >
-                  <InputLabel id="tenantId">Event Type</InputLabel>
-                  <Select
-                    fullWidth
-                    variant="filled"
-                    // type="text"
-                    label="Event Type"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.eventType}
-                    name="eventType"
-                    labelId="Event Type"
-                    id="eventType"
-                    error={!!touched.eventType && !!errors.eventType}
-                    helperText={touched.eventType && errors.eventType}
-                    sx={{ gridColumn: "span 4" }}
-                  >
-                    {eventTypes.map((event, id) => (
-                      <MenuItem value={event} key={id}>
-                        {event}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </div>
-                {/* <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Contact Number"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.contact}
-                name="contact"
-                error={!!touched.contact && !!errors.contact}
-                helperText={touched.contact && errors.contact}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address 1"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.address1}
-                name="address1"
-                error={!!touched.address1 && !!errors.address1}
-                helperText={touched.address1 && errors.address1}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address 2"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.address2}
-                name="address2"
-                error={!!touched.address2 && !!errors.address2}
-                helperText={touched.address2 && errors.address2}
-                sx={{ gridColumn: "span 4" }}
-              /> */}
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mt="20px"
-              >
-                {loading ? (
-                  <CircularProgress />
-                ) : teamData.headUserId ? (
-                  <Button
-                    disabled
-                    type="submit"
-                    color="secondary"
-                    variant="contained"
-                    sx={{
-                      padding: "10px 20px",
-                      width: "100%",
-                      fontSize: "16px",
-                      letterSpacing: "0.15rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Already Registered
-                  </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    color="secondary"
-                    variant="contained"
-                    sx={{
-                      padding: "10px 20px",
-                      width: "100%",
-                      fontSize: "16px",
-                      letterSpacing: "0.15rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Register team
-                  </Button>
-                )}
-              </Box>
-            </form>
-          )}
-        </Formik>
-      </Box>
-    </Box>
-  );
+                  Already Registered
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  sx={{
+                    padding: "10px 20px",
+                    width: "100%",
+                    fontSize: "16px",
+                    letterSpacing: "0.15rem",
+                    fontWeight: "bold",
+                    color:"#fff"
+                  }}
+                >
+                  Register team
+                </Button>
+              )}
+            </Box>
+						</form>
+					)}
+				</Formik>
+			</Box>
+		</Box>
+	);
 };
 
 const checkoutSchema = yup.object().shape({
@@ -307,8 +258,8 @@ const checkoutSchema = yup.object().shape({
   eventType: yup.string().required("required"),
 });
 const initialValues = {
-  name: "",
-  eventType: "",
+  teamName: "",
+  eventName: "",
 };
 
 export default TeamInfo;

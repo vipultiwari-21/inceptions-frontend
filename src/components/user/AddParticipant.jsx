@@ -24,61 +24,54 @@ const AddParticipant = () => {
   const [error, setError] = useState("");
   const eventTypes = ["General Champtionship", "Open Event"];
   const [teamData, setTeamData] = useState([] || {});
+  const [teamCount,setTeamCount]=useState(0)
 
-  const getTeam = async () => {
-    const { data } = await axios.get("/team/get-team-of-current-user");
-    // console.log(data);
-    setTeamData(data);
+
+  const getTeamCount = async () => {
+    const { data } = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}teamMember/get`);
+     setTeamCount(data.length);
+    //setTeamData(data);
   };
 
   useEffect(() => {
-    getTeam();
-    console.log("teamData", teamData);
+    getTeamCount();
+    //console.log("teamData", teamData);
   }, []);
 
   const handleFormSubmit = async (values, { resetForm }) => {
-    try {
-      setLoading(true);
-      // console.log(values.eventType === values.eventType.toLowerCase())
-      let isGCConsidered =
-        values.eventType.toLowerCase().replace(/ +/g, "") ===
-        "generalchamptionship";
-      console.log("isGCConsidered", isGCConsidered);
-      let obj = {
-        name: values.name,
-        isGCConsidered,
-      };
-      console.log(obj);
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_ENDPOINT}team/add`,
-        obj
-      );
-
-      console.log(data);
-
-      setLoading(false);
-      resetForm(initialValues);
-      getTeam();
-    } catch (err) {
-      console.log(err);
-      setError(err.message);
-      setLoading(false);
+    setLoading(true)
+    try{
+      
+      const {data}=await axios.post(`${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,values)
+      alert("Team mate added succesfully")
+      getTeamCount()
+    }catch(err){
+      // alert(err.data.message)
+      alert(err.response.data.error)
     }
+    setLoading(false)
+    console.log(values)
+    resetForm()
   };
 
   return (
-    <Box m="20px" sx={{ height: "85vh" }}>
+    <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
       <Header
-        title="ADD Participant Details"
-        subtitle="Fill up the form with the Participants details"
+        title="Add Participants"
+        subtitle="Fill up the form with the Participant details"
       />
+
+      {
+        <h3 className="text-warning font-bold text-center">You have added {teamCount} members , you can still add {6-teamCount} members</h3>
+      }
+
       <Box
         m="20px"
         sx={{
-          height: "80vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          height: isNonMobile ? "80vh" : "100%",
+          // display: "flex",
+          // justifyContent: "center",
+          // alignItems: "center",
         }}
       >
         <Formik
@@ -98,22 +91,24 @@ const AddParticipant = () => {
               onSubmit={handleSubmit}
               style={{
                 width: "100%",
-                maxWidth: "30rem",
+                // boxShadow: "7px 7px 9px 0px rgba(0,0,0,0.47)",
                 boxShadow: isNonMobile
                   ? "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
                   : null,
-                // color: colors.grey[100],
-                marginTop: "2rem",
+                maxWidth: "40rem",
+                color: "#e0e0e0",
                 margin: "0 auto",
                 padding: isNonMobile ? "2rem" : null,
                 borderRadius: "6px",
-                // background: isNonMobile ? colors.primary[400] : null,
-                background: "white",
+                background: isNonMobile ? "#1F2A40" : null,
+                // display: "grid",
+                // placeItems: "center",
+                // height: "100%",
               }}
             >
               <Typography
-                variant="h3"
-                // color={colors.grey[100]}
+                variant={isNonMobile ? "h4" : "h6"}
+                color="#e0e0e0"
                 fontWeight="bold"
                 mb="2rem"
               >
@@ -138,38 +133,14 @@ const AddParticipant = () => {
               )}
               <Box
                 display="grid"
+                // placeItems="center"
+                color="#e0e0e0"
                 gap="30px"
                 gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                // sx={{
-                //   "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-                // }}
+                sx={{
+                  "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                }}
               >
-                {/* <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="First Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Last Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.lastName}
-                name="lastName"
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
-                sx={{ gridColumn: "span 2" }}
-              /> */}
                 <TextField
                   fullWidth
                   variant="filled"
@@ -179,11 +150,14 @@ const AddParticipant = () => {
                   onChange={handleChange}
                   value={values.firstName}
                   name="firstName"
-                  id="firstName"
                   error={!!touched.firstName && !!errors.firstName}
                   helperText={touched.firstName && errors.firstName}
-                  sx={{ gridColumn: "span 4" }}
+                  sx={{ gridColumn: "span 8" }}
+                  InputLabelProps={{ className: "textfield__label" }}
+                  InputProps={{ className: "textfield__label" }}
+                  className="textfield"
                 />
+
                 <TextField
                   fullWidth
                   variant="filled"
@@ -193,11 +167,14 @@ const AddParticipant = () => {
                   onChange={handleChange}
                   value={values.lastName}
                   name="lastName"
-                  id="lastName"
                   error={!!touched.lastName && !!errors.lastName}
                   helperText={touched.lastName && errors.lastName}
-                  sx={{ gridColumn: "span 4" }}
+                  sx={{ gridColumn: "span 8" }}
+                  InputLabelProps={{ className: "textfield__label" }}
+                  InputProps={{ className: "textfield__label" }}
+                  className="textfield"
                 />
+
                 <TextField
                   fullWidth
                   variant="filled"
@@ -207,104 +184,86 @@ const AddParticipant = () => {
                   onChange={handleChange}
                   value={values.usn}
                   name="usn"
-                  id="usn"
                   error={!!touched.usn && !!errors.usn}
                   helperText={touched.usn && errors.usn}
-                  sx={{ gridColumn: "span 4" }}
+                  sx={{ gridColumn: "span 8" }}
+                  InputLabelProps={{ className: "textfield__label" }}
+                  InputProps={{ className: "textfield__label" }}
+                  className="textfield"
                 />
+
+
                 <TextField
                   fullWidth
                   variant="filled"
-                  type="email"
+                  type="text"
                   label="Email"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.email}
                   name="email"
-                  id="email"
                   error={!!touched.email && !!errors.email}
                   helperText={touched.email && errors.email}
-                  sx={{ gridColumn: "span 4" }}
+                  sx={{ gridColumn: "span 8" }}
+                  InputLabelProps={{ className: "textfield__label" }}
+                  InputProps={{ className: "textfield__label" }}
+                  className="textfield"
                 />
+
+
+
                 <TextField
                   fullWidth
                   variant="filled"
-                  type="tel"
+                  type="text"
                   label="Contact Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.contactNumber}
                   name="contactNumber"
-                  id="contactNumber"
                   error={!!touched.contactNumber && !!errors.contactNumber}
                   helperText={touched.contactNumber && errors.contactNumber}
-                  sx={{ gridColumn: "span 4" }}
+                  sx={{ gridColumn: "span 8" }}
+                  InputLabelProps={{ className: "textfield__label" }}
+                  InputProps={{ className: "textfield__label" }}
+                  className="textfield"
                 />
-                {/* <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Contact Number"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.contact}
-                name="contact"
-                error={!!touched.contact && !!errors.contact}
-                helperText={touched.contact && errors.contact}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address 1"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.address1}
-                name="address1"
-                error={!!touched.address1 && !!errors.address1}
-                helperText={touched.address1 && errors.address1}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address 2"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.address2}
-                name="address2"
-                error={!!touched.address2 && !!errors.address2}
-                helperText={touched.address2 && errors.address2}
-                sx={{ gridColumn: "span 4" }}
-              /> */}
+
+
+                
+
+                
+
               </Box>
+             
+
               <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mt="20px"
-              >
-                {loading ? (
-                  <CircularProgress />
-                ) : (
-                  <Button
-                    type="submit"
-                    color="secondary"
-                    variant="contained"
-                    sx={{
-                      padding: "10px 20px",
-                      width: "100%",
-                      fontSize: "16px",
-                      letterSpacing: "0.15rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Add Teammate
-                  </Button>
-                )}
-              </Box>
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              mt="20px"
+            >
+              {loading ? (
+                <CircularProgress />
+              ) : (
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  sx={{
+                    padding: "10px 20px",
+                    width: "100%",
+                    fontSize: "16px",
+                    letterSpacing: "0.15rem",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Add Teammate
+                </Button>
+              )}
+            </Box>
+
+
             </form>
           )}
         </Formik>

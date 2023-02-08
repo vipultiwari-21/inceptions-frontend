@@ -6,7 +6,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 // import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import WorkspacesIcon from '@mui/icons-material/Workspaces';
+import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import AddToQueueIcon from "@mui/icons-material/AddToQueue";
 import PeopleIcon from "@mui/icons-material/People";
@@ -15,14 +15,9 @@ import axios from "../../features/Interceptors/apiInterceptor";
 import UpdateIcon from "@mui/icons-material/Update";
 import GroupsIcon from "@mui/icons-material/Groups";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
-
- 
-
-
-
   return (
     <MenuItem
       active={selected === title}
@@ -44,13 +39,12 @@ const Sidebar = () => {
   //   const colors = tokens(theme.palette.mode);
 
   const isNonMobile = useMediaQuery("(max-width:700px)");
-  console.log("Break-Point : ",isNonMobile)
+  console.log("Break-Point : ", isNonMobile);
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Set Team Name");
   const [profile, setProfile] = useState({});
- 
 
   const getRoleOrProfile = async (route) => {
     const { data } = await axios.get(route);
@@ -58,8 +52,8 @@ const Sidebar = () => {
       setProfile(data);
     } else if (route === "/auth/my-role") {
       setRole(data.role);
-      if(data.role=='PARTICIPANT'){
-        setSelected('User Profile')
+      if (data.role == "PARTICIPANT") {
+        setSelected("User Profile");
       }
     }
   };
@@ -126,19 +120,16 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed} sx={{ minHeight: "100vh" }} 
-      
-      >
+      <ProSidebar collapsed={isCollapsed} sx={{ minHeight: "100vh" }}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
-            onClick={() => !isNonMobile ? setIsCollapsed(!isCollapsed) : null}
+            onClick={() => (!isNonMobile ? setIsCollapsed(!isCollapsed) : null)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : null}
             style={{
               margin: "10px 0 20px 0",
               color: "#fff",
             }}
-            
           >
             {!isCollapsed && (
               <Box
@@ -153,14 +144,13 @@ const Sidebar = () => {
                   style={{ width: "50px", maxWidth: "50px" }}
                 />
 
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)} >
-                  <MenuOutlinedIcon 
-                  style={{
-                    margin: "10px 0 20px 0",
-                    color: "#fff",
-                  }}
+                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                  <MenuOutlinedIcon
+                    style={{
+                      margin: "10px 0 20px 0",
+                      color: "#fff",
+                    }}
                   />
-
                 </IconButton>
               </Box>
             )}
@@ -218,15 +208,13 @@ const Sidebar = () => {
 
             {role === "PARTICIPANT" && (
               <>
-
-              <Item
-              title="User Profile"
-              to="/"
-              icon={<WorkspacesIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
+                <Item
+                  title="User Profile"
+                  to="/"
+                  icon={<WorkspacesIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
                 <Item
                   title="Set Team Name"
                   to="team-info"
@@ -234,7 +222,6 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-               
                 <Item
                   title="Add Participants"
                   to="add-participant"
@@ -251,11 +238,11 @@ const Sidebar = () => {
                 />
               </>
             )}
-            {role === "CUSTOMER" && (
+            {role === "ADMIN" && (
               <>
                 <Item
-                  title="Add Tenant"
-                  to="add-tenant"
+                  title="Dashboard"
+                  to="/"
                   icon={<PersonAddAltIcon />}
                   selected={selected}
                   setSelected={setSelected}

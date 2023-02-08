@@ -67,7 +67,6 @@ function Login() {
           password: values.password,
         }
       );
-
       dispatch(stateModifier(true));
       dispatch(accessTokenModifier(data.accessToken));
       Cookies.set("token", data.accessToken);

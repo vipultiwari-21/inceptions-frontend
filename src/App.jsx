@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState, Suspense, lazy, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage";
@@ -19,16 +19,54 @@ import TeamInfo from "./components/user/TeamInfo";
 import UpdateTeamInfo from "./components/user/UpdateTeamInfo";
 import AddParticipant from "./components/user/AddParticipant";
 import DisplayTeam from "./components/user/DisplayTeam";
+import axios from "./features/Interceptors/apiInterceptor";
+import AdminProfile from "./components/admin/AdminProfile";
 
 function App() {
   const user = Cookies.get("token");
+  const [role, setRole] = useState("");
+  const [profile, setProfile] = useState({});
+
+  const getRoleOrProfile = async (route) => {
+    const { data } = await axios.get(route);
+    if (route === "profile/me") {
+      setProfile(data);
+    } else if (route === "/auth/my-role") {
+      setRole(data.role);
+    }
+  };
+
+  useEffect(() => {
+    getRoleOrProfile("profile/me");
+    getRoleOrProfile("/auth/my-role");
+  }, []);
   return (
     <div className="app">
       {user && <Sidebar />}
       <main className="content">
         {user && <Topbar />}
         <Routes>
-          {user ? (
+          {user && role === "PARTICIPANT" && (
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <UserProfile />
+                </ProtectedRoute>
+              }
+            />
+          )}
+          {user && role === "ADMIN" && (
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <AdminProfile />
+                </ProtectedRoute>
+              }
+            />
+          )}
+          {/* {user ? (
             <Route
               path="/"
               element={
@@ -39,7 +77,8 @@ function App() {
             />
           ) : (
             <Route path="/" element={<LandingPage />} />
-          )}
+          )} */}
+          {!user && <Route path="/" element={<LandingPage />} />}
           <Route path="/logintemp" element={<Login />} />
           <Route path="/registertemp" element={<Registration />} />
           <Route path="/register" element={<Temporary />} />

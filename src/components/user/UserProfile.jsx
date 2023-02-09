@@ -21,11 +21,22 @@ function UserProfile() {
   const [teamName, setTeamName] = useState("");
   const [teamDetails, setTeamDetails] = useState([]);
   const [teamCount, setTeamCount] = useState(0);
+  const [isRegistered,setIsRegistered]=useState(false)
 
   const getTeam = async () => {
     const { data } = await axios.get("/team/get-team-of-current-user");
     console.log(data);
-    setTeamDetails(data);
+    if(data.message=="This user has not registered any teams"){
+      setIsRegistered(false)
+    }else{
+      setTeamDetails(data);
+      setIsRegistered(true)
+      const teamDetails = await axios.get(
+        `${import.meta.env.VITE_API_ENDPOINT}teamMember/get`
+      );
+      setTeamCount(teamDetails.data.length);
+    }
+    
   };
 
   const getUser = async () => {
@@ -38,10 +49,7 @@ function UserProfile() {
   };
 
   const getTeamCount = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_ENDPOINT}teamMember/get`
-    );
-    setTeamCount(data.length);
+   
     //setTeamData(data);
   };
 
@@ -67,25 +75,28 @@ function UserProfile() {
  
 
  <Box sx={{width:{lg:'400px'}}}>
- <Table className="text text-neutral-content font-bold   ">
- <TableRow>
-   <TableCell>Team ID</TableCell>
-   <TableCell>{teamDetails.teamId}</TableCell>
- </TableRow>
- <TableRow>
-   <TableCell>Team Name</TableCell>
-   <TableCell>{teamDetails.name}</TableCell>
- </TableRow>
- <TableRow>
-   <TableCell>Group championship</TableCell>
-   <TableCell>{teamDetails.isGCConsidered ? "Yes" : "No"}</TableCell>
- </TableRow>
+ {isRegistered ?
+  <Table className="text text-neutral-content font-bold   ">
+  <TableRow>
+    <TableCell>Team ID</TableCell>
+    <TableCell>{teamDetails ? teamDetails.teamId : null}</TableCell>
+  </TableRow>
+  <TableRow>
+    <TableCell>Team Name</TableCell>
+    <TableCell>{teamDetails && teamDetails.teamName ? teamDetails.teamName.label : null}</TableCell>
+  </TableRow>
+  <TableRow>
+    <TableCell>Group championship</TableCell>
+    <TableCell>{teamDetails ? teamDetails.isGCConsidered ? "Yes" : "No" : null}</TableCell>
+  </TableRow>
+ 
+  <TableRow>
+    <TableCell>Total participants</TableCell>
+    <TableCell>{teamCount}</TableCell>
+  </TableRow>
+ </Table>
 
- <TableRow>
-   <TableCell>Total participants</TableCell>
-   <TableCell>{teamCount}</TableCell>
- </TableRow>
-</Table>
+: <h1 className="lg:text-2xl font-bold text-neutral-content">Team name is not registered yet!!!</h1>}
  </Box>
     </Box>
 

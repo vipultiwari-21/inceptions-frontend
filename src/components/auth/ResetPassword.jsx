@@ -1,62 +1,63 @@
-import React,{useEffect,useState} from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Container } from '@mui/system';
-import Background from '../custom_styling/Background';
-import Logo from '../../assets/exceptions/png/E.png'
-import { Formik } from 'formik';
-import * as yup from 'yup';
-import Exceptions from '../../assets/svg/taken.svg' 
-import axios from 'axios'
-
+import React, { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Container } from "@mui/system";
+import Background from "../custom_styling/Background";
+import Logo from "../../assets/exceptions/png/E.png";
+import { Formik, ErrorMessage } from "formik";
+import * as yup from "yup";
+import Exceptions from "../../assets/svg/taken.svg";
+import axios from "axios";
 
 function ResetPassword() {
-    
-    const [queryParameters] = useSearchParams()
-    const jwtToken=queryParameters.get("jwtToken")
-    const userID=queryParameters.get("userId")
-    const [loading,setLoading]=useState(false)
-    const navigate=useNavigate()
+  const [queryParameters] = useSearchParams();
+  const jwtToken = queryParameters.get("jwtToken");
+  const userID = queryParameters.get("userId");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    useEffect(()=>{
-        console.log("JWT TOKEN : ",jwtToken)
-        console.log("USER ID : ",userID)
-    },[])
+  useEffect(() => {
+    console.log("JWT TOKEN : ", jwtToken);
+    console.log("USER ID : ", userID);
+  }, []);
 
-    const initialValues = {
-        password: '',
-        cpassword: ''
-    }
+  const initialValues = {
+    password: "",
+    cpassword: "",
+  };
 
-    const checkoutSchema = yup.object().shape({
-        password: yup.string().required("required"),
-        cpassword: yup.string().required("required")
+  const checkoutSchema = yup.object().shape({
+    password: yup.string().required("required"),
+    cpassword: yup.string().required("required"),
+  });
 
-    });
-
-    const handleResetPassword=async(values)=>{
-        try{
-            const {data}= await axios.post(`${import.meta.env.VITE_API_ENDPOINT}auth/update-password?jwtToken=${jwtToken}&userId=${userID}`,{
-                "newPassword": values.password
-                
-            }) 
-            alert(data.message)
-        }catch(err){
-            alert("Token has expired ! request a new token");
-            navigate("/forgot-password")
-
+  const handleResetPassword = async (values) => {
+    try {
+      const { data } = await axios.post(
+        `${
+          import.meta.env.VITE_API_ENDPOINT
+        }auth/update-password?jwtToken=${jwtToken}&userId=${userID}`,
+        {
+          newPassword: values.password,
         }
+      );
+      alert(data.message);
+      navigate("/login");
+    } catch (err) {
+      alert("Token has expired ! request a new token");
+      navigate("/forgot-password");
     }
+  };
 
-    const handleFormSubmit = async (values, { setSubmitting , resetForm}) => {
-        setLoading(true)
-        console.log("values", values);
-         handleResetPassword(values)
-         resetForm()
-         setLoading(false)
-    };
+  const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
+    setLoading(true);
+    console.log("values", values);
+    handleResetPassword(values);
+    resetForm();
+    setLoading(false);
+  };
 
   return (
-      <Container maxWidth="xl">
+    <Container maxWidth="xl">
       <Background />
       <section className="h-full gradient-form  md:h-screen login-container text-center">
         <div className="container py-12 px-6 h-full">
@@ -110,6 +111,9 @@ function ResetPassword() {
                                 placeholder="New password"
                                 className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               />
+
+                              <ErrorMessage name="password"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
+
                             </div>
                             <div className="mb-4">
                               <input
@@ -120,6 +124,12 @@ function ResetPassword() {
                                 id="exampleFormControlInput1"
                                 placeholder="Confirm password"
                                 value={values.cpassword}
+                              />
+
+                              <ErrorMessage
+                                name="cpassword"
+                                component="div"
+                                className="text-blue-500  mt-3 text-left capitalize"
                               />
                             </div>
                             <div className="text-center pt-1 mb-6 pb-1">
@@ -137,10 +147,7 @@ function ResetPassword() {
                               >
                                 Update password
                               </button>
-                             
                             </div>
-
-                            
                           </form>
                         )}
                       </Formik>
@@ -168,8 +175,7 @@ function ResetPassword() {
         </div>
       </section>
     </Container>
-  
-  )
+  );
 }
 
-export default ResetPassword
+export default ResetPassword;

@@ -39,6 +39,7 @@ const DisplayTeam = () => {
       // type: "number",
       // headerAlign: "left",
       // align: "left",
+      minWidth:150
     },
     {
       field: "lastName",
@@ -47,21 +48,25 @@ const DisplayTeam = () => {
       // type: "number",
       // headerAlign: "left",
       // align: "left",
+      minWidth:150
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
+      minWidth:150
     },
     {
       field: "usn",
       headerName: "USN",
       flex: 1,
+      minWidth:150
     },
     {
       field: "contactNumber",
       headerName: "Contact Number",
       flex: 1,
+      minWidth:150
     },
 
     // {
@@ -120,6 +125,7 @@ const DisplayTeam = () => {
             rows={teamMemberTable}
             columns={columns}
             getRowId={(row) => row.teamMemberId}
+            pageSize={8}
           />
         }
       </Box>

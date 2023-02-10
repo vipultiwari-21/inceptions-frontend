@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import EventDetailList from "../../data/EventDetailList";
 import Background from "../custom_styling/Background";
-import ImageTemp from "../../assets/images/img.jpg";
+import ImageTemp from "../../assets/eventdetails/coding.jpg";
 import EventNavbar from "./EventNavbar";
 
 const DetailedEvents = () => {
@@ -14,11 +14,18 @@ const DetailedEvents = () => {
       <Background />
 
       <Box className="bg-neutral  lg:w-10/12 lg:h-5/6 w-full h-full px-3 lg:p-0  flex lg:flex-row flex-col">
-        <img
-          src={ImageTemp}
-          alt="temp"
+      {EventDetailList.map((event) => {
+        if (event.route == id) {
+          
+          return (
+            <img
+          src={event.img}
+          alt="Event Image"
           className="h-full w-5/12 hidden lg:block"
         />
+          )
+        }})
+      }
 
         <Box className="h-full lg:w-7/12 ">
           <EventNavbar />

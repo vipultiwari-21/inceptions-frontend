@@ -1,23 +1,41 @@
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Formik, Field } from "formik";
+import { ErrorMessage, Formik } from "formik";
+import { MenuItem, TextField } from "@mui/material";
 import Logo from "../../assets/exceptions/png/E.png";
 import Background from "../custom_styling/Background";
-import { useNavigate } from "react-router-dom";
 import Exceptions from "../../assets/svg/male.svg";
 import axios from "axios";
 import * as yup from "yup";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { State } from "country-state-city";
 
 function Registration() {
+  const isNonMobile = useMediaQuery("(min-width:600px)");
   const states = State.getStatesOfCountry("IN");
   const [loading, setLoading] = useState(false);
   const url = "";
 
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
-    password: yup.string().required("required"),
+    password: yup
+      .string()
+      .required("required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "weak password"
+      ),
+    firstName: yup.string().required("required"),
+    lastName: yup.string().required("required"),
+    contactNumber: yup.string().required("required").matches(
+      /^[6-9]\d{9}$/,"Enter valid phone number"
+    ),
+    collegeName: yup.string().required("required"),
+    usn: yup.string().required("required"),
+    state: yup.string().required("required"),
+    city: yup.string().required("required"),
+    zip: yup.string().required("required"),
   });
   const initialValues = {
     email: "",
@@ -25,7 +43,6 @@ function Registration() {
     lastName: "",
     contactNumber: "",
     password: "",
-    confirmPassword: "",
     collegeName: "",
     usn: "",
     state: "",
@@ -33,12 +50,9 @@ function Registration() {
     zip: "",
   };
 
-  const loginAuth = async (values) => {
+  const loginAuth = async (values) => {};
 
-   
-  };
-
-  const handleFormSubmit = async (values, { setSubmitting , resetForm } ) => {
+  const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       setLoading(true);
       // console.log(import.meta.env.VITE_API_ENDPOINT);
@@ -59,37 +73,37 @@ function Registration() {
         }
       );
 
-      console.log(data)
-      
-      try{
+      console.log(data);
+
+      try {
         await axios.post(
           `${import.meta.env.VITE_API_ENDPOINT}auth/send-confirmation-email`,
           {
-            "userId": data.userId
+            userId: data.userId,
           }
-          )
-          alert("We have sent you a confirmation email, please verify your email before logging in")
-      }catch(err){
-        alert(err.response.data.error)
+        );
+        alert(
+          "We have sent you a confirmation email, please verify your email before logging in"
+        );
+      } catch (err) {
+        alert(err.response.data.error);
       }
-        
-       setLoading(false)
 
+      setLoading(false);
     } catch (err) {
-      setLoading(false)
-      console.log(err)
-      alert(err.response.data.error)
+      setLoading(false);
+      console.log(err);
+      alert(err.response.data.error);
     }
 
-    resetForm()
-
+    resetForm();
   };
 
   return (
     <Container maxWidth="xl">
       <Background />
       <section className="h-full gradient-form  md:h-screen login-container text-center">
-        <div className="container py-12 px-6 h-full w-full">
+        <div className="container py-3 px-6 h-full w-full">
           <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800 w-full">
             <div className="xl:w-10/12">
               <div
@@ -126,149 +140,286 @@ function Registration() {
                           isSubmitting,
                           /* and other goodies */
                         }) => (
-                          <form onSubmit={handleSubmit} className="w-full">
+                          <form
+                            onSubmit={handleSubmit}
+                            className="w-full"
+                            style={{
+                              width: "100%",
+                              // boxShadow: "7px 7px 9px 0px rgba(0,0,0,0.47)",
+                              boxShadow: isNonMobile
+                                ? "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
+                                : null,
+                              maxWidth: "40rem",
+                              color: "#e0e0e0",
+                              margin: "0 auto",
+
+                              borderRadius: "6px",
+
+                              // display: "grid",
+                              // placeItems: "center",
+                              // height: "100%",
+                            }}
+                          >
                             <p className="mb-4 font-bold ">
                               Lets create an account
                             </p>
                             <div className="flex justify-around items-center  w-full flex-wrap">
                               <div className="mb-4 basis-full lg:basis-1/2 ">
-                                <input
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
                                   type="text"
-                                  name="firstName"
-                                  onChange={handleChange}
+                                  label="First Name"
                                   onBlur={handleBlur}
+                                  size="small"
+                                  onChange={handleChange}
                                   value={values.firstName}
-                                  placeholder="First Name"
-                                  className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  name="firstName"
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
+                                  error={
+                                    !!touched.firstName && !!errors.firstName
+                                  }
+                                  helperText={
+                                    touched.firstName && errors.firstName
+                                  }
                                 />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
-                                <input
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
                                   type="text"
-                                  name="lastName"
-                                  onChange={handleChange}
+                                  label="Last Name"
+                                  size="small"
                                   onBlur={handleBlur}
+                                  onChange={handleChange}
                                   value={values.lastName}
-                                  placeholder="Last Name"
-                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  name="lastName"
+                                  error={
+                                    !!touched.lastName && !!errors.lastName
+                                  }
+                                  helperText={
+                                    touched.lastName && errors.lastName
+                                  }
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
+                                  className="textfield"
                                 />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
-                                <input
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
                                   type="text"
-                                  name="contactNumber"
-                                  onChange={handleChange}
+                                  label="Contact Number"
+                                  size="small"
                                   onBlur={handleBlur}
+                                  onChange={handleChange}
                                   value={values.contactNumber}
-                                  placeholder="Contact Number"
-                                  className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  name="contactNumber"
+                                  error={
+                                    !!touched.contactNumber &&
+                                    !!errors.contactNumber
+                                  }
+                                  helperText={
+                                    touched.contactNumber &&
+                                    errors.contactNumber
+                                  }
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
                                 />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
-                                <input
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
                                   type="email"
-                                  name="email"
-                                  onChange={handleChange}
+                                  label="Email"
                                   onBlur={handleBlur}
+                                  onChange={handleChange}
                                   value={values.email}
-                                  placeholder="Email ID"
-                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  name="email"
+                                  size="small"
+                                  error={!!touched.email && !!errors.email}
+                                  helperText={touched.email && errors.email}
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
                                 />
                               </div>
 
-                              <div className="mb-4 basis-full ">
-                                <input
+                              <div className="mb-4 basis-full lg:basis-1/2">
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
                                   type="text"
-                                  name="collegeName"
-                                  onChange={handleChange}
+                                  label="College Name"
                                   onBlur={handleBlur}
+                                  size="small"
+                                  onChange={handleChange}
                                   value={values.collegeName}
-                                  placeholder="College Name "
-                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  name="collegeName"
+                                  error={
+                                    !!touched.collegeName &&
+                                    !!errors.collegeName
+                                  }
+                                  helperText={
+                                    touched.collegeName && errors.collegeName
+                                  }
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
                                 />
                               </div>
 
-                              <div className="mb-4 basis-full ">
-                                <input
+                              <div className="mb-4 basis-full lg:basis-1/2">
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
                                   type="text"
-                                  name="usn"
-                                  onChange={handleChange}
+                                  label="USN"
                                   onBlur={handleBlur}
+                                  onChange={handleChange}
                                   value={values.usn}
-                                  placeholder="University number "
-                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  name="usn"
+                                  size="small"
+                                  error={!!touched.usn && !!errors.usn}
+                                  helperText={touched.usn && errors.usn}
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
                                 />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
-                                <input
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
                                   type="text"
-                                  name="city"
-                                  onChange={handleChange}
+                                  label="City"
                                   onBlur={handleBlur}
+                                  onChange={handleChange}
                                   value={values.city}
-                                  placeholder="City"
-                                  className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  name="city"
+                                  size="small"
+                                  error={!!touched.city && !!errors.city}
+                                  helperText={touched.city && errors.city}
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
                                 />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
-                                <input
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
                                   type="text"
+                                  label="Pin code"
+                                  onBlur={handleBlur}
+                                  onChange={handleChange}
+                                  value={values.zip}
                                   name="zip"
+                                  size="small"
+                                  error={!!touched.zip && !!errors.zip}
+                                  helperText={touched.zip && errors.zip}
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
+                                />
+                              </div>
+
+                              <div className="mb-4 basis-full lg:basis-1/2">
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  select
+                                  label="Select state"
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    textAlign: "left",
+                                    width: isNonMobile ? "200px" : null,
+                                    borderRadius:'4px'
+                                  }}
+                                  variant="filled"
+                                  size="small"
+                                  color="primary"
+                                  className="textfield w-full"
+                                  name="state"
+                                  id="state"
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  value={values.zip}
-                                  placeholder="Zip code"
-                                  className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                />
-                              </div>
-
-                              <div className="mb-4 basis-full ">
-                                <Field
-                                  name="state"
-                                  as="select"
-                                  className="form-control block state-selector w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  error={!!touched.state && !!errors.state}
+                                  helperText={touched.state && errors.state}
                                 >
-                                  <option value="">Select State</option>
-                                  {states.map((state) => {
-                                    return (
-                                      <option
-                                        value={state.name}
-                                        key={state.name}
-                                      >
-                                        {state.name}
-                                      </option>
-                                    );
-                                  })}
-                                </Field>
+                                  {states
+                                    ? states.map((stateVal) => (
+                                        <MenuItem
+                                          value={stateVal.name}
+                                          key={stateVal.name}
+                                        >
+                                          {stateVal.name}
+                                        </MenuItem>
+                                      ))
+                                    : null}
+                                </TextField>
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
-                                <input
-                                  type="password"
+                                <TextField
+                                  fullWidth={!isNonMobile}
+                                  variant="filled"
+                                  type="text"
+                                  label="Password"
+                                  onBlur={handleBlur}
                                   onChange={handleChange}
-                                  name="password"
-                                  className="form-control block w-full  lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                  id="exampleFormControlInput1"
-                                  placeholder="Password"
                                   value={values.password}
+                                  name="password"
+                                  error={!!touched.password && !!errors.password}
+                                  helperText={touched.password && errors.password}
+                                  size="small"
+                                  sx={{
+                                    gridColumn: "span 4",
+                                    background: "#fff",
+                                    color: "#000",
+                                    borderRadius:'4px'
+                                  }}
+                                  className="textfield"
                                 />
-                              </div>
 
-                              <div className="mb-4 basis-full lg:basis-1/2 ">
-                                <input
-                                  type="password"
-                                  onChange={handleChange}
-                                  name="confirmPassword"
-                                  className="form-control block w-full  px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                  id="exampleFormControlInput1"
-                                  placeholder="Confirm Password"
-                                  value={values.confirmPassword}
-                                />
+
                               </div>
 
                               <div className="text-center pt-1 mb-6 basis-full pb-1">

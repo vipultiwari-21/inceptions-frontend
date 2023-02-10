@@ -2,7 +2,7 @@
     import { Container } from '@mui/system';
     import Background from '../custom_styling/Background';
     import Logo from '../../assets/exceptions/png/E.png'
-    import { Formik } from 'formik';
+    import { Formik,ErrorMessage } from 'formik';
     import * as yup from 'yup';
     import Exceptions from '../../assets/svg/taken.svg' 
     import axios from 'axios'
@@ -108,6 +108,9 @@
                                   placeholder="Email ID"
                                   className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 />
+
+                                <ErrorMessage name="email"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
+
                               </div>
                              
                               <div className="text-center pt-1 mb-6 pb-1">

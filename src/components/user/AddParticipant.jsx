@@ -25,6 +25,7 @@ const AddParticipant = () => {
   const eventTypes = ["General Champtionship", "Open Event"];
   const [teamData, setTeamData] = useState([] || {});
   const [teamCount,setTeamCount]=useState(0)
+  const [isGCConsidered,setIsGCConsidered]=useState(false)
 
 
   const getTeamCount = async () => {
@@ -33,13 +34,23 @@ const AddParticipant = () => {
     //setTeamData(data);
   };
 
+  const getTeam = async () => {
+    const { data } = await axios.get("/team/get-team-of-current-user");
+    console.log(data);
+    //setTeamData(data);
+    setIsGCConsidered(data.isGCConsidered)    
+  };
+
+
   useEffect(() => {
-    getTeamCount();
+    getTeam()
+    getTeamCount()
     //console.log("teamData", teamData);
   }, []);
 
   const handleFormSubmit = async (values, { resetForm }) => {
-    setLoading(true)
+    if(isGCConsidered && 7-teamCount>0 && !isGCConsidered && 4-teamCount>0){
+      setLoading(true)
     try{
       
       const {data}=await axios.post(`${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,values)
@@ -51,6 +62,10 @@ const AddParticipant = () => {
     }
     setLoading(false)
     console.log(values)
+    
+    }else{
+      alert("You cant add more members!!")
+    }
     resetForm()
   };
 
@@ -62,7 +77,9 @@ const AddParticipant = () => {
       />
 
       {
-        <h3 className="text-warning font-bold text-center">You have added {teamCount} members , you can still add {6-teamCount} members</h3>
+        <h3 className="text-warning font-bold text-center">You have added {teamCount} members ,{isGCConsidered && 7-teamCount>0 ? 
+        <span>You can still add {7- teamCount} members </span> : !isGCConsidered && 4-teamCount>0 ? <span>You can still add {4-teamCount} members </span> : <span>You cant add more members</span>
+        } </h3>
       }
 
       <Box

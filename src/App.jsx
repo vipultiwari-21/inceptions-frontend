@@ -21,6 +21,8 @@ import AddParticipant from "./components/user/AddParticipant";
 import DisplayTeam from "./components/user/DisplayTeam";
 import axios from "./features/Interceptors/apiInterceptor";
 import AdminProfile from "./components/admin/AdminProfile";
+import GetAllTeams from "./components/admin/GetAllTeams";
+import AssignEvent from "./components/coordinator/AssignEvent";
 
 function App() {
   const user = Cookies.get("token");
@@ -66,6 +68,16 @@ function App() {
               }
             />
           )}
+          {user && role === "COORDINATOR" && (
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <AssignEvent />
+                </ProtectedRoute>
+              }
+            />
+          )}
           {/* {user ? (
             <Route
               path="/"
@@ -93,6 +105,9 @@ function App() {
           <Route path="update-team" element={<UpdateTeamInfo />} />
           <Route path="add-participant" element={<AddParticipant />} />
           <Route path="display-team" element={<DisplayTeam />} />
+
+          {/* Admin routes */}
+          <Route path="get-teams" element={<GetAllTeams />} />
 
           {/*Backend Routed */}
 

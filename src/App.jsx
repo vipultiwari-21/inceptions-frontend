@@ -22,6 +22,8 @@ import AddParticipant from "./components/user/AddParticipant";
 import DisplayTeam from "./components/user/DisplayTeam";
 import axios from "./features/Interceptors/apiInterceptor";
 import AdminProfile from "./components/admin/AdminProfile";
+import GetAllTeams from "./components/admin/GetAllTeams";
+import AssignEvent from "./components/coordinator/AssignEvent";
 import VolunteerProfile from "./components/volunteer/VolunteerProfile";
 import VolunteerAttendance from "./components/volunteer/VolunteerAttendance";
 
@@ -69,18 +71,16 @@ function App() {
               }
             />
           )}
-
-          {user && role === "VOLUNTEER" && (
+          {user && role === "COORDINATOR" && (
             <Route
               path="/"
               element={
                 <ProtectedRoute>
-                  <VolunteerProfile />
+                  <AssignEvent />
                 </ProtectedRoute>
               }
             />
           )}
-
           {/* {user ? (
             <Route
               path="/"

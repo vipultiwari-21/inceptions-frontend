@@ -274,9 +274,34 @@ const Sidebar = () => {
                   setSelected={setSelected}
                 />
                 <Item
-                  title="Assign Devices"
-                  to="assign-device"
-                  icon={<AddToQueueIcon />}
+                  title="Get All Teams"
+                  to="get-teams"
+                  icon={<PeopleIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="My Tenants"
+                  to="tenants"
+                  icon={<PeopleIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </>
+            )}
+            {role === "COORDINATOR" && (
+              <>
+                <Item
+                  title="Assign Event"
+                  to="/"
+                  icon={<PersonAddAltIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+                <Item
+                  title="Get All Teams"
+                  to="get-teams"
+                  icon={<PeopleIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />

@@ -65,7 +65,7 @@ const AssignEvent = () => {
         teamId: values.team_id,
       });
       console.log("data", data);
-      setTeamMates(data.teamMembers);
+      setTeamMates(data[0].teamMembers);
       resetForm({ values: initialValues });
       setLoading(false);
     } catch (err) {
@@ -76,64 +76,32 @@ const AssignEvent = () => {
 
   console.log("teamMates", teamMates);
   const columns = [
-    // { field: "sl_no", headerName: "SL. NO" },
     { field: "memberId", headerName: "Member ID", flex: 1 },
-    // {
-    //   field: "user",
-    //   headerName: "User Name",
-    //   flex: 1,
-    //   cellClassName: "name-column--cell",
-    // },
     {
       field: "firstName",
       headerName: "First Name",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
     {
       field: "lastName",
       headerName: "Last Name",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
     {
       field: "usn",
       headerName: "USN",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
     {
       field: "contactNumber",
       headerName: "Contact Number",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
-    // {
-    //   field: "phone",
-    //   headerName: "Phone Number",
-    //   flex: 1,
-    // },
-    // {
-    //   field: "email",
-    //   headerName: "Email",
-    //   flex: 1,
-    // },
   ];
 
   return (
@@ -282,6 +250,7 @@ const AssignEvent = () => {
         </Formik>
 
         <DataGrid
+          className="datagrid"
           checkboxSelection
           rows={teamMates}
           columns={columns}

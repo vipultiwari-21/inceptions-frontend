@@ -5,6 +5,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Temporary from "./Temporary";
 import DetailedEvents from "./components/LandingPage/DetailedEvents";
 import Registration from "./components/auth/Registration";
+import Error from "./Error";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UserProfile from "./components/user/UserProfile";
 import ForgotPassword from "./components/auth/ForgotPassword";
@@ -21,6 +22,8 @@ import AddParticipant from "./components/user/AddParticipant";
 import DisplayTeam from "./components/user/DisplayTeam";
 import axios from "./features/Interceptors/apiInterceptor";
 import AdminProfile from "./components/admin/AdminProfile";
+import VolunteerProfile from "./components/volunteer/VolunteerProfile";
+import VolunteerAttendance from "./components/volunteer/VolunteerAttendance";
 
 function App() {
   const user = Cookies.get("token");
@@ -66,6 +69,18 @@ function App() {
               }
             />
           )}
+
+          {user && role === "VOLUNTEER" && (
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <VolunteerProfile />
+                </ProtectedRoute>
+              }
+            />
+          )}
+
           {/* {user ? (
             <Route
               path="/"
@@ -89,18 +104,58 @@ function App() {
           <Route exact path="/reset-password" element={<ResetPassword />} />
 
           {/* Participations Routes */}
-          <Route path="team-info" element={<TeamInfo />} />
-          <Route path="update-team" element={<UpdateTeamInfo />} />
-          <Route path="add-participant" element={<AddParticipant />} />
-          <Route path="display-team" element={<DisplayTeam />} />
+          <Route
+            path="team-info"
+            element={
+              <ProtectedRoute>
+                <TeamInfo />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="update-team"
+            element={
+              <ProtectedRoute>
+                <UpdateTeamInfo />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="add-participant"
+            element={
+              <ProtectedRoute>
+                <AddParticipant />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="display-team"
+            element={
+              <ProtectedRoute>
+                <DisplayTeam />
+              </ProtectedRoute>
+            }
+          />
 
-          {/*Backend Routed */}
+          {/* Volunteer Routes */}
+          <Route
+            path="volunteer-attendance"
+            element={<ProtectedRoute>
+              <VolunteerAttendance />
+              </ProtectedRoute>}
+          />
+
+          {/*Backend Routes*/}
 
           <Route
             exact
             path="/backend-registration"
             element={<RegisterPrivate />}
           />
+
+          {/* Error 404 handler */}
+
+          <Route path="*" element={<Error />} />
         </Routes>
       </main>
     </div>

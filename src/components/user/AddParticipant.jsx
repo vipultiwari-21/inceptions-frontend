@@ -28,6 +28,7 @@ const AddParticipant = () => {
     const { data } = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}teamMember/get`);
      setTeamCount(data.length);
     //setTeamData(data);
+    console.log(data.length)
   };
 
   const getTeam = async () => {
@@ -45,8 +46,9 @@ const AddParticipant = () => {
   }, []);
 
   const handleFormSubmit = async (values, { resetForm }) => {
-    if(isGCConsidered && 7-teamCount>0 && !isGCConsidered && 4-teamCount>0){
-      setLoading(true)
+    setLoading(true)
+    if(isGCConsidered && 7-teamCount>0){
+      
     try{
       
       const {data}=await axios.post(`${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,values)
@@ -56,13 +58,26 @@ const AddParticipant = () => {
       // alert(err.data.message)
       alert(err.response.data.error)
     }
-    setLoading(false)
     console.log(values)
     
+    }else if(!isGCConsidered && 4-teamCount>0){
+      try{
+      
+        const {data}=await axios.post(`${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,values)
+        alert("Team mate added succesfully")
+        getTeamCount()
+      }catch(err){
+        // alert(err.data.message)
+        alert(err.response.data.error)
+      }
     }else{
-      alert("You cant add more members!!")
+      alert("Your team is full! cant add more members")
     }
-    resetForm()
+    resetForm()   
+     setLoading(false)
+
+
+
   };
 
   return (

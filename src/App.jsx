@@ -81,6 +81,17 @@ function App() {
               }
             />
           )}
+
+          {user && role === "VOLUNTEER" && (
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <VolunteerProfile />
+                </ProtectedRoute>
+              }
+            />
+          )}
           {/* {user ? (
             <Route
               path="/"
@@ -152,6 +163,8 @@ function App() {
             path="/backend-registration"
             element={<RegisterPrivate />}
           />
+
+          
 
           {/* Error 404 handler */}
 

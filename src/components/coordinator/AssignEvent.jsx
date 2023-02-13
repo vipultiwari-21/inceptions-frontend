@@ -26,6 +26,8 @@ import Header from "../Sidebar/Header";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 // import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 
+
+
 const AssignEvent = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
@@ -57,21 +59,19 @@ const AssignEvent = () => {
     // console.log(values);
     // dispatch(adminregister(values));
     try {
-      setLoading(true);
-      console.log("values", values);
-      //   let obj = { teamId: values.team_id };
+      setLoading(true);      //   let obj = { teamId: values.team_id };
       //   console.log("obj", obj);
       const { data } = await axios.post("/team/get-specific-team-details", {
         teamId: values.team_id,
       });
       console.log("data", data);
-      setTeamMates(data.teamMembers);
-      resetForm({ values: initialValues });
-      setLoading(false);
+      
     } catch (err) {
       console.log(err);
       setError(err.message);
     }
+
+    setLoading(false)
   };
 
   console.log("teamMates", teamMates);

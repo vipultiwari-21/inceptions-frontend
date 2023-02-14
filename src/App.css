@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
+
 @font-face {
   font-family: gallient;
   src: url("./assets/fonts/Gallient.ttf");
@@ -52,7 +53,6 @@ font-weight: bold;
 
 .headings {
   font-family: "Orbitron", sans-serif;
-
   border-left: 5px solid #fff;
   padding: 30px;
 }
@@ -60,6 +60,11 @@ font-weight: bold;
 .sub-heading {
   font-family: "Orbitron", sans-serif;
   text-align: justify;
+}
+
+
+.special-heading{
+  font-family: 'Montserrat', sans-serif;
 }
 
 .title {

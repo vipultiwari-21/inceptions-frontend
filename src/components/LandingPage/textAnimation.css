@@ -1,0 +1,26 @@
+div {
+  text-align: center;
+}
+
+
+
+
+.horizontal-shake {
+    animation: skew-y-shake 0.5s infinite;
+}
+@keyframes skew-y-shake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(5px, 5px) rotate(5deg); }
+    50% { transform: translate(0, 0) rotate(0eg); }
+    75% { transform: translate(-5px, 5px) rotate(-5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+
+
+/* 
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) } */
+
+}

@@ -1,0 +1,10 @@
+@font-face {
+    font-family: mont;
+    src: url("./assets/fonts/Mont.ttf");
+  }
+  
+
+.special-heading{
+    font-family: mont;
+    
+}

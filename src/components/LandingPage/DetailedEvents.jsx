@@ -48,7 +48,7 @@ const DetailedEvents = () => {
                       <p className="my-8 ">
                         <span className="text-xl text-secondary ">Rules</span>
 
-                        <ul className="list-disc">
+                        <ul className="list-disc text-left">
                           {event.rules.map((rule) => {
                             return <li>{rule}</li>;
                           })}
@@ -74,11 +74,17 @@ const DetailedEvents = () => {
                       <p className="my-8">
                         <span className="text-xl text-secondary">Contact</span>
 
-                        <ul>
-                          <li>{event.contact.name}</li>
-                          <li>{event.contact.phone}</li>
-                          <li>{event.contact.email}</li>
+                      <div className="flex  flex-col justify-evenly items-center w-full lg:flex-row ">
+                      { event.contact.map((contacts)=>{
+                        return <ul className="my-3">
+                            <li className="text-warning">{contacts.type}</li>
+                          <li>{contacts.name}</li>
+                          <li>{contacts.phone}</li>
+                          <li>{contacts.email}</li>
                         </ul>
+                       })}
+                      </div>
+                       
                       </p>
                     ) : null}
                   </Box>

@@ -66,12 +66,12 @@ function RegisterPrivate() {
     } else if (values.role == "volunteer") {
       const api = `${
         import.meta.env.VITE_API_ENDPOINT
-      }auth/register-coordinator/`;
+      }auth/register-volunteer/`;
       performRegistration(api, values);
     } else if (values.role == "coordinator") {
       const api = `${
         import.meta.env.VITE_API_ENDPOINT
-      }auth/register-volunteer/`;
+      }auth/register-coordinator/`;
       performRegistration(api, values);
     }
 

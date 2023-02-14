@@ -94,6 +94,8 @@ function UserProfile() {
     <TableCell>Total participants</TableCell>
     <TableCell>{teamCount}</TableCell>
   </TableRow>
+
+  
  </Table>
 
 : <h1 className="lg:text-2xl font-bold text-neutral-content">Team name is not registered yet!!!</h1>}

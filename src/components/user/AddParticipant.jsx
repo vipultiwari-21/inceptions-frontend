@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import * as yup from "yup";
-import Topbar from "./Topbar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -20,53 +12,62 @@ import Header from "../Sidebar/Header";
 const AddParticipant = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [loading, setLoading] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const [error, setError] = useState("");
-  const eventTypes = ["General Champtionship", "Open Event"];
-  const [teamData, setTeamData] = useState([] || {});
-  const [teamCount,setTeamCount]=useState(0)
-  const [isGCConsidered,setIsGCConsidered]=useState(false)
-
+  const [teamCount, setTeamCount] = useState(0);
+  const [maxTeam, setMaxTeam] = useState(0);
 
   const getTeamCount = async () => {
-    const { data } = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}teamMember/get`);
-     setTeamCount(data.length);
-    //setTeamData(data);
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_ENDPOINT}teamMember/get`
+      );
+      setTeamCount(data.length);
+      //setTeamData(data);
+      //console.log(data.length)
+    } catch (err) {
+      alert("Error occured!");
+    }
   };
 
-  const getTeam = async () => {
-    const { data } = await axios.get("/team/get-team-of-current-user");
-    console.log(data);
-    //setTeamData(data);
-    setIsGCConsidered(data.isGCConsidered)    
+  const getMaxTeamMembers = async () => {
+    try {
+      const { data } = await axios.get("/team/get-max-team-members");
+      console.log("Max", data);
+      setMaxTeam(data);
+    } catch (err) {
+      alert("Error occured!");
+    }
   };
-
 
   useEffect(() => {
-    getTeam()
-    getTeamCount()
+    getTeamCount();
+    getMaxTeamMembers();
     //console.log("teamData", teamData);
   }, []);
 
   const handleFormSubmit = async (values, { resetForm }) => {
-    if(isGCConsidered && 7-teamCount>0 && !isGCConsidered && 4-teamCount>0){
-      setLoading(true)
-    try{
-      
-      const {data}=await axios.post(`${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,values)
-      alert("Team mate added succesfully")
-      getTeamCount()
-    }catch(err){
-      // alert(err.data.message)
-      alert(err.response.data.error)
-    }
-    setLoading(false)
-    console.log(values)
-    
+    setLoading(true);
+
+    if (maxTeam - teamCount > 0) {
+      try {
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,
+          values
+        );
+        alert("Team mate added succesfully");
+        getTeamCount()
+        getMaxTeamMembers()
+      } catch (err) {
+        // alert(err.data.message)
+        console.log(err.response.data.error);
+      }
+      console.log(values);
     }else{
-      alert("You cant add more members!!")
+      alert("You cant add more members")
+      
     }
     resetForm()
+    setLoading(false);
   };
 
   return (
@@ -77,9 +78,12 @@ const AddParticipant = () => {
       />
 
       {
-        <h3 className="text-warning font-bold text-center">You have added {teamCount} members ,{isGCConsidered && 7-teamCount>0 ? 
-        <span>You can still add {7- teamCount} members </span> : !isGCConsidered && 4-teamCount>0 ? <span>You can still add {4-teamCount} members </span> : <span>You cant add more members</span>
-        } </h3>
+        <h3 className="text-warning font-bold text-center">
+          You have added {teamCount} member(s) ,{" "}
+          {maxTeam-teamCount > 0
+            ? `you can still add ${maxTeam - teamCount} member(s)`
+            : "you cannot add more member(s)"}{" "}
+        </h3>
       }
 
       <Box
@@ -209,7 +213,6 @@ const AddParticipant = () => {
                   className="textfield"
                 />
 
-
                 <TextField
                   fullWidth
                   variant="filled"
@@ -227,8 +230,6 @@ const AddParticipant = () => {
                   className="textfield"
                 />
 
-
-
                 <TextField
                   fullWidth
                   variant="filled"
@@ -245,42 +246,33 @@ const AddParticipant = () => {
                   InputProps={{ className: "textfield__label" }}
                   className="textfield"
                 />
-
-
-                
-
-                
-
               </Box>
-             
 
               <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              mt="20px"
-            >
-              {loading ? (
-                <CircularProgress />
-              ) : (
-                <Button
-                  type="submit"
-                  color="primary"
-                  variant="contained"
-                  sx={{
-                    padding: "10px 20px",
-                    width: "100%",
-                    fontSize: "16px",
-                    letterSpacing: "0.15rem",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Add Teammate
-                </Button>
-              )}
-            </Box>
-
-
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                mt="20px"
+              >
+                {loading ? (
+                  <CircularProgress />
+                ) : (
+                  <Button
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                    sx={{
+                      padding: "10px 20px",
+                      width: "100%",
+                      fontSize: "16px",
+                      letterSpacing: "0.15rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Add Teammate
+                  </Button>
+                )}
+              </Box>
             </form>
           )}
         </Formik>

@@ -57,16 +57,16 @@ function Footer() {
         </div>
       </div>
 
-      {/* <div className="dev  w-screen bg-neutral text-neutral-content text-center font-bold p-5 text-sm lg:text-xl">
-        <p className=" ">
-          Made with <span className="text-error text-xl  ">&#9829;</span> by
-          <div className="dev-names flex flex-col lg:flex-row text-center">
+      <div className=" devw-screen bg-neutral text-neutral-content text-center font-bold p-5">
+        <p className="">
+          Made with <span className="text-error">&#9829;</span> by</p>
+          <div className="flex flex-col lg:flex-row text-center">
             <span className="mx-3"> Akash E Punagin </span>
             <span className="mx-3">Puneeth Kumar V </span>
             <span className="mx-3">Punith Gowda S P</span>
           </div>
-        </p>
-      </div> */}
+        
+      </div> 
     </footer>
   );
 }

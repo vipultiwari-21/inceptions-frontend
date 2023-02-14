@@ -34,39 +34,20 @@ const DisplayTeam = () => {
     // },
     {
       field: "firstName",
-      headerName: "First Name",
+      headerName: "Name",
       flex: 1,
       // type: "number",
       // headerAlign: "left",
       // align: "left",
-      minWidth:150
+      minWidth:25
     },
-    {
-      field: "lastName",
-      headerName: "Last Name",
-      flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
-      minWidth:150
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1,
-      minWidth:150
-    },
-    {
-      field: "usn",
-      headerName: "USN",
-      flex: 1,
-      minWidth:150
-    },
+    
+
     {
       field: "contactNumber",
       headerName: "Contact Number",
       flex: 1,
-      minWidth:150
+      minWidth:25
     },
 
     // {
@@ -86,7 +67,7 @@ const DisplayTeam = () => {
       <Header title="TEAM MEMBERS" subtitle="Here is your team members list" />
       <Box
         m="40px 0 0 0"
-        height="75vh"
+        height="70vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -121,7 +102,6 @@ const DisplayTeam = () => {
         {
           <DataGrid
             className="datagrid"
-            checkboxSelection
             rows={teamMemberTable}
             columns={columns}
             getRowId={(row) => row.teamMemberId}

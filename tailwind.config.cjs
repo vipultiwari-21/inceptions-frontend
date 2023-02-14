@@ -22,6 +22,7 @@ module.exports = {
 
         error: "#FB6F84",
       },
+      
     },
   ],
   plugins: [require("daisyui")],

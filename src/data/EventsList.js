@@ -9,6 +9,7 @@ const EventsList = [
     direction: "flex-row",
     color: "btn-primary",
     text: "text-primary",
+    eventType:'general'
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-success",
     text: "text-success",
+    eventType:'general'
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ const EventsList = [
     direction: "flex-row",
     color: "btn-accent",
     text: "text-accent",
+    eventType:'general'
   },
   {
     id: 4,
@@ -42,31 +45,23 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-warning",
     text: "text-warning",
+    eventType:'open'
   },
+
   {
     id: 5,
-    name: "equinox",
-    to: "/details/equinox",
-    description:
-      "Web-o-Thon is a hackathon event focused on full-stack web development, where participants collaborate to create new projects and prototypes for 24 hours. It is an opportunity for students to showcase their skills, learn new technologies and potentially develop a project into a product.",
-    img: "/icons/hackathon.svg",
-    direction: "flex-row",
-    color: "btn-success",
-    text: "text-success",
-  },
-  {
-    id: 6,
     name: "infinity & beyond",
     to: "/details/infinity&beyond",
     description:
       "Calling all tech wizards and IoT enthusiasts! Get ready to EXCEPTION-ally amaze us with your innovative ideas! Because the one of a kind 'IOT to infinity and beyond!' event is waiting for you to shine BEYOND beliefs. Submit your entries now and let's see what you've got!",
     img: "/icons/iot.svg",
-    direction: "flex-row-reverse",
+    diretion: "flex-row-reverse",
     color: "btn-accent",
     text: "text-accent",
+    eventType:'open'
   },
   {
-    id: 7,
+    id: 6,
     name: "constellation",
     to: "/details/constellation",
     description:
@@ -75,9 +70,10 @@ const EventsList = [
     direction: "flex-row",
     color: "btn-primary",
     text: "text-primary",
+    eventType:'general'
   },
   {
-    id: 8,
+    id: 7,
     name: "gravity",
     to: "/details/gravity",
     description:
@@ -86,9 +82,10 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-warning",
     text: "text-warning",
+    eventType:'general'
   },
   {
-    id: 9,
+    id: 8,
     name: "zest",
     to: "/details/zest",
     description:
@@ -97,9 +94,10 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-primary",
     text: "text-primary",
+    eventType:'general'
   },
   {
-    id: 10,
+    id: 9,
     name: "event x",
     to: "/details/eventx",
     description: "Why don't you come to the Venue and find out?",
@@ -107,7 +105,10 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-primary",
     text: "text-primary",
+    eventType:'general'
   },
+
+  
 ];
 
 export default EventsList;

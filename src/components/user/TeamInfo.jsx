@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
+import React, { useEffect, useState, useRef } from "react";
+import { Button, MenuItem, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
 import * as yup from "yup";
 import Topbar from "./Topbar";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -16,16 +11,19 @@ import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 
 const TeamInfo = () => {
+  const formikRef = useRef(null);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [error, setError] = useState("");
-  const eventTypes = ["General Championship", "Open Event"];
+  const eventTypes = ["General Championship + Open Event", "Open Event"];
   const [teamName, setTeamName] = useState([] || {});
   const [isRegistered, setIsRegistered] = useState(false);
   const [registeredTeamName, setRegisteredTeamName] = useState("");
   const [registeredEventType, setRegisteredEventType] = useState("");
   const [teamHead, setTeamHead] = useState([]);
+  const [openEvents, setOpenEvents] = useState([]);
+  const [isGCConsidered, setIsGCConsidered] = useState(true);
 
   const getTeamHeadDetails = async () => {
     try {
@@ -33,9 +31,19 @@ const TeamInfo = () => {
         `${import.meta.env.VITE_API_ENDPOINT}/profile/me`
       );
       setTeamHead(data);
-      console.log(data)
+      //console.log(data)
     } catch (err) {
       alert("Some error occured!!");
+    }
+  };
+
+  const getOpenEvents = async () => {
+    try {
+      const { data } = await axios.get("/event/get-open-events");
+     // console.log("Open Events : ", data);
+      setOpenEvents(data);
+    } catch (err) {
+      //console.log(err);
     }
   };
 
@@ -49,14 +57,13 @@ const TeamInfo = () => {
         contactNumber: teamHead.contactNumber,
       };
 
-      console.log("ADding data ",obj )
+      //console.log("ADding data ",obj )
 
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,
         obj
       );
-      alert("Team mate added succesfully");
-      getTeamCount();
+      
     } catch (err) {
       // alert(err.data.message)
       alert(err.response.data.error);
@@ -71,10 +78,10 @@ const TeamInfo = () => {
       );
 
       setIsRegistered(false);
-      console.log(getAllTeamNames.data);
+     // console.log(getAllTeamNames.data);
       setTeamName(getAllTeamNames.data);
     } else {
-      console.log(data);
+      //console.log(data);
       setIsRegistered(true);
       setRegisteredTeamName(data.teamName.label);
       data.isGCConsidered
@@ -86,20 +93,47 @@ const TeamInfo = () => {
   useEffect(() => {
     getTeamHeadDetails();
     getTeams();
+    getOpenEvents();
   }, []);
 
+
+  const mapTeamID=async(values)=>{
+    var eventIdArray=[]
+
+    values.openEvents.forEach((selectedEvents)=>{
+
+      openEvents.forEach((event)=>{
+        if(event.name==selectedEvents){
+          eventIdArray.push(event.eventId)
+        }
+      })
+
+    })
+
+    return eventIdArray
+
+  }
+
   const handleFormSubmit = async (values, { resetForm }) => {
+   
+    //console.log(eventIdArray)
+
+    
+    
+
+
     try {
       setLoading(true);
       // console.log(values.eventType === values.eventType.toLowerCase())
-      let isGCConsidered =
-        values.eventType.toLowerCase().replace(/ +/g, "") ===
-        "generalchampionship";
+    
       //console.log("isGCConsidered", isGCConsidered);
+     
       let obj = {
         teamNameId: values.teamID,
         isGCConsidered,
+        ...(values.eventType=='Open Event' ? {openEventIds:await mapTeamID(values)}:{})
       };
+  
       console.log(obj);
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}team/add`,
@@ -108,16 +142,20 @@ const TeamInfo = () => {
 
       // console.log(data);
       addTeamLeader();
-      setLoading(false);
+      setIsGCConsidered(true)
+      alert("Team was created succesfully")
       resetForm(initialValues);
       getTeams();
     } catch (err) {
       console.log(err);
       setError(err.message);
-      setLoading(false);
     }
 
-    // console.log(values)
+
+    setLoading(false);
+
+
+
   };
 
   return (
@@ -146,6 +184,7 @@ const TeamInfo = () => {
             touched,
             handleBlur,
             handleChange,
+            setFieldValue,
             handleSubmit,
           }) => (
             <form
@@ -239,7 +278,12 @@ const TeamInfo = () => {
                       InputProps={{ className: "textfield__label" }}
                       className="textfield"
                       name="eventType"
-                      onChange={handleChange}
+                      onChange={(e, { value }) => {
+                        setFieldValue("eventType", e.target.value);
+                        e.target.value == "Open Event"
+                          ? setIsGCConsidered(false)
+                          : setIsGCConsidered(true);
+                      }}
                       onBlur={handleBlur}
                       id="eventType"
                       error={!!touched.eventType && !!errors.eventType}
@@ -279,6 +323,27 @@ const TeamInfo = () => {
                   </>
                 )}
               </Box>
+
+              {!isGCConsidered ? (
+                <Box className="flex w-full items-center justify-center  flex-wrap my-8">
+                  {openEvents
+                    ? openEvents.map((oe) => {
+                        return (
+                          <label key={oe.eventId} className="mx-3 py-3 ">
+                            <Field
+                              type="checkbox"
+                              name="openEvents"
+                              key={oe.eventId}
+                              value={oe.name}
+                            />
+                            {`${oe.name}`}
+                          </label>
+                        );
+                      })
+                    : null}
+                </Box>
+              ) : null}
+
               <Box
                 display="flex"
                 justifyContent="center"
@@ -336,6 +401,7 @@ const checkoutSchema = yup.object().shape({
 const initialValues = {
   teamID: "",
   eventType: "",
+  openEvents: [],
 };
 
 export default TeamInfo;

@@ -8,15 +8,14 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import WorkspacesIcon from "@mui/icons-material/Workspaces";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import AddToQueueIcon from "@mui/icons-material/AddToQueue";
 import PeopleIcon from "@mui/icons-material/People";
 import Logo from "../../assets/exceptions/png/E1.png";
 import axios from "../../features/Interceptors/apiInterceptor";
-import UpdateIcon from "@mui/icons-material/Update";
 import GroupsIcon from "@mui/icons-material/Groups";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import { Visibility } from "@mui/icons-material";
+import Payment from "@mui/icons-material/Payment";
+import { Info, PaymentOutlined } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -105,7 +104,7 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+          color: "#000 !important",
         },
         "& .MuiBox-root": {
           padding: "0px !important",
@@ -116,7 +115,7 @@ const Sidebar = () => {
         },
         "& .pro-menu-item.active": {
           // color: "#6870fa !impor  tant",
-          color: "#fff !important",
+          color: "#000 !important",
           background: "#38BDF8",
         },
       }}
@@ -222,26 +221,42 @@ const Sidebar = () => {
                 />
                 <Item
                   title="Set Team Name"
-                  to="team-info"
+                  to="/team-info"
                   icon={<GroupsIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
                 <Item
                   title="Add Participants"
-                  to="add-participant"
+                  to="/add-participant"
                   icon={<PersonAddAltIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />{" "}
                 <Item
                   title="Show Team Members"
-                  to="display-team"
+                  to="/display-team"
                   icon={<FilterListIcon />}
                   selected={selected}
                   setSelected={setSelected}
                 />
-              </>
+                {" "}
+                <Item
+                  title="Payment"
+                  to="/payment"
+                  icon={<Payment />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+
+                {" "}
+                <Item
+                  title="Payment Info"
+                  to="/payment-info"
+                  icon={<Info />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />                </>
             )}
 
             {role === "VOLUNTEER" && (

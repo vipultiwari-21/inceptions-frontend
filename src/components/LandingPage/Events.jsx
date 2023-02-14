@@ -6,6 +6,12 @@ function Events() {
   return (
     <div className="event my-8  " id="events">
       <h1 className="sub-heading text-secondary text-bold text-3xl ">EVENTS</h1>
+
+
+      <div className="w-full flex items-center justify-center" >
+      
+      </div>
+
       {EventsList.map((data) => (
         <div
           id={data.id}

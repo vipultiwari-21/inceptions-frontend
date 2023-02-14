@@ -26,6 +26,8 @@ import GetAllTeams from "./components/admin/GetAllTeams";
 import AssignEvent from "./components/coordinator/AssignEvent";
 import VolunteerProfile from "./components/volunteer/VolunteerProfile";
 import VolunteerAttendance from "./components/volunteer/VolunteerAttendance";
+import Payment from "./components/user/Payment";
+import PaymentInfo from "./components/user/PaymentInfo";
 
 function App() {
   const user = Cookies.get("token");
@@ -147,6 +149,24 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+          path="payment"
+          element={
+            <ProtectedRoute>
+              <Payment />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+        path="payment-info"
+        element={
+          <ProtectedRoute>
+            <PaymentInfo />
+          </ProtectedRoute>
+        }
+      />
 
           {/* Volunteer Routes */}
           <Route

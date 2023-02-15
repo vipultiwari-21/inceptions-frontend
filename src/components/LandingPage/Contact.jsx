@@ -103,7 +103,7 @@ function Contact() {
         <img src={Faculty2} alt="male" className="img-contact" />
 
            <h3 className="text-center  text-xl text-bold">
-           DR. SAVITHA R
+           Dr. SAVITHA R
           </h3>
           <h4 className="text-center my-1 text-xl text-bold flex ">
           <EmailIcon className="mr-3" style={{color:'#FFEEBE'}} />

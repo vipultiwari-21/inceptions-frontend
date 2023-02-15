@@ -98,8 +98,8 @@ const EventsList = [
   },
   {
     id: 9,
-    name: "event x",
-    to: "/details/eventx",
+    name: "Mystery Event",
+    to: "/details/mysteryevent",
     description: "Why don't you come to the Venue and find out?",
     img: "/icons/mystery.svg",
     direction: "flex-row-reverse",

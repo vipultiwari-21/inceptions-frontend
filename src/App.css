@@ -11,6 +11,11 @@
   src: url("./assets/fonts/Fonarto.ttf");
 }
 
+@font-face {
+  font-family: mont;
+  src: url("./assets/fonts/Mont.ttf");
+}
+
 @media screen and (max-width: 768px) {
   ::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -273,4 +278,8 @@ html {
   position: -webkit-sticky !important; /* Safari */
   position: fixed !important;
   top: 0% !important;
+}
+
+.event-header{
+  font-family: mont;
 }

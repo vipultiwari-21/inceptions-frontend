@@ -9,6 +9,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
+import Loading from "../../Loading";
 
 const TeamInfo = () => {
   const formikRef = useRef(null);
@@ -24,6 +25,7 @@ const TeamInfo = () => {
   const [teamHead, setTeamHead] = useState([]);
   const [openEvents, setOpenEvents] = useState([]);
   const [isGCConsidered, setIsGCConsidered] = useState(true);
+  const [pageLoading,setPageLoading]=useState(true)
 
   const getTeamHeadDetails = async () => {
     try {
@@ -40,8 +42,9 @@ const TeamInfo = () => {
   const getOpenEvents = async () => {
     try {
       const { data } = await axios.get("/event/get-open-events");
-     // console.log("Open Events : ", data);
+      console.log("Open Events : ", data);
       setOpenEvents(data);
+      
     } catch (err) {
       //console.log(err);
     }
@@ -76,17 +79,20 @@ const TeamInfo = () => {
       const getAllTeamNames = await axios.get(
         "/teamNames/get-available-team-names"
       );
-
+        setPageLoading(false)
       setIsRegistered(false);
      // console.log(getAllTeamNames.data);
       setTeamName(getAllTeamNames.data);
+      
     } else {
       //console.log(data);
       setIsRegistered(true);
+      
       setRegisteredTeamName(data.teamName.label);
       data.isGCConsidered
         ? setRegisteredEventType("Genral Championship")
         : setRegisteredEventType("Open Event");
+        setPageLoading(false)
     }
   };
 
@@ -159,6 +165,9 @@ const TeamInfo = () => {
   };
 
   return (
+
+    !pageLoading ?
+
     <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
       <Header
         title="Add Team"
@@ -391,6 +400,9 @@ const TeamInfo = () => {
         </Formik>
       </Box>
     </Box>
+
+    : <Loading />
+
   );
 };
 

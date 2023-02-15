@@ -1,26 +1,55 @@
-import { Box } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import Header from "../Sidebar/Header";
+import { Link } from "react-router-dom";
 import axios from "../../features/Interceptors/apiInterceptor";
-
-
+import Loading from "../../Loading";
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 // import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 
 const DisplayTeam = () => {
-  const [teamMember, setTeamMember] = useState([]);
+  const [teamMemberTable, setTeamMemberTable] = useState([]);
+  const [teamRegistered, setTeamRegistered] = useState(false);
+  const [pageLoading,setPageLoading]=useState(true)
+
+  const getTeamRegisteredDetails = async () => {
+    try {
+      const { data } = await axios.get("/team/get-team-of-current-user");
+      if (data.message == "This user has not registered any teams") {
+        const getAllTeamNames = await axios.get(
+          "/teamNames/get-available-team-names"
+        );
+        console.log("Not registered");
+        setTeamRegistered(false);
+        setPageLoading(false)
+      } else {
+        //console.log(data);
+        setTeamRegistered(true);
+        getTeamMembersOfCurrentUser();
+        setPageLoading(false)
+      }
+    } catch (err) {
+      alert("Error occured");
+      setTeamRegistered(false)
+      setPageLoading(false)
+    }
+  };
+
   const getTeamMembersOfCurrentUser = async () => {
     const { data } = await axios.get(
       `${import.meta.env.VITE_API_ENDPOINT}/teamMember/get`
     );
-    setTeamMember(data);
-    console.log(data);
+
+    console.log("wsdfeedfer", data);
+    setTeamMemberTable(data)
   };
 
   useEffect(() => {
-    getTeamMembersOfCurrentUser();
-    // getAllCustomers();
+    getTeamRegisteredDetails();
+    // // getAllCustomers();
+    console.log("Hello")
   }, []);
 
   const columns = [
@@ -39,15 +68,14 @@ const DisplayTeam = () => {
       // type: "number",
       // headerAlign: "left",
       // align: "left",
-      minWidth:25
+      minWidth: 100,
     },
-    
 
     {
       field: "contactNumber",
       headerName: "Contact Number",
       flex: 1,
-      minWidth:25
+      minWidth: 100,
     },
 
     // {
@@ -55,28 +83,24 @@ const DisplayTeam = () => {
     //   headerName: "Phone Number",
     //   flex: 1,
     // },
-    // {
-    //   field: "email",
-    //   headerName: "Email",
-    //   flex: 1,
-    // },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+      minWidth:200
+    },
   ];
 
-  return (
-    <Box >
-    <Header title="TEAM MEMBERS" subtitle="Here is your team members list" />
+  return  (
 
-      
-    </Box>
-  );
-};
+    !pageLoading ? 
 
-export default DisplayTeam;
+    teamRegistered ?
 
 
-{/*
-
-<Header title="TEAM MEMBERS" subtitle="Here is your team members list" />
+    
+    <Box m="20px">
+      <Header title="TEAM MEMBERS" subtitle="Here is your team members list" />
       <Box
         m="40px 0 0 0"
         height="70vh"
@@ -121,4 +145,20 @@ export default DisplayTeam;
           />
         }
       </Box>
-*/}
+    </Box>
+
+    : 
+    <Box className="flex justify-center items-center " sx={{ height: "90vh" }}>
+      <Header
+        title="Pending registration!!!"
+        subtitle="Please register your team name and event type in the Add team section"
+      />
+    </Box>
+
+    : <Loading />
+
+  ) 
+  
+};
+
+export default DisplayTeam;

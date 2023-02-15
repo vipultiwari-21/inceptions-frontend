@@ -218,8 +218,8 @@ const EventDetailList = [
   },
   {
     id: 10,
-    name: "event x",
-    route: "eventx",
+    name: "Mystery Event",
+    route: "mysteryevent",
     img: "/src/assets/eventdetails/mystery.jpg",
     description: "You Never Know What you Might have in the Store?",
   },
@@ -228,6 +228,7 @@ const EventDetailList = [
     id: 11,
     name: "SOLVEATHON",
     route: "solveathon",
+    problemStatement:'Water  level detection and marking to estimate the level of water in the storage tanks (overhead / sump). The tanks are plastic and cement tanks.The approaches involve computer vision and machine learning.',
     description:
       "Solve-a-thon is a solution event focused on building an AI/ML and vision based android application, where enrolled teams will get to solve real time problems that could be planet changing tech. It is an opportunity for students to showcase their skills, learn new technologies and potentially develop a project into a product",
     img: "/src/assets/eventdetails/hackathon.jpg",
@@ -242,13 +243,13 @@ const EventDetailList = [
     ],
     contact: [
       {
-        type:"Faculty Co ordinator",
+        type:"Faculty Coordinator",
         name: "Dr Preethi Patil",
         email: "preethinpatil@rvce.edu.in",
         phone: "+91 9900970235",
       },
       {
-        type:"Student Co ordinator",
+        type:"Student Coordinator",
         name: "Ranjith Kumar J",
         email: "ranjithkj.mca21@rvce.edu.in",
         phone: "+91 8884601647",

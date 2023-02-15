@@ -12,7 +12,7 @@ function Events() {
       
       {/* Open Events */}
 
-      <h1 className="text-center special-heading text-3xl text-success my-3 lg:my-8">Open Events</h1>
+      <h1 className="text-center event-header text-3xl text-success my-5 lg:my-8">Open Events (For all branches of UG & PG)</h1>
 
       <div className="w-full flex items-center justify-center" >
       <Solvathon />
@@ -58,7 +58,7 @@ function Events() {
      
       {/*  General Events */}
 
-      <h1 className="text-center text-3xl text-success my-16">General Events</h1>
+      <h1 className="text-center text-3xl text-success my-16 event-header">Group Events (Only for MCA & BCA)</h1>
 
 
       {EventsList.map((data)=>{

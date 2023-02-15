@@ -32,20 +32,28 @@ function Navbar() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a href="#events">Events</a>
+              <a href="#about">About</a>
             </li>
             <li>
+              <a href="#events">Events</a>
+            </li>
+
+            <li>
               <a href="#sponsors">Sponsors</a>
+            </li>
+
+            <li>
+              <a href="#awards">Awards</a>
             </li>
             <li>
               <a href="#contact">Contact us</a>
             </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
+
             <li>
               <Link to="/login">Login</Link>
             </li>
+
+            
           </ul>
         </div>
 
@@ -67,9 +75,9 @@ function Navbar() {
           <li>
             <a href="#events">Events</a>
           </li>
-          {/*  <li>
+            <li>
             <a href="#sponsors">Sponsors</a>
-          </li> */}
+          </li> 
 
           <li>
             <a href="#venue">Venue</a>
@@ -80,18 +88,20 @@ function Navbar() {
           </li>
 
           <li>
+            <a href="#awards">Awards</a>
+          </li>
+
+          <li>
             <Link to="/login">Login</Link>
           </li>
 
           <li>
-          
-          <img
-          src={Logo}
-          className="logo"
-          style={{ width: "100px", maxWidth: "100px" }}
-        />
-        </li>
-
+            <img
+              src={Logo}
+              className="logo"
+              style={{ width: "100px", maxWidth: "100px" }}
+            />
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
@@ -100,8 +110,6 @@ function Navbar() {
           Register
         </Link>
       */}
-
-       
       </div>
     </div>
   );

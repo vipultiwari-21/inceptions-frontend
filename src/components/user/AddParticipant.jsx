@@ -8,6 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
+import Loading from "../../Loading";
 
 const AddParticipant = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -15,6 +16,25 @@ const AddParticipant = () => {
   const [error, setError] = useState("");
   const [teamCount, setTeamCount] = useState(0);
   const [maxTeam, setMaxTeam] = useState(0);
+  const [teamRegisterd, setTeamRegistered] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+
+  const getTeamRegisteredDetails = async () => {
+    const { data } = await axios.get("/team/get-team-of-current-user");
+    if (data.message == "This user has not registered any teams") {
+      const getAllTeamNames = await axios.get(
+        "/teamNames/get-available-team-names"
+      );
+      setTeamRegistered(false);
+      setPageLoading(false)
+    } else {
+      //console.log(data);
+      setTeamRegistered(true);
+      getMaxTeamMembers();
+      getTeamCount();
+      setPageLoading(false);
+    }
+  };
 
   const getTeamCount = async () => {
     try {
@@ -22,10 +42,11 @@ const AddParticipant = () => {
         `${import.meta.env.VITE_API_ENDPOINT}teamMember/get`
       );
       setTeamCount(data.length);
+      // setPageLoading(false)
       //setTeamData(data);
       //console.log(data.length)
     } catch (err) {
-      alert("Error occured!");
+      console.log(err);
     }
   };
 
@@ -35,14 +56,12 @@ const AddParticipant = () => {
       console.log("Max", data);
       setMaxTeam(data);
     } catch (err) {
-      alert("Error occured!");
+      console.log(err);
     }
   };
 
   useEffect(() => {
-    getTeamCount();
-    getMaxTeamMembers();
-    //console.log("teamData", teamData);
+    getTeamRegisteredDetails();
   }, []);
 
   const handleFormSubmit = async (values, { resetForm }) => {
@@ -55,229 +74,244 @@ const AddParticipant = () => {
           values
         );
         alert("Team mate added succesfully");
-        getTeamCount()
-        getMaxTeamMembers()
+        getTeamCount();
+        getMaxTeamMembers();
       } catch (err) {
         // alert(err.data.message)
         console.log(err.response.data.error);
       }
       console.log(values);
-    }else{
-      alert("You cant add more members")
-      
+    } else {
+      alert("You cant add more members");
     }
-    resetForm()
+    resetForm();
     setLoading(false);
   };
 
-  return (
-    <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
-      <Header
-        title="Add Participants"
-        subtitle="Fill up the form with the Participant details"
-      />
+  return !pageLoading ? (
+    teamRegisterd ? (
+      <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
+        <Header
+          title="Add Participants"
+          subtitle="Fill up the form with the Participant details"
+        />
 
-      {
-        <h3 className="text-warning font-bold text-center">
-          You have added {teamCount} member(s) ,{" "}
-          {maxTeam-teamCount > 0
-            ? `you can still add ${maxTeam - teamCount} member(s)`
-            : "you cannot add more member(s)"}{" "}
-        </h3>
-      }
+        {
+          <h3 className="text-warning font-bold text-center">
+            You have added {teamCount} member(s) ,{" "}
+            {maxTeam - teamCount > 0
+              ? `you can still add ${maxTeam - teamCount} member(s)`
+              : "you cannot add more member(s)"}{" "}
+          </h3>
+        }
 
-      <Box
-        m="20px"
-        sx={{
-          height: isNonMobile ? "80vh" : "100%",
-          // display: "flex",
-          // justifyContent: "center",
-          // alignItems: "center",
-        }}
-      >
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={checkoutSchema}
+        <Box
+          m="20px"
+          sx={{
+            height: isNonMobile ? "80vh" : "100%",
+            // display: "flex",
+            // justifyContent: "center",
+            // alignItems: "center",
+          }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-          }) => (
-            <form
-              onSubmit={handleSubmit}
-              style={{
-                width: "100%",
-                // boxShadow: "7px 7px 9px 0px rgba(0,0,0,0.47)",
-                boxShadow: isNonMobile
-                  ? "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
-                  : null,
-                maxWidth: "40rem",
-                color: "#e0e0e0",
-                margin: "0 auto",
-                padding: isNonMobile ? "2rem" : null,
-                borderRadius: "6px",
-                background: isNonMobile ? "#1F2A40" : null,
-                // display: "grid",
-                // placeItems: "center",
-                // height: "100%",
-              }}
-            >
-              <Typography
-                variant={isNonMobile ? "h4" : "h6"}
-                color="#e0e0e0"
-                fontWeight="bold"
-                mb="2rem"
-              >
-                PARTICIPANT
-              </Typography>
-              {error && (
-                <Box
-                  mb="1rem"
-                  sx={{
-                    color: "#e87c03",
-                    display: "flex",
-                    // justifyContent: "center",
-                    gap: "0.5rem",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                  }}
-                  p=".5rem"
-                >
-                  <ErrorIcon />
-                  {error}
-                </Box>
-              )}
-              <Box
-                display="grid"
-                // placeItems="center"
-                color="#e0e0e0"
-                gap="30px"
-                gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                sx={{
-                  "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+          <Formik
+            onSubmit={handleFormSubmit}
+            initialValues={initialValues}
+            validationSchema={checkoutSchema}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+            }) => (
+              <form
+                onSubmit={handleSubmit}
+                style={{
+                  width: "100%",
+                  // boxShadow: "7px 7px 9px 0px rgba(0,0,0,0.47)",
+                  boxShadow: isNonMobile
+                    ? "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
+                    : null,
+                  maxWidth: "40rem",
+                  color: "#e0e0e0",
+                  margin: "0 auto",
+                  padding: isNonMobile ? "2rem" : null,
+                  borderRadius: "6px",
+                  background: isNonMobile ? "#1F2A40" : null,
+                  // display: "grid",
+                  // placeItems: "center",
+                  // height: "100%",
                 }}
               >
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="First Name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.firstName}
-                  name="firstName"
-                  error={!!touched.firstName && !!errors.firstName}
-                  helperText={touched.firstName && errors.firstName}
-                  sx={{ gridColumn: "span 8" }}
-                  InputLabelProps={{ className: "textfield__label" }}
-                  InputProps={{ className: "textfield__label" }}
-                  className="textfield"
-                />
-
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Last Name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.lastName}
-                  name="lastName"
-                  error={!!touched.lastName && !!errors.lastName}
-                  helperText={touched.lastName && errors.lastName}
-                  sx={{ gridColumn: "span 8" }}
-                  InputLabelProps={{ className: "textfield__label" }}
-                  InputProps={{ className: "textfield__label" }}
-                  className="textfield"
-                />
-
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="USN"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.usn}
-                  name="usn"
-                  error={!!touched.usn && !!errors.usn}
-                  helperText={touched.usn && errors.usn}
-                  sx={{ gridColumn: "span 8" }}
-                  InputLabelProps={{ className: "textfield__label" }}
-                  InputProps={{ className: "textfield__label" }}
-                  className="textfield"
-                />
-
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Email"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.email}
-                  name="email"
-                  error={!!touched.email && !!errors.email}
-                  helperText={touched.email && errors.email}
-                  sx={{ gridColumn: "span 8" }}
-                  InputLabelProps={{ className: "textfield__label" }}
-                  InputProps={{ className: "textfield__label" }}
-                  className="textfield"
-                />
-
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Contact Number"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.contactNumber}
-                  name="contactNumber"
-                  error={!!touched.contactNumber && !!errors.contactNumber}
-                  helperText={touched.contactNumber && errors.contactNumber}
-                  sx={{ gridColumn: "span 8" }}
-                  InputLabelProps={{ className: "textfield__label" }}
-                  InputProps={{ className: "textfield__label" }}
-                  className="textfield"
-                />
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mt="20px"
-              >
-                {loading ? (
-                  <CircularProgress />
-                ) : (
-                  <Button
-                    type="submit"
-                    color="primary"
-                    variant="contained"
+                <Typography
+                  variant={isNonMobile ? "h4" : "h6"}
+                  color="#e0e0e0"
+                  fontWeight="bold"
+                  mb="2rem"
+                >
+                  PARTICIPANT
+                </Typography>
+                {error && (
+                  <Box
+                    mb="1rem"
                     sx={{
-                      padding: "10px 20px",
-                      width: "100%",
-                      fontSize: "16px",
-                      letterSpacing: "0.15rem",
-                      fontWeight: "bold",
+                      color: "#e87c03",
+                      display: "flex",
+                      // justifyContent: "center",
+                      gap: "0.5rem",
+                      alignItems: "center",
+                      borderRadius: "5px",
                     }}
+                    p=".5rem"
                   >
-                    Add Teammate
-                  </Button>
+                    <ErrorIcon />
+                    {error}
+                  </Box>
                 )}
-              </Box>
-            </form>
-          )}
-        </Formik>
+                <Box
+                  display="grid"
+                  // placeItems="center"
+                  color="#e0e0e0"
+                  gap="30px"
+                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                  sx={{
+                    "& > div": {
+                      gridColumn: isNonMobile ? undefined : "span 4",
+                    },
+                  }}
+                >
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="First Name"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.firstName}
+                    name="firstName"
+                    error={!!touched.firstName && !!errors.firstName}
+                    helperText={touched.firstName && errors.firstName}
+                    sx={{ gridColumn: "span 8" }}
+                    InputLabelProps={{ className: "textfield__label" }}
+                    InputProps={{ className: "textfield__label" }}
+                    className="textfield"
+                  />
+
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="Last Name"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.lastName}
+                    name="lastName"
+                    error={!!touched.lastName && !!errors.lastName}
+                    helperText={touched.lastName && errors.lastName}
+                    sx={{ gridColumn: "span 8" }}
+                    InputLabelProps={{ className: "textfield__label" }}
+                    InputProps={{ className: "textfield__label" }}
+                    className="textfield"
+                  />
+
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="USN"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.usn}
+                    name="usn"
+                    error={!!touched.usn && !!errors.usn}
+                    helperText={touched.usn && errors.usn}
+                    sx={{ gridColumn: "span 8" }}
+                    InputLabelProps={{ className: "textfield__label" }}
+                    InputProps={{ className: "textfield__label" }}
+                    className="textfield"
+                  />
+
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="Email"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.email}
+                    name="email"
+                    error={!!touched.email && !!errors.email}
+                    helperText={touched.email && errors.email}
+                    sx={{ gridColumn: "span 8" }}
+                    InputLabelProps={{ className: "textfield__label" }}
+                    InputProps={{ className: "textfield__label" }}
+                    className="textfield"
+                  />
+
+                  <TextField
+                    fullWidth
+                    variant="filled"
+                    type="text"
+                    label="Contact Number"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.contactNumber}
+                    name="contactNumber"
+                    error={!!touched.contactNumber && !!errors.contactNumber}
+                    helperText={touched.contactNumber && errors.contactNumber}
+                    sx={{ gridColumn: "span 8" }}
+                    InputLabelProps={{ className: "textfield__label" }}
+                    InputProps={{ className: "textfield__label" }}
+                    className="textfield"
+                  />
+                </Box>
+
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  mt="20px"
+                >
+                  {loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <Button
+                      type="submit"
+                      color="primary"
+                      variant="contained"
+                      sx={{
+                        padding: "10px 20px",
+                        width: "100%",
+                        fontSize: "16px",
+                        letterSpacing: "0.15rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Add Teammate
+                    </Button>
+                  )}
+                </Box>
+              </form>
+            )}
+          </Formik>
+        </Box>
       </Box>
-    </Box>
+    ) : (
+      <Box
+        className="flex justify-center items-center "
+        sx={{ height: "90vh" }}
+      >
+        <Header
+          title="Pending registration!!!"
+          subtitle="Please register your team name and event type in the Add team section"
+        />
+      </Box>
+    )
+  ) : (
+    <Loading />
   );
 };
 

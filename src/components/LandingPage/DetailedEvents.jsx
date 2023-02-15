@@ -44,6 +44,18 @@ const DetailedEvents = () => {
                     <p className="my-8 text-justify text-md ">
                       {event.description}
                     </p>
+
+
+                    {event.problemStatement ? (
+                      <>
+                      <span className="text-xl text-secondary ">Problem statement</span>
+
+                      <p className="my-8 text-justify text-md ">
+                      {event.problemStatement}
+                    </p>
+                    </>
+                    ) : null}
+
                     {event.rules ? (
                       <p className="my-8 ">
                         <span className="text-xl text-secondary ">Rules</span>

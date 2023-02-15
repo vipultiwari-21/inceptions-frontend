@@ -15,7 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import ExceptionsLogo from "../../assets/exceptions/png/E.png";
 import {Link} from 'react-router-dom'
 
-const pages = ["Event","Home","Login", "Register"];
+const pages = ["Home","Event","Login", "Register"];
 
 
 function ResponsiveAppBar() {
@@ -111,7 +111,7 @@ function ResponsiveAppBar() {
               >
             
 
-                <Link to={page=="Event" ? `` : page=='Home' ? '/' : page=='Login' ? '/login' : page=='Register' ? '/register' : null}>
+                <Link to={page=='Home' ? '/' : page=="Event" ? `` : page=='Login' ? '/login' : page=='Register' ? '/register' : null}>
                 
                 <span className={`${page=='Event' ? 'active' : ""}`}>{page}</span>
                 </Link>

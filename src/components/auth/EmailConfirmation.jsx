@@ -103,7 +103,7 @@ function EmailConfirmation() {
                   >
                     <img
                       src={Exceptions}
-                      style={{ width: "500px", height: "500px" }}
+                      style={{ width: "450px", height: "450px" }}
                     />
                   </div>
                 </div>

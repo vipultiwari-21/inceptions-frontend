@@ -5,7 +5,7 @@ import RvceLogo from "/web_logo.png";
 
 function Navbar() {
   return (
-    <div className="sticky navbar bg-base-100 pb-5">
+    <div className="sticky navbar bg-base-100 pb-5  ">
       <div className="navbar-start">
         <div className="dropdown">
           <label
@@ -82,6 +82,16 @@ function Navbar() {
           <li>
             <Link to="/login">Login</Link>
           </li>
+
+          <li>
+          
+          <img
+          src={Logo}
+          className="logo"
+          style={{ width: "100px", maxWidth: "100px" }}
+        />
+        </li>
+
         </ul>
       </div>
       <div className="navbar-end">
@@ -91,11 +101,7 @@ function Navbar() {
         </Link>
       */}
 
-        <img
-          src={Logo}
-          className="logo"
-          style={{ width: "50px", maxWidth: "50px" }}
-        />
+       
       </div>
     </div>
   );

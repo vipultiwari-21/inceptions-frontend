@@ -4,7 +4,7 @@
     import Logo from '../../assets/exceptions/png/E.png'
     import { Formik,ErrorMessage } from 'formik';
     import * as yup from 'yup';
-    import Exceptions from '../../assets/svg/taken.svg' 
+    import Exceptions from '../../assets/svg/male.svg' 
     import axios from 'axios'
     import {Link} from 'react-router-dom'
     function ForgotPassword() {
@@ -153,10 +153,10 @@
                         background: "linear-gradient(to right, #8360c3, #2ebf91)",
                       }}
                     >
-                      <img
-                        src={Exceptions}
-                        style={{ width: "500px", height: "500px" }}
-                      />
+                    <img
+                    src={Exceptions}
+                    style={{ width: "450px", height: "450px" }}
+                  />
                     </div>
                   </div>
                 </div>

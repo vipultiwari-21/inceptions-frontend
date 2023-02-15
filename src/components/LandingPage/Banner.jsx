@@ -11,7 +11,7 @@ function Banner() {
   return (
     <div>
    
-    <Container maxWidth="xl mt-16 text-neutral-content">
+    <Container maxWidth="xl mt-32 text-neutral-content">
     
     <Box className="flex justify-around  items-center flex-col-reverse lg:flex-row " >
     <div className='event-name '>

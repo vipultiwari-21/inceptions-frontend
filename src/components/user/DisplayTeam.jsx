@@ -1,20 +1,20 @@
-import { Box, Button, Typography, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import Header from "../Sidebar/Header";
-import { Link } from "react-router-dom";
 import axios from "../../features/Interceptors/apiInterceptor";
+
+
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 // import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 
 const DisplayTeam = () => {
-  const [teamMemberTable, setTeamMemberTable] = useState([]);
+  const [teamMember, setTeamMember] = useState([]);
   const getTeamMembersOfCurrentUser = async () => {
     const { data } = await axios.get(
       `${import.meta.env.VITE_API_ENDPOINT}/teamMember/get`
     );
-    setTeamMemberTable(data);
+    setTeamMember(data);
     console.log(data);
   };
 
@@ -63,8 +63,20 @@ const DisplayTeam = () => {
   ];
 
   return (
-    <Box m="20px">
-      <Header title="TEAM MEMBERS" subtitle="Here is your team members list" />
+    <Box >
+    <Header title="TEAM MEMBERS" subtitle="Here is your team members list" />
+
+      
+    </Box>
+  );
+};
+
+export default DisplayTeam;
+
+
+{/*
+
+<Header title="TEAM MEMBERS" subtitle="Here is your team members list" />
       <Box
         m="40px 0 0 0"
         height="70vh"
@@ -109,8 +121,4 @@ const DisplayTeam = () => {
           />
         }
       </Box>
-    </Box>
-  );
-};
-
-export default DisplayTeam;
+*/}

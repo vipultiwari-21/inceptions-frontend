@@ -17,10 +17,12 @@ function PaymentInfo() {
   const initialValues = {
     transactionID: "",
     image: "",
+    amountPaid:''
   };
 
   const checkoutSchema = yup.object().shape({
     transactionID: yup.string().required("required"),
+    amountPaid:yup.number().required("required")
   });
 
   const handleFormSubmit = async (values, { resetForm }) => {
@@ -28,7 +30,7 @@ function PaymentInfo() {
   };
 
   return (
-    <Box m="20px" className="w-full ">
+    <Box m="20px">
       <Header
         title="Transaction Details"
         subtitle="Please upload screenshot of payment recieved by RVCE with transaction ID"
@@ -42,7 +44,7 @@ function PaymentInfo() {
           // justifyContent: "center",
           // alignItems: "center",
         }}
-        className="w-full "
+        className=""
       >
         <Formik
           onSubmit={handleFormSubmit}
@@ -124,11 +126,28 @@ function PaymentInfo() {
                   name="transactionID"
                   error={!!touched.transactionID && !!errors.transactionID}
                   helperText={touched.transactionID && errors.transactionID}
-                  sx={{ gridColumn: "span 8" }}
+                  sx={{ gridColumn: "span 4" }}
                   InputLabelProps={{ className: "textfield__label" }}
                   InputProps={{ className: "textfield__label" }}
                   className="textfield"
                 />
+
+                <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Amount paid"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.amountPaid}
+                name="amountPaid"
+                error={!!touched.amountPaid && !!errors.amountPaid}
+                helperText={touched.amountPaid && errors.amountPaid}
+                sx={{ gridColumn: "span 4" }}
+                InputLabelProps={{ className: "textfield__label" }}
+                InputProps={{ className: "textfield__label" }}
+                className="textfield"
+              />
 
                 <TextField
                   fullWidth
@@ -143,7 +162,7 @@ function PaymentInfo() {
                   name="image"
                   error={!!touched.image && !!errors.image}
                   helperText={touched.image && errors.image}
-                  sx={{ gridColumn: "span 8" }}
+                  sx={{ gridColumn: "span 4" }}
                   InputLabelProps={{ className: "textfield__label" }}
                   InputProps={{ className: "textfield__label" }}
                   className="textfield"

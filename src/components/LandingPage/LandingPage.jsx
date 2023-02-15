@@ -10,7 +10,7 @@ import Contact from "./Contact";
 import Box from "@material-ui/core/Box";
 import Footer from "./Footer";
 import Banner from "./Banner";
-import Events from '../LandingPage/Events'
+import Events from "../LandingPage/Events";
 
 function LandingPage() {
   return (

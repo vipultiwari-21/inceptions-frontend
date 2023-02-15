@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import React from "react";
-import MaleAstronaut from "../../assets/svg/male.svg";
+import MaleAstronaut from "../../assets/svg/maleAstro.svg";
 import FemaleAstronaut from "../../assets/svg/female.svg";
 import Faculty1 from '../../assets/svg/faculty1.svg'
 import Faculty2 from '../../assets/svg/faculty2.svg'

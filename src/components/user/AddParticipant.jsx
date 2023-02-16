@@ -9,6 +9,8 @@ import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 import Loading from "../../Loading";
+import { useNavigate } from "react-router-dom";
+
 
 const AddParticipant = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -18,21 +20,53 @@ const AddParticipant = () => {
   const [maxTeam, setMaxTeam] = useState(0);
   const [teamRegisterd, setTeamRegistered] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
+  const [eventType,setEventType]=useState('')
+  const navigate=useNavigate()
+
+  const getEventType=async()=>{
+    try{
+      const events = await axios.get("/team/get-events-of-team");
+      const isOpen = events.data.some((event) => {
+        return event.eventIsOpenEvent;
+      });
+
+      const isGC = events.data.some((event) => {
+        return !event.eventIsOpenEvent;
+      });
+
+     
+
+      isOpen && isGC
+        ? setEventType("both")
+        : isOpen && !isGC
+        ? setEventType("open")
+        : isGC && !isOpen
+        ? setEventType("group")
+        : setEventType("");
+    }catch(err){
+      console.log("Error occured")
+    }
+  }
 
   const getTeamRegisteredDetails = async () => {
-    const { data } = await axios.get("/team/get-team-of-current-user");
+    try{
+      const { data } = await axios.get("/team/get-team-of-current-user");
     if (data.message == "This user has not registered any teams") {
       const getAllTeamNames = await axios.get(
         "/teamNames/get-available-team-names"
       );
       setTeamRegistered(false);
-      setPageLoading(false)
+      setPageLoading(false) 
     } else {
       //console.log(data);
       setTeamRegistered(true);
       getMaxTeamMembers();
+     getEventType()
       getTeamCount();
       setPageLoading(false);
+    }
+    }catch(err){
+      console.log("error")
     }
   };
 
@@ -59,6 +93,8 @@ const AddParticipant = () => {
       console.log(err);
     }
   };
+
+
 
   useEffect(() => {
     getTeamRegisteredDetails();
@@ -88,6 +124,10 @@ const AddParticipant = () => {
     setLoading(false);
   };
 
+  const handleSelected=()=>{
+    navigate("/payment");
+  }
+
   return !pageLoading ? (
     teamRegisterd ? (
       <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
@@ -97,12 +137,23 @@ const AddParticipant = () => {
         />
 
         {
+          <>
           <h3 className="text-warning font-bold text-center">
             You have added {teamCount} member(s) ,{" "}
             {maxTeam - teamCount > 0
               ? `you can still add ${maxTeam - teamCount} member(s)`
               : "you cannot add more member(s)"}{" "}
-          </h3>
+ </h3>
+
+ <h3 className="text-error my-5 font-bold">
+   
+ {eventType=='both' ? `  Note : Your team must contain atleast 7 members to win General Championship` 
+ : null
+ }
+ </h3>
+ 
+ </>
+
         }
 
         <Box
@@ -273,6 +324,7 @@ const AddParticipant = () => {
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
+                  flexDirection="column"
                   mt="20px"
                 >
                   {loading ? (
@@ -293,6 +345,26 @@ const AddParticipant = () => {
                       Add Teammate
                     </Button>
                   )}
+
+                  <Button
+                      color="primary"
+                      variant="contained"
+                      sx={{
+                        padding: "10px 20px",
+                        width: "100%",
+                        fontSize: "16px",
+                        letterSpacing: "0.15rem",
+                        fontWeight: "bold",
+                        marginTop:'10px'
+                      }}
+                      onClick={handleSelected}
+                    >
+                      Head to payment
+
+                     
+
+                    </Button>
+
                 </Box>
               </form>
             )}

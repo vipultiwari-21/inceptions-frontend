@@ -12,9 +12,9 @@ import { Box } from "@mui/material";
 
 function Prize() {
   return (
-    <Container maxWidth="xl my-16 text-neutral-content " id="awards">
-      <h1 className="sub-heading text-secondary text-bold text-3xl" id="awards">
-        AWARDS
+    <Container maxWidth="xl my-16 text-neutral-content " id="prize">
+      <h1 className="sub-heading text-secondary text-bold text-3xl" id="prize">
+        Registration Fees
       </h1>
 
       
@@ -29,7 +29,7 @@ function Prize() {
           <h3 className="text-center text-primary  text-xl text-bold">Group Event</h3>
           <h4 className="text-center text-warning my-1 text-xl text-bold flex ">
           
-          ₹99000
+          ₹3540
           </h4>
           
                </Box>
@@ -47,7 +47,7 @@ function Prize() {
           Gaming
         </h3>
         <h4 className="text-center text-warning my-1 text-xl text-bold flex ">
-        ₹99000
+        ₹944
         </h4>
         
       </Box>
@@ -65,7 +65,7 @@ function Prize() {
             Solvathon
           </h3>
           <h4 className="text-center text-warning my-1 text-xl text-bold flex ">
-          ₹99000
+          ₹236
           </h4>
           
         </Box>
@@ -86,7 +86,7 @@ function Prize() {
         IoT
       </h3>
       <h4 className="text-center text-warning my-1 text-xl text-bold flex ">
-      ₹99000
+      ₹590
       </h4>
       
     </Box>

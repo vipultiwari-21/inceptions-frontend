@@ -31,6 +31,7 @@
     "crypto-js": "^4.1.1",
     "daisyui": "^2.46.1",
     "dotenv": "^16.0.3",
+    "ember-ufo-loading": "^0.0.4",
     "formik": "^2.2.9",
     "jotai": "^1.13.1",
     "js-cookie": "^3.0.1",

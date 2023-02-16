@@ -3,7 +3,7 @@ import { Typography, Box, useTheme } from "@mui/material";
 const Header = ({ title, subtitle }) => {
   const theme = useTheme();
   return (
-    <Box  mb="30px" className="p-5 text-center lg:text-left flex justify-center items-center flex-col "
+    <Box  mb="" className="p-5 text-center lg:text-left flex justify-center items-center flex-col "
     
     >
       <Typography

@@ -28,6 +28,7 @@ import VolunteerProfile from "./components/volunteer/VolunteerProfile";
 import VolunteerAttendance from "./components/volunteer/VolunteerAttendance";
 import Payment from "./components/user/Payment";
 import PaymentInfo from "./components/user/PaymentInfo";
+import Schedule from './components/LandingPage/Schedule'
 
 function App() {
   const user = Cookies.get("token");
@@ -108,6 +109,7 @@ function App() {
           )} */}
           {!user && <Route path="/" element={<LandingPage />} />}
           <Route path="/logintemp" element={<Login />} />
+          <Route path="/schedule" element={<Schedule />} />
           <Route path="/registertemp" element={<Registration />} />
           <Route path="/register" element={<Temporary />} />
           <Route path="/login" element={<Temporary />} />

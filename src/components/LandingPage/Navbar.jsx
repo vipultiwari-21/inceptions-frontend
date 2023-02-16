@@ -43,10 +43,13 @@ function Navbar() {
             </li>
 
             <li>
-              <a href="#awards">Awards</a>
+              <a href="#prize">Event Fee</a>
             </li>
             <li>
               <a href="#contact">Contact us</a>
+            </li>
+            <li>
+            <Link to="/schedule">Schedule</Link>
             </li>
 
             <li>
@@ -82,13 +85,15 @@ function Navbar() {
           <li>
             <a href="#venue">Venue</a>
           </li>
-
+          <li>
+          <Link to="/schedule">Schedule</Link>
+          </li>
           <li>
             <a href="#contact">Contact us</a>
           </li>
 
           <li>
-            <a href="#awards">Awards</a>
+            <a href="#prize">Event Fee</a>
           </li>
 
           <li>

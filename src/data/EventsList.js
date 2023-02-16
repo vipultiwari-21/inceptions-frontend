@@ -1,14 +1,16 @@
 const EventsList = [
+
+
   {
-    id: 1,
-    name: "gen-geeks",
-    to: "/details/gengeeks",
+    id: 7,
+    name: "gravity",
+    to: "/details/gravity",
     description:
-      "Bring your cognitive skills to the arena as Exception is back with its highly anticipated quiz. Strap in  for a crazy ride into the energetic universe of quizzing.",
-    img: "/icons/quiz.svg",
-    direction: "flex-row",
-    color: "btn-primary",
-    text: "text-primary",
+      "Are you an IT student ready to showcase your skills and prove you're the crème de la crème? Look no further, the “Gravity” competition is the perfect opportunity for you to step up and show your potential as IT specialists what you're made of!. It’s time to put your knowledge to the test and show off that brain power with an intriguing rounds.",
+    img: "/icons/manager.svg",
+    direction: "flex-row-reverse",
+    color: "btn-warning",
+    text: "text-warning",
     eventType:'general'
   },
   {
@@ -35,6 +37,61 @@ const EventsList = [
     text: "text-accent",
     eventType:'general'
   },
+
+  {
+    id: 6,
+    name: "constellation",
+    to: "/details/constellation",
+    description:
+      "Ideas shouldn't be kept, something must be done about it so bring out your inner creativity and imagination into action here at Exceptions 2023 - Constellation(UI/UX designing)",
+    img: "/icons/ui.svg",
+    direction: "flex-row",
+    color: "btn-primary",
+    text: "text-primary",
+    eventType:'general'
+  },
+ 
+
+  {
+    id: 1,
+    name: "gen-geeks",
+    to: "/details/gengeeks",
+    description:
+      "Bring your cognitive skills to the arena as Exception is back with its highly anticipated quiz. Strap in  for a crazy ride into the energetic universe of quizzing.",
+    img: "/icons/quiz.svg",
+    direction: "flex-row",
+    color: "btn-primary",
+    text: "text-primary",
+    eventType:'general'
+  },
+
+  {
+    id: 8,
+    name: "zest",
+    to: "/details/zest",
+    description:
+      "Presenting to you an event which promotes creative ways of thinking to teach technology to common folks. Idea of this event is to project a few basics of technology through a creative medium. Zest is an event where a group of people have to think and come up with an idea to project the specific technology basics to the present crowd. The medium can be a game, video, drama, song or any creative mode. The most entertaining and creative participant wins.",
+    img: "/icons/zest.svg",
+    direction: "flex-row-reverse",
+    color: "btn-primary",
+    text: "text-primary",
+    eventType:'general'
+  },
+
+  {
+    id: 9,
+    name: "Mystery Event",
+    to: "/details/mysteryevent",
+    description: "Why don't you come to the Venue and find out?",
+    img: "/icons/mystery.svg",
+    direction: "flex-row-reverse",
+    color: "btn-primary",
+    text: "text-primary",
+    eventType:'general'
+  },
+
+ 
+  
   {
     id: 4,
     name: "strike force",
@@ -60,54 +117,9 @@ const EventsList = [
     text: "text-accent",
     eventType:'open'
   },
-  {
-    id: 6,
-    name: "constellation",
-    to: "/details/constellation",
-    description:
-      "Ideas shouldn't be kept, something must be done about it so bring out your inner creativity and imagination into action here at Exceptions 2023 - Constellation(UI/UX designing)",
-    img: "/icons/ui.svg",
-    direction: "flex-row",
-    color: "btn-primary",
-    text: "text-primary",
-    eventType:'general'
-  },
-  {
-    id: 7,
-    name: "gravity",
-    to: "/details/gravity",
-    description:
-      "Are you an IT student ready to showcase your skills and prove you're the crème de la crème? Look no further, the “Gravity” competition is the perfect opportunity for you to step up and show your potential as IT specialists what you're made of!. It’s time to put your knowledge to the test and show off that brain power with an intriguing rounds.",
-    img: "/icons/manager.svg",
-    direction: "flex-row-reverse",
-    color: "btn-warning",
-    text: "text-warning",
-    eventType:'general'
-  },
-  {
-    id: 8,
-    name: "zest",
-    to: "/details/zest",
-    description:
-      "Presenting to you an event which promotes creative ways of thinking to teach technology to common folks. Idea of this event is to project a few basics of technology through a creative medium. Zest is an event where a group of people have to think and come up with an idea to project the specific technology basics to the present crowd. The medium can be a game, video, drama, song or any creative mode. The most entertaining and creative participant wins.",
-    img: "/icons/zest.svg",
-    direction: "flex-row-reverse",
-    color: "btn-primary",
-    text: "text-primary",
-    eventType:'general'
-  },
-  {
-    id: 9,
-    name: "Mystery Event",
-    to: "/details/mysteryevent",
-    description: "Why don't you come to the Venue and find out?",
-    img: "/icons/mystery.svg",
-    direction: "flex-row-reverse",
-    color: "btn-primary",
-    text: "text-primary",
-    eventType:'general'
-  },
 
+
+ 
   
 ];
 

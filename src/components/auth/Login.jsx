@@ -46,7 +46,7 @@ function Login() {
   };
 
 
-  const handleFormSubmit = async (values, { setSubmitting }) => {
+  const handleFormSubmit = async (values, { setSubmitting , resetForm}) => {
    // console.log("values", values);
     // const data = await loginAuth(values);
     // console.log("data", data);
@@ -75,6 +75,8 @@ function Login() {
     }
 
     setLoading(false);
+    resetForm()
+    
   };
 
   return (
@@ -130,7 +132,10 @@ function Login() {
                                 onBlur={handleBlur}
                                 value={values.email}
                                 placeholder="Email ID"
-                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                className="form-control block w-full px-3 py-1.5 text-base font-normal
+                                 text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300
+                                  rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
+                                  focus:border-blue-600 focus:outline-none"
                               />
 
                           
@@ -147,7 +152,8 @@ function Login() {
                                 placeholder="Password"
                                 value={values.password}
                               />
-                              <ErrorMessage name="password"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
+                              <ErrorMessage name="password"  component="div" className="text-blue-500 
+                               mt-3 text-left capitalize" />
 
                             </div>
                             <div className="text-center pt-1 mb-6 pb-1">
@@ -205,7 +211,7 @@ function Login() {
                   >
                     <img
                       src={Exceptions}
-                      style={{ width: "450px", height: "450px" }}
+                      style={{ width: "500px", height: "500px" }}
                     />
                   </div>
                 </div>

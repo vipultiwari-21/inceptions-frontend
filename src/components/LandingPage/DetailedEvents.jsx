@@ -28,8 +28,7 @@ const DetailedEvents = () => {
       }
 
         <Box className="h-full lg:w-7/12 ">
-          <EventNavbar />
-
+         
           <Box className="h-5/6 w-full p-5 lg:p-12 overflow-y-scroll">
             {EventDetailList.map((event) => {
               if (event.route == id) {

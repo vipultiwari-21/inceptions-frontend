@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 
 @font-face {
   font-family: gallient;
@@ -23,7 +23,8 @@
 }
 
 body {
-  overflow-x: hidden;
+  height: 100%;
+  overflow: auto;
 }
 
 .app {
@@ -66,9 +67,8 @@ font-weight: bold;
   text-align: justify;
 }
 
-
-.special-heading{
-  font-family: 'Montserrat', sans-serif;
+.special-heading {
+  font-family: "Montserrat", sans-serif;
 }
 
 .title {
@@ -252,25 +252,18 @@ html {
   background: #38bdf8;
 }
 
-
-
-.textfield{
-  color:#fff;
-  background-color: rgba(190, 190, 190, 0.2)
+.textfield {
+  color: #fff;
+  background-color: rgba(190, 190, 190, 0.2);
 }
 
-
-.textfield__label{
-  color:#fff !important;
-  
+.textfield__label {
+  color: #fff !important;
 }
 
-
-.error-404{
-  font-family:fonarto;
-  
+.error-404 {
+  font-family: fonarto;
 }
-
 
 /*Sticky navbar*/
 
@@ -280,6 +273,35 @@ html {
   top: 0% !important;
 }
 
-.event-header{
+.event-header {
   font-family: mont;
 }
+
+/* Solvathon ad banner element begins here */
+
+.special-case-element {
+  position: sticky;
+  width: 100px;
+  top:60%;
+  left:90%;
+  z-index: 9994;
+  height: 80px;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+
+
+@media screen and (max-width: 500px) {
+  .special-case-element{
+  display: none;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .special-case-element{
+    display: none;
+  }
+}
+

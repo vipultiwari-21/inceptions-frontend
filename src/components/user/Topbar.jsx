@@ -37,7 +37,7 @@ const Topbar = () => {
          <IconButton onClick={handleLogout} >
          <LogoutIcon onClick={handleLogout} style={{color:'#B5CDF5'}} />
        </IconButton>
-       <h3 className="text-xl text-neutral-content font-bold event-header">Logout</h3>
+       <h3 className="text-xl text-neutral-content font-bold event-header cursor-pointer" onClick={handleLogout} >Logout</h3>
          </Box>
         </>
       </Box>

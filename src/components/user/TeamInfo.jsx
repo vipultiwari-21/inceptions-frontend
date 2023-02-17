@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Button, MenuItem, TextField, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
@@ -9,21 +10,29 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
+import Loading from "../../Loading";
+import { useNavigate } from "react-router-dom";
 
 const TeamInfo = () => {
-  const formikRef = useRef(null);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const navigate=useNavigate()
   const [error, setError] = useState("");
-  const eventTypes = ["General Championship + Open Event", "Open Event"];
+  const eventTypes = [
+    "Group Events",
+    "Group Events + Open Events",
+    "Open Events",
+  ];
   const [teamName, setTeamName] = useState([] || {});
   const [isRegistered, setIsRegistered] = useState(false);
   const [registeredTeamName, setRegisteredTeamName] = useState("");
   const [registeredEventType, setRegisteredEventType] = useState("");
   const [teamHead, setTeamHead] = useState([]);
   const [openEvents, setOpenEvents] = useState([]);
-  const [isGCConsidered, setIsGCConsidered] = useState(true);
+  const [isGCConsidered, setIsGCConsidered] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [hasOpenEvents, setHasOpenEvents] = useState(false);
 
   const getTeamHeadDetails = async () => {
     try {
@@ -40,7 +49,7 @@ const TeamInfo = () => {
   const getOpenEvents = async () => {
     try {
       const { data } = await axios.get("/event/get-open-events");
-     // console.log("Open Events : ", data);
+      console.log("Open Events : ", data);
       setOpenEvents(data);
     } catch (err) {
       //console.log(err);
@@ -63,7 +72,6 @@ const TeamInfo = () => {
         `${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,
         obj
       );
-      
     } catch (err) {
       // alert(err.data.message)
       alert(err.response.data.error);
@@ -76,17 +84,37 @@ const TeamInfo = () => {
       const getAllTeamNames = await axios.get(
         "/teamNames/get-available-team-names"
       );
-
+      setPageLoading(false);
       setIsRegistered(false);
-     // console.log(getAllTeamNames.data);
+      // console.log(getAllTeamNames.data);
       setTeamName(getAllTeamNames.data);
     } else {
       //console.log(data);
       setIsRegistered(true);
+
       setRegisteredTeamName(data.teamName.label);
-      data.isGCConsidered
-        ? setRegisteredEventType("Genral Championship")
-        : setRegisteredEventType("Open Event");
+      // data.isGCConsidered
+      //   ? setRegisteredEventType("Group Event")
+      //   : setRegisteredEventType("Open Event");
+
+      const events = await axios.get("/team/get-events-of-team");
+      const isOpen = events.data.some((event) => {
+        return event.eventIsOpenEvent;
+      });
+
+      const isGC = events.data.some((event) => {
+        return !event.eventIsOpenEvent;
+      });
+
+      isOpen && isGC
+        ? setRegisteredEventType("Group Events + Open Event")
+        : isOpen && !isGC
+        ? setRegisteredEventType("Open Events")
+        : isGC && !isOpen
+        ? setRegisteredEventType("Group Events")
+        : setRegisteredEventType("");
+
+      setPageLoading(false);
     }
   };
 
@@ -96,54 +124,50 @@ const TeamInfo = () => {
     getOpenEvents();
   }, []);
 
+  const mapTeamID = async (values) => {
+    var eventIdArray = [];
 
-  const mapTeamID=async(values)=>{
-    var eventIdArray=[]
-
-    values.openEvents.forEach((selectedEvents)=>{
-
-      openEvents.forEach((event)=>{
-        if(event.name==selectedEvents){
-          eventIdArray.push(event.eventId)
+    values.openEvents.forEach((selectedEvents) => {
+      openEvents.forEach((event) => {
+        if (event.name == selectedEvents) {
+          eventIdArray.push(event.eventId);
         }
-      })
+      });
+    });
 
-    })
-
-    return eventIdArray
-
-  }
+    return eventIdArray;
+  };
 
   const handleFormSubmit = async (values, { resetForm }) => {
-   
     //console.log(eventIdArray)
-
-    
-    
-
 
     try {
       setLoading(true);
       // console.log(values.eventType === values.eventType.toLowerCase())
-    
+
       //console.log("isGCConsidered", isGCConsidered);
-     
+
+      //  console.log(values.eventType);
+
       let obj = {
         teamNameId: values.teamID,
         isGCConsidered,
-        ...(values.eventType=='Open Event' ? {openEventIds:await mapTeamID(values)}:{})
+        ...(values.eventType !== "Group Events"
+          ? { openEventIds: await mapTeamID(values) }
+          : { openEventIds: [] }),
       };
-  
-      console.log(obj);
+
+      //console.log(obj);
+
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}team/add`,
         obj
       );
 
-      // console.log(data);
+      console.log(data);
       addTeamLeader();
-      setIsGCConsidered(true)
-      alert("Team was created succesfully")
+      setIsGCConsidered(true);
+      alert("Team was created succesfully!! You can start adding team members");
       resetForm(initialValues);
       getTeams();
     } catch (err) {
@@ -151,14 +175,10 @@ const TeamInfo = () => {
       setError(err.message);
     }
 
-
     setLoading(false);
-
-
-
   };
 
-  return (
+  return !pageLoading ? (
     <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
       <Header
         title="Add Team"
@@ -280,9 +300,25 @@ const TeamInfo = () => {
                       name="eventType"
                       onChange={(e, { value }) => {
                         setFieldValue("eventType", e.target.value);
-                        e.target.value == "Open Event"
-                          ? setIsGCConsidered(false)
-                          : setIsGCConsidered(true);
+
+                        //console.log("Selected Event : ",e.target.value);
+
+                        if (e.target.value == "Group Events") {
+                          setIsGCConsidered(true);
+                          setHasOpenEvents(false);
+
+                          console.log("selected event : ", e.target.value);
+                        } else if (
+                          e.target.value == "Group Events + Open Events"
+                        ) {
+                          setIsGCConsidered(true);
+                          setHasOpenEvents(true);
+                          console.log("selected event : ", e.target.value);
+                        } else if (e.target.value == "Open Events") {
+                          setIsGCConsidered(false);
+                          setHasOpenEvents(true);
+                          console.log("selected event : ", e.target.value);
+                        }
                       }}
                       onBlur={handleBlur}
                       id="eventType"
@@ -324,7 +360,7 @@ const TeamInfo = () => {
                 )}
               </Box>
 
-              {!isGCConsidered ? (
+              {!isRegistered && hasOpenEvents ? (
                 <Box className="flex w-full items-center justify-center  flex-wrap my-8">
                   {openEvents
                     ? openEvents.map((oe) => {
@@ -349,6 +385,7 @@ const TeamInfo = () => {
                 justifyContent="center"
                 alignItems="center"
                 mt="20px"
+                className="flex-col"
               >
                 {loading ? (
                   <CircularProgress />
@@ -385,12 +422,16 @@ const TeamInfo = () => {
                     Register team
                   </Button>
                 )}
+
+                
               </Box>
             </form>
           )}
         </Formik>
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 };
 

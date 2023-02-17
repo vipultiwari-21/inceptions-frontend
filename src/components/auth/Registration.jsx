@@ -22,10 +22,7 @@ function Registration() {
     password: yup
       .string()
       .required("required")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "weak password"
-      ),
+      .min(8, 'Too Short!'),
     firstName: yup.string().required("required"),
     lastName: yup.string().required("required"),
     contactNumber: yup.string().required("required").matches(

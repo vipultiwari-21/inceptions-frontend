@@ -19,7 +19,7 @@ const Topbar = () => {
       display="flex"
       justifyContent="space-between"
       width="100%"
-      backgroundColor="white"
+      backgroundColor="#1F2A40"
       p={2}
     >
       {/* SEARCH BAR */}
@@ -33,9 +33,12 @@ const Topbar = () => {
       {/* ICONS */}
       <Box display="flex">
         <>
-          <IconButton onClick={handleLogout}>
-            <LogoutIcon onClick={handleLogout} />
-          </IconButton>
+         <Box className="flex items-center justify-center">
+         <IconButton onClick={handleLogout} >
+         <LogoutIcon onClick={handleLogout} style={{color:'#B5CDF5'}} />
+       </IconButton>
+       <h3 className="text-xl text-neutral-content font-bold event-header">Logout</h3>
+         </Box>
         </>
       </Box>
     </Box>

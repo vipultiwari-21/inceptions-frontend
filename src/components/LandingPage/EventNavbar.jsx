@@ -1,4 +1,4 @@
-import * as React from "react";
+import React,{useState} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,13 +14,17 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import ExceptionsLogo from "../../assets/exceptions/png/E.png";
 import {Link} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 
-const pages = ["Event","Home","Login", "Register"];
+const pages = ["Home","Event","Login", "Register"];
 
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [params,setParams]=useState('')
+
+  console.log(params)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -111,7 +115,9 @@ function ResponsiveAppBar() {
               >
             
 
-                <Link to={page=="Event" ? `` : page=='Home' ? '/' : page=='Login' ? '/login' : page=='Register' ? '/register' : null}>
+                <Link to={page=='Home' ? '/' : page=="Event" ? `` :
+                 page=='Login' ? '/login' : page=='Register' ? '/register' :
+                  null}>
                 
                 <span className={`${page=='Event' ? 'active' : ""}`}>{page}</span>
                 </Link>

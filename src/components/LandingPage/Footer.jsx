@@ -1,6 +1,7 @@
 import { Container } from "@mui/system";
 import React from "react";
 import RvceLogo from "/web_logo.png";
+import Divider from '@mui/material/Divider';
 
 function Footer() {
   return (
@@ -56,11 +57,14 @@ function Footer() {
           </a>
         </div>
       </div>
+      
+     <Divider  sx={{width:'100%',border:'0.01em solid #ddd'}}></Divider>
+     
 
       <div className=" devw-screen bg-neutral text-neutral-content text-center font-bold p-5">
-        <p className="">
-          Made with <span className="text-error">&#9829;</span> by</p>
-          <div className="flex flex-col lg:flex-row text-center">
+        <p className="text-2xl">
+          Made by</p>
+          <div className="flex flex-col lg:flex-row text-center text-xl">
             <span className="mx-3"> Akash E Punagin </span>
             <span className="mx-3">Puneeth Kumar V </span>
             <span className="mx-3">Punith Gowda S P</span>

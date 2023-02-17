@@ -18,6 +18,10 @@ const DetailedEvents = () => {
           if (event.route == id) {
             return (
               <img
+<<<<<<< HEAD
+=======
+              style={{backgroundSize:'contain'}}
+>>>>>>> 5526096fcb2143cacb4fa084f896181556e30b9d
                 src={event.img}
                 alt="Event Image"
                 className="h-full w-5/12 hidden lg:block"
@@ -27,8 +31,6 @@ const DetailedEvents = () => {
         })}
 
         <Box className="h-full lg:w-7/12 ">
-          <EventNavbar />
-
           <Box className="h-5/6 w-full p-5 lg:p-12 overflow-y-scroll">
             {EventDetailList.map((event) => {
               if (event.route == id) {
@@ -43,6 +45,19 @@ const DetailedEvents = () => {
                     <p className="my-8 text-justify text-md ">
                       {event.description}
                     </p>
+
+                    {event.problemStatement ? (
+                      <>
+                        <span className="text-xl text-secondary ">
+                          Problem statement
+                        </span>
+
+                        <p className="my-8 text-justify text-md ">
+                          {event.problemStatement}
+                        </p>
+                      </>
+                    ) : null}
+
                     {event.rules ? (
                       <p className="my-8 ">
                         <span className="text-xl text-secondary ">Rules</span>

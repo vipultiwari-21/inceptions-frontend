@@ -36,10 +36,17 @@ function Solvathon() {
               technologies and potentially develop a project into a product.
             </p>
 
+            <h3 className="my-3 text-xl font-bold text-warning">Click the button below to view the problem statement</h3>
+
+            <Link to="/details/solveathon" className={`btn btn-primary btn-wide my-8 `}>
+            Details
+          </Link>
+
             <div>
             <h3 className="text-center my-8 text-3xl text-primary font-bold ">Price details </h3>
 
-          <div className="text-lg lg:text-2xl horizontal-shake font-bold text-warning text-price flex-col   flex w-full items-center justify-around">
+          <div className="text-lg lg:text-2xl horizontal-shake font-bold text-warning text-price flex-col 
+            flex w-full items-center justify-around">
           <span>1st Price : 15000 </span>
           <span>2nd Price : 10000 </span>
           <span>3rd Price : 5000 </span>
@@ -47,9 +54,9 @@ function Solvathon() {
           </div>
             </div>
 
-            <div className="trophy py-8 flex flex-col lg:flex-row items-center justify-evenly w-full">
+            <div className="trophy my-5 flex flex-col lg:flex-row items-center justify-around w-full">
               <div className="">
-                <img src={TrophyImage} alt="price-img" />
+                <img src={TrophyImage} alt="price-img" style={{maxWidth:'10rem'}} />
               </div>
 
             
@@ -60,12 +67,13 @@ function Solvathon() {
           <img
             src={solveathonImage}
             alt="solvathon-logo"
-            style={{ width: "25rem" }}
+            style={{ width: "50rem" }}
           />
-          <Link to="/details/solveathon" className={`btn btn-primary btn-wide my-8 `}>
-            Details
-          </Link>
+         
         </div>
+
+        
+       
       </div>
     </Box>
   );

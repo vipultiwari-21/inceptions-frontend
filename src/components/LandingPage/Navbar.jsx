@@ -2,8 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/exceptions/png/E1.png";
 import RvceLogo from "/web_logo.png";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 function Navbar() {
+
+  const isNonMobile = useMediaQuery("(max-width:700px)"); 
+
   return (
     <div className="sticky navbar bg-base-100 pb-5  ">
       <div className="navbar-start">
@@ -32,27 +37,38 @@ function Navbar() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a href="#events">Events</a>
+              <a href="#about">About</a>
             </li>
             <li>
+              <a href="#events">Events</a>
+            </li>
+
+            <li>
               <a href="#sponsors">Sponsors</a>
+            </li>
+
+            <li>
+              <a href="#prize">Event Fee</a>
             </li>
             <li>
               <a href="#contact">Contact us</a>
             </li>
             <li>
-              <a href="#about">About</a>
+            <Link to="/schedule">Schedule</Link>
             </li>
+
             <li>
               <Link to="/login">Login</Link>
             </li>
+
+            
           </ul>
         </div>
 
         <a>
           <img
             src={RvceLogo}
-            style={{ width: "35px", maxWidth: "120px", marginTop: "5px" }}
+            style={{ maxWidth: !isNonMobile ? '60px' : '40px', marginTop: "5px" }}
             className="rvce_logo"
           />
         </a>
@@ -67,16 +83,22 @@ function Navbar() {
           <li>
             <a href="#events">Events</a>
           </li>
-          {/*  <li>
+            <li>
             <a href="#sponsors">Sponsors</a>
-          </li> */}
+          </li> 
 
           <li>
             <a href="#venue">Venue</a>
           </li>
-
+          <li>
+          <Link to="/schedule">Schedule</Link>
+          </li>
           <li>
             <a href="#contact">Contact us</a>
+          </li>
+
+          <li>
+            <a href="#prize">Event Fee</a>
           </li>
 
           <li>
@@ -84,14 +106,12 @@ function Navbar() {
           </li>
 
           <li>
-          
-          <img
-          src={Logo}
-          className="logo"
-          style={{ width: "100px", maxWidth: "100px" }}
-        />
-        </li>
-
+            <img
+              src={Logo}
+              className="logo"
+              style={{ width: "100px", maxWidth: "100px" }}
+            />
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
@@ -100,8 +120,6 @@ function Navbar() {
           Register
         </Link>
       */}
-
-       
       </div>
     </div>
   );

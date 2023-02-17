@@ -1,0 +1,56 @@
+.lrounded {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin: 20px auto;
+  border-radius: 50%;
+  line-height: 30px;  
+  text-align: center;  
+}
+.lrounded label {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  cursor: pointer;
+  background: #565656;
+  border-radius: 50%;
+  border:2px solid transparent;
+ 
+}
+.lrounded label:after { /*the tick*/
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  opacity: .5;
+  box-sizing: content-box;
+}
+.lrounded label:hover::after {
+  opacity: 1;
+}
+
+.lrounded:hover,
+.lrounded label:hover {
+  background: #404040;
+  opacity: 1;
+}
+
+.lrounded input[type=checkbox] {
+  visibility: hidden;
+}
+
+.lrounded input[type=checkbox]:checked + label:after,
+.lrounded input[type=checkbox]:checked + label {
+  opacity: 1;
+  background: #0DC771;
+ 
+}

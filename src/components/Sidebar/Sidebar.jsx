@@ -16,8 +16,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import Payment from "@mui/icons-material/Payment";
 import { Info, PaymentOutlined } from "@mui/icons-material";
-
 const Item = ({ title, to, icon, selected, setSelected }) => {
+ 
   return (
     <MenuItem
       active={selected === title}
@@ -38,13 +38,15 @@ const Sidebar = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
 
-  const isNonMobile = useMediaQuery("(max-width:700px)");
+  const isNonMobile = useMediaQuery("(max-width:700px)"); 
   console.log("Break-Point : ", isNonMobile);
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState("");
-  const [isCollapsed, setIsCollapsed] = useState(true);
-  const [selected, setSelected] = useState("Set Team Name");
+  const [isCollapsed, setIsCollapsed] = useState(isNonMobile ? true : false);
+  const [selected, setSelected] = useState("User Profile");
   const [profile, setProfile] = useState({});
+
+
 
   const getRoleOrProfile = async (route) => {
     const { data } = await axios.get(route);
@@ -104,7 +106,7 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#000 !important",
+          color: "#fff !important",
         },
         "& .MuiBox-root": {
           padding: "0px !important",
@@ -120,18 +122,18 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed} sx={{ minHeight: "100vh" }} >
+      <ProSidebar collapsed={isCollapsed} sx={{ minHeight: "100vh" }}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => {
-              
-              (!isNonMobile ? setIsCollapsed(!isCollapsed) : null)}}
+              !isNonMobile ? setIsCollapsed(!isCollapsed) : null;
+            }}
             icon={isCollapsed ? <MenuOutlinedIcon /> : null}
             style={{
               margin: "10px 0 20px 0",
               color: "#fff",
-              visibility:isNonMobile ?  'hidden' : null
+              visibility: isNonMobile ? "hidden" : null,
             }}
           >
             {!isCollapsed && (
@@ -147,8 +149,11 @@ const Sidebar = () => {
                   style={{ width: "50px", maxWidth: "50px" }}
                 />
 
-                <IconButton onClick={() => {
-                  setIsCollapsed(!isCollapsed)}}>
+                <IconButton
+                  onClick={() => {
+                    setIsCollapsed(!isCollapsed);
+                  }}
+                >
                   <MenuOutlinedIcon
                     style={{
                       margin: "10px 0 20px 0",
@@ -173,14 +178,16 @@ const Sidebar = () => {
               </Box>
               <Box textAlign="center">
                 <Typography
-                  variant="h2"
+                  className="text-neutral-content event-header"
+                  variant="h3"
                   //   color={colors.grey[100]}
                   fontWeight="bold"
+                 
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {profile.firstName}
+                  {profile.firstName ? profile.firstName.toString().toUpperCase() : null}
                 </Typography>
-                <Typography variant="h5" className="text-primary">
+                <Typography variant="h6" className="text-primary">
                   {role}
                 </Typography>
               </Box>
@@ -239,24 +246,22 @@ const Sidebar = () => {
                   icon={<FilterListIcon />}
                   selected={selected}
                   setSelected={setSelected}
-                />
-                {" "}
+                />{" "}
                 <Item
                   title="Payment"
                   to="/payment"
                   icon={<Payment />}
                   selected={selected}
                   setSelected={setSelected}
-                />
-
-                {" "}
+                />{" "}
                 <Item
                   title="Payment Info"
                   to="/payment-info"
                   icon={<Info />}
                   selected={selected}
                   setSelected={setSelected}
-                />                </>
+                />{" "}
+              </>
             )}
 
             {role === "VOLUNTEER" && (
@@ -275,7 +280,6 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />
-                
               </>
             )}
 

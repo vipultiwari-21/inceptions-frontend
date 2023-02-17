@@ -4,7 +4,7 @@ const Header = ({ title, subtitle }) => {
   const theme = useTheme();
   return (
     <Box  mb="" className="p-5 text-center lg:text-left flex justify-center items-center flex-col "
-    
+      
     >
       <Typography
         variant="h5"
@@ -17,7 +17,7 @@ const Header = ({ title, subtitle }) => {
       </Typography>
       <Typography variant="subtitle1"  
       fontWeight="bold"
-      color="#3da58a" >
+      color="#38BDF8" >
         {subtitle}
       </Typography>
 

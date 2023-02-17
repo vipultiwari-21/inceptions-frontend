@@ -2,8 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/exceptions/png/E1.png";
 import RvceLogo from "/web_logo.png";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 function Navbar() {
+
+  const isNonMobile = useMediaQuery("(max-width:700px)"); 
+
   return (
     <div className="sticky navbar bg-base-100 pb-5  ">
       <div className="navbar-start">
@@ -63,7 +68,7 @@ function Navbar() {
         <a>
           <img
             src={RvceLogo}
-            style={{ width: "35px", maxWidth: "120px", marginTop: "5px" }}
+            style={{ maxWidth: !isNonMobile ? '60px' : '40px', marginTop: "5px" }}
             className="rvce_logo"
           />
         </a>

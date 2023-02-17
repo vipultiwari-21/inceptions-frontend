@@ -35,6 +35,7 @@ function Payment() {
        sethasPaid(data.isPaid);
 
       // setHasVerified(data.paymentData.isVerified)
+      data.paymentData ? setIsVerified(data.paymentData.isVerified) : setIsVerified(false)
       console.log(data);
     } catch (err) {
       console.log(err);

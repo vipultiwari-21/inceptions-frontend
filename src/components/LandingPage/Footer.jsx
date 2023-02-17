@@ -63,7 +63,7 @@ function Footer() {
 
       <div className=" devw-screen bg-neutral text-neutral-content text-center font-bold p-5">
         <p className="text-2xl">
-          Made with <span className="text-error">&#9829;</span> by</p>
+          Made by</p>
           <div className="flex flex-col lg:flex-row text-center text-xl">
             <span className="mx-3"> Akash E Punagin </span>
             <span className="mx-3">Puneeth Kumar V </span>

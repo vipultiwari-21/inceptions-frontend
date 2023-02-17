@@ -93,12 +93,12 @@ function UserProfile() {
   <TableCell>{teamDetails && teamDetails.teamName ? teamDetails.teamName.label : null}</TableCell>
 </TableRow>
 <TableRow>
-  <TableCell>Group championship</TableCell>
+  <TableCell>General Championship</TableCell>
   <TableCell>{teamDetails ? teamDetails.isGCConsidered ? "Yes" : "No" : null}</TableCell>
 </TableRow>
 
 <TableRow>
-  <TableCell>Total participants</TableCell>
+  <TableCell>Total Participants</TableCell>
   <TableCell>{teamCount}</TableCell>
 </TableRow>
 

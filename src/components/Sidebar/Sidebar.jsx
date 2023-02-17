@@ -38,7 +38,7 @@ const Sidebar = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
 
-  const isNonMobile = useMediaQuery("(max-width:700px)");
+  const isNonMobile = useMediaQuery("(max-width:700px)"); 
   console.log("Break-Point : ", isNonMobile);
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState("");
@@ -106,7 +106,7 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#000 !important",
+          color: "#fff !important",
         },
         "& .MuiBox-root": {
           padding: "0px !important",

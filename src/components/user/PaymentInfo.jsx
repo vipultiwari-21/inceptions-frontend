@@ -3,7 +3,6 @@ import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import Header from "../Sidebar/Header";
-import { ImageList, ImageListItem } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "../../features/Interceptors/apiInterceptor";
 import * as yup from "yup";
@@ -38,6 +37,9 @@ function PaymentInfo() {
       const { data } = await axios.get("/payment/is-paid");
 
       setIsPaid(data.isPaid);
+      
+      data.paymentData ? setIsVerified(data.paymentData.isVerified) : setIsVerified(false)
+
     } catch (err) {
       console.log(err);
     }

@@ -1,13 +1,16 @@
-@charset "UTF-8";
-/* Please ❤ this if you like it! 😊 */
-/* Googles Font Link */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-/* Reset Style */
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-
+html {
+  font-size: 10px;
+} */
 
 .schedule-body {
   display: flex;
+
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -15,12 +18,14 @@
   font-family: "Poppins", sans-serif;
   color: #fff;
   background-color: #0f172a;
-  font-size: 1.6rem;
+  padding: 2px;
+  font-size: 18px;
+  box-sizing: border-box;
+  
 }
 .logo
 {
-    display: flex;
-    flex-direction: row;
+    margin-left: 50px !important; 
 }
 
 /* Page Wrapper/Container Style */
@@ -28,7 +33,7 @@
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding:15px;
   
 }
 
@@ -93,8 +98,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  flex-direction: row;
-  justify-content: center;
 }
 .responsive-table__body__text::before {
   margin-right: 1rem;

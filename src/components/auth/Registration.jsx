@@ -19,20 +19,23 @@ function Registration() {
 
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
-    password: yup
-      .string()
-      .required("required")
-      .min(8, 'Too Short!'),
+    password: yup.string().required("required").min(8, "Too Short!"),
     firstName: yup.string().required("required"),
     lastName: yup.string().required("required"),
-    contactNumber: yup.string().required("required").matches(
-      /^[6-9]\d{9}$/,"Enter valid phone number"
-    ),
+    contactNumber: yup
+      .string()
+      .required("required")
+      .min(10, "Invalid Phone Number")
+      .max(10, "Invalid Phone Number")
+      .matches(/^[6-9]\d{9}$/, "Enter valid phone number"),
     collegeName: yup.string().required("required"),
-    usn: yup.string().required("required"),
     state: yup.string().required("required"),
     city: yup.string().required("required"),
-    zip: yup.string().required("required"),
+    zip: yup
+      .string()
+      .required("required")
+      .max(6, "Invalid Pincode")
+      .min(6, "Invalid Pincode"),
   });
   const initialValues = {
     email: "",
@@ -41,7 +44,6 @@ function Registration() {
     contactNumber: "",
     password: "",
     collegeName: "",
-    usn: "",
     state: "",
     city: "",
     zip: "",
@@ -63,7 +65,7 @@ function Registration() {
           contactNumber: values.contactNumber,
           password: values.password,
           collegeName: values.collegeName,
-          usn: values.usn,
+          usn: " ",
           state: values.state,
           city: values.city,
           zip: values.zip,
@@ -176,7 +178,7 @@ function Registration() {
                                     gridColumn: "span 4",
                                     background: "#fff",
                                     color: "#000",
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                   error={
                                     !!touched.firstName && !!errors.firstName
@@ -208,7 +210,7 @@ function Registration() {
                                     gridColumn: "span 4",
                                     background: "#fff",
                                     color: "#000",
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                   className="textfield"
                                 />
@@ -237,7 +239,7 @@ function Registration() {
                                     gridColumn: "span 4",
                                     background: "#fff",
                                     color: "#000",
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                 />
                               </div>
@@ -259,14 +261,13 @@ function Registration() {
                                     gridColumn: "span 4",
                                     background: "#fff",
                                     color: "#000",
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                 />
                               </div>
 
-                              <div className="mb-4 basis-full lg:basis-1/2">
+                              <div className="mb-4 basis-full lg:basis-1/2 ">
                                 <TextField
-                                  fullWidth={!isNonMobile}
                                   variant="filled"
                                   type="text"
                                   label="College Name"
@@ -286,29 +287,7 @@ function Registration() {
                                     gridColumn: "span 4",
                                     background: "#fff",
                                     color: "#000",
-                                    borderRadius:'4px'
-                                  }}
-                                />
-                              </div>
-
-                              <div className="mb-4 basis-full lg:basis-1/2">
-                                <TextField
-                                  fullWidth={!isNonMobile}
-                                  variant="filled"
-                                  type="text"
-                                  label="USN"
-                                  onBlur={handleBlur}
-                                  onChange={handleChange}
-                                  value={values.usn}
-                                  name="usn"
-                                  size="small"
-                                  error={!!touched.usn && !!errors.usn}
-                                  helperText={touched.usn && errors.usn}
-                                  sx={{
-                                    gridColumn: "span 4",
-                                    background: "#fff",
-                                    color: "#000",
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                 />
                               </div>
@@ -330,7 +309,7 @@ function Registration() {
                                     gridColumn: "span 4",
                                     background: "#fff",
                                     color: "#000",
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                 />
                               </div>
@@ -352,7 +331,7 @@ function Registration() {
                                     gridColumn: "span 4",
                                     background: "#fff",
                                     color: "#000",
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                 />
                               </div>
@@ -368,7 +347,7 @@ function Registration() {
                                     color: "#000",
                                     textAlign: "left",
                                     width: isNonMobile ? "200px" : null,
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                   variant="filled"
                                   size="small"
@@ -396,27 +375,29 @@ function Registration() {
 
                               <div className="mb-4 basis-full lg:basis-1/2">
                                 <TextField
-                                  fullWidth={!isNonMobile}
+                                  fullWidth
                                   variant="filled"
-                                  type="text"
+                                  type="password"
                                   label="Password"
                                   onBlur={handleBlur}
                                   onChange={handleChange}
                                   value={values.password}
                                   name="password"
-                                  error={!!touched.password && !!errors.password}
-                                  helperText={touched.password && errors.password}
+                                  error={
+                                    !!touched.password && !!errors.password
+                                  }
+                                  helperText={
+                                    touched.password && errors.password
+                                  }
                                   size="small"
                                   sx={{
                                     gridColumn: "span 4",
                                     background: "#fff",
                                     color: "#000",
-                                    borderRadius:'4px'
+                                    borderRadius: "4px",
                                   }}
                                   className="textfield"
                                 />
-
-
                               </div>
 
                               <div className="text-center pt-1 mb-6 basis-full pb-1">

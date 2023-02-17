@@ -17,7 +17,7 @@ const TeamInfo = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const eventTypes = [
     "Group Events",
@@ -165,14 +165,13 @@ const TeamInfo = () => {
       );
 
       console.log(data);
-      addTeamLeader();
       setIsGCConsidered(true);
       alert("Team was created succesfully!! You can start adding team members");
       resetForm(initialValues);
       getTeams();
     } catch (err) {
       console.log(err);
-      setError(err.message);
+      alert("There was an error while adding team !! please try again.");
     }
 
     setLoading(false);
@@ -184,6 +183,15 @@ const TeamInfo = () => {
         title="Add Team"
         subtitle="Fill up the form with the Event details"
       />
+      <h3
+        className={`text-neutral-content my-3 font-bold ${
+          isNonMobile ? "text-center" : "text-left"
+        }`}
+      >
+        Note: Once registered, team name cannot be changed, please choose the
+        team name carefully
+      </h3>
+
       <Box
         m="20px"
         sx={{
@@ -361,7 +369,7 @@ const TeamInfo = () => {
               </Box>
 
               {!isRegistered && hasOpenEvents ? (
-                <Box className="flex w-full items-center justify-center  flex-wrap my-8">
+                <Box className="flex w-full items-center flex-col  justify-center  flex-wrap my-8">
                   {openEvents
                     ? openEvents.map((oe) => {
                         return (
@@ -422,8 +430,6 @@ const TeamInfo = () => {
                     Register team
                   </Button>
                 )}
-
-                
               </Box>
             </form>
           )}

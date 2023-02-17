@@ -17,7 +17,6 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import Payment from "@mui/icons-material/Payment";
 import { Info, PaymentOutlined } from "@mui/icons-material";
 const Item = ({ title, to, icon, selected, setSelected }) => {
- 
   return (
     <MenuItem
       active={selected === title}
@@ -38,15 +37,13 @@ const Sidebar = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
 
-  const isNonMobile = useMediaQuery("(max-width:700px)"); 
+  const isNonMobile = useMediaQuery("(max-width:700px)");
   console.log("Break-Point : ", isNonMobile);
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState("");
   const [isCollapsed, setIsCollapsed] = useState(isNonMobile ? true : false);
   const [selected, setSelected] = useState("User Profile");
   const [profile, setProfile] = useState({});
-
-
 
   const getRoleOrProfile = async (route) => {
     const { data } = await axios.get(route);
@@ -55,7 +52,7 @@ const Sidebar = () => {
     } else if (route === "/auth/my-role") {
       setRole(data.role);
       if (data.role == "PARTICIPANT") {
-        setSelected("User Profile");
+        setSelected("Set Team Name");
       }
     }
   };
@@ -178,14 +175,15 @@ const Sidebar = () => {
               </Box>
               <Box textAlign="center">
                 <Typography
-                  className="text-neutral-content event-header"
-                  variant="h3"
+                  className="text-neutral-content "
+                  variant="h5"
                   //   color={colors.grey[100]}
-                  fontWeight="bold"
-                 
+
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {profile.firstName ? profile.firstName.toString().toUpperCase() : null}
+                  {profile.firstName
+                    ? profile.firstName.toString().toUpperCase()
+                    : null}
                 </Typography>
                 <Typography variant="h6" className="text-primary">
                   {role}
@@ -219,13 +217,6 @@ const Sidebar = () => {
 
             {role === "PARTICIPANT" && (
               <>
-                <Item
-                  title="User Profile"
-                  to="/"
-                  icon={<WorkspacesIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
                 <Item
                   title="Set Team Name"
                   to="/team-info"
@@ -261,6 +252,13 @@ const Sidebar = () => {
                   selected={selected}
                   setSelected={setSelected}
                 />{" "}
+                <Item
+                  title="User Profile"
+                  to="/"
+                  icon={<WorkspacesIcon />}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
               </>
             )}
 

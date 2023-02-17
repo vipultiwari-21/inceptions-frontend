@@ -108,11 +108,11 @@ function App() {
             <Route path="/" element={<LandingPage />} />
           )} */}
           {!user && <Route path="/" element={<LandingPage />} />}
-          <Route path="/logintemp" element={<Login />} />
+          {/* <Route path="/logintemp" element={<Login />} /> */}
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/registertemp" element={<Registration />} />
-          <Route path="/register" element={<Temporary />} />
-          <Route path="/login" element={<Temporary />} />
+          {/*<Route path="/registertemp" element={<Registration />} /> */}
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
           <Route exact path="/details/:id" element={<DetailedEvents />} />
           <Route exact path="/forgot-password" element={<ForgotPassword />} />
           <Route exact path="/email-confirm" element={<EmailConfirmation />} />

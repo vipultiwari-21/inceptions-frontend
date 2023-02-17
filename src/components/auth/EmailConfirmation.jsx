@@ -6,12 +6,13 @@ import { Container } from "@mui/system";
 import Background from "../custom_styling/Background";
 import Logo from "../../assets/exceptions/png/E.png";
 import Exceptions from "../../assets/svg/male.svg";
+import { useNavigate } from "react-router-dom";
 
 function EmailConfirmation() {
   const [params] = useSearchParams();
   const jwtToken = params.get("jwtToken");
   const [result, setResult] = useState("");
-
+  const navigate = useNavigate();
   const [loading, setLoading] = useState("");
 
   const handleVerification = async () => {
@@ -24,6 +25,8 @@ function EmailConfirmation() {
         }auth/verify-email?jwtToken=${jwtToken}`
       );
       setResult(data.message);
+      alert(data.message);
+      navigate("/login")
     } catch (err) {
       setResult(err.response.data.error);
     }

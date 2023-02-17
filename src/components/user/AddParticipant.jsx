@@ -97,23 +97,23 @@ const AddParticipant = () => {
 
   const handleFormSubmit = async (values, { resetForm }) => {
     setLoading(true);
-    console.log(" Total Members in team as of now : ",teamCount)
-    console.log("Maximum members in the team : ",maxTeam)
-   
-      try {
-        const { data } = await axios.post(
-          `${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,
-          values
-        );
-        alert("Team mate added succesfully");
-        getTeamCount();
-        getMaxTeamMembers();
-      } catch (err) {
-        // alert(err.data.message)
-        alert(err.response.data.error);
-      }
-      console.log(values);
-    
+    console.log(" Total Members in team as of now : ", teamCount);
+    console.log("Maximum members in the team : ", maxTeam);
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,
+        values
+      );
+      alert("Team mate added succesfully");
+      getTeamCount();
+      getMaxTeamMembers();
+    } catch (err) {
+      // alert(err.data.message)
+      alert(err.response.data.error);
+    }
+    console.log(values);
+
     resetForm();
     setLoading(false);
   };
@@ -128,7 +128,10 @@ const AddParticipant = () => {
 
         {
           <>
-            <ul style={{ listStyle: isNonMobile ? 'none' : 'disc' }} className="px-4">
+            <ul
+              style={{ listStyle: isNonMobile ? "none" : "disc" }}
+              className="px-4"
+            >
               <li>
                 <h3
                   className={`text-neutral-content my-3 font-bold ${
@@ -379,7 +382,7 @@ const checkoutSchema = yup.object().shape({
   contactNumber: yup
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
-    .min(10,"Invalid phone number")
+    .min(10, "Invalid phone number")
     .required("required"),
 });
 const initialValues = {

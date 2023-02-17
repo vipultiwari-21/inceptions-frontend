@@ -97,8 +97,9 @@ const AddParticipant = () => {
 
   const handleFormSubmit = async (values, { resetForm }) => {
     setLoading(true);
-
-    if (maxTeam - teamCount > 0) {
+    console.log(" Total Members in team as of now : ",teamCount)
+    console.log("Maximum members in the team : ",maxTeam)
+   
       try {
         const { data } = await axios.post(
           `${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,
@@ -109,12 +110,10 @@ const AddParticipant = () => {
         getMaxTeamMembers();
       } catch (err) {
         // alert(err.data.message)
-        console.log(err.response.data.error);
+        alert(err.response.data.error);
       }
       console.log(values);
-    } else {
-      alert("You cant add more members");
-    }
+    
     resetForm();
     setLoading(false);
   };
@@ -380,6 +379,7 @@ const checkoutSchema = yup.object().shape({
   contactNumber: yup
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
+    .min(10,"Invalid phone number")
     .required("required"),
 });
 const initialValues = {

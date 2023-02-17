@@ -5,7 +5,7 @@ const EventDetailList = [
     route: "gravity",
     description:
       "Are you an IT student ready to showcase your skills and prove you're the crème de la crème? Look no further, the “Gravity” competition is the perfect opportunity for you to step up and show your potential as IT specialists what you're made of! This competition is exclusively for undergraduate and postgraduate students enrolled in BCA or MCA. It's time to put your knowledge to the test and show off that brain power with intriguing rounds. The winner takes home a cash prize and the title of the “Mr/Ms Earth” IT managers in the program. Don't miss out on this chance to make your mark in the industry and show everyone you're the one to watch.",
-    img: "/src/assets/eventdetails/manager.jpg",
+    img: "https://i.ibb.co/zmZBP7N/manager.jpg",
     rules: [
       "Solo participation.",
       "Dress up at your best with a professional look which will add on to points.",
@@ -28,7 +28,7 @@ const EventDetailList = [
     route: "bigbang",
     description:
       "The power of sound has always been greater than the power of sense; One who wants to persuade should put his/her trust not in the right argument, but in the right word. That's all about BIG BANG. Thou who keeps his point by words and takes over the mic shall win the title THE ASTEROID.",
-    img: "/src/assets/eventdetails/debate.jpg",
+    img: "https://i.ibb.co/7Xmk40d/debate.jpg",
     rules: [
       "Solo participation.",
       "Participant should be good at communication.",
@@ -50,7 +50,7 @@ const EventDetailList = [
     route: "gengeeks",
     description:
       "Hola Geeks! Bring your cognitive skills to the arena as Exception is back with its highly anticipated quiz. Strap in for a crazy ride into the energetic universe of quizzing.",
-    img: "/src/assets/eventdetails/quiz.jpg",
+    img: "https://i.ibb.co/rQQy2CC/quiz.jpg",
     rules: [
       "Team of 2 members.",
       "The judge's decision will be final.",
@@ -70,7 +70,7 @@ const EventDetailList = [
     route: "zest",
     description:
       "Presenting to you an event which promotes creative ways of thinking to teach technology to common folks. Idea of this event is to project a few basics of technology through a creative medium. Zest is an event where a group of people have to think and come up with an idea to project the specific technology basics to the present crowd. The medium can be a game, video, drama, song or any creative mode. The most entertaining and creative participant wins.",
-    img: "/src/assets/eventdetails/zest.jpg",
+    img: "https://i.ibb.co/Y0CLHxq/zest.jpg",
     rules: [
       "There will be two rounds.",
       "The judge's decision will be final.",
@@ -90,7 +90,7 @@ const EventDetailList = [
     route: "constellation",
     description:
       "'Ideas shouldn't be kept, something must be done about it'. So bring out your inner creativity and imagination into action here at CONSTELLATION event.",
-    img: "/src/assets/eventdetails/uiux.jpg",
+    img: "https://i.ibb.co/C61DCrs/uiux.jpg",
     rules: [
       "No elimination in any rounds. Result will be decided on the basis of cumulative scoring.",
       "Each team must consist of 2 members.",
@@ -113,7 +113,7 @@ const EventDetailList = [
     route: "nebulax",
     description:
       "Calling all coders! Are you ready for the most anticipated event of the year? Yes, you heard it right. The biggest coding fest is knocking at the door. The Nebula X is here So, Get ready ahead of time. Brush up on your concepts, hold your morals high and count down the moments! Don't miss this opportunity. Register now",
-    img: "/src/assets/eventdetails/coding.jpg",
+    img: "https://i.ibb.co/jyW1Ncd/coding.jpg",
     rules: [
       "Solo Participant",
       "Participants will be given questions/puzzles in each round.",
@@ -142,7 +142,7 @@ const EventDetailList = [
     route: "strikeforce",
     description:
       "Join us for an exciting gaming event featuring the popular first-person shooter game, Valorant. Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it. Don't miss out on the chance to prove yourself as a top player in the Valorant community. Register now and get ready to frag!",
-    img: "/src/assets/eventdetails/gaming.jpg",
+    img: "https://i.ibb.co/Qmng547/gaming.jpg",
     rules: [
       "All games will be played on official Valorant servers to maintain authenticity.",
       "Games will be played with the default settings for competition. If a game is played with non-default settings, the match will be replayed with corrections.",
@@ -167,7 +167,7 @@ const EventDetailList = [
     route: "infinity&beyond",
     description:
       "Calling all tech-savvy, innovation-loving, and prize-hunting students! Are you ready to show off your skills and prove you're the best in the game? Well, buckle up because we're hosting an IoT competition and it's time to put your knowledge to the test! This is your chance to let your creativity run wild and come up with some mind-blowing solutions using IoT technology. Trust us, this is not an average boring competition, we're talking about cash prizes, recognition, and the opportunity to make a real impact in the world of tech. So, what are you waiting for? Submit your entries and let's see if you got what it takes to be called “IoT's Orbital Overlord”!",
-    img: "/src/assets/eventdetails/iot.jpg",
+    img: "https://i.ibb.co/k0KsQrH/iot.jpg",
     rules: [
       "Team should consist of 2 to maximum 3 participants.",
       "Team must be present 20 minutes prior to the scheduled event time for reporting.",
@@ -189,38 +189,10 @@ const EventDetailList = [
     ]
   },
   {
-    id: 9,
-    name: "equinox",
-    route: "equinox",
-    description:
-      "Web-o-Thon is a hackathon event focused on full-stack web development, where participants collaborate to create new projects and prototypes for 24 hours. It is an opportunity for students to showcase their skills, learn new technologies and potentially develop a project into a product.",
-    img: "/src/assets/eventdetails/hackathon.jpg",
-    rules: [
-      "Duration: 24 hours.",
-      "Max Team Size: 4 members.",
-      "Teams must ensure they reach the venue on time and select their problem statements in the time allotted.",
-      "Problem statements will be given on a first come first serve basis once teams select their preferred problem statement they will work on that particular project.",
-      "Participants are expected to bring their laptops, and charging cables.",
-      "Teams can use any web technologies, libraries, frameworks, or open-source code in their projects.",
-      "All projects must be developed during the hackathon and cannot have been previously worked on.",
-      "Participants must refrain from any illegal or unethical behavior, including hacking or cheating.",
-      "Members of a team are not allowed to leave the venue without informing one of the organizers before leaving. Failing to do so will lead to the disqualification of the entire team.",
-      "At the end of the hackathon, participants must submit their projects and provide all required documentation.",
-      "The decision of the judges will be final, and no correspondence will be entered into regarding their decision.",
-    ],
-    contact: [
-      {
-        name: "Puneeth Kumar V",
-        email: "puneethkv.mca21@rvce.edu.in",
-        phone: "+91 7975886469",
-      },
-    ]
-  },
-  {
     id: 10,
     name: "Mystery Event",
     route: "mysteryevent",
-    img: "/src/assets/eventdetails/mystery.jpg",
+    img: "https://i.ibb.co/GMKqfZq/peter-forster-ou-VAsbiwzlo-unsplash.jpg",
     description: "You Never Know What you Might have in the Store?",
   },
 
@@ -231,7 +203,7 @@ const EventDetailList = [
     problemStatement:'Water  level detection and marking to estimate the level of water in the storage tanks (overhead / sump). The tanks are plastic and cement tanks.The approaches involve computer vision and machine learning.',
     description:
       "Solve-a-thon is a solution event focused on building an AI/ML and vision based android application, where enrolled teams will get to solve real time problems that could be planet changing tech. It is an opportunity for students to showcase their skills, learn new technologies and potentially develop a project into a product",
-    img: "/src/assets/eventdetails/hackathon.jpg",
+    img: "https://i.ibb.co/rcpfRps/sharon-pittaway-N7-Ftpk-C-P7o-unsplash-1.jpg",
     rules: [
       "Team Size: 2 Members",
       "Problem statements will be provided in the brochure, Enrolled teams will have till 3rd March 2023 to submit their working model",

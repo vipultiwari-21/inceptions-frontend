@@ -22,25 +22,23 @@ function UserProfile() {
   const [teamName, setTeamName] = useState("");
   const [teamDetails, setTeamDetails] = useState([]);
   const [teamCount, setTeamCount] = useState(0);
-  const [isRegistered,setIsRegistered]=useState(false)
-  const [pageLoading,setPageLoading]=useState(true)
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
 
   const getTeam = async () => {
     const { data } = await axios.get("/team/get-team-of-current-user");
-    console.log(data);
-    if(data.message=="This user has not registered any teams"){
-      setPageLoading(false)
-      setIsRegistered(false)
-    }else{
+    if (data.message == "This user has not registered any teams") {
+      setPageLoading(false);
+      setIsRegistered(false);
+    } else {
       setTeamDetails(data);
-      setIsRegistered(true)
+      setIsRegistered(true);
       const teamDetails = await axios.get(
         `${import.meta.env.VITE_API_ENDPOINT}teamMember/get`
       );
       setTeamCount(teamDetails.data.length);
-      setPageLoading(false)
+      setPageLoading(false);
     }
-    
   };
 
   const getUser = async () => {
@@ -49,75 +47,76 @@ function UserProfile() {
     );
 
     setUsername(data.firstName);
-    console.log(data.firstName);
   };
 
   const getTeamCount = async () => {
-   
     //setTeamData(data);
   };
 
   useEffect(() => {
     getUser();
     getTeam();
-    
   }, []);
 
-  return (
-    
-    !pageLoading ?
+  return !pageLoading ? (
+    isRegistered ? (
+      <Box
+        m="20px"
+        sx={{ height: isNonMobile ? "90vh" : "100%" }}
+        className="flex justify-center items-center l"
+      >
+        <Box>
+          <Header
+            title={`Welcome, ${userName}`}
+            subtitle="Have a look at your team details"
+          />
 
-    isRegistered ? <Box
-    m="20px"
-    sx={{ height: isNonMobile ? "90vh" : "100%" }}
-    className="flex justify-center items-center l"
-  >
-   
-  <Box >
-  <Header
-  title={`Welcome, ${userName}`}
-  subtitle="Have a look at your team details"
-/>
+          <Box sx={{ width: { lg: "400px" } }}>
+            <Table className="text text-neutral-content font-bold   ">
+              <TableRow>
+                <TableCell>Team ID</TableCell>
+                <TableCell>{teamDetails ? teamDetails.teamId : null}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Team Name</TableCell>
+                <TableCell>
+                  {teamDetails && teamDetails.teamName
+                    ? teamDetails.teamName.label
+                    : null}
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>General Championship</TableCell>
+                <TableCell>
+                  {teamDetails
+                    ? teamDetails.isGCConsidered
+                      ? "Yes"
+                      : "No"
+                    : null}
+                </TableCell>
+              </TableRow>
 
-
-
-<Box sx={{width:{lg:'400px'}}}>
-
-<Table className="text text-neutral-content font-bold   ">
-<TableRow>
-  <TableCell>Team ID</TableCell>
-  <TableCell>{teamDetails ? teamDetails.teamId : null}</TableCell>
-</TableRow>
-<TableRow>
-  <TableCell>Team Name</TableCell>
-  <TableCell>{teamDetails && teamDetails.teamName ? teamDetails.teamName.label : null}</TableCell>
-</TableRow>
-<TableRow>
-  <TableCell>General Championship</TableCell>
-  <TableCell>{teamDetails ? teamDetails.isGCConsidered ? "Yes" : "No" : null}</TableCell>
-</TableRow>
-
-<TableRow>
-  <TableCell>Total Participants</TableCell>
-  <TableCell>{teamCount}</TableCell>
-</TableRow>
-
-
-</Table>
-
-
-
-
-</Box>
-  </Box>
-
-  </Box> : <Box className="flex justify-center items-center " sx={{height:'90vh'}}>
-  <Header
-      title="Pending registration!!!"
-      subtitle="Please register your team name and event type in the Add team section"
-    />
-  </Box>
-  : <Loading />
+              <TableRow>
+                <TableCell>Total Participants</TableCell>
+                <TableCell>{teamCount}</TableCell>
+              </TableRow>
+            </Table>
+          </Box>
+        </Box>
+      </Box>
+    ) : (
+      <Box
+        className="flex justify-center items-center "
+        sx={{ height: "90vh" }}
+      >
+        <Header
+          title="Pending registration!!!"
+          subtitle="Please register your team name and event type in the Add team section"
+        />
+      </Box>
+    )
+  ) : (
+    <Loading />
   );
 }
 

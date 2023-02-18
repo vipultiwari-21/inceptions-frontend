@@ -1,7 +1,7 @@
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Formik, Field,ErrorMessage } from "formik";
+import { Formik, Field, ErrorMessage } from "formik";
 import Logo from "../../assets/exceptions/png/E.png";
 import Background from "../custom_styling/Background";
 import { useNavigate } from "react-router-dom";
@@ -13,14 +13,13 @@ function RegisterPrivate() {
   const [loading, setLoading] = useState(false);
 
   const checkoutSchema = yup.object().shape({
-    role:yup.string().required("Select role"),
+    role: yup.string().required("Select role"),
     email: yup.string().email("invalid email").required("required"),
     password: yup.string().required("required"),
     firstName: yup.string().required("required"),
     lastName: yup.string().required("required"),
     contactNumber: yup.string().required("required"),
     confirmPassword: yup.string().required("required"),
-
   });
   const initialValues = {
     email: "",
@@ -29,7 +28,7 @@ function RegisterPrivate() {
     contactNumber: "",
     password: "",
     confirmPassword: "",
-    role:""
+    role: "",
   };
 
   const performRegistration = async (api, values) => {
@@ -42,16 +41,16 @@ function RegisterPrivate() {
         contactNumber: values.contactNumber,
         password: values.password,
       });
-      console.log(data);
-      try{
-        await axios.post(`${import.meta.env.VITE_API_ENDPOINT}auth/send-confirmation-email`,{
-            userId:data.userId,
-            
-        })
-        alert("Please check your mail , we have sent a verification email")
-      }catch(err){
+      try {
+        await axios.post(
+          `${import.meta.env.VITE_API_ENDPOINT}auth/send-confirmation-email`,
+          {
+            userId: data.userId,
+          }
+        );
+        alert("Please check your mail , we have sent a verification email");
+      } catch (err) {
         alert(err.response.data.error);
-
       }
     } catch (err) {
       alert(err.response.data.error);
@@ -137,12 +136,14 @@ function RegisterPrivate() {
                                   </option>
                                   <option value="volunteer">Volunteer</option>
                                 </Field>
-                                <ErrorMessage name="role"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                                <ErrorMessage
+                                  name="role"
+                                  component="div"
+                                  className="text-blue-500  mt-3 text-left capitalize"
+                                />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2 ">
-                              
                                 <input
                                   type="text"
                                   name="firstName"
@@ -152,8 +153,11 @@ function RegisterPrivate() {
                                   placeholder="First Name"
                                   className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 />
-                                <ErrorMessage name="firstName"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                                <ErrorMessage
+                                  name="firstName"
+                                  component="div"
+                                  className="text-blue-500  mt-3 text-left capitalize"
+                                />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
@@ -166,8 +170,11 @@ function RegisterPrivate() {
                                   placeholder="Last Name"
                                   className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 />
-                                <ErrorMessage name="lastName"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                                <ErrorMessage
+                                  name="lastName"
+                                  component="div"
+                                  className="text-blue-500  mt-3 text-left capitalize"
+                                />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
@@ -180,8 +187,11 @@ function RegisterPrivate() {
                                   placeholder="Contact Number"
                                   className="form-control block w-full lg:w-11/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 />
-                                <ErrorMessage name="contactNumber"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                                <ErrorMessage
+                                  name="contactNumber"
+                                  component="div"
+                                  className="text-blue-500  mt-3 text-left capitalize"
+                                />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
@@ -194,8 +204,11 @@ function RegisterPrivate() {
                                   placeholder="Email ID"
                                   className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 />
-                                <ErrorMessage name="email"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                                <ErrorMessage
+                                  name="email"
+                                  component="div"
+                                  className="text-blue-500  mt-3 text-left capitalize"
+                                />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2">
@@ -208,8 +221,11 @@ function RegisterPrivate() {
                                   placeholder="Password"
                                   value={values.password}
                                 />
-                                <ErrorMessage name="password"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                                <ErrorMessage
+                                  name="password"
+                                  component="div"
+                                  className="text-blue-500  mt-3 text-left capitalize"
+                                />
                               </div>
 
                               <div className="mb-4 basis-full lg:basis-1/2 ">
@@ -222,8 +238,11 @@ function RegisterPrivate() {
                                   placeholder="Confirm Password"
                                   value={values.confirmPassword}
                                 />
-                                <ErrorMessage name="confirmPassword"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                                <ErrorMessage
+                                  name="confirmPassword"
+                                  component="div"
+                                  className="text-blue-500  mt-3 text-left capitalize"
+                                />
                               </div>
 
                               <div className="text-center pt-1 mb-6 basis-full pb-1">

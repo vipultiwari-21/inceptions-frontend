@@ -55,7 +55,6 @@ const UpdateTeamInfo = () => {
         obj
       );
 
-      console.log(data);
       alert(data.status);
 
       setLoading(false);

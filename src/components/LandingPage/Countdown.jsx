@@ -15,7 +15,6 @@ function Countdown() {
   }, []);
 
   const setNewTime = () => {
-    console.log(minutes)
     if (countdownDate) {
       const currentTime = new Date().getTime();
 
@@ -37,7 +36,6 @@ function Countdown() {
         hours = `0${hours}`;
       } else if (numbersToAddZeroTo.includes(minutes)) {
         minutes = `0${minutes}`;
-        console.log(minutes)
       } else if (numbersToAddZeroTo.includes(seconds)) {
         seconds = `0${seconds}`;
       }
@@ -51,7 +49,6 @@ function Countdown() {
 
   return (
     <div className="grid grid-flow-col gap-3 text-center auto-cols-max items:center countdown-container">
-     
       <div className="flex flex-col p-3 bg-neutral rounded-box text-warning">
         <span className="countdown font-mono text-xl lg:text-6xl">
           <span style={{ "--value": days }}></span>

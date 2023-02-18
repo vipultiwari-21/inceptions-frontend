@@ -18,13 +18,13 @@ function Error() {
     "The astronaut thought he was being hailed by an extraterrestrial, but it was just a 404 error page!",
   ];
 
-  console.log(jokesArray.val);
-
   return (
     <Box className="flex items-center justify-center h-screen w-screen flex-col p-8 text-center">
       <Background />
       <h1 className="text-8xl error-404 my-8 text-neutral-content">Uh,oh</h1>
-      <p className="text-3xl font-bold">{jokesArray[Math.floor(Math.random() * 10)]}</p>
+      <p className="text-3xl font-bold">
+        {jokesArray[Math.floor(Math.random() * 10)]}
+      </p>
 
       <img src={ImageBackground} />
 

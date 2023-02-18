@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mynerve&display=swap");
+@import "../node_modules/react-pro-sidebar/dist/css/styles.css";
 
 @font-face {
   font-family: gallient;
@@ -28,12 +29,66 @@ body {
 }
 
 .app {
+  /* display: flex;
+  position: relative; */
+
+  height: 100%;
   display: flex;
   position: relative;
 }
-.app .content {
+
+.btn-toggle {
+  cursor: pointer;
+  display: none;
+}
+/* .app .content {
   height: 100%;
   width: 100%;
+} */
+
+.sidebar-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-btn-wrapper .sidebar-btn {
+  padding: 1px 15px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #adadad;
+  text-decoration: none;
+  margin: 0 auto;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.collapsed .sidebar-btn {
+  display: inline-block;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  line-height: 40px;
+  padding: 0;
+}
+
+main {
+  /* padding: 24px; */
+  min-height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+  .btn-toggle {
+    display: flex;
+  }
 }
 
 .sticky {

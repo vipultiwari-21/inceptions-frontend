@@ -41,7 +41,7 @@ const Sidebar = () => {
   console.log("Break-Point : ", isNonMobile);
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState("");
-  const [isCollapsed, setIsCollapsed] = useState(isNonMobile ? true : false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("User Profile");
   const [profile, setProfile] = useState({});
 
@@ -88,8 +88,6 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
-
         // "& .pro-sidebar-inner": {
         //   background: `${colors.primary[400]} !important`,
         // },
@@ -124,13 +122,12 @@ const Sidebar = () => {
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => {
-              !isNonMobile ? setIsCollapsed(!isCollapsed) : null;
+              setIsCollapsed(!isCollapsed);
             }}
             icon={isCollapsed ? <MenuOutlinedIcon /> : null}
             style={{
               margin: "10px 0 20px 0",
               color: "#fff",
-              visibility: isNonMobile ? "hidden" : null,
             }}
           >
             {!isCollapsed && (

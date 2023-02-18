@@ -2,6 +2,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import Background from "./components/custom_styling/Background";
 import ImageBackground from "./assets/images/error.png";
+import { Link } from "react-router-dom";
 
 function Error() {
   const jokesArray = [
@@ -24,11 +25,15 @@ function Error() {
     <Box className="flex items-center justify-center h-screen w-screen flex-col p-8 text-center">
       <Background />
       <h1 className="text-8xl error-404 my-8 text-neutral-content">Uh,oh</h1>
-      <p className="text-3xl font-bold">{jokesArray[Math.floor(Math.random() * 10)]}</p>
+      <p className="text-3xl font-bold">
+        {jokesArray[Math.floor(Math.random() * 10)]}
+      </p>
 
       <img src={ImageBackground} />
 
-      <button className="btn btn-outline btn-warning">Back Home</button>
+      <Link to="/" className="btn btn-outline btn-warning">
+        Back Home
+      </Link>
     </Box>
   );
 }

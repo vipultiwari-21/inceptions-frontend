@@ -24,7 +24,6 @@
 
 body {
   height: 100%;
-  overflow: auto;
 }
 
 .app {
@@ -282,26 +281,22 @@ html {
 .special-case-element {
   position: sticky;
   width: 100px;
-  top:60%;
-  left:90%;
+  top: 60%;
+  left: 90%;
   z-index: 9994;
   height: 80px;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 }
 
-
-
 @media screen and (max-width: 500px) {
-  .special-case-element{
-  display: none;
-  }
-}
-
-
-@media screen and (max-width: 768px) {
-  .special-case-element{
+  .special-case-element {
     display: none;
   }
 }
 
+@media screen and (max-width: 768px) {
+  .special-case-element {
+    display: none;
+  }
+}

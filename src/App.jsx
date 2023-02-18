@@ -28,9 +28,8 @@ import VolunteerProfile from "./components/volunteer/VolunteerProfile";
 import VolunteerAttendance from "./components/volunteer/VolunteerAttendance";
 import Payment from "./components/user/Payment";
 import PaymentInfo from "./components/user/PaymentInfo";
-import Schedule from './components/LandingPage/Schedule'
+import Schedule from "./components/LandingPage/Schedule";
 import { Offline, Online } from "react-detect-offline";
-
 
 function App() {
   const user = Cookies.get("token");
@@ -113,8 +112,22 @@ function App() {
           {/* <Route path="/logintemp" element={<Login />} /> */}
           <Route path="/schedule" element={<Schedule />} />
           {/*<Route path="/registertemp" element={<Registration />} /> */}
-          <Route path="/register" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute>
+                <Registration />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <ProtectedRoute>
+                <Login />
+              </ProtectedRoute>
+            }
+          />
           <Route exact path="/details/:id" element={<DetailedEvents />} />
           <Route exact path="/forgot-password" element={<ForgotPassword />} />
           <Route exact path="/email-confirm" element={<EmailConfirmation />} />
@@ -155,29 +168,31 @@ function App() {
           />
 
           <Route
-          path="payment"
-          element={
-            <ProtectedRoute>
-              <Payment />
-            </ProtectedRoute>
-          }
-        />
+            path="payment"
+            element={
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-        path="payment-info"
-        element={
-          <ProtectedRoute>
-            <PaymentInfo />
-          </ProtectedRoute>
-        }
-      />
+          <Route
+            path="payment-info"
+            element={
+              <ProtectedRoute>
+                <PaymentInfo />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Volunteer Routes */}
           <Route
             path="volunteer-attendance"
-            element={<ProtectedRoute>
-              <VolunteerAttendance />
-              </ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <VolunteerAttendance />
+              </ProtectedRoute>
+            }
           />
 
           {/*Backend Routes*/}
@@ -187,8 +202,6 @@ function App() {
             path="/backend-registration"
             element={<RegisterPrivate />}
           />
-
-         
 
           {/* Error 404 handler */}
 

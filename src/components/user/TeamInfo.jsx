@@ -195,7 +195,8 @@ const TeamInfo = () => {
       <Box
         m="20px"
         sx={{
-          height: isNonMobile ? "80vh" : "100%",
+          height: isNonMobile ? "60vh" : "100%",
+          overflow: "hidden",
           // display: "flex",
           // justifyContent: "center",
           // alignItems: "center",

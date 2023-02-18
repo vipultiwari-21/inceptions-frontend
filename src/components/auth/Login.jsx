@@ -1,7 +1,7 @@
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Formik , ErrorMessage} from "formik";
+import { Formik, ErrorMessage } from "formik";
 import Logo from "../../assets/exceptions/png/E.png";
 import Background from "../custom_styling/Background";
 import { useNavigate } from "react-router-dom";
@@ -45,13 +45,10 @@ function Login() {
     navigate("/forgot-password");
   };
 
-
-  const handleFormSubmit = async (values, { setSubmitting , resetForm}) => {
-   // console.log("values", values);
+  const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
+    // console.log("values", values);
     // const data = await loginAuth(values);
     // console.log("data", data);
-
-  
 
     try {
       setLoading(true);
@@ -75,8 +72,7 @@ function Login() {
     }
 
     setLoading(false);
-    resetForm()
-    
+    resetForm();
   };
 
   return (
@@ -121,7 +117,10 @@ function Login() {
                           /* and other goodies */
                         }) => (
                           <form onSubmit={handleSubmit}>
-                            <p className="mb-4 font-bold">
+                            <p
+                              className="mb-4 font-bold"
+                              style={{ color: "#fff" }}
+                            >
                               Please login to your account
                             </p>
                             <div className="mb-4">
@@ -138,9 +137,11 @@ function Login() {
                                   focus:border-blue-600 focus:outline-none"
                               />
 
-                          
-                              <ErrorMessage name="email"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                              <ErrorMessage
+                                name="email"
+                                component="div"
+                                className="text-blue-500  mt-3 text-left capitalize"
+                              />
                             </div>
                             <div className="mb-4">
                               <input
@@ -152,9 +153,12 @@ function Login() {
                                 placeholder="Password"
                                 value={values.password}
                               />
-                              <ErrorMessage name="password"  component="div" className="text-blue-500 
-                               mt-3 text-left capitalize" />
-
+                              <ErrorMessage
+                                name="password"
+                                component="div"
+                                className="text-blue-500 
+                               mt-3 text-left capitalize"
+                              />
                             </div>
                             <div className="text-center pt-1 mb-6 pb-1">
                               <button
@@ -182,7 +186,10 @@ function Login() {
                             </div>
 
                             <div className="">
-                              <p className="mb-0 font-bold login-link ">
+                              <p
+                                className="mb-0 font-bold login-link"
+                                style={{ color: "#fff" }}
+                              >
                                 Don't have an account?{" "}
                                 <Link to="/register" className="text-warning">
                                   Click here

@@ -15,18 +15,16 @@ function Countdown() {
   }, []);
 
   const setNewTime = () => {
-    console.log(minutes)
+    console.log(minutes);
     if (countdownDate) {
       const currentTime = new Date().getTime();
 
       const distanceToDate = countdownDate - currentTime;
 
       let days = Math.floor(distanceToDate / (1000 * 60 * 60 * 24));
-      let hours = Math.floor(
-        (distanceToDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
+      let hours = Math.floor((distanceToDate % (1000 * 60 * 60)) / (1000 * 60));
       let minutes = Math.floor(
-        (distanceToDate % (1000 * 60 * 60)) / (1000 * 60)
+        (distanceToDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
       let seconds = Math.floor((distanceToDate % (1000 * 60)) / 1000);
 
@@ -37,7 +35,7 @@ function Countdown() {
         hours = `0${hours}`;
       } else if (numbersToAddZeroTo.includes(minutes)) {
         minutes = `0${minutes}`;
-        console.log(minutes)
+        console.log(minutes);
       } else if (numbersToAddZeroTo.includes(seconds)) {
         seconds = `0${seconds}`;
       }
@@ -51,7 +49,6 @@ function Countdown() {
 
   return (
     <div className="grid grid-flow-col gap-3 text-center auto-cols-max items:center countdown-container">
-     
       <div className="flex flex-col p-3 bg-neutral rounded-box text-warning">
         <span className="countdown font-mono text-xl lg:text-6xl">
           <span style={{ "--value": days }}></span>

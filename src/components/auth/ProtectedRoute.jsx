@@ -15,11 +15,8 @@ function Protected({ children }) {
   });
 
   if (!auth) {
-    console.log("Unauth ", auth);
-    console.log("children ", children.type.name);
     return <Navigate to="/login" replace />;
   } else {
-    console.log("children ", children.type.name);
     return children;
   }
 }

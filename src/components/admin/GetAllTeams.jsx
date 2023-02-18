@@ -15,7 +15,6 @@ const GetAllTeams = () => {
     const { data } = await axios.get(
       `${import.meta.env.VITE_API_ENDPOINT}team/get`
     );
-    // console.log("data", data);
     // setTeamMemberTable(data);
     const temp = data.map((obj) => {
       return {
@@ -29,11 +28,9 @@ const GetAllTeams = () => {
         score: obj.score,
       };
     });
-    // console.log("temp", temp);
 
     // allTeams.push(temp);
     setAllTeams(temp);
-    // console.log(data);
   };
 
   useEffect(() => {

@@ -19,8 +19,6 @@ function Error() {
     "The astronaut thought he was being hailed by an extraterrestrial, but it was just a 404 error page!",
   ];
 
-  console.log(jokesArray.val);
-
   return (
     <Box className="flex items-center justify-center h-screen w-screen flex-col p-8 text-center">
       <Background />

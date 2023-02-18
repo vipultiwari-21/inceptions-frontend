@@ -84,7 +84,6 @@ const AddParticipant = () => {
   const getMaxTeamMembers = async () => {
     try {
       const { data } = await axios.get("/team/get-max-team-members");
-      console.log("Max", data);
       setMaxTeam(data);
     } catch (err) {
       console.log(err);
@@ -97,8 +96,6 @@ const AddParticipant = () => {
 
   const handleFormSubmit = async (values, { resetForm }) => {
     setLoading(true);
-    console.log(" Total Members in team as of now : ", teamCount);
-    console.log("Maximum members in the team : ", maxTeam);
 
     try {
       const { data } = await axios.post(
@@ -112,7 +109,6 @@ const AddParticipant = () => {
       // alert(err.data.message)
       alert(err.response.data.error);
     }
-    console.log(values);
 
     resetForm();
     setLoading(false);

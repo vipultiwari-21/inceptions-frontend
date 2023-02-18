@@ -46,13 +46,10 @@ function Login() {
   };
 
   const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
-    // console.log("values", values);
     // const data = await loginAuth(values);
-    // console.log("data", data);
 
     try {
       setLoading(true);
-      console.log(import.meta.env.VITE_API_ENDPOINT);
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}auth/login`,
         {

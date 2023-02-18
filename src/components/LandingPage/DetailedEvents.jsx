@@ -18,7 +18,7 @@ const DetailedEvents = () => {
           if (event.route == id) {
             return (
               <img
-              style={{backgroundSize:'contain'}}
+                style={{ backgroundSize: "contain" }}
                 src={event.img}
                 alt="Event Image"
                 className="h-full w-5/12 hidden lg:block"

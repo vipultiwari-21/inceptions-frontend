@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,18 +13,15 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import ExceptionsLogo from "../../assets/exceptions/png/E.png";
-import {Link} from 'react-router-dom'
-import {useParams} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const pages = ["Home","Event","Login", "Register"];
-
+const pages = ["Home", "Event", "Login", "Register"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [params,setParams]=useState('')
-
-  console.log(params)
+  const [params, setParams] = useState("");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -42,24 +39,21 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" color="transparent" style={{boxShadow:'none'}}>
+    <AppBar position="static" color="transparent" style={{ boxShadow: "none" }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters  >
-       
-
+        <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="small"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
 
-          <IconButton
-          size="small"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleOpenNavMenu}
-          color="inherit"
-        >
-          <MenuIcon />
-        </IconButton>
-           
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -80,8 +74,19 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Link to={page=='Home' ? '/' : page=='Login' ? '/login' : page=='Register' ? '/register' : null}>{page}</Link>
-
+                  <Link
+                    to={
+                      page == "Home"
+                        ? "/"
+                        : page == "Login"
+                        ? "/login"
+                        : page == "Register"
+                        ? "/register"
+                        : null
+                    }
+                  >
+                    {page}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -96,30 +101,47 @@ function ResponsiveAppBar() {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
-              fontWeight: 'bold',
+              fontWeight: "bold",
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
+          ></Typography>
+          <Box
+            sx={{
+              flexGrow: 1,
+
+              display: { xs: "none", md: "flex" },
+            }}
           >
-            
-          </Typography>
-          <Box sx={{ flexGrow: 1, 
-           
-            display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: {xs:"#fff",sm:'#fff',md:"#fff",lg:"#fff"}, display: "block",fontWeight:'bold',ml:{lg:10} }}
+                sx={{
+                  my: 2,
+                  color: { xs: "#fff", sm: "#fff", md: "#fff", lg: "#fff" },
+                  display: "block",
+                  fontWeight: "bold",
+                  ml: { lg: 10 },
+                }}
               >
-            
-
-                <Link to={page=='Home' ? '/' : page=="Event" ? `` :
-                 page=='Login' ? '/login' : page=='Register' ? '/register' :
-                  null}>
-                
-                <span className={`${page=='Event' ? 'active' : ""}`}>{page}</span>
+                <Link
+                  to={
+                    page == "Home"
+                      ? "/"
+                      : page == "Event"
+                      ? ``
+                      : page == "Login"
+                      ? "/login"
+                      : page == "Register"
+                      ? "/register"
+                      : null
+                  }
+                >
+                  <span className={`${page == "Event" ? "active" : ""}`}>
+                    {page}
+                  </span>
                 </Link>
               </Button>
             ))}

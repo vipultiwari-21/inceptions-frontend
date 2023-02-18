@@ -15,7 +15,6 @@ function Countdown() {
   }, []);
 
   const setNewTime = () => {
-    console.log(minutes);
     if (countdownDate) {
       const currentTime = new Date().getTime();
 
@@ -35,7 +34,6 @@ function Countdown() {
         hours = `0${hours}`;
       } else if (numbersToAddZeroTo.includes(minutes)) {
         minutes = `0${minutes}`;
-        console.log(minutes);
       } else if (numbersToAddZeroTo.includes(seconds)) {
         seconds = `0${seconds}`;
       }

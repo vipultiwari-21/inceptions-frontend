@@ -54,7 +54,6 @@ function Registration() {
   const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       setLoading(true);
-      // console.log(import.meta.env.VITE_API_ENDPOINT);
 
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}auth/register-participant`,
@@ -71,8 +70,6 @@ function Registration() {
           zip: values.zip,
         }
       );
-
-      console.log(data);
 
       try {
         await axios.post(
@@ -91,7 +88,6 @@ function Registration() {
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      console.log(err);
       alert(err.response.data.error);
     }
 

@@ -49,7 +49,6 @@ const TeamInfo = () => {
   const getOpenEvents = async () => {
     try {
       const { data } = await axios.get("/event/get-open-events");
-      console.log("Open Events : ", data);
       setOpenEvents(data);
     } catch (err) {
       //console.log(err);
@@ -164,7 +163,6 @@ const TeamInfo = () => {
         obj
       );
 
-      console.log(data);
       setIsGCConsidered(true);
       alert("Team was created succesfully!! You can start adding team members");
       resetForm(initialValues);
@@ -315,18 +313,14 @@ const TeamInfo = () => {
                         if (e.target.value == "Group Events") {
                           setIsGCConsidered(true);
                           setHasOpenEvents(false);
-
-                          console.log("selected event : ", e.target.value);
                         } else if (
                           e.target.value == "Group Events + Open Events"
                         ) {
                           setIsGCConsidered(true);
                           setHasOpenEvents(true);
-                          console.log("selected event : ", e.target.value);
                         } else if (e.target.value == "Open Events") {
                           setIsGCConsidered(false);
                           setHasOpenEvents(true);
-                          console.log("selected event : ", e.target.value);
                         }
                       }}
                       onBlur={handleBlur}

@@ -26,8 +26,6 @@ import Header from "../Sidebar/Header";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 // import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 
-
-
 const AssignEvent = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
@@ -45,7 +43,6 @@ const AssignEvent = () => {
         label: obj.teamName.label,
       };
     });
-    // console.log("temp", temp);
 
     // allTeams.push(temp);
     setTeamName(temp);
@@ -59,81 +56,48 @@ const AssignEvent = () => {
     // console.log(values);
     // dispatch(adminregister(values));
     try {
-      setLoading(true);      //   let obj = { teamId: values.team_id };
+      setLoading(true); //   let obj = { teamId: values.team_id };
       //   console.log("obj", obj);
       const { data } = await axios.post("/team/get-specific-team-details", {
         teamId: values.team_id,
       });
-      console.log("data", data);
-      
+      setTeamMates(data[0].teamMembers);
+      resetForm({ values: initialValues });
+      setLoading(false);
     } catch (err) {
-      console.log(err);
       setError(err.message);
     }
 
-    setLoading(false)
+    setLoading(false);
   };
 
-  console.log("teamMates", teamMates);
   const columns = [
-    // { field: "sl_no", headerName: "SL. NO" },
     { field: "memberId", headerName: "Member ID", flex: 1 },
-    // {
-    //   field: "user",
-    //   headerName: "User Name",
-    //   flex: 1,
-    //   cellClassName: "name-column--cell",
-    // },
     {
       field: "firstName",
       headerName: "First Name",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
     {
       field: "lastName",
       headerName: "Last Name",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
     {
       field: "usn",
       headerName: "USN",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
     {
       field: "contactNumber",
       headerName: "Contact Number",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
     },
-    // {
-    //   field: "phone",
-    //   headerName: "Phone Number",
-    //   flex: 1,
-    // },
-    // {
-    //   field: "email",
-    //   headerName: "Email",
-    //   flex: 1,
-    // },
   ];
 
   return (
@@ -282,6 +246,7 @@ const AssignEvent = () => {
         </Formik>
 
         <DataGrid
+          className="datagrid"
           checkboxSelection
           rows={teamMates}
           columns={columns}

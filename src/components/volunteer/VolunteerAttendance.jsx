@@ -27,8 +27,6 @@ import Header from "../Sidebar/Header";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 // import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 
-
-
 const VolunteerAttendance = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
@@ -67,8 +65,7 @@ const VolunteerAttendance = () => {
       const { data } = await axios.post("/team/get-specific-team-details", {
         teamId: values.team_id,
       });
-      console.log("data", data);
-      
+
       resetForm({ values: initialValues });
       setLoading(false);
     } catch (err) {
@@ -77,7 +74,6 @@ const VolunteerAttendance = () => {
     }
   };
 
-  console.log("teamMates", teamMates);
   const columns = [
     // { field: "sl_no", headerName: "SL. NO" },
     { field: "memberId", headerName: "Member ID", flex: 1 },
@@ -206,10 +202,10 @@ const VolunteerAttendance = () => {
                   }}
                 >
                   <TextField
-                  select
-                  InputLabelProps={{ className: "textfield__label" }}
-                  InputProps={{ className: "textfield__label" }}
-                  className="textfield"
+                    select
+                    InputLabelProps={{ className: "textfield__label" }}
+                    InputProps={{ className: "textfield__label" }}
+                    className="textfield"
                     fullWidth
                     variant="filled"
                     // type="text"

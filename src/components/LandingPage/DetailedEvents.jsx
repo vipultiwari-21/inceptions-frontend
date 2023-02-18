@@ -2,22 +2,8 @@ import { Box } from "@mui/material";
 import React, { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import EventDetailList from "../../data/EventDetailList";
-import Background from "../custom_styling/Background";
-import ImageTemp from "../../assets/eventdetails/coding.jpg";
-import EventNavbar from "./EventNavbar";
 import { useMediaQuery } from "@material-ui/core";
-import Solvathon from "../../assets/scheduleIcons/solvathon.svg";
-import StrikeForce from "../../assets/scheduleIcons/strikeForce.svg";
-import InfinityAndBeyond from "../../assets/scheduleIcons/iandb.svg";
-import GenGeeks from "../../assets/scheduleIcons/gengeeks.svg";
-import BigBang from "../../assets/scheduleIcons/bigBang.svg";
-import Zest from "../../assets/scheduleIcons/zest.svg";
-import Gravity from "../../assets/scheduleIcons/gravity.svg";
-import Constellation from "../../assets/scheduleIcons/constellation.svg";
-import NebulaX from "../../assets/scheduleIcons/nebulax.svg";
-import MysteryEventX from "../../assets/scheduleIcons/EventX.svg";
-import ScheduleNavbar from "./ScheduleNavbar";
-import { EventNoteTwoTone } from "@mui/icons-material";
+import Solvathon from "/scheduleIcons/zest.svg";
 
 const DetailedEvents = () => {
   const isNonMobile = useMediaQuery("(max-width:700px)");
@@ -63,10 +49,10 @@ const DetailedEvents = () => {
                       className="event-detail-container text-neutral font-bold flex flex-col justify-center w-full items-center text-white"
                       key={event.id}
                     >
-                      <h4 className="event-name text-3xl lg:text-5xl text-primary">
+                      <h4 className="event-name text-3xl lg:text-5xl py-3 text-primary">
                         {event.name.toUpperCase()}
                       </h4>
-                      <img src={Solvathon} style={{ width: "300px" }} />
+                      <img src={event.svg} style={{ width: "150px" }} />
                       <p className="my-8 text-justify text-md ">
                         {event.description}
                       </p>

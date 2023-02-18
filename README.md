@@ -62,8 +62,18 @@ After you have pushed the changes to the branch open the repo on the browser and
   - [x] Home Banner
   - [x] About Us
   - [x] Events
-    - [x] Events Details Page 
+    - [x] Group Evens
+    - [x] Open Events 
+    - [x] Events Details Page
+  - [x] Schedule Page  
   - [x] Venue Map
   - [x] Contact Us
   - [x] Login
   - [x] Register
+
+- [x] Participants
+  - [x] Choose Team name and Event Type
+  - [x] Add Team Members
+  - [x] Payment Options
+  - [x] Team Members View
+  - [x] User Profile

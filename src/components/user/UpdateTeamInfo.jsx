@@ -16,6 +16,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
+import Swal, { swal } from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const UpdateTeamInfo = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -26,9 +28,18 @@ const UpdateTeamInfo = () => {
   const [teamName, setTeamName] = useState("");
 
   const getTeam = async () => {
-    const { data } = await axios.get("/team/get-team-of-current-user");
-    // console.log(data.name);
-    setTeamName(data.name);
+    try {
+      const { data } = await axios.get("/team/get-team-of-current-user");
+      // console.log(data.name);
+      setTeamName(data.name);
+    } catch (err) {
+      Swal.fire({
+        title: "Error",
+        text: "Something went wrong !!!",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+    }
   };
 
   useEffect(() => {
@@ -55,13 +66,23 @@ const UpdateTeamInfo = () => {
         obj
       );
 
-      alert(data.status);
+      Swal.fire({
+        title: "Success!",
+        text: "Your team was succesfully registered ! you can proceed to payment and add teammates",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
 
       setLoading(false);
       resetForm(initialValues);
       getTeam();
     } catch (err) {
-      console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong! please try again :)",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
       setError(err.message);
       setLoading(false);
     }

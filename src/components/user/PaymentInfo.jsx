@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography, MenuItem } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik } from "formik";
 import Header from "../Sidebar/Header";
@@ -7,6 +7,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "../../features/Interceptors/apiInterceptor";
 import * as yup from "yup";
 import Loading from "../../Loading";
+import FileUpload from "react-mui-fileuploader";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 function PaymentInfo() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -28,7 +32,12 @@ function PaymentInfo() {
         setTeamRegistered(true);
       }
     } catch (err) {
-      console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! please try again!",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -37,11 +46,17 @@ function PaymentInfo() {
       const { data } = await axios.get("/payment/is-paid");
 
       setIsPaid(data.isPaid);
-      
-      data.paymentData ? setIsVerified(data.paymentData.isVerified) : setIsVerified(false)
 
+      data.paymentData
+        ? setIsVerified(data.paymentData.isVerified)
+        : setIsVerified(false);
     } catch (err) {
-      console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
 
     setPageLoading(false);
@@ -72,22 +87,35 @@ function PaymentInfo() {
 
   const handleFormSubmit = async (values, { resetForm }) => {
     // console.log(values)
-
+    setLoading(true);
     const formData = new FormData();
     formData.append("screenshot", values.image);
     formData.set("amount", values.amountPaid);
     formData.set("transactionId", values.transactionID);
 
-    //  for (var key of formData.entries()) {
-    //   console.log(key[0] + ', ' + key[1])
+    // for (var key of formData.entries()) {
+    //   //console.log(key[0] + ', ' + key[1])
     // }
 
     try {
       const { data } = await axios.post("/payment/add", formData);
-      alert(data.status);
+      Swal.fire({
+        title: "Success!",
+        text: data.status,
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
+
       verifyPayment();
     } catch (err) {
-      alert("Something went wrong!!");
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! please try again!",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+
+      setLoading(false);
     }
   };
 
@@ -179,7 +207,7 @@ function PaymentInfo() {
                       gridColumn: isNonMobile ? undefined : "span 4",
                     },
                   }}
-                  className="w-full "
+                  className="w-full"
                 >
                   <TextField
                     fullWidth
@@ -199,6 +227,7 @@ function PaymentInfo() {
                   />
 
                   <TextField
+                    select
                     fullWidth
                     variant="filled"
                     type="text"
@@ -213,9 +242,14 @@ function PaymentInfo() {
                     InputLabelProps={{ className: "textfield__label" }}
                     InputProps={{ className: "textfield__label" }}
                     className="textfield"
-                  />
+                  >
+                    <MenuItem value="3540">3540</MenuItem>
+                    <MenuItem value="944">944</MenuItem>
+                    <MenuItem value="236">236</MenuItem>
+                    <MenuItem value="590">590</MenuItem>
+                  </TextField>
 
-                  <TextField
+                  {/* <TextField
                     fullWidth
                     variant="filled"
                     type="file"
@@ -229,10 +263,46 @@ function PaymentInfo() {
                     error={!!touched.image && !!errors.image}
                     helperText={touched.image && errors.image}
                     sx={{ gridColumn: "span 4" }}
-                    InputLabelProps={{ className: "textfield__label" }}
-                    InputProps={{ className: "textfield__label" }}
+                    InputLabelProps={{
+                      className: "textfield__label fileInputLabel",
+                    }}
+                    InputProps={{
+                      className: "textfield__label default-file-input",
+                    }}
                     className="textfield"
-                  />
+                  /> */}
+
+                  <Box
+                    className=""
+                    sx={{
+                      width: { lg: "900px", sm: "600px", md: "800px" },
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <FileUpload
+                      multiFile={false}
+                      title=""
+                      name="image"
+                      showPlaceholderImage={false}
+                      header=""
+                      leftLabel=""
+                      acceptedType={"image/*"}
+                      allowedExtensions={["jpg", "jpeg", "png"]}
+                      onBlur={handleBlur}
+                      error={!!touched.image && !!errors.image}
+                      helperText={touched.image && errors.image}
+                      onFilesChange={(file) => {
+                        setFieldValue("image", file[0]);
+                        setSelectedImage(file[0]);
+                        console.log(file);
+                      }}
+                      maxUploadFiles={1}
+                      onError={() => {}}
+                      onContextReady={(context) => {}}
+                    />
+                  </Box>
                 </Box>
 
                 {selectedImage ? (

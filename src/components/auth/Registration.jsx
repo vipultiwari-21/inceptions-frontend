@@ -2,7 +2,7 @@ import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ErrorMessage, Formik } from "formik";
-import { MenuItem, TextField } from "@mui/material";
+import { MenuItem, TextField, InputAdornment } from "@mui/material";
 import Logo from "../../assets/exceptions/png/E.png";
 import Background from "../custom_styling/Background";
 import Exceptions from "../../assets/svg/male.svg";
@@ -10,12 +10,14 @@ import axios from "axios";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { State } from "country-state-city";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Registration() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const states = State.getStatesOfCountry("IN");
   const [loading, setLoading] = useState(false);
-  const url = "";
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
@@ -264,6 +266,7 @@ function Registration() {
 
                               <div className="mb-4 basis-full lg:basis-1/2 ">
                                 <TextField
+                                  fullWidth={!isNonMobile}
                                   variant="filled"
                                   type="text"
                                   label="College Name"
@@ -287,7 +290,6 @@ function Registration() {
                                   }}
                                 />
                               </div>
-
                               <div className="mb-4 basis-full lg:basis-1/2">
                                 <TextField
                                   fullWidth={!isNonMobile}
@@ -373,7 +375,7 @@ function Registration() {
                                 <TextField
                                   fullWidth
                                   variant="filled"
-                                  type="password"
+                                  type={showPassword ? "text" : "password"}
                                   label="Password"
                                   onBlur={handleBlur}
                                   onChange={handleChange}
@@ -393,6 +395,28 @@ function Registration() {
                                     borderRadius: "4px",
                                   }}
                                   className="textfield"
+                                  InputProps={{
+                                    endAdornment: (
+                                      <InputAdornment
+                                        position="end"
+                                        onClick={() =>
+                                          handleClickShowPassword()
+                                        }
+                                      >
+                                        {showPassword ? (
+                                          <Visibility
+                                            htmlColor="#000"
+                                            className="cursor-pointer"
+                                          />
+                                        ) : (
+                                          <VisibilityOff
+                                            htmlColor="#000"
+                                            className="cursor-pointer"
+                                          />
+                                        )}
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                 />
                               </div>
 

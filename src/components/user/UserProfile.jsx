@@ -14,6 +14,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TeamSvg from "../../assets/svg/secret.svg";
 import Loading from "../../Loading";
+import Swal, { swal } from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 function UserProfile() {
   const dispatch = useDispatch();
@@ -26,31 +28,45 @@ function UserProfile() {
   const [pageLoading, setPageLoading] = useState(true);
 
   const getTeam = async () => {
-    const { data } = await axios.get("/team/get-team-of-current-user");
-    if (data.message == "This user has not registered any teams") {
-      setPageLoading(false);
-      setIsRegistered(false);
-    } else {
-      setTeamDetails(data);
-      setIsRegistered(true);
-      const teamDetails = await axios.get(
-        `${import.meta.env.VITE_API_ENDPOINT}teamMember/get`
-      );
-      setTeamCount(teamDetails.data.length);
-      setPageLoading(false);
+    try {
+      const { data } = await axios.get("/team/get-team-of-current-user");
+      if (data.message == "This user has not registered any teams") {
+        setPageLoading(false);
+        setIsRegistered(false);
+      } else {
+        setTeamDetails(data);
+        setIsRegistered(true);
+        const teamDetails = await axios.get(
+          `${import.meta.env.VITE_API_ENDPOINT}teamMember/get`
+        );
+        setTeamCount(teamDetails.data.length);
+        setPageLoading(false);
+      }
+    } catch (err) {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
   const getUser = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_API_ENDPOINT}profile/me`
-    );
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_ENDPOINT}profile/me`
+      );
 
-    setUsername(data.firstName);
-  };
-
-  const getTeamCount = async () => {
-    //setTeamData(data);
+      setUsername(data.firstName);
+    } catch (err) {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+    }
   };
 
   useEffect(() => {

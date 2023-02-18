@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Button, MenuItem, TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
@@ -12,6 +11,8 @@ import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 import Loading from "../../Loading";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const TeamInfo = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -42,7 +43,12 @@ const TeamInfo = () => {
       setTeamHead(data);
       //console.log(data)
     } catch (err) {
-      alert("Some error occured!!");
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong! please check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -51,7 +57,12 @@ const TeamInfo = () => {
       const { data } = await axios.get("/event/get-open-events");
       setOpenEvents(data);
     } catch (err) {
-      //console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong! please check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -78,43 +89,51 @@ const TeamInfo = () => {
   };
 
   const getTeams = async () => {
-    const { data } = await axios.get("/team/get-team-of-current-user");
-    if (data.message == "This user has not registered any teams") {
-      const getAllTeamNames = await axios.get(
-        "/teamNames/get-available-team-names"
-      );
-      setPageLoading(false);
-      setIsRegistered(false);
-      // console.log(getAllTeamNames.data);
-      setTeamName(getAllTeamNames.data);
-    } else {
-      //console.log(data);
-      setIsRegistered(true);
+    try {
+      const { data } = await axios.get("/team/get-team-of-current-user");
+      if (data.message == "This user has not registered any teams") {
+        const getAllTeamNames = await axios.get(
+          "/teamNames/get-available-team-names"
+        );
+        setPageLoading(false);
+        setIsRegistered(false);
+        // console.log(getAllTeamNames.data);
+        setTeamName(getAllTeamNames.data);
+      } else {
+        //console.log(data);
+        setIsRegistered(true);
 
-      setRegisteredTeamName(data.teamName.label);
-      // data.isGCConsidered
-      //   ? setRegisteredEventType("Group Event")
-      //   : setRegisteredEventType("Open Event");
+        setRegisteredTeamName(data.teamName.label);
+        // data.isGCConsidered
+        //   ? setRegisteredEventType("Group Event")
+        //   : setRegisteredEventType("Open Event");
 
-      const events = await axios.get("/team/get-events-of-team");
-      const isOpen = events.data.some((event) => {
-        return event.eventIsOpenEvent;
+        const events = await axios.get("/team/get-events-of-team");
+        const isOpen = events.data.some((event) => {
+          return event.eventIsOpenEvent;
+        });
+
+        const isGC = events.data.some((event) => {
+          return !event.eventIsOpenEvent;
+        });
+
+        isOpen && isGC
+          ? setRegisteredEventType("Group Events + Open Event")
+          : isOpen && !isGC
+          ? setRegisteredEventType("Open Events")
+          : isGC && !isOpen
+          ? setRegisteredEventType("Group Events")
+          : setRegisteredEventType("");
+      }
+    } catch (err) {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong! please check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
       });
-
-      const isGC = events.data.some((event) => {
-        return !event.eventIsOpenEvent;
-      });
-
-      isOpen && isGC
-        ? setRegisteredEventType("Group Events + Open Event")
-        : isOpen && !isGC
-        ? setRegisteredEventType("Open Events")
-        : isGC && !isOpen
-        ? setRegisteredEventType("Group Events")
-        : setRegisteredEventType("");
-
-      setPageLoading(false);
     }
+    setPageLoading(false);
   };
 
   useEffect(() => {
@@ -164,12 +183,22 @@ const TeamInfo = () => {
       );
 
       setIsGCConsidered(true);
-      alert("Team was created succesfully!! You can start adding team members");
+      Swal.fire({
+        title: "Success!",
+        text: "Your team was registered succesfully! Proceed to payment and add teammates",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
       resetForm(initialValues);
       getTeams();
     } catch (err) {
       console.log(err);
-      alert("There was an error while adding team !! please try again.");
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong! please try again :)",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
 
     setLoading(false);

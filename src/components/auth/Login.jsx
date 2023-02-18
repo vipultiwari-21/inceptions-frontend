@@ -12,12 +12,14 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import * as yup from "yup";
-import { Button, Modal } from "@mui/material";
+import { Button, Modal, InputAdornment, TextField, Icon } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
   const [loading, setLoading] = useState(false);
 
   const checkoutSchema = yup.object().shape({
@@ -121,7 +123,7 @@ function Login() {
                               Please login to your account
                             </p>
                             <div className="mb-4">
-                              <input
+                              <TextField
                                 type="email"
                                 name="email"
                                 onChange={handleChange}
@@ -132,7 +134,7 @@ function Login() {
                                  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300
                                   rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
                                   focus:border-blue-600 focus:outline-none"
-                              />
+                              ></TextField>
 
                               <ErrorMessage
                                 name="email"
@@ -141,15 +143,35 @@ function Login() {
                               />
                             </div>
                             <div className="mb-4">
-                              <input
-                                type="password"
+                              <TextField
+                                type={showPassword ? "text" : "password"}
                                 onChange={handleChange}
                                 name="password"
                                 className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 id="exampleFormControlInput1"
                                 placeholder="Password"
                                 value={values.password}
-                              />
+                                InputProps={{
+                                  endAdornment: (
+                                    <InputAdornment
+                                      position="end"
+                                      onClick={() => handleClickShowPassword()}
+                                    >
+                                      {showPassword ? (
+                                        <Visibility
+                                          htmlColor="#000"
+                                          className="cursor-pointer"
+                                        />
+                                      ) : (
+                                        <VisibilityOff
+                                          htmlColor="#000"
+                                          className="cursor-pointer"
+                                        />
+                                      )}
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              ></TextField>
                               <ErrorMessage
                                 name="password"
                                 component="div"

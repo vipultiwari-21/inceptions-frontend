@@ -10,6 +10,8 @@ import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 import Loading from "../../Loading";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 const AddParticipant = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -41,7 +43,12 @@ const AddParticipant = () => {
         ? setEventType("group")
         : setEventType("");
     } catch (err) {
-      console.log("Error occured");
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -63,7 +70,12 @@ const AddParticipant = () => {
         setPageLoading(false);
       }
     } catch (err) {
-      console.log("error");
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -77,7 +89,12 @@ const AddParticipant = () => {
       //setTeamData(data);
       //console.log(data.length)
     } catch (err) {
-      console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -86,7 +103,12 @@ const AddParticipant = () => {
       const { data } = await axios.get("/team/get-max-team-members");
       setMaxTeam(data);
     } catch (err) {
-      console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -102,7 +124,12 @@ const AddParticipant = () => {
         `${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,
         values
       );
-      alert("Team mate added succesfully");
+      Swal.fire({
+        title: "Sucess!",
+        text: "Team made was added succesfully!!",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
       getTeamCount();
       getMaxTeamMembers();
     } catch (err) {
@@ -147,17 +174,19 @@ const AddParticipant = () => {
                 </h3>
               </li>
 
-              <li>
-                <h3
-                  className={`text-neutral-content my-3 font-bold ${
-                    isNonMobile ? "text-center" : "text-left"
-                  }`}
-                >
-                  {eventType == "both"
-                    ? `  Note : Your team must contain atleast 7 members to win General Championship`
-                    : null}
-                </h3>
-              </li>
+              {eventType && eventType == "both" ? (
+                <li>
+                  <h3
+                    className={`text-neutral-content my-3 font-bold ${
+                      isNonMobile ? "text-center" : "text-left"
+                    }`}
+                  >
+                    {eventType == "both"
+                      ? `  Note : Your team must contain atleast 7 members to win General Championship`
+                      : null}
+                  </h3>
+                </li>
+              ) : null}
             </ul>
           </>
         }

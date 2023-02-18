@@ -16,11 +16,13 @@ const EventDetailList = [
       "Participants should know the basics of OOP's.",
       "Participants should carry a laptop.",
     ],
-    contact:[ {
-      name: "Shireesha KB",
-      email: "shireeshakb.mca21@rvce.edu.in",
-      phone: "+91 9880063997",
-    }]
+    contact: [
+      {
+        name: "Shireesha KB",
+        email: "shireeshakb.mca21@rvce.edu.in",
+        phone: "+91 9880063997",
+      },
+    ],
   },
   {
     id: 2,
@@ -38,11 +40,13 @@ const EventDetailList = [
     requirements: [
       "Participants should have knowledge about current technology and current affairs.",
     ],
-    contact: [{
-      name: "Krupa Arjunwadkar",
-      email: "krupasa.mca21@rvce.edu.in",
-      phone: "+91 9972308056",
-    }]
+    contact: [
+      {
+        name: "Krupa Arjunwadkar",
+        email: "krupasa.mca21@rvce.edu.in",
+        phone: "+91 9972308056",
+      },
+    ],
   },
   {
     id: 3,
@@ -58,11 +62,13 @@ const EventDetailList = [
       "Participants are required to assemble at the event venue 15 minutes prior to the stated time.",
     ],
     requirements: ["Participants should have fair knowledge in all areas."],
-    contact: [{
-      name: "Bhakthi Prabhu",
-      email: "bhaktiprabhu.mca21@rvce.edu.in",
-      phone: "+91 8088308112",
-    }]
+    contact: [
+      {
+        name: "Bhakthi Prabhu",
+        email: "bhaktiprabhu.mca21@rvce.edu.in",
+        phone: "+91 8088308112",
+      },
+    ],
   },
   {
     id: 4,
@@ -78,11 +84,13 @@ const EventDetailList = [
       "Participants to be present 10 minutes prior to the stated schedule.",
     ],
     requirements: ["Participants should have fair knowledge in all areas."],
-    contact: [{
-      name: "Sumanth C R",
-      email: "sumanthcr.mca21@rvce.edu.in",
-      phone: "+91 789263225",
-    }]
+    contact: [
+      {
+        name: "Sumanth C R",
+        email: "sumanthcr.mca21@rvce.edu.in",
+        phone: "+91 789263225",
+      },
+    ],
   },
   {
     id: 5,
@@ -101,11 +109,13 @@ const EventDetailList = [
       "Participants shall carry their own phone and laptop chargers.",
       "Install required software prior to the event",
     ],
-    contact: [{
-      name: "Aishwarya Kamble",
-      email: "aishwaryakk.mca21@rvce.edu.in",
-      phone: "+91 7026239982",
-    }]
+    contact: [
+      {
+        name: "Aishwarya Kamble",
+        email: "aishwaryakk.mca21@rvce.edu.in",
+        phone: "+91 7026239982",
+      },
+    ],
   },
   {
     id: 6,
@@ -133,8 +143,8 @@ const EventDetailList = [
         name: "Dashline Jove D Souza",
         email: "dashlineds.mca21@rvce.edu.in",
         phone: "+91 8762127308",
-      }
-    ]
+      },
+    ],
   },
   {
     id: 7,
@@ -159,7 +169,7 @@ const EventDetailList = [
         email: "sohangowdac.mca21@rvce.edu.in",
         phone: "+91 9380023145",
       },
-    ]
+    ],
   },
   {
     id: 8,
@@ -180,13 +190,13 @@ const EventDetailList = [
       "Participants are expected to act ethically and refrain from any illegal or unethical behavior such as hacking or cheating.",
       "Team members should inform one of the organizers before leaving the venue, failure to do so will result in disqualification of the entire team.",
     ],
-    contact:[
+    contact: [
       {
         name: "Prajwal K",
         email: "prajwalk.mca21@rvce.edu.in",
         phone: "+91 8105830328",
       },
-    ]
+    ],
   },
   {
     id: 10,
@@ -200,7 +210,8 @@ const EventDetailList = [
     id: 11,
     name: "SOLVEATHON",
     route: "solveathon",
-    problemStatement:'Water  level detection and marking to estimate the level of water in the storage tanks (overhead / sump). The tanks are plastic and cement tanks.The approaches involve computer vision and machine learning.',
+    problemStatement:
+      "Water  level detection and marking to estimate the level of water in the storage tanks (overhead / sump). The tanks are plastic and cement tanks.The approaches involve computer vision and machine learning.",
     description:
       "Solve-a-thon is a solution event focused on building an AI/ML and vision based android application, where enrolled teams will get to solve real time problems that could be planet changing tech. It is an opportunity for students to showcase their skills, learn new technologies and potentially develop a project into a product",
     img: "https://i.ibb.co/rcpfRps/sharon-pittaway-N7-Ftpk-C-P7o-unsplash-1.jpg",
@@ -215,21 +226,19 @@ const EventDetailList = [
     ],
     contact: [
       {
-        type:"Faculty Coordinator",
+        type: "Faculty Coordinator",
         name: "Dr Preethi Patil",
         email: "preethinpatil@rvce.edu.in",
         phone: "+91 9900970235",
       },
       {
-        type:"Student Coordinator",
+        type: "Student Coordinator",
         name: "Ranjith Kumar J",
         email: "ranjithkj.mca21@rvce.edu.in",
         phone: "+91 8884601647",
       },
-    ]
+    ],
   },
-
-
 ];
 
 export default EventDetailList;

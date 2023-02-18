@@ -5,6 +5,9 @@ import Header from "../Sidebar/Header";
 import { Link } from "react-router-dom";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Loading from "../../Loading";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 // import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
@@ -30,7 +33,12 @@ const DisplayTeam = () => {
         setPageLoading(false);
       }
     } catch (err) {
-      alert("Error occured");
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
       setTeamRegistered(false);
       setPageLoading(false);
     }

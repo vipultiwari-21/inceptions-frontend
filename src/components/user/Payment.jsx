@@ -4,6 +4,8 @@ import Header from "../Sidebar/Header";
 import Loading from "../../Loading";
 import CustomCheckbox from "./CustomCheckbox";
 import axios from "../../features/Interceptors/apiInterceptor";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 function Payment() {
   const [hasPaid, sethasPaid] = useState(false);
@@ -24,7 +26,12 @@ function Payment() {
         getSelectedEventDetails();
       }
     } catch (err) {
-      console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 
@@ -39,7 +46,12 @@ function Payment() {
         : setIsVerified(false);
       console.log(data);
     } catch (err) {
-      console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
     setPageLoading(false);
   };
@@ -107,7 +119,12 @@ function Payment() {
       //   ? setSelectedEvents(["Group Event"])
       //   : setRegisteredEventType("");
     } catch (err) {
-      console.log(err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong!! check your internet connectivity",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 

@@ -114,7 +114,10 @@ function Login() {
                           /* and other goodies */
                         }) => (
                           <form onSubmit={handleSubmit}>
-                            <p className="mb-4 font-bold">
+                            <p
+                              className="mb-4 font-bold"
+                              style={{ color: "#fff" }}
+                            >
                               Please login to your account
                             </p>
                             <div className="mb-4">
@@ -180,7 +183,10 @@ function Login() {
                             </div>
 
                             <div className="">
-                              <p className="mb-0 font-bold login-link ">
+                              <p
+                                className="mb-0 font-bold login-link"
+                                style={{ color: "#fff" }}
+                              >
                                 Don't have an account?{" "}
                                 <Link to="/register" className="text-warning">
                                   Click here

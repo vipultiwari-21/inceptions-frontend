@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
 import Header from "../Sidebar/Header";
 import Loading from "../../Loading";
 import CustomCheckbox from "./CustomCheckbox";
@@ -38,6 +37,7 @@ function Payment() {
       data.paymentData
         ? setIsVerified(data.paymentData.isVerified)
         : setIsVerified(false);
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -69,6 +69,7 @@ function Payment() {
         });
 
         const openEventsArray = OpenEvents.map((event) => event.eventName);
+        console.log(openEventsArray);
         setSelectedEvents(openEventsArray);
         //setSelectedEvents([OpenEvents.map((event) => event.eventName)])
       } else if (isOpen && !isGC) {

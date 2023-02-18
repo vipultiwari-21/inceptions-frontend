@@ -2,6 +2,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import Background from "./components/custom_styling/Background";
 import ImageBackground from "./assets/images/error.png";
+import { Link } from "react-router-dom";
 
 function Error() {
   const jokesArray = [
@@ -28,7 +29,9 @@ function Error() {
 
       <img src={ImageBackground} />
 
-      <button className="btn btn-outline btn-warning">Back Home</button>
+      <Link to="/" className="btn btn-outline btn-warning">
+        Back Home
+      </Link>
     </Box>
   );
 }

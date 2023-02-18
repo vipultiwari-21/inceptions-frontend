@@ -116,7 +116,13 @@ const AddParticipant = () => {
 
   return !pageLoading ? (
     teamRegisterd ? (
-      <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
+      <Box
+        m="20px"
+        sx={{
+          height: isNonMobile ? "90vh" : "100%",
+          overflow: "hidden",
+        }}
+      >
         <Header
           title="Add Participants"
           subtitle="Fill up the form with the Participant details"
@@ -377,9 +383,10 @@ const checkoutSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
   contactNumber: yup
     .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .min(10, "Invalid phone number")
-    .required("required"),
+    .required("required")
+    .min(10, "Invalid Phone Number")
+    .max(10, "Invalid Phone Number")
+    .matches(/^[6-9]\d{9}$/, "Enter valid phone number"),
 });
 const initialValues = {
   firstName: "",

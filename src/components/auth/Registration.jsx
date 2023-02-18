@@ -22,19 +22,32 @@ function Registration() {
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
     password: yup.string().required("required").min(8, "Too Short!"),
-    firstName: yup.string().required("required"),
-    lastName: yup.string().required("required"),
+    firstName: yup
+      .string()
+      .required("required")
+      .matches("^[a-zA-Z]*$", "Enter valid First Name"),
+    lastName: yup
+      .string()
+      .required("required")
+      .matches("^[a-zA-Z]*$", "Enter valid last Name"),
     contactNumber: yup
       .string()
       .required("required")
       .min(10, "Invalid Phone Number")
       .max(10, "Invalid Phone Number")
       .matches(/^[6-9]\d{9}$/, "Enter valid phone number"),
-    collegeName: yup.string().required("required"),
+    collegeName: yup
+      .string()
+      .required("required")
+      .matches("^[a-zA-Z]*$", "Enter valid College Name"),
     state: yup.string().required("required"),
-    city: yup.string().required("required"),
+    city: yup
+      .string()
+      .required("required")
+      .matches("^[a-zA-Z]*$", "Enter valid City Name"),
     zip: yup
       .string()
+      .matches("^[0-9]*$", "Enter valid City Name")
       .required("required")
       .max(6, "Invalid Pincode")
       .min(6, "Invalid Pincode"),

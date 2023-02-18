@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField, Typography, MenuItem } from "@mui/material";
 import { Box } from "@mui/system";
-import { Formik } from "formik";
+import { Formik, ErrorMessage } from "formik";
 import Header from "../Sidebar/Header";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "../../features/Interceptors/apiInterceptor";
@@ -11,6 +11,8 @@ import FileUpload from "react-mui-fileuploader";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import UploadComponent from "./UploadComponent";
+import { Label } from "@mui/icons-material";
 
 function PaymentInfo() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -74,13 +76,16 @@ function PaymentInfo() {
   };
 
   const checkoutSchema = yup.object().shape({
-    transactionID: yup.string().required("required"),
+    transactionID: yup
+      .string()
+      .required("required")
+      .matches("^[a-zA-Z0-9]*$", "Enter valid Transaction ID"),
     image: yup
       .mixed()
       .required("File is required")
-      .test("fileType", "Upload only images", function (value) {
-        const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
-        return SUPPORTED_FORMATS.includes(value.type);
+      .test("fileType", "Upload only jpeg / jpg format", function (value) {
+        const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg"];
+        return SUPPORTED_FORMATS.includes(value ? value.type : null);
       }),
     amountPaid: yup.number().required("required"),
   });
@@ -279,8 +284,42 @@ function PaymentInfo() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      flexDirection: "column",
                     }}
                   >
+                    <UploadComponent
+                      setFieldValue={setFieldValue}
+                      setSelectedImage={setSelectedImage}
+                    />
+
+                    <ErrorMessage name="image">
+                      {(err) => (
+                        <h2 className="text-accent mt-5 font-bold ">{err}</h2>
+                      )}
+                    </ErrorMessage>
+
+                    {/*
+                  
+                  *
+                      {({ getRootProps, getInputProps, isDragRejected }) => (
+                        <section>
+                          <div {...getRootProps()}>
+                            <input {...getInputProps()} />
+                            <Box className="py-3  ">
+                              <p className="text-neutral-content  ">
+                                {!isDragRejected
+                                  ? "Drag and drop screenshot of payment / click here to upload"
+                                  : "Select valid file"}
+                              </p>
+                            </Box>
+                          </div>
+                        </section>
+                      )}
+                    </Dropzone>
+
+                    /*}
+
+                    {/*
                     <FileUpload
                       multiFile={false}
                       title=""
@@ -288,6 +327,8 @@ function PaymentInfo() {
                       showPlaceholderImage={false}
                       header=""
                       leftLabel=""
+                      rightLabel=""
+                      buttonLabel="Click here to upload file"
                       acceptedType={"image/*"}
                       allowedExtensions={["jpg", "jpeg", "png"]}
                       onBlur={handleBlur}
@@ -301,9 +342,13 @@ function PaymentInfo() {
                       maxUploadFiles={1}
                       onError={() => {}}
                       onContextReady={(context) => {}}
-                    />
+
+/>
+
+                    */}
                   </Box>
                 </Box>
+                {/*
 
                 {selectedImage ? (
                   <Box className="w-full my-8 flex items-center justify-center  ">
@@ -322,6 +367,7 @@ function PaymentInfo() {
                     />
                   </Box>
                 ) : null}
+*/}
 
                 <Box
                   display="flex"

@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 import { Box } from "@mui/system";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
+import AstronautImage from "../../assets/images/astronaut.png";
 import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import TeamSvg from "../../assets/svg/secret.svg";
 import Loading from "../../Loading";
-import Swal, { swal } from "sweetalert2/dist/sweetalert2.js";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
 function UserProfile() {
@@ -26,20 +21,24 @@ function UserProfile() {
   const [teamCount, setTeamCount] = useState(0);
   const [isRegistered, setIsRegistered] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
+  const [userDetails, setUserDetails] = useState([]);
 
   const getTeam = async () => {
     try {
-      const { data } = await axios.get("/team/get-team-of-current-user");
+      const { data } = await axios.get("/profile/me");
       if (data.message == "This user has not registered any teams") {
         setPageLoading(false);
         setIsRegistered(false);
       } else {
-        setTeamDetails(data);
+        setUserDetails(data);
         setIsRegistered(true);
-        const teamDetails = await axios.get(
+        const currUserTeam = await axios.get("team/get-team-of-current-user");
+        setTeamDetails(currUserTeam.data);
+
+        const teamSize = await axios.get(
           `${import.meta.env.VITE_API_ENDPOINT}teamMember/get`
         );
-        setTeamCount(teamDetails.data.length);
+        setTeamCount(teamSize.data.length);
         setPageLoading(false);
       }
     } catch (err) {
@@ -81,14 +80,20 @@ function UserProfile() {
         sx={{ height: isNonMobile ? "90vh" : "100%" }}
         className="flex justify-center items-center l"
       >
-        <Box>
+        <Box className="flex flex-col align-center justify-center">
           <Header
-            title={`Welcome, ${userName}`}
-            subtitle="Have a look at your team details"
+            title={`Welcome , ${userDetails ? userDetails.firstName : null}`}
+            subtitle={`Cant wait to see you soon at RVCE`}
           />
 
-          <Box sx={{ width: { lg: "400px" } }}>
-            <Table className="text text-neutral-content font-bold   ">
+          <Box
+            sx={{
+              width: { lg: "400px" },
+              color: "#fff",
+              fontWeight: "bold",
+            }}
+          >
+            <Table className=" ">
               <TableRow>
                 <TableCell>Team ID</TableCell>
                 <TableCell>{teamDetails ? teamDetails.teamId : null}</TableCell>

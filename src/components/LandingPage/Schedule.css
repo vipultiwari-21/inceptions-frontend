@@ -21,11 +21,9 @@ html {
   padding: 2px;
   font-size: 18px;
   box-sizing: border-box;
-  
 }
-.logo
-{
-    margin-left: 50px !important; 
+.logo {
+  margin-left: 50px !important;
 }
 
 /* Page Wrapper/Container Style */
@@ -33,16 +31,15 @@ html {
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-  padding:15px;
-  
+  padding: 15px;
 }
 
 /* Responsive Table Style */
 .responsive-table {
   background-color: #1e293b;
-  
+
   border-collapse: collapse;
- 
+
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
   width: 100%;
@@ -70,7 +67,7 @@ html {
 }
 .responsive-table__head {
   background-color: #fff;
-  color:#0CA5E9;
+  color: #0ca5e9;
 }
 @media (max-width: 991px) {
   .responsive-table__head {
@@ -106,7 +103,7 @@ html {
 }
 @media (max-width: 991px) {
   .responsive-table__body__text::before {
-    content: attr(data-title) " :";
+    content: attr(data-title) "";
   }
 }
 @media (max-width: 400px) {
@@ -130,7 +127,9 @@ html {
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  .responsive-table__body__text--status, .responsive-table__body__text--types, .responsive-table__body__text--update {
+  .responsive-table__body__text--status,
+  .responsive-table__body__text--types,
+  .responsive-table__body__text--update {
     grid-column: 2/3;
   }
 }
@@ -140,7 +139,8 @@ html {
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  .responsive-table__body__text--name, .responsive-table__body__text--country {
+  .responsive-table__body__text--name,
+  .responsive-table__body__text--country {
     grid-row: 2;
   }
 }

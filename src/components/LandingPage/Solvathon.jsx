@@ -3,8 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import solveathonImage from "../../assets/svg/solveathon.svg";
 import TrophyImage from "../../assets/images/trophy.png";
-import './textAnimation.css'
-
+import "./textAnimation.css";
 
 function Solvathon() {
   return (
@@ -36,30 +35,40 @@ function Solvathon() {
               technologies and potentially develop a project into a product.
             </p>
 
-            <h3 className="my-3 text-xl font-bold text-warning">Click the button below to view the problem statement</h3>
+            <h3 className="my-3 text-xl font-bold text-warning">
+              Click the button below to view the problem statement
+            </h3>
 
-            <Link to="/details/solveathon" className={`btn btn-primary btn-wide my-8 `}>
-            Details
-          </Link>
+            <Link
+              to="/details/solveathon"
+              className={`btn btn-primary btn-wide my-8 `}
+            >
+              Details
+            </Link>
 
             <div>
-            <h3 className="text-center my-8 text-3xl text-primary font-bold ">Price details </h3>
+              <h3 className="text-center my-8 text-3xl text-primary font-bold ">
+                Prize details{" "}
+              </h3>
 
-          <div className="text-lg lg:text-2xl horizontal-shake font-bold text-warning text-price flex-col 
-            flex w-full items-center justify-around">
-          <span>1st Price : 15000 </span>
-          <span>2nd Price : 10000 </span>
-          <span>3rd Price : 5000 </span>
-
-          </div>
+              <div
+                className="text-lg lg:text-2xl horizontal-shake font-bold text-warning text-price flex-col 
+            flex w-full items-center justify-around"
+              >
+                <span>1st Prize : 15000 </span>
+                <span>2nd Prize : 10000 </span>
+                <span>3rd Prize : 5000 </span>
+              </div>
             </div>
 
             <div className="trophy my-5 flex flex-col lg:flex-row items-center justify-around w-full">
               <div className="">
-                <img src={TrophyImage} alt="price-img" style={{maxWidth:'10rem'}} />
+                <img
+                  src={TrophyImage}
+                  alt="price-img"
+                  style={{ maxWidth: "10rem" }}
+                />
               </div>
-
-            
             </div>
           </div>
         </div>
@@ -69,11 +78,7 @@ function Solvathon() {
             alt="solvathon-logo"
             style={{ width: "50rem" }}
           />
-         
         </div>
-
-        
-       
       </div>
     </Box>
   );

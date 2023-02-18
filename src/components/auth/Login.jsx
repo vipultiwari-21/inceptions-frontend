@@ -1,7 +1,7 @@
 import { Container } from "@mui/system";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Formik , ErrorMessage} from "formik";
+import { Formik, ErrorMessage } from "formik";
 import Logo from "../../assets/exceptions/png/E.png";
 import Background from "../custom_styling/Background";
 import { useNavigate } from "react-router-dom";
@@ -45,17 +45,11 @@ function Login() {
     navigate("/forgot-password");
   };
 
-
-  const handleFormSubmit = async (values, { setSubmitting , resetForm}) => {
-   // console.log("values", values);
+  const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
     // const data = await loginAuth(values);
-    // console.log("data", data);
-
-  
 
     try {
       setLoading(true);
-      console.log(import.meta.env.VITE_API_ENDPOINT);
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}auth/login`,
         {
@@ -75,8 +69,7 @@ function Login() {
     }
 
     setLoading(false);
-    resetForm()
-    
+    resetForm();
   };
 
   return (
@@ -138,9 +131,11 @@ function Login() {
                                   focus:border-blue-600 focus:outline-none"
                               />
 
-                          
-                              <ErrorMessage name="email"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                              <ErrorMessage
+                                name="email"
+                                component="div"
+                                className="text-blue-500  mt-3 text-left capitalize"
+                              />
                             </div>
                             <div className="mb-4">
                               <input
@@ -152,9 +147,12 @@ function Login() {
                                 placeholder="Password"
                                 value={values.password}
                               />
-                              <ErrorMessage name="password"  component="div" className="text-blue-500 
-                               mt-3 text-left capitalize" />
-
+                              <ErrorMessage
+                                name="password"
+                                component="div"
+                                className="text-blue-500 
+                               mt-3 text-left capitalize"
+                              />
                             </div>
                             <div className="text-center pt-1 mb-6 pb-1">
                               <button

@@ -28,15 +28,13 @@ import VolunteerProfile from "./components/volunteer/VolunteerProfile";
 import VolunteerAttendance from "./components/volunteer/VolunteerAttendance";
 import Payment from "./components/user/Payment";
 import PaymentInfo from "./components/user/PaymentInfo";
-import Schedule from './components/LandingPage/Schedule'
+import Schedule from "./components/LandingPage/Schedule";
 import { Offline, Online } from "react-detect-offline";
-
 
 function App() {
   const user = Cookies.get("token");
   const [role, setRole] = useState("");
   const [profile, setProfile] = useState({});
-
   const getRoleOrProfile = async (route) => {
     const { data } = await axios.get(route);
     if (route === "profile/me") {
@@ -46,10 +44,10 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    getRoleOrProfile("profile/me");
-    getRoleOrProfile("/auth/my-role");
-  }, []);
+  // useEffect(() => {
+  //   getRoleOrProfile("profile/me");
+  getRoleOrProfile("/auth/my-role");
+  // }, []);
   return (
     <div className="app">
       {user && <Sidebar />}
@@ -57,22 +55,74 @@ function App() {
         {user && <Topbar />}
         <Routes>
           {user && role === "PARTICIPANT" && (
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <UserProfile />
-                </ProtectedRoute>
-              }
-            />
+            <>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <UserProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="team-info"
+                element={
+                  <ProtectedRoute>
+                    <TeamInfo />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="update-team"
+                element={
+                  <ProtectedRoute>
+                    <UpdateTeamInfo />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="add-participant"
+                element={
+                  <ProtectedRoute>
+                    <AddParticipant />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="display-team"
+                element={
+                  <ProtectedRoute>
+                    <DisplayTeam />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="payment"
+                element={
+                  <ProtectedRoute>
+                    <Payment />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="payment-info"
+                element={
+                  <ProtectedRoute>
+                    <PaymentInfo />
+                  </ProtectedRoute>
+                }
+              />
+            </>
           )}
           {user && role === "ADMIN" && (
             <Route
               path="/"
               element={
-                <ProtectedRoute>
-                  <AdminProfile />
-                </ProtectedRoute>
+                <>
+                  <ProtectedRoute>
+                    <AdminProfile />
+                  </ProtectedRoute>
+                </>
               }
             />
           )}
@@ -109,75 +159,37 @@ function App() {
           ) : (
             <Route path="/" element={<LandingPage />} />
           )} */}
-          {!user && <Route path="/" element={<LandingPage />} />}
-          {/* <Route path="/logintemp" element={<Login />} /> */}
-          <Route path="/schedule" element={<Schedule />} />
-          {/*<Route path="/registertemp" element={<Registration />} /> */}
-          <Route path="/register" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
-          <Route exact path="/details/:id" element={<DetailedEvents />} />
-          <Route exact path="/forgot-password" element={<ForgotPassword />} />
-          <Route exact path="/email-confirm" element={<EmailConfirmation />} />
-          <Route exact path="/reset-password" element={<ResetPassword />} />
-
-          {/* Participations Routes */}
-          <Route
-            path="team-info"
-            element={
-              <ProtectedRoute>
-                <TeamInfo />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="update-team"
-            element={
-              <ProtectedRoute>
-                <UpdateTeamInfo />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="add-participant"
-            element={
-              <ProtectedRoute>
-                <AddParticipant />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="display-team"
-            element={
-              <ProtectedRoute>
-                <DisplayTeam />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-          path="payment"
-          element={
-            <ProtectedRoute>
-              <Payment />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-        path="payment-info"
-        element={
-          <ProtectedRoute>
-            <PaymentInfo />
-          </ProtectedRoute>
-        }
-      />
+          {!user && (
+            <>
+              <Route path="/" element={<LandingPage />} />
+              {/* <Route path="/logintemp" element={<Login />} /> */}
+              <Route path="/schedule" element={<Schedule />} />
+              {/*<Route path="/registertemp" element={<Registration />} /> */}
+              <Route path="/register" element={<Registration />} />
+              <Route path="/login" element={<Login />} />
+              <Route exact path="/details/:id" element={<DetailedEvents />} />
+              <Route
+                exact
+                path="/forgot-password"
+                element={<ForgotPassword />}
+              />
+              <Route
+                exact
+                path="/email-confirm"
+                element={<EmailConfirmation />}
+              />
+              <Route exact path="/reset-password" element={<ResetPassword />} />{" "}
+            </>
+          )}
 
           {/* Volunteer Routes */}
           <Route
             path="volunteer-attendance"
-            element={<ProtectedRoute>
-              <VolunteerAttendance />
-              </ProtectedRoute>}
+            element={
+              <ProtectedRoute>
+                <VolunteerAttendance />
+              </ProtectedRoute>
+            }
           />
 
           {/*Backend Routes*/}
@@ -187,8 +199,6 @@ function App() {
             path="/backend-registration"
             element={<RegisterPrivate />}
           />
-
-         
 
           {/* Error 404 handler */}
 

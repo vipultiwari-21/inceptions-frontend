@@ -32,11 +32,12 @@ function Payment() {
   const checkPaymentStatus = async () => {
     try {
       const { data } = await axios.get("/payment/is-paid");
-       sethasPaid(data.isPaid);
+      sethasPaid(data.isPaid);
 
       // setHasVerified(data.paymentData.isVerified)
-      data.paymentData ? setIsVerified(data.paymentData.isVerified) : setIsVerified(false)
-      console.log(data);
+      data.paymentData
+        ? setIsVerified(data.paymentData.isVerified)
+        : setIsVerified(false);
     } catch (err) {
       console.log(err);
     }
@@ -68,7 +69,6 @@ function Payment() {
         });
 
         const openEventsArray = OpenEvents.map((event) => event.eventName);
-        console.log(openEventsArray);
         setSelectedEvents(openEventsArray);
         //setSelectedEvents([OpenEvents.map((event) => event.eventName)])
       } else if (isOpen && !isGC) {

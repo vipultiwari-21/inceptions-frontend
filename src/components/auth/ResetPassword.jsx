@@ -15,11 +15,6 @@ function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("JWT TOKEN : ", jwtToken);
-    console.log("USER ID : ", userID);
-  }, []);
-
   const initialValues = {
     password: "",
     cpassword: "",
@@ -50,7 +45,6 @@ function ResetPassword() {
 
   const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
     setLoading(true);
-    console.log("values", values);
     handleResetPassword(values);
     resetForm();
     setLoading(false);
@@ -112,8 +106,11 @@ function ResetPassword() {
                                 className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                               />
 
-                              <ErrorMessage name="password"  component="div" className="text-blue-500  mt-3 text-left capitalize" />
-
+                              <ErrorMessage
+                                name="password"
+                                component="div"
+                                className="text-blue-500  mt-3 text-left capitalize"
+                              />
                             </div>
                             <div className="mb-4">
                               <input

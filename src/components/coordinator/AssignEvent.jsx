@@ -43,7 +43,6 @@ const AssignEvent = () => {
         label: obj.teamName.label,
       };
     });
-    // console.log("temp", temp);
 
     // allTeams.push(temp);
     setTeamName(temp);
@@ -62,19 +61,16 @@ const AssignEvent = () => {
       const { data } = await axios.post("/team/get-specific-team-details", {
         teamId: values.team_id,
       });
-      console.log("data", data);
       setTeamMates(data[0].teamMembers);
       resetForm({ values: initialValues });
       setLoading(false);
     } catch (err) {
-      console.log(err);
       setError(err.message);
     }
 
     setLoading(false);
   };
 
-  console.log("teamMates", teamMates);
   const columns = [
     { field: "memberId", headerName: "Member ID", flex: 1 },
     {

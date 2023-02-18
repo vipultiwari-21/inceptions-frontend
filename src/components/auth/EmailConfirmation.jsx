@@ -17,7 +17,6 @@ function EmailConfirmation() {
 
   const handleVerification = async () => {
     setLoading(true);
-    console.log(jwtToken);
     try {
       const { data } = await axios.get(
         `${
@@ -26,7 +25,7 @@ function EmailConfirmation() {
       );
       setResult(data.message);
       alert(data.message);
-      navigate("/login")
+      navigate("/login");
     } catch (err) {
       setResult(err.response.data.error);
     }

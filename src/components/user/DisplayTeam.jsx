@@ -12,7 +12,7 @@ import Loading from "../../Loading";
 const DisplayTeam = () => {
   const [teamMemberTable, setTeamMemberTable] = useState([]);
   const [teamRegistered, setTeamRegistered] = useState(false);
-  const [pageLoading,setPageLoading]=useState(true)
+  const [pageLoading, setPageLoading] = useState(true);
 
   const getTeamRegisteredDetails = async () => {
     try {
@@ -21,19 +21,18 @@ const DisplayTeam = () => {
         const getAllTeamNames = await axios.get(
           "/teamNames/get-available-team-names"
         );
-        console.log("Not registered");
         setTeamRegistered(false);
-        setPageLoading(false)
+        setPageLoading(false);
       } else {
         //console.log(data);
         setTeamRegistered(true);
         getTeamMembersOfCurrentUser();
-        setPageLoading(false)
+        setPageLoading(false);
       }
     } catch (err) {
       alert("Error occured");
-      setTeamRegistered(false)
-      setPageLoading(false)
+      setTeamRegistered(false);
+      setPageLoading(false);
     }
   };
 
@@ -42,14 +41,12 @@ const DisplayTeam = () => {
       `${import.meta.env.VITE_API_ENDPOINT}/teamMember/get`
     );
 
-    console.log("wsdfeedfer", data);
-    setTeamMemberTable(data)
+    setTeamMemberTable(data);
   };
 
   useEffect(() => {
     getTeamRegisteredDetails();
     // // getAllCustomers();
-    console.log("Hello")
   }, []);
 
   const columns = [
@@ -87,78 +84,76 @@ const DisplayTeam = () => {
       field: "email",
       headerName: "Email",
       flex: 1,
-      minWidth:200
+      minWidth: 200,
     },
   ];
 
-  return  (
-
-    !pageLoading ? 
-
-    teamRegistered ?
-
-
-    
-    <Box m="20px">
-      <Header title="TEAM MEMBERS" subtitle="Here is your team members list" />
-      <Box
-        m="40px 0 0 0"
-        height="70vh"
-        sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .name-column--cell": {
-            color: "#94e2cd !important",
-            // color: colors.greenAccent[300],
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            // backgroundColor: colors.blueAccent[700],
-            backgroundColor: "#3e4396",
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: "#1F2A40",
-            // backgroundColor: colors.primary[400],
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: "#3e4396",
-            // backgroundColor: colors.blueAccent[700],
-          },
-          "& .MuiCheckbox-root": {
-            color: "#b7ebde !important",
-            // color: `${colors.greenAccent[200]} !important`,
-          },
-        }}
-      >
-        {
-          <DataGrid
-            className="datagrid"
-            rows={teamMemberTable}
-            columns={columns}
-            getRowId={(row) => row.teamMemberId}
-            pageSize={8}
-          />
-        }
+  return !pageLoading ? (
+    teamRegistered ? (
+      <Box m="20px">
+        <Header
+          title="TEAM MEMBERS"
+          subtitle="Here is your team members list"
+        />
+        <Box
+          m="40px 0 0 0"
+          height="70vh"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+            },
+            "& .name-column--cell": {
+              color: "#94e2cd !important",
+              // color: colors.greenAccent[300],
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              // backgroundColor: colors.blueAccent[700],
+              backgroundColor: "#3e4396",
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: "#1F2A40",
+              // backgroundColor: colors.primary[400],
+            },
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+              backgroundColor: "#3e4396",
+              // backgroundColor: colors.blueAccent[700],
+            },
+            "& .MuiCheckbox-root": {
+              color: "#b7ebde !important",
+              // color: `${colors.greenAccent[200]} !important`,
+            },
+          }}
+        >
+          {
+            <DataGrid
+              className="datagrid"
+              rows={teamMemberTable}
+              columns={columns}
+              getRowId={(row) => row.teamMemberId}
+              pageSize={8}
+            />
+          }
+        </Box>
       </Box>
-    </Box>
-
-    : 
-    <Box className="flex justify-center items-center " sx={{ height: "90vh" }}>
-      <Header
-        title="Pending registration!!!"
-        subtitle="Please register your team name and event type in the Add team section"
-      />
-    </Box>
-
-    : <Loading />
-
-  ) 
-  
+    ) : (
+      <Box
+        className="flex justify-center items-center "
+        sx={{ height: "90vh" }}
+      >
+        <Header
+          title="Pending registration!!!"
+          subtitle="Please register your team name and event type in the Add team section"
+        />
+      </Box>
+    )
+  ) : (
+    <Loading />
+  );
 };
 
 export default DisplayTeam;

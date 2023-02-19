@@ -4,6 +4,7 @@ import MaleAstronaut from "../../assets/svg/maleAstro.svg";
 import FemaleAstronaut from "../../assets/svg/female.svg";
 import Faculty1 from "../../assets/svg/faculty1.svg";
 import Faculty2 from "../../assets/svg/faculty2.svg";
+import Faculty3 from "../../assets/svg/faculty3.svg";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";

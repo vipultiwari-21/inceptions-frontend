@@ -1,6 +1,4 @@
 const EventsList = [
-
-
   {
     id: 7,
     name: "gravity",
@@ -11,7 +9,7 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-warning",
     text: "text-warning",
-    eventType:'general'
+    eventType: "general",
   },
   {
     id: 2,
@@ -23,7 +21,7 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-success",
     text: "text-success",
-    eventType:'general'
+    eventType: "general",
   },
   {
     id: 3,
@@ -35,7 +33,7 @@ const EventsList = [
     direction: "flex-row",
     color: "btn-accent",
     text: "text-accent",
-    eventType:'general'
+    eventType: "general",
   },
 
   {
@@ -48,9 +46,8 @@ const EventsList = [
     direction: "flex-row",
     color: "btn-primary",
     text: "text-primary",
-    eventType:'general'
+    eventType: "general",
   },
- 
 
   {
     id: 1,
@@ -62,7 +59,7 @@ const EventsList = [
     direction: "flex-row",
     color: "btn-primary",
     text: "text-primary",
-    eventType:'general'
+    eventType: "general",
   },
 
   {
@@ -75,7 +72,7 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-primary",
     text: "text-primary",
-    eventType:'general'
+    eventType: "general",
   },
 
   {
@@ -87,11 +84,9 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-primary",
     text: "text-primary",
-    eventType:'general'
+    eventType: "general",
   },
 
- 
-  
   {
     id: 4,
     name: "strike force",
@@ -102,7 +97,7 @@ const EventsList = [
     direction: "flex-row-reverse",
     color: "btn-warning",
     text: "text-warning",
-    eventType:'open'
+    eventType: "open",
   },
 
   {
@@ -115,12 +110,8 @@ const EventsList = [
     diretion: "flex-row-reverse",
     color: "btn-accent",
     text: "text-accent",
-    eventType:'open'
+    eventType: "open",
   },
-
-
- 
-  
 ];
 
 export default EventsList;

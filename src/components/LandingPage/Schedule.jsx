@@ -1,15 +1,15 @@
 import React from "react";
 import "./Schedule.css";
-import Solvathon from "../../assets/scheduleIcons/solvathon.svg";
-import StrikeForce from "../../assets/scheduleIcons/strikeForce.svg";
-import InfinityAndBeyond from "../../assets/scheduleIcons/iandb.svg";
-import GenGeeks from "../../assets/scheduleIcons/gengeeks.svg";
-import BigBang from "../../assets/scheduleIcons/bigBang.svg";
-import Zest from "../../assets/scheduleIcons/zest.svg";
-import Gravity from "../../assets/scheduleIcons/gravity.svg";
-import Constellation from "../../assets/scheduleIcons/constellation.svg";
-import NebulaX from "../../assets/scheduleIcons/nebulax.svg";
-import MysteryEventX from "../../assets/scheduleIcons/EventX.svg";
+import Solvathon from "../../../public/scheduleIcons/solvathon.svg";
+import StrikeForce from "../../../public/scheduleIcons/strikeForce.svg";
+import InfinityAndBeyond from "../../../public/scheduleIcons/iandb.svg";
+import GenGeeks from "../../../public/scheduleIcons/gengeeks.svg";
+import BigBang from "../../../public/scheduleIcons/bigBang.svg";
+import Zest from "../../../public/scheduleIcons/zest.svg";
+import Gravity from "../../../public/scheduleIcons/gravity.svg";
+import Constellation from "../../../public/scheduleIcons/constellation.svg";
+import NebulaX from "../../../public/scheduleIcons/nebulax.svg";
+import MysteryEventX from "../../../public/scheduleIcons/EventX.svg";
 import ScheduleNavbar from "./ScheduleNavbar";
 
 export default function Schedule() {

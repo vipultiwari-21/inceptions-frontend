@@ -406,9 +406,18 @@ const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
 const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  usn: yup.string().required("required"),
+  firstName: yup
+    .string()
+    .required("required")
+    .matches("^[a-zA-Z]*$", "Enter valid First Name"),
+  lastName: yup
+    .string()
+    .required("required")
+    .matches("^[a-zA-Z]*$", "Enter valid USN"),
+  usn: yup
+    .string()
+    .required("required")
+    .matches("^[a-zA-Z0-9]*$", "Enter valid Transaction ID"),
   email: yup.string().email("invalid email").required("required"),
   contactNumber: yup
     .string()

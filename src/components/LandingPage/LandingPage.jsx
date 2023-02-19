@@ -22,24 +22,16 @@ function LandingPage() {
             <Navbar />
             <Background />
           </header>
-
           <Banner />
-
           <About />
-
-
+          <Sponsorship />
           <Events />
-
-          {/* <Sponsorship /> */}
-
+          {/* */}
           <Prize />
-
           <Map />
-
           <Contact />
         </div>
       </Container>
-
       <Footer />
     </div>
   );

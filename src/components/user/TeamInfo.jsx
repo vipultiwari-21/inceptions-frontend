@@ -454,6 +454,24 @@ const TeamInfo = () => {
                     Register team
                   </Button>
                 )}
+
+                {isRegistered ? (
+                  <Button
+                    type="submit"
+                    color="primary"
+                    variant="contained"
+                    onClick={() => navigate("/add-participant")}
+                    sx={{
+                      padding: "10px 20px",
+                      width: "100%",
+                      fontSize: "16px",
+                      letterSpacing: "0.15rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Add team mates
+                  </Button>
+                ) : null}
               </Box>
             </form>
           )}

@@ -54,7 +54,7 @@ function Events() {
       {/*  General Events */}
 
       <h1 className="text-center text-3xl text-success my-16 event-header">
-        Group Events (Only for MCA & BCA)
+        Group Events (Only for BCA , MCA , BSc and MSc)
       </h1>
 
       {EventsList.map((data) => {

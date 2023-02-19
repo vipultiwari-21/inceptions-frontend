@@ -22,7 +22,6 @@ const AddParticipant = () => {
   const [teamRegisterd, setTeamRegistered] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const [eventType, setEventType] = useState("");
-  const navigate = useNavigate();
 
   const getEventType = async () => {
     try {
@@ -146,7 +145,7 @@ const AddParticipant = () => {
       <Box
         m="20px"
         sx={{
-          height: isNonMobile ? "90vh" : "100%",
+          height: isNonMobile ? "100vh" : "100%",
           overflow: "hidden",
         }}
       >
@@ -177,12 +176,12 @@ const AddParticipant = () => {
               {eventType && eventType == "both" ? (
                 <li>
                   <h3
-                    className={`text-neutral-content my-3 font-bold ${
+                    className={`text-warning my-3 font-bold ${
                       isNonMobile ? "text-center" : "text-left"
                     }`}
                   >
                     {eventType == "both"
-                      ? `  Note : Your team must contain atleast 7 members to win General Championship`
+                      ? `  Note : Your team must contain atleast 7 members to win General Championship . You can make payment before adding participants`
                       : null}
                   </h3>
                 </li>
@@ -366,6 +365,25 @@ const AddParticipant = () => {
                     <CircularProgress />
                   ) : (
                     <Button
+                      disabled={maxTeam - teamCount == 0 ? true : false}
+                      type="submit"
+                      color="primary"
+                      variant="contained"
+                      sx={{
+                        padding: "10px 20px",
+                        width: "100%",
+                        marginBottom: "20px",
+                        fontSize: "16px",
+                        letterSpacing: "0.15rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Add Teammate
+                    </Button>
+                  )}
+
+                  {maxTeam - teamCount > 0 ? (
+                    <Button
                       type="submit"
                       color="primary"
                       variant="contained"
@@ -377,9 +395,9 @@ const AddParticipant = () => {
                         fontWeight: "bold",
                       }}
                     >
-                      Add Teammate
+                      Proceed for payment
                     </Button>
-                  )}
+                  ) : null}
                 </Box>
               </form>
             )}
@@ -388,8 +406,11 @@ const AddParticipant = () => {
       </Box>
     ) : (
       <Box
-        className="flex justify-center items-center "
-        sx={{ height: "90vh" }}
+        m="20px"
+        sx={{
+          height: isNonMobile ? "90vh" : "100%",
+          overflow: "hidden",
+        }}
       >
         <Header
           title="Pending registration!!!"
@@ -413,11 +434,11 @@ const checkoutSchema = yup.object().shape({
   lastName: yup
     .string()
     .required("required")
-    .matches("^[a-zA-Z]*$", "Enter valid USN"),
+    .matches("^[a-zA-Z]*$", "Enter valid last Name"),
   usn: yup
     .string()
     .required("required")
-    .matches("^[a-zA-Z0-9]*$", "Enter valid Transaction ID"),
+    .matches("^[a-zA-Z0-9]*$", "Enter valid USN"),
   email: yup.string().email("invalid email").required("required"),
   contactNumber: yup
     .string()

@@ -35,6 +35,18 @@ function App() {
   const user = Cookies.get("token");
   const [role, setRole] = useState("");
   const [profile, setProfile] = useState({});
+
+  const [collapsed, setCollapsed] = useState(false);
+  const [toggled, setToggled] = useState(false);
+
+  const handleCollapsedChange = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const handleToggleSidebar = (value) => {
+    setToggled(value);
+  };
+
   const getRoleOrProfile = async (route) => {
     const { data } = await axios.get(route);
     if (route === "profile/me") {
@@ -50,9 +62,20 @@ function App() {
   // }, []);
   return (
     <div className="app">
-      {user && <Sidebar />}
+      {user && (
+        <Sidebar
+          collapsed={collapsed}
+          toggled={toggled}
+          handleToggleSidebar={handleToggleSidebar}
+          handleCollapsedChange={handleCollapsedChange}
+        />
+      )}
       <main className="content">
-        {user && <Topbar />}
+        {user && (
+          <>
+            <Topbar handleToggleSidebar={handleToggleSidebar} />
+          </>
+        )}
         <Routes>
           {user && role === "PARTICIPANT" && (
             <>

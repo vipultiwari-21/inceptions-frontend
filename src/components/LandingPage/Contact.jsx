@@ -17,6 +17,10 @@ function Contact() {
         className="sub-heading text-secondary text-bold text-3xl "
         id="contact"
       >
+      <h1
+        className="sub-heading text-secondary text-bold text-3xl "
+        id="contact"
+      >
         CONTACT US
       </h1>
 
@@ -26,10 +30,13 @@ function Contact() {
 
       <Grid container className="lg:px-20" spacing={6}>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
           <Box
             display="flex"
             justifyContent="center"
             alignItems="center"
+            flexDirection="column"
+          >
             flexDirection="column"
           >
             <img src={MaleAstronaut} alt="male" className="img-contact" />
@@ -54,6 +61,7 @@ function Contact() {
           >
             <img src={FemaleAstronaut} alt="male" className="img-contact" />
             <h3 className="text-center  text-xl text-bold">SANJANA AVADHANI</h3>
+            <h3 className="text-center  text-xl text-bold">SANJANA AVADHANI</h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#FFEEBE" }} />
               sanjanaga.mca21@rvce.edu.in
@@ -69,6 +77,8 @@ function Contact() {
       {/* Faculty co ordinators */}
 
       <h4 className="text-center my-16 text-2xl text-bold ">
+        Faculty Co-ordinators
+      </h4>
         Faculty Co-ordinators
       </h4>
 
@@ -127,6 +137,8 @@ function Contact() {
               savithar@rvce.edu.in
             </h4>
           </Box>
+        </Grid>
+      </Grid>
         </Grid>
       </Grid>
     </Container>

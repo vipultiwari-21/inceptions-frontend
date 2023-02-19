@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SidebarHeader,
+  SidebarContent,
+} from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -16,6 +22,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import Payment from "@mui/icons-material/Payment";
 import { Info, PaymentOutlined } from "@mui/icons-material";
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
     <MenuItem
@@ -33,15 +41,19 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({
+  collapsed,
+  toggled,
+  handleToggleSidebar,
+  handleCollapsedChange,
+}) => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
 
   const isNonMobile = useMediaQuery("(max-width:700px)");
-  console.log("Break-Point : ", isNonMobile);
   const [isAdmin, setIsAdmin] = useState(false);
   const [role, setRole] = useState("");
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  // const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("User Profile");
   const [profile, setProfile] = useState({});
 
@@ -91,17 +103,20 @@ const Sidebar = () => {
         // "& .pro-sidebar-inner": {
         //   background: `${colors.primary[400]} !important`,
         // },
-        "& .pro-menu": {
-          minHeight: "100vh",
+        // "& .pro-menu": {
+        //   minHeight: "100vh",
+        // },
+        // "& .pro-icon-wrapper": {
+        //   backgroundColor: "transparent !important",
+        // },
+        "& .pro-item-content": {
+          display: "flex",
+          justifyContent: "left",
+          alignItems: "center",
         },
-        "& .pro-icon-wrapper": {
-          backgroundColor: "transparent !important",
-        },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
-        },
+
         "& .pro-inner-item:hover": {
-          color: "#fff !important",
+          color: "#38BDF8 !important",
         },
         "& .MuiBox-root": {
           padding: "0px !important",
@@ -110,16 +125,138 @@ const Sidebar = () => {
           padding: "0px !important",
           borderBottom: "0px !important",
         },
-        "& .pro-menu-item.active": {
-          // color: "#6870fa !impor  tant",
-          color: "#000 !important",
-          background: "#38BDF8",
-        },
+        // "& .pro-menu-item.active": {
+        //   color: "#6870fa !important",
+        //   color: "#000 !important",
+        //   background: "#38BDF8",
+        // },
       }}
     >
-      <ProSidebar collapsed={isCollapsed} sx={{ minHeight: "100vh" }}>
-        <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
+      <ProSidebar
+        sx={{ minHeight: "100vh" }}
+        collapsed={collapsed}
+        toggled={toggled}
+        onToggle={handleToggleSidebar}
+        breakPoint="md"
+      >
+        <SidebarHeader>
+          <Menu iconShape="circle">
+            {collapsed ? (
+              <MenuItem
+                icon={<FaAngleDoubleRight />}
+                onClick={handleCollapsedChange}
+              ></MenuItem>
+            ) : (
+              <>
+                <div
+                  style={{
+                    padding: "1rem 0",
+                  }}
+                >
+                  <MenuItem
+                    suffix={<FaAngleDoubleLeft />}
+                    onClick={handleCollapsedChange}
+                  >
+                    <img
+                      src={Logo}
+                      className="logo"
+                      style={{
+                        width: "50px",
+                        maxWidth: "50px",
+                        margin: "0px",
+                        position: "absolute",
+                        right: "200px",
+                        // marginRight: "2rem",
+                      }}
+                    />
+                  </MenuItem>
+                </div>
+                <Box mb="25px">
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  ></Box>
+                  <Box textAlign="center">
+                    <Typography
+                      className="text-neutral-content "
+                      variant="h5"
+                      sx={{ m: "10px 0 0 0" }}
+                    >
+                      {profile.firstName
+                        ? profile.firstName.toString().toUpperCase()
+                        : null}
+                    </Typography>
+                    <Typography variant="h6" className="text-primary">
+                      {role}
+                    </Typography>
+                  </Box>
+                </Box>
+              </>
+            )}
+          </Menu>
+        </SidebarHeader>
+
+        <SidebarContent
+          sx={{
+            "& .pro-sidebar-inner": {
+              // width: "20px",
+            },
+          }}
+        >
+          <Menu iconShape="circle">
+            <Box paddingLeft={collapsed ? undefined : "10%"}>
+              {role === "PARTICIPANT" && (
+                <>
+                  <Item
+                    title="Set Team Name"
+                    to="/team-info"
+                    icon={<GroupsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Add Participants"
+                    to="/add-participant"
+                    icon={<PersonAddAltIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />{" "}
+                  <Item
+                    title="Show Team Members"
+                    to="/display-team"
+                    icon={<FilterListIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />{" "}
+                  <Item
+                    title="Payment"
+                    to="/payment"
+                    icon={<Payment />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />{" "}
+                  <Item
+                    title="Payment Info"
+                    to="/payment-info"
+                    icon={<Info />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />{" "}
+                  <Item
+                    title="User Profile"
+                    to="/"
+                    icon={<WorkspacesIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </>
+              )}
+            </Box>
+          </Menu>
+        </SidebarContent>
+
+        {/* <Menu iconShape="square">
           <MenuItem
             onClick={() => {
               setIsCollapsed(!isCollapsed);
@@ -162,19 +299,11 @@ const Sidebar = () => {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                {/* <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                /> */}
               </Box>
               <Box textAlign="center">
                 <Typography
                   className="text-neutral-content "
                   variant="h5"
-                  //   color={colors.grey[100]}
 
                   sx={{ m: "10px 0 0 0" }}
                 >
@@ -190,28 +319,6 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            {/* <Item
-              title="Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-
-            {/* <Typography
-              variant="h6"
-              //   color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
-            </Typography> */}
-            {/* <Item
-              title={role === "PARTICIPANT"}              to="/devices"
-              icon={<ChargingStationIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-
             {role === "PARTICIPANT" && (
               <>
                 <Item
@@ -328,85 +435,8 @@ const Sidebar = () => {
                 />
               </>
             )}
-            {/* <Item
-              title="Contacts Information"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}>
-              Pages
-            </Typography>
-            <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}>
-              Charts
-            </Typography>
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
           </Box>
-        </Menu>
+        </Menu> */}
       </ProSidebar>
     </Box>
   );

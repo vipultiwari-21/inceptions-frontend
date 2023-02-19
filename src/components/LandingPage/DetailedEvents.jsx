@@ -13,8 +13,6 @@ const DetailedEvents = () => {
     return event.route == id;
   });
 
-  console.log(selectedEvent);
-
   return (
     <div className="flex w-screen py-8 lg:h-screen justify-center items-center ">
       <Box
@@ -26,7 +24,8 @@ const DetailedEvents = () => {
               if (event.route == id) {
                 return (
                   <img
-                    style={{ backgroundSize: "contain" }}
+                    key={event.id}
+                    style={{ objectFit: "cover" }}
                     src={event.img}
                     alt="Event Image"
                     className="h-full w-5/12 hidden lg:block"

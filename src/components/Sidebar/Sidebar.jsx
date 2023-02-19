@@ -125,11 +125,11 @@ const Sidebar = ({
           padding: "0px !important",
           borderBottom: "0px !important",
         },
-        // "& .pro-menu-item.active": {
-        //   color: "#6870fa !important",
-        //   color: "#000 !important",
-        //   background: "#38BDF8",
-        // },
+        "& .pro-menu-item.active": {
+          // color: "#6870fa !important",
+          color: "#38BDF8 !important",
+          // background: "#38BDF8",
+        },
       }}
     >
       <ProSidebar

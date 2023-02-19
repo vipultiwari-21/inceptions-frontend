@@ -85,7 +85,7 @@ main {
   overflow-y: auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 770px) {
   .btn-toggle {
     display: flex;
   }

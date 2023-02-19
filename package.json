@@ -40,7 +40,6 @@
     "react-detect-offline": "^2.4.5",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
-    "react-leaflet": "^4.1.0",
     "react-dropzone": "^14.2.3",
     "react-mui-fileuploader": "^0.5.2",
     "react-pretty-carousel": "^1.0.19",

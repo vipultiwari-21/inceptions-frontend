@@ -59,12 +59,12 @@ function Footer() {
 
       <Divider sx={{ width: "100%", border: "0.01em solid #ddd" }}></Divider>
 
-      <div className=" devw-screen bg-neutral text-neutral-content text-center font-bold p-5">
-        <p className="text-2xl ">Developed by</p>
+      <div className="devw-screen bg-neutral text-neutral-content text-center font-bold p-5">
+        <p className="text-2xl text-warning">Developed by</p>
         <div className="flex flex-col lg:flex-row text-center text-xl">
           <span className="mx-3">
             <a
-              className="text-info   cursor-pointer"
+              className="text-neutral-content   cursor-pointer"
               href="https://github.com/akashpunagin"
               target="_blank"
             >
@@ -73,7 +73,7 @@ function Footer() {
           </span>
           <span className="mx-3">
             <a
-              className="text-info cursor-pointer"
+              className="text-neutral-content cursor-pointer"
               href="https://github.com/puneethkumar-v"
               target="_blank"
             >
@@ -82,7 +82,7 @@ function Footer() {
           </span>
           <span className="mx-3">
             <a
-              className="text-info cursor-pointer"
+              className="text-neutral-content cursor-pointer"
               href="https://github.com/i-punithgowda"
               target="_blank"
             >

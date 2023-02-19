@@ -6,8 +6,10 @@ import CustomCheckbox from "./CustomCheckbox";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 function Payment() {
+  const isNonMobile = useMediaQuery("(min-width:600px)");
   const [hasPaid, sethasPaid] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const [isRegistered, setIsRegistered] = useState(false);
@@ -44,7 +46,7 @@ function Payment() {
       data.paymentData
         ? setIsVerified(data.paymentData.isVerified)
         : setIsVerified(false);
-      console.log(data);
+      // console.log(data);
     } catch (err) {
       Swal.fire({
         title: "Error!",
@@ -138,8 +140,8 @@ function Payment() {
       isVerified ? (
         <Box
           m="20px"
-          className="flex  justify-center items-center flex-col"
-          sx={{ height: "90vh" }}
+          className="flex justify-center items-center w-full "
+          sx={{ height: isNonMobile ? "100vh" : "100%" }}
         >
           <Header
             title="Payment Succesfull"
@@ -149,8 +151,8 @@ function Payment() {
       ) : hasPaid ? (
         <Box
           m="20px"
-          className="flex  justify-center items-center flex-col"
-          sx={{ height: "90vh" }}
+          className="flex justify-center items-center w-full "
+          sx={{ height: isNonMobile ? "100vh" : "100%" }}
         >
           <Header
             title="Verifying Payment"
@@ -159,9 +161,9 @@ function Payment() {
         </Box>
       ) : (
         <Box
+          className="flex justify-center items-center w-full "
           m="20px"
-          className="flex flex-col justify-center items-center h-full "
-          sx={{ height: "100vh" }}
+          sx={{ height: isNonMobile ? "100vh" : "100%" }}
         >
           <Header
             title="Payment details"
@@ -180,7 +182,7 @@ function Payment() {
             </span>
           </Box>
 
-          <Box className="paymentDetailsContainer flex flex-col items-start  lg:flex-row my-5">
+          <Box className="paymentDetailsContainer flex flex-col items-center justify-center  w-full  lg:flex-row my-5">
             {selectedEvents
               ? selectedEvents.map((event) => {
                   return (
@@ -196,19 +198,21 @@ function Payment() {
           </Box>
 
           <Box className="">
-            <button className="btn btn-warning btn-outline">
-              <a href="https://rzp.io/l/saPTXGGI" target="_blank">
-                Proceed to Payment
-              </a>
-            </button>
+            <a
+              className="btn btn-warning btn-outline"
+              href="https://rzp.io/l/saPTXGGI"
+              target="_blank"
+            >
+              Proceed to Payment
+            </a>
           </Box>
         </Box>
       )
     ) : (
       <Box
         m="20px"
-        sx={{ height: "70vh" }}
-        className="flex  justify-center items-center flex-col"
+        className="flex justify-center items-center w-full "
+        sx={{ height: isNonMobile ? "100vh" : "100%" }}
       >
         <Header
           title="Pending registration!!!"

@@ -48,7 +48,7 @@ function Solvathon() {
 
             <div>
               <h3 className="text-center my-8 text-3xl text-primary font-bold ">
-                Prize details{" "}
+                Prize details for Solveathon{" "}
               </h3>
 
               <div

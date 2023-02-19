@@ -190,7 +190,7 @@ const EventDetailList = [
     route: "infinity&beyond",
     description:
       "Calling all tech-savvy, innovation-loving, and prize-hunting students! Are you ready to show off your skills and prove you're the best in the game? Well, buckle up because we're hosting an IoT competition and it's time to put your knowledge to the test! This is your chance to let your creativity run wild and come up with some mind-blowing solutions using IoT technology. Trust us, this is not an average boring competition, we're talking about cash prizes, recognition, and the opportunity to make a real impact in the world of tech. So, what are you waiting for? Submit your entries and let's see if you got what it takes to be called “IoT's Orbital Overlord”!",
-    img: "https://i.ibb.co/k0KsQrH/iot.jpg",
+    img: "https://i.ibb.co/m8SxjDF/Digital-nomad-cuate.png",
     svg: "/scheduleIcons/iandb.svg",
     rules: [
       "Team should consist of 2 to maximum 3 participants.",

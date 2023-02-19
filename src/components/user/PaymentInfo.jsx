@@ -126,21 +126,25 @@ function PaymentInfo() {
 
   return !pageLoading ? (
     teamRegisterd && isPaid == false ? (
-      <Box m="20px">
+      <Box
+        m="20px"
+        className="flex justify-center items-center w-full "
+        sx={{ height: isNonMobile ? "100vh" : "100%" }}
+      >
         <Header
           title="Transaction Details"
           subtitle="Please upload screenshot of payment recieved by RVCE with transaction ID"
         />
 
         <Box
+          className="flex justify-center items-center w-full "
           m="20px"
           sx={{
-            height: isNonMobile ? "80vh" : "100%",
+            height: isNonMobile ? "100vh" : "100%",
             // display: "flex",
             // justifyContent: "center",
             // alignItems: "center",
           }}
-          className=""
         >
           <Formik
             onSubmit={handleFormSubmit}
@@ -401,8 +405,8 @@ function PaymentInfo() {
       </Box>
     ) : teamRegisterd && isVerified ? (
       <Box
-        className="flex justify-center items-center "
-        sx={{ height: "90vh" }}
+        className="flex justify-center items-center w-full "
+        sx={{ height: isNonMobile ? "100vh" : "100%" }}
       >
         <Header
           title="Payment Succesfull"
@@ -411,8 +415,9 @@ function PaymentInfo() {
       </Box>
     ) : teamRegisterd && isPaid ? (
       <Box
-        className="flex justify-center items-center "
-        sx={{ height: "90vh" }}
+        m="20px"
+        sx={{ height: isNonMobile ? "100vh" : "100%" }}
+        className="flex justify-center items-center w-full "
       >
         <Header
           title="You have already uploaded a screenshot!"
@@ -421,8 +426,9 @@ function PaymentInfo() {
       </Box>
     ) : (
       <Box
-        className="flex justify-center items-center "
-        sx={{ height: "90vh" }}
+        m="20px"
+        sx={{ height: isNonMobile ? "100vh" : "100%" }}
+        className="flex justify-center items-center w-full "
       >
         <Header
           title="Pending registration!!!"

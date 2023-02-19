@@ -15,6 +15,7 @@ import "sweetalert2/src/sweetalert2.scss";
 
 const AddParticipant = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [teamCount, setTeamCount] = useState(0);
@@ -384,7 +385,7 @@ const AddParticipant = () => {
 
                   {maxTeam - teamCount > 0 ? (
                     <Button
-                      type="submit"
+                      onClick={() => navigate("/payment")}
                       color="primary"
                       variant="contained"
                       sx={{
@@ -408,13 +409,13 @@ const AddParticipant = () => {
       <Box
         m="20px"
         sx={{
-          height: isNonMobile ? "90vh" : "100%",
-          overflow: "hidden",
+          height: "100vh",
         }}
+        className="flex justify-center items-center "
       >
         <Header
           title="Pending registration!!!"
-          subtitle="Please register your team name and event type in the Add team section"
+          subtitle="Please register your team name and event type in the Add Team section"
         />
       </Box>
     )

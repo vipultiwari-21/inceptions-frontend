@@ -128,24 +128,15 @@ function PaymentInfo() {
     teamRegisterd && isPaid == false ? (
       <Box
         m="20px"
-        className="flex justify-center items-center w-full "
-        sx={{ height: isNonMobile ? "100vh" : "100%" }}
+        className="flex justify-center items-center  flex-col"
+        sx={{ height: "100vh" }}
       >
         <Header
           title="Transaction Details"
           subtitle="Please upload screenshot of payment recieved by RVCE with transaction ID"
         />
 
-        <Box
-          className="flex justify-center items-center w-full "
-          m="20px"
-          sx={{
-            height: isNonMobile ? "100vh" : "100%",
-            // display: "flex",
-            // justifyContent: "center",
-            // alignItems: "center",
-          }}
-        >
+        <Box className="" m="20px">
           <Formik
             onSubmit={handleFormSubmit}
             initialValues={initialValues}
@@ -406,7 +397,7 @@ function PaymentInfo() {
     ) : teamRegisterd && isVerified ? (
       <Box
         className="flex justify-center items-center w-full "
-        sx={{ height: isNonMobile ? "100vh" : "100%" }}
+        sx={{ height: "100vh" }}
       >
         <Header
           title="Payment Succesfull"
@@ -416,8 +407,8 @@ function PaymentInfo() {
     ) : teamRegisterd && isPaid ? (
       <Box
         m="20px"
-        sx={{ height: isNonMobile ? "100vh" : "100%" }}
-        className="flex justify-center items-center w-full "
+        sx={{ height: "100vh" }}
+        className="flex justify-center items-center  "
       >
         <Header
           title="You have already uploaded a screenshot!"
@@ -427,8 +418,8 @@ function PaymentInfo() {
     ) : (
       <Box
         m="20px"
-        sx={{ height: isNonMobile ? "100vh" : "100%" }}
-        className="flex justify-center items-center w-full "
+        sx={{ height: "100vh" }}
+        className="flex justify-center items-center  "
       >
         <Header
           title="Pending registration!!!"

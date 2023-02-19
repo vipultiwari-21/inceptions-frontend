@@ -205,7 +205,11 @@ const TeamInfo = () => {
   };
 
   return !pageLoading ? (
-    <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
+    <Box
+      m="20px"
+      sx={{ height: "100vh" }}
+      className="flex flex-col justify-center items-center"
+    >
       <Header
         title="Add Team"
         subtitle="Fill up the form with the Event details"
@@ -222,7 +226,6 @@ const TeamInfo = () => {
       <Box
         m="20px"
         sx={{
-          height: isNonMobile ? "60vh" : "100%",
           overflow: "hidden",
           // display: "flex",
           // justifyContent: "center",

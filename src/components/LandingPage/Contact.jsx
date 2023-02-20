@@ -106,7 +106,7 @@ function Contact() {
               Dr. Andhe Dharani
             </h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
-              <EmailIcon className="mr-3" style={{ color: "#FFEEBE" }} />
+              <EmailIcon className="mr-3" style={{ color: "#FF725E" }} />
               andhedharani@rvce.edu.in
             </h4>
           </Box>

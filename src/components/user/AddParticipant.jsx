@@ -382,23 +382,20 @@ const AddParticipant = () => {
                       Add Teammate
                     </Button>
                   )}
-
-                  {maxTeam - teamCount > 0 ? (
-                    <Button
-                      onClick={() => navigate("/payment")}
-                      color="primary"
-                      variant="contained"
-                      sx={{
-                        padding: "10px 20px",
-                        width: "100%",
-                        fontSize: "16px",
-                        letterSpacing: "0.15rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Proceed for payment
-                    </Button>
-                  ) : null}
+                  <Button
+                    onClick={() => navigate("/payment")}
+                    color="primary"
+                    variant="contained"
+                    sx={{
+                      padding: "10px 20px",
+                      width: "100%",
+                      fontSize: "16px",
+                      letterSpacing: "0.15rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Proceed for payment
+                  </Button>
                 </Box>
               </form>
             )}

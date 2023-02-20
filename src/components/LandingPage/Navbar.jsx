@@ -4,10 +4,8 @@ import Logo from "../../assets/exceptions/png/E1.png";
 import RvceLogo from "/web_logo.png";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-
 function Navbar() {
-
-  const isNonMobile = useMediaQuery("(max-width:700px)"); 
+  const isNonMobile = useMediaQuery("(max-width:700px)");
 
   return (
     <div className="sticky navbar bg-base-100 pb-5  ">
@@ -54,21 +52,25 @@ function Navbar() {
               <a href="#contact">Contact us</a>
             </li>
             <li>
-            <Link to="/schedule">Schedule</Link>
+              <Link to="/schedule">Schedule</Link>
+            </li>
+            <li>
+              <Link to="/rules">General Rules</Link>
             </li>
 
             <li>
               <Link to="/login">Login</Link>
             </li>
-
-            
           </ul>
         </div>
 
         <a>
           <img
             src={RvceLogo}
-            style={{ maxWidth: !isNonMobile ? '60px' : '40px', marginTop: "5px" }}
+            style={{
+              maxWidth: !isNonMobile ? "60px" : "40px",
+              marginTop: "5px",
+            }}
             className="rvce_logo"
           />
         </a>
@@ -83,15 +85,15 @@ function Navbar() {
           <li>
             <a href="#events">Events</a>
           </li>
-            <li>
+          <li>
             <a href="#sponsors">Sponsors</a>
-          </li> 
+          </li>
 
           <li>
             <a href="#venue">Venue</a>
           </li>
           <li>
-          <Link to="/schedule">Schedule</Link>
+            <Link to="/schedule">Schedule</Link>
           </li>
           <li>
             <a href="#contact">Contact us</a>
@@ -99,6 +101,9 @@ function Navbar() {
 
           <li>
             <a href="#prize">Event Fee</a>
+          </li>
+          <li>
+            <Link to="/rules">General Rules</Link>
           </li>
 
           <li>

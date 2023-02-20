@@ -83,7 +83,7 @@ function UserProfile() {
             }}
             className="w-full flex justify-center items-center"
           >
-            <div className="card w-72 lg:w-96 bg-warning text-neutral">
+            <div className="card w-72 lg:w-96 bg-neutral text-neutral-content">
               <div className="card-body">
                 <h2 className=" text-center text-xl">
                   {teamDetails && teamDetails.teamName

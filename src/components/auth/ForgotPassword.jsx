@@ -7,6 +7,9 @@ import * as yup from "yup";
 import Exceptions from "../../assets/svg/male.svg";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+
 function ForgotPassword() {
   const [loading, setLoading] = useState(false);
 
@@ -20,10 +23,19 @@ function ForgotPassword() {
           email: values.email,
         }
       );
-
-      alert(data.message);
+      Swal.fire({
+        title: "Success!",
+        text: data.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
     } catch (err) {
-      alert(err.response.data.error);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.error,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
 
     setLoading(false);

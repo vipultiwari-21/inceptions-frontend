@@ -7,6 +7,8 @@ import Background from "../custom_styling/Background";
 import Logo from "../../assets/exceptions/png/E.png";
 import Exceptions from "../../assets/svg/male.svg";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 function EmailConfirmation() {
   const [params] = useSearchParams();
@@ -24,10 +26,22 @@ function EmailConfirmation() {
         }auth/verify-email?jwtToken=${jwtToken}`
       );
       setResult(data.message);
-      alert(data.message);
+      Swal.fire({
+        title: "Success!",
+        text: data.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
+
       navigate("/login");
     } catch (err) {
-      setResult(err.response.data.error);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.error,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+      setResult();
     }
     setLoading(false);
   };

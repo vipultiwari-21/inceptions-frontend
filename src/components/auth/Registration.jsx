@@ -11,6 +11,8 @@ import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { State } from "country-state-city";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 function Registration() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -93,17 +95,30 @@ function Registration() {
             userId: data.userId,
           }
         );
-        alert(
-          "We have sent you a confirmation email, please verify your email before logging in"
-        );
+        Swal.fire({
+          title: "Success!",
+          text: "We have sent you a confirmation email, please verify your email before logging in",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
       } catch (err) {
-        alert(err.response.data.error);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.error,
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
       }
 
       setLoading(false);
     } catch (err) {
       setLoading(false);
-      alert(err.response.data.error);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.error,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
 
     resetForm();

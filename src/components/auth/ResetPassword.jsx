@@ -7,6 +7,8 @@ import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Exceptions from "../../assets/svg/taken.svg";
 import axios from "axios";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 function ResetPassword() {
   const [queryParameters] = useSearchParams();
@@ -35,10 +37,15 @@ function ResetPassword() {
           newPassword: values.password,
         }
       );
-      alert(data.message);
+      Swal.fire({
+        title: "Success!",
+        text: data.message,
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
+
       navigate("/login");
     } catch (err) {
-      alert("Token has expired ! request a new token");
       navigate("/forgot-password");
     }
   };

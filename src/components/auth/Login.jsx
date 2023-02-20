@@ -14,6 +14,8 @@ import axios from "axios";
 import * as yup from "yup";
 import { Button, Modal, InputAdornment, TextField, Icon } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 function Login() {
   const navigate = useNavigate();
@@ -66,7 +68,12 @@ function Login() {
       window.location.href = "/";
       setLoading(false);
     } catch (err) {
-      alert(err.response.data.error);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.error,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
       setLoading(false);
     }
 

@@ -84,7 +84,12 @@ const TeamInfo = () => {
       );
     } catch (err) {
       // alert(err.data.message)
-      alert(err.response.data.error);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.error,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
   };
 

@@ -125,7 +125,7 @@ const AddParticipant = () => {
         values
       );
       Swal.fire({
-        title: "Sucess!",
+        title: "Success!",
         text: "Team made was added succesfully!!",
         icon: "success",
         confirmButtonText: "Okay",
@@ -134,7 +134,12 @@ const AddParticipant = () => {
       getMaxTeamMembers();
     } catch (err) {
       // alert(err.data.message)
-      alert(err.response.data.error);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.error,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
 
     resetForm();

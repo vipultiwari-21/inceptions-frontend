@@ -29,7 +29,6 @@ import VolunteerAttendance from "./components/volunteer/VolunteerAttendance";
 import Payment from "./components/user/Payment";
 import PaymentInfo from "./components/user/PaymentInfo";
 import Schedule from "./components/LandingPage/Schedule";
-import { Offline, Online } from "react-detect-offline";
 
 function App() {
   const user = Cookies.get("token");

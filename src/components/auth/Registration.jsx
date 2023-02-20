@@ -39,7 +39,7 @@ function Registration() {
     collegeName: yup
       .string()
       .required("required")
-      .matches("^[a-zA-Z]*$", "Enter valid College Name"),
+      .matches("^[a-zA-Z ]*$", "Enter valid College Name"),
     state: yup.string().required("required"),
     city: yup
       .string()
@@ -47,7 +47,7 @@ function Registration() {
       .matches("^[a-zA-Z]*$", "Enter valid City Name"),
     zip: yup
       .string()
-      .matches("^[0-9]*$", "Enter valid City Name")
+      .matches("^[0-9]*$", "Enter valid Pin Code")
       .required("required")
       .max(6, "Invalid Pincode")
       .min(6, "Invalid Pincode"),

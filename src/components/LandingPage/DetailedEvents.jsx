@@ -80,13 +80,13 @@ const DetailedEvents = () => {
                         </p>
                       ) : null}
 
-                      {event.requiremetns ? (
-                        <p className="my-8">
-                          <span className="text-xl text-secondary">
+                      {event.requirements ? (
+                        <p className="my-8 ">
+                          <span className="text-xl text-secondary ">
                             Requirements
                           </span>
 
-                          <ul className="list-disc">
+                          <ul className="list-disc text-left">
                             {event.requirements.map((requirement) => {
                               return <li>{requirement}</li>;
                             })}

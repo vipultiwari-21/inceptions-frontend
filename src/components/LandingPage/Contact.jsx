@@ -77,7 +77,7 @@ function Contact() {
       </h4>
 
       <Grid container className="lg:px-20 " spacing={6}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+        <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
           <Box
             display="flex"
             justifyContent="center"

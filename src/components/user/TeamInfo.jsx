@@ -318,6 +318,7 @@ const TeamInfo = () => {
                       className="textfield"
                       name="teamID"
                       id="teamID"
+                      value={values.teamID}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       error={!!touched.teamID && !!errors.teamID}

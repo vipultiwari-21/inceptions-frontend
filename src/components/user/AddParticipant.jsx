@@ -157,7 +157,7 @@ const AddParticipant = () => {
       >
         <Header
           title="Add Participants"
-          subtitle="Fill up the form with the Participant details"
+          subtitle="Fill up the form with the Participant details , You can make payment before adding participants"
         />
 
         {
@@ -187,7 +187,7 @@ const AddParticipant = () => {
                     }`}
                   >
                     {eventType == "both"
-                      ? `  Note : Your team must contain atleast 7 members to win General Championship . You can make payment before adding participants`
+                      ? `  Note : Your team must contain atleast 7 members to win General Championship . `
                       : null}
                   </h3>
                 </li>

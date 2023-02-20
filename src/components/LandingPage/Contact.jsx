@@ -87,7 +87,7 @@ function Contact() {
             <img src={Faculty1} alt="male" className="img-contact" />
 
             <h3 className="text-center  text-xl text-bold">
-              PROF. SAVITA SHEELAVANT
+              Prof. SAVITA SHEELAVANT
             </h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#E6E6E6  " }} />
@@ -109,11 +109,13 @@ function Contact() {
 
             <h3 className="text-center  text-xl text-bold">
               {" "}
-              Dr. Andhe Dharani
+              Dr. ANDHE DHARANI
             </h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#FF725E" }} />
-              andhedharani@rvce.edu.in
+              <a href="mailto:andhedharani@rvce.edu.in">
+                andhedharani@rvce.edu.in
+              </a>
             </h4>
           </Box>
         </Grid>

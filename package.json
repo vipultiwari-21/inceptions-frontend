@@ -44,6 +44,7 @@
     "react-icons": "^4.7.1",
     "react-leaflet": "^4.1.0",
     "react-mui-fileuploader": "^0.5.2",
+    "react-multi-select-component": "^4.3.4",
     "react-pretty-carousel": "^1.0.19",
     "react-pro-sidebar": "^0.6.0",
     "react-redux": "^8.0.5",

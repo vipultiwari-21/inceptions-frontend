@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField, Typography, MenuItem } from "@mui/material";
 import { Box } from "@mui/system";
-import { Formik, ErrorMessage } from "formik";
+import { Formik, ErrorMessage, Field } from "formik";
 import Header from "../Sidebar/Header";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "../../features/Interceptors/apiInterceptor";
 import * as yup from "yup";
 import Loading from "../../Loading";
-import FileUpload from "react-mui-fileuploader";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import UploadComponent from "./UploadComponent";
-import { Label } from "@mui/icons-material";
 
 function PaymentInfo() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -23,6 +21,7 @@ function PaymentInfo() {
   const [pageLoading, setPageLoading] = useState(true);
   const [isPaid, setIsPaid] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [selected, setSelected] = useState([]);
 
   const getTeamRegisteredDetails = async () => {
     try {
@@ -72,7 +71,7 @@ function PaymentInfo() {
   const initialValues = {
     transactionID: "",
     image: "",
-    amountPaid: "",
+    amountPaid: [],
   };
 
   const checkoutSchema = yup.object().shape({
@@ -87,15 +86,25 @@ function PaymentInfo() {
         const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg"];
         return SUPPORTED_FORMATS.includes(value ? value.type : null);
       }),
-    amountPaid: yup.number().required("required"),
+    amountPaid: yup.array().required("required"),
   });
+
+  const calculateSum = (values) => {
+    var sum = values.reduce(function (a, b) {
+      return parseInt(a) + parseInt(b);
+    }, 0);
+
+    console.log(sum);
+
+    return sum;
+  };
 
   const handleFormSubmit = async (values, { resetForm }) => {
     // console.log(values)
     setLoading(true);
     const formData = new FormData();
     formData.append("screenshot", values.image);
-    formData.set("amount", values.amountPaid);
+    formData.set("amount", calculateSum(values.amountPaid));
     formData.set("transactionId", values.transactionID);
 
     // for (var key of formData.entries()) {
@@ -196,19 +205,8 @@ function PaymentInfo() {
                     {error}
                   </Box>
                 )}
-                <Box
-                  display="grid"
-                  // placeItems="center"
-                  color="#e0e0e0"
-                  gap="30px"
-                  gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                  sx={{
-                    "& > div": {
-                      gridColumn: isNonMobile ? undefined : "span 4",
-                    },
-                  }}
-                  className="w-full"
-                >
+
+                <Box className="w-full flex justify-evenly items-center flex-col ">
                   <TextField
                     fullWidth
                     variant="filled"
@@ -223,10 +221,44 @@ function PaymentInfo() {
                     sx={{ gridColumn: "span 4" }}
                     InputLabelProps={{ className: "textfield__label" }}
                     InputProps={{ className: "textfield__label" }}
-                    className="textfield"
+                    className="textfield my-5"
                   />
 
-                  <TextField
+                  <Box className="w-full my-5">
+                    <label className="mx-3 py-3 ">
+                      <Field type="checkbox" name="amountPaid" value="3540" />
+                      3540
+                    </label>
+                    <label className="mx-3 py-3 ">
+                      <Field type="checkbox" name="amountPaid" value="944" />
+                      944
+                    </label>
+                    <label className="mx-3 py-3 ">
+                      <Field type="checkbox" name="amountPaid" value="590" />
+                      590
+                    </label>
+                    <label className="mx-3 py-3 ">
+                      <Field type="checkbox" name="amountPaid" value="236" />
+                      236
+                    </label>
+                  </Box>
+
+                  <Box className="w-full my-5">
+                    <UploadComponent
+                      setFieldValue={setFieldValue}
+                      setSelectedImage={setSelectedImage}
+                    />
+
+                    <ErrorMessage name="image">
+                      {(err) => (
+                        <h2 className="text-accent mt-5 font-bold ">{err}</h2>
+                      )}
+                    </ErrorMessage>
+                  </Box>
+                </Box>
+
+                {/*
+                <TextField
                     select
                     fullWidth
                     variant="filled"
@@ -248,8 +280,9 @@ function PaymentInfo() {
                     <MenuItem value="236">236</MenuItem>
                     <MenuItem value="590">590</MenuItem>
                   </TextField>
+              */}
 
-                  {/* <TextField
+                {/* <TextField
                     fullWidth
                     variant="filled"
                     type="file"
@@ -272,28 +305,7 @@ function PaymentInfo() {
                     className="textfield"
                   /> */}
 
-                  <Box
-                    className=""
-                    sx={{
-                      width: { lg: "900px", sm: "600px", md: "800px" },
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <UploadComponent
-                      setFieldValue={setFieldValue}
-                      setSelectedImage={setSelectedImage}
-                    />
-
-                    <ErrorMessage name="image">
-                      {(err) => (
-                        <h2 className="text-accent mt-5 font-bold ">{err}</h2>
-                      )}
-                    </ErrorMessage>
-
-                    {/*
+                {/*
                   
                   *
                       {({ getRootProps, getInputProps, isDragRejected }) => (
@@ -341,8 +353,7 @@ function PaymentInfo() {
 />
 
                     */}
-                  </Box>
-                </Box>
+
                 {/*
 
                 {selectedImage ? (

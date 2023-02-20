@@ -16,6 +16,7 @@ function Payment() {
   const [isVerified, setIsVerified] = useState(false);
   const [totalFees, setTotalFees] = useState("");
   const [selectedEvents, setSelectedEvents] = useState([]);
+  const [isBoth, setIsBoth] = useState(false);
 
   const getTeamRegisteredDetails = async () => {
     try {
@@ -78,12 +79,13 @@ function Payment() {
           // if(event.eventIsOpenEvent){
           //   selectedEvents.push(event.eventName)
           // }
-
+          // console.log(event);
           return event.eventIsOpenEvent;
         });
 
         const openEventsArray = OpenEvents.map((event) => event.eventName);
-        console.log(openEventsArray);
+        // console.log(openEventsArray);
+        setIsBoth(true);
         setSelectedEvents(openEventsArray);
         //setSelectedEvents([OpenEvents.map((event) => event.eventName)])
       } else if (isOpen && !isGC) {
@@ -140,8 +142,8 @@ function Payment() {
       isVerified ? (
         <Box
           m="20px"
-          className="flex justify-center items-center w-full "
-          sx={{ height: isNonMobile ? "100vh" : "100%" }}
+          className="flex justify-center items-center"
+          sx={{ height: "100vh" }}
         >
           <Header
             title="Payment Succesfull"
@@ -151,8 +153,8 @@ function Payment() {
       ) : hasPaid ? (
         <Box
           m="20px"
-          className="flex justify-center items-center w-full "
-          sx={{ height: isNonMobile ? "100vh" : "100%" }}
+          className="flex justify-center items-center "
+          sx={{ height: "100vh" }}
         >
           <Header
             title="Verifying Payment"
@@ -161,20 +163,20 @@ function Payment() {
         </Box>
       ) : (
         <Box
-          className="flex justify-center items-center w-full "
+          className="flex justify-center items-center flex-col "
           m="20px"
-          sx={{ height: isNonMobile ? "100vh" : "100%" }}
+          sx={{ height: "100vh" }}
         >
           <Header
             title="Payment details"
             subtitle="Please verify selected events and proceed to pay!"
           />
 
-          <Box className="w-full">
-            <span className="event-header text-warning text-2xl">
-              Total : ₹{totalFees ? totalFees : 0}
-            </span>
-          </Box>
+          <h3 className={`text-neutral-content font-bold text-center my-5`}>
+            Note : Already paid ? upload the screenshot in next section ! It
+            usually takes 3-4 days for us to verify your payment, once you
+            upload the screenshot
+          </h3>
 
           <Box className="w-full mt-8 text-2xl">
             <span className="event-header text-primary text-xxl font-bold">
@@ -183,6 +185,15 @@ function Payment() {
           </Box>
 
           <Box className="paymentDetailsContainer flex flex-col items-center justify-center  w-full  lg:flex-row my-5">
+            {isBoth ? (
+              <Box className="flex items-center justify-center mx-8">
+                <CustomCheckbox />
+                <span className="text-info font-bold mx-3 w-full">
+                  Group Championship
+                </span>
+              </Box>
+            ) : null}
+
             {selectedEvents
               ? selectedEvents.map((event) => {
                   return (
@@ -195,6 +206,12 @@ function Payment() {
                   );
                 })
               : null}
+          </Box>
+
+          <Box className="w-full mb-3">
+            <span className="event-header text-warning text-2xl">
+              Total : ₹{totalFees ? totalFees : 0}
+            </span>
           </Box>
 
           <Box className="">
@@ -211,8 +228,8 @@ function Payment() {
     ) : (
       <Box
         m="20px"
-        className="flex justify-center items-center w-full "
-        sx={{ height: isNonMobile ? "100vh" : "100%" }}
+        className="flex justify-center items-center "
+        sx={{ height: "100vh" }}
       >
         <Header
           title="Pending registration!!!"

@@ -98,7 +98,27 @@ function Contact() {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <img src={Faculty3} alt="male" className="img-contact" />
+
+            <h3 className="text-center  text-xl text-bold">
+              {" "}
+              Dr. Andhe Dharani
+            </h3>
+            <h4 className="text-center my-1 text-xl text-bold flex ">
+              <EmailIcon className="mr-3" style={{ color: "#FF725E" }} />
+              andhedharani@rvce.edu.in
+            </h4>
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
           <Box
             display="flex"
             justifyContent="center"

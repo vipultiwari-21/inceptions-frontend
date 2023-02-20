@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import Loading from "../../Loading";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import { useNavigate } from "react-router-dom";
 
 function UserProfile() {
   const dispatch = useDispatch();
@@ -19,7 +20,9 @@ function UserProfile() {
   const [teamCount, setTeamCount] = useState(0);
   const [isRegistered, setIsRegistered] = useState(true);
   const [pageLoading, setPageLoading] = useState(true);
+  const [isVerified, setIsVerified] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
+  const navigate = useNavigate();
 
   const getTeam = async () => {
     try {
@@ -34,6 +37,11 @@ function UserProfile() {
         setTeamCount(teamSize.data.length);
 
         const payment = await axios.get("/payment/is-paid");
+        setIsVerified(
+          payment.data.paymentData && payment.data.paymentData.isVerified
+            ? true
+            : false
+        );
         setIsPaid(payment.data.isPaid);
       }
     } catch (err) {
@@ -55,7 +63,7 @@ function UserProfile() {
   return !pageLoading ? (
     isRegistered ? (
       <Box
-        sx={{ height: isNonMobile ? "100vh" : "100%" }}
+        sx={{ height: "100vh" }}
         className="p-8 flex justify-center items-center"
       >
         <Box>
@@ -75,7 +83,7 @@ function UserProfile() {
             }}
             className="w-full flex justify-center items-center"
           >
-            <div className="card w-72 lg:w-96 bg-primary text-primary-content">
+            <div className="card w-72 lg:w-96 bg-neutral text-neutral-content">
               <div className="card-body">
                 <h2 className=" text-center text-xl">
                   {teamDetails && teamDetails.teamName
@@ -94,10 +102,22 @@ function UserProfile() {
                     ? teamDetails.headUser.contactNumber
                     : null}
                 </h6>
-                <h6>Payment : {isPaid ? "Paid" : "Not Paid"}</h6>
+                <h6>
+                  Payment status:{" "}
+                  {isPaid && isVerified
+                    ? "Paid"
+                    : isPaid && !isVerified
+                    ? "Pending verification"
+                    : "Not paid"}
+                </h6>
                 <div className="card-actions justify-center">
-                  {!isPaid ? (
-                    <button className="btn">Proceed to payment</button>
+                  {!isVerified ? (
+                    <button
+                      className="btn text-neutral-content"
+                      onClick={() => navigate("/payment")}
+                    >
+                      Proceed to payment
+                    </button>
                   ) : null}
                 </div>
               </div>
@@ -106,13 +126,15 @@ function UserProfile() {
         </Box>
       </Box>
     ) : (
-      <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
-        <Box className="flex">
-          <Header
-            title="Pending registration!!!"
-            subtitle="Please register your team name and event type in the Add team section"
-          />
-        </Box>
+      <Box
+        m="20px"
+        sx={{ height: "100vh" }}
+        className="flex justify-center items-center"
+      >
+        <Header
+          title="Pending registration!!!"
+          subtitle="Please register your team name and event type in the Add team section"
+        />
       </Box>
     )
   ) : (

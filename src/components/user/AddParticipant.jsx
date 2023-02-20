@@ -15,6 +15,7 @@ import "sweetalert2/src/sweetalert2.scss";
 
 const AddParticipant = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [teamCount, setTeamCount] = useState(0);
@@ -381,23 +382,20 @@ const AddParticipant = () => {
                       Add Teammate
                     </Button>
                   )}
-
-                  {maxTeam - teamCount > 0 ? (
-                    <Button
-                      type="submit"
-                      color="primary"
-                      variant="contained"
-                      sx={{
-                        padding: "10px 20px",
-                        width: "100%",
-                        fontSize: "16px",
-                        letterSpacing: "0.15rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Proceed for payment
-                    </Button>
-                  ) : null}
+                  <Button
+                    onClick={() => navigate("/payment")}
+                    color="primary"
+                    variant="contained"
+                    sx={{
+                      padding: "10px 20px",
+                      width: "100%",
+                      fontSize: "16px",
+                      letterSpacing: "0.15rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Proceed for payment
+                  </Button>
                 </Box>
               </form>
             )}
@@ -408,13 +406,13 @@ const AddParticipant = () => {
       <Box
         m="20px"
         sx={{
-          height: isNonMobile ? "90vh" : "100%",
-          overflow: "hidden",
+          height: "100vh",
         }}
+        className="flex justify-center items-center "
       >
         <Header
           title="Pending registration!!!"
-          subtitle="Please register your team name and event type in the Add team section"
+          subtitle="Please register your team name and event type in the Add Team section"
         />
       </Box>
     )

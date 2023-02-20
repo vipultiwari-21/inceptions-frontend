@@ -29,7 +29,7 @@ import VolunteerAttendance from "./components/volunteer/VolunteerAttendance";
 import Payment from "./components/user/Payment";
 import PaymentInfo from "./components/user/PaymentInfo";
 import Schedule from "./components/LandingPage/Schedule";
-import { Offline, Online } from "react-detect-offline";
+import Rules from "./components/LandingPage/Rules";
 
 function App() {
   const user = Cookies.get("token");
@@ -187,6 +187,7 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               {/* <Route path="/logintemp" element={<Login />} /> */}
               <Route path="/schedule" element={<Schedule />} />
+              <Route path="/rules" element={<Rules />} />
               {/*<Route path="/registertemp" element={<Registration />} /> */}
               <Route path="/register" element={<Registration />} />
               <Route path="/login" element={<Login />} />

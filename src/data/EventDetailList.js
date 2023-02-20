@@ -219,6 +219,14 @@ const EventDetailList = [
     img: "https://i.ibb.co/SfHsWcW/eventx.png",
     svg: "/scheduleIcons/EventX.svg",
     description: "You never know what we might have in the store?",
+    contact: [
+      {
+        type: "Student Coordinator",
+        name: "Thejas P",
+        email: "thejasp.mca21@rvce.edu.in",
+        phone: "+91 8147231746",
+      },
+    ],
   },
 
   {

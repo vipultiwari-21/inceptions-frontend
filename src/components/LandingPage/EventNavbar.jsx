@@ -16,7 +16,7 @@ import ExceptionsLogo from "../../assets/exceptions/png/E.png";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const pages = ["Home", "Event", "Login", "Register"];
+const pages = ["Home", "Login", "Register"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -110,8 +110,10 @@ function ResponsiveAppBar() {
           <Box
             sx={{
               flexGrow: 1,
-
               display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "10px 0",
             }}
           >
             {pages.map((page) => (

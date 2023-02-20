@@ -7,6 +7,7 @@ import axios from "../../features/Interceptors/apiInterceptor";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { MultiSelect } from "react-multi-select-component";
 
 function Payment() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -184,7 +185,7 @@ function Payment() {
             </span>
           </Box>
 
-          <Box className="paymentDetailsContainer flex flex-col items-center justify-center  w-full  lg:flex-row my-5">
+          <Box className="paymentDetailsContainer flex  flex-wrap  items-center justify-center  w-full   my-5">
             {isBoth ? (
               <Box className="flex items-center justify-center mx-8">
                 <CustomCheckbox />
@@ -197,7 +198,7 @@ function Payment() {
             {selectedEvents
               ? selectedEvents.map((event) => {
                   return (
-                    <Box className="flex items-center justify-center mx-8">
+                    <Box className="flex items-center justify-center  mx-8">
                       <CustomCheckbox />
                       <span className="text-info font-bold mx-3 w-full">
                         {event}

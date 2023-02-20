@@ -130,6 +130,7 @@ const AddParticipant = () => {
         icon: "success",
         confirmButtonText: "Okay",
       });
+      resetForm();
       getTeamCount();
       getMaxTeamMembers();
     } catch (err) {
@@ -142,7 +143,6 @@ const AddParticipant = () => {
       });
     }
 
-    resetForm();
     setLoading(false);
   };
 

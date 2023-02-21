@@ -100,10 +100,10 @@ const DetailedEvents = () => {
                             Contact
                           </span>
 
-                          <div className="flex  flex-col justify-evenly items-center w-full lg:flex-row ">
+                          <div className="flex flex-col justify-around items-center  w-full lg:flex-row ">
                             {event.contact.map((contacts) => {
                               return (
-                                <ul className="my-3">
+                                <ul className="my-3 mx-3">
                                   <li className="text-warning">
                                     {contacts.type}
                                   </li>

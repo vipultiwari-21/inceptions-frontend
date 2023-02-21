@@ -252,6 +252,25 @@ const Sidebar = ({
                   />
                 </>
               )}
+
+              {role === "VOLUNTEER" && (
+                <>
+                  <Item
+                    title="Volunteer Profile"
+                    to="/"
+                    icon={<WorkspacesIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Attendance status"
+                    to="/volunteer-attendance"
+                    icon={<GroupsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </>
+              )}
             </Box>
           </Menu>
         </SidebarContent>

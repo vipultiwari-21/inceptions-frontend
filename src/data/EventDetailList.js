@@ -108,7 +108,8 @@ const EventDetailList = [
       "No elimination in any rounds. Result will be decided on the basis of cumulative scoring.",
       "Each team must consist of 2 members.",
       "Internet usage permitted only to download required resources(ex: images/software updates).",
-      "Can only use open source software for all the rounds (any one of your choice).",
+      "Allowed softwares - Adobe Illustrator, Adobe Photoshop, Adobe XD, Canva, Figma ",
+      "Can only use the software mentioned above (any one of your choice  based on the round)",
       "Using other technologies other than open source Softwares is strictly prohibited.",
       "Proper Schedule is to be followed.",
       "Participants shall carry their own phone and laptop chargers.",
@@ -243,7 +244,7 @@ const EventDetailList = [
     svg: "/scheduleIcons/solvathon.svg",
     rules: [
       "Team Size: 2 Members",
-      "Problem statements will be provided in the brochure, Enrolled teams will have till 3rd March 2023 to submit their working model",
+      "Problem statements will be provided in the brochure, enrolled teams will have till 3rd March 2023 to submit their working model",
       "The teams must adhere to ethics and responsible AI practices",
       "Submissions should include a detailed report and demonstration of the working model",
       "The decision of the judges is final",

@@ -37,12 +37,12 @@ function Navbar() {
             <li>
               <a href="#about">About</a>
             </li>
-            <li>
-              <a href="#events">Events</a>
-            </li>
 
             <li>
               <a href="#sponsors">Sponsors</a>
+            </li>
+            <li>
+              <a href="#events">Events</a>
             </li>
 
             <li>
@@ -82,11 +82,13 @@ function Navbar() {
           <li>
             <a href="#about">About</a>
           </li>
-          <li>
-            <a href="#events">Events</a>
-          </li>
+
           <li>
             <a href="#sponsors">Sponsors</a>
+          </li>
+
+          <li>
+            <a href="#events">Events</a>
           </li>
 
           <li>

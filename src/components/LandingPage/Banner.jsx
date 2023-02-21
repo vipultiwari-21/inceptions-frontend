@@ -6,6 +6,7 @@ import Countdown from "./Countdown";
 import { Container, Box } from "@mui/material";
 import VBLogo from "../../assets/svg/VB.svg";
 import PepsiLogo from "../../assets/svg/pepsi.png";
+import MainLogo from "../../assets/svg/mainLogo.png";
 
 function Banner() {
   return (
@@ -34,17 +35,15 @@ function Banner() {
                 <h6 className="lg:ml-3">Presents</h6>
               </div>
 
-              <h3 className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
+              <div className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
                 {" "}
-                EXCEPTIONS
-                <br /> 2023
-              </h3>
+                <img
+                  src={MainLogo}
+                  alt="main logo"
+                  style={{ width: "800px" }}
+                />
+              </div>
             </div>
-
-            {/* Tagline */}
-            <p className="text-neutral-content   sm:text-xl text-2xl text-center lg:text-left  font-extrabold">
-              UNLEASH THE EXCEPTION IN YOU
-            </p>
 
             {/* Register btn */}
             <div className="w-100 flex justify-center align-center lg:justify-start">

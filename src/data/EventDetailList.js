@@ -153,9 +153,9 @@ const EventDetailList = [
     ],
     contact: [
       {
-        name: "Dashline Jove D Souza",
-        email: "dashlineds.mca21@rvce.edu.in",
-        phone: "+91 8762127308",
+        name: "Indrabhushan Maluche",
+        email: "indrabusanam.mca21@rvce.edu.in",
+        phone: "+91 7259420108",
       },
     ],
   },

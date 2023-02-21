@@ -38,9 +38,12 @@ function LandingPage() {
 
             <GroupEvents />
 
-            <Box className="flex justify-center items-center">
+            <Box className="flex justify-center items-center flex-col">
+              <p className="event-details text-xl my-5 text-neutral-content">
+                Time is ticking on and spaceship is about to launch
+              </p>
               <Link
-                className="btn btn-warning btn-wide hover:btn-warning-800"
+                className="btn btn-warning btn-wide btn-outline "
                 to="/register"
               >
                 Register Now

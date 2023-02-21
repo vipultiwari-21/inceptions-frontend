@@ -11,7 +11,7 @@ function Prize() {
   return (
     <Container maxWidth="xl my-16 text-neutral-content " id="prize">
       <h1 className="sub-heading text-secondary text-bold text-3xl" id="prize">
-        Registration Fees
+        REGISTRATION FEE
       </h1>
 
       <Grid container className="lg:px-20" spacing={6}>

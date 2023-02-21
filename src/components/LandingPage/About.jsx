@@ -36,17 +36,17 @@ function About() {
         <div className="w-1/2" style={{ width: "100%" }}>
           <p
             className="text-neutral-content  text-2xl text-bold  text-justify text-neutral-content 
-    md:text-2xl"
+    md:text-2xl event-details"
             style={{ width: "100%" }}
           >
             R V College of Engineering holds its head high as one of the top ten
             self-financing colleges in India. The Master of Computer
             Applications Department of RVCE was established in the year 1997 and
             is affiliated to Visvesvaraya Technological University (VTU),
-            Belgaum. The department is a recognized VTU research center. The MCA
-            course is two year Post-Graduate program in Computer Applications.
-            The MCA Program of RVCE has been accredited by National Board of
-            Accreditation, New Delhi. <br />
+            Belagavi. The department is a recognized VTU research center. The
+            MCA course is two year Post-Graduate program in Computer
+            Applications. The MCA Program of RVCE has been accredited by
+            National Board of Accreditation, New Delhi. <br />
             <br /> Exposed to quantitative and qualitative analysis skills which
             are inbuilt in the curriculum. Appropriate training is provided to
             the students to equip themselves to be innovative and creative. The

@@ -17,7 +17,7 @@ import "sweetalert2/src/sweetalert2.scss";
 const TeamInfo = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [loading, setLoading] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const eventTypes = [
@@ -402,7 +402,7 @@ const TeamInfo = () => {
               </Box>
 
               {!isRegistered && hasOpenEvents ? (
-                <Box className="flex w-full items-center flex-col  justify-center  flex-wrap my-8">
+                <Box className="flex w-full items-start   justify-center  flex-wrap my-8">
                   {openEvents
                     ? openEvents.map((oe) => {
                         return (
@@ -442,6 +442,7 @@ const TeamInfo = () => {
                       fontSize: "16px",
                       letterSpacing: "0.15rem",
                       fontWeight: "bold",
+                      margin: "20px 0",
                     }}
                   >
                     Already Registered

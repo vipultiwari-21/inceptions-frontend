@@ -224,22 +224,22 @@ function PaymentInfo() {
                     className="textfield my-5"
                   />
 
-                  <Box className="w-full my-5">
+                  <Box className="w-full my-5 font-bold">
                     <label className="mx-3 py-3 ">
                       <Field type="checkbox" name="amountPaid" value="3540" />
-                      3540
+                      3540₹
                     </label>
                     <label className="mx-3 py-3 ">
                       <Field type="checkbox" name="amountPaid" value="944" />
-                      944
+                      944₹
                     </label>
                     <label className="mx-3 py-3 ">
                       <Field type="checkbox" name="amountPaid" value="590" />
-                      590
+                      590₹
                     </label>
                     <label className="mx-3 py-3 ">
                       <Field type="checkbox" name="amountPaid" value="236" />
-                      236
+                      236₹
                     </label>
                   </Box>
 

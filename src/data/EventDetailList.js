@@ -170,11 +170,13 @@ const EventDetailList = [
       "All games will be played on official Valorant servers to maintain authenticity.",
       "Games will be played with the default settings for competition. If a game is played with non-default settings, the match will be replayed with corrections.",
       "Games will be played on the current competitive map pool. Map pick will be contingent",
-      "On who wins a coin flip. CT/T side will also be contingent on a separate coinflip.",
+      "On who wins a coin flip. Attackers/Defenders side will also be contingent on a separate coinflip.",
     ],
     requirements: [
-      "Participants should have a steam account",
+      "Participants should get their own laptops",
+      "Participants should have a Riot Vanguard Valorant account",
       "Participants should bring their own accessories (Keyboards, Mouse, Earphones)",
+      "The participants should bring an ethernet adapter if their device doesn't have one",
     ],
     contact: [
       {

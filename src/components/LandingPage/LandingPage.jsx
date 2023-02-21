@@ -12,6 +12,8 @@ import Footer from "./Footer";
 import Banner from "./Banner";
 import Events from "../LandingPage/Events";
 import Sponsorship from "./Sponsorship";
+import OpenEvents from "./OpenEvents";
+import GroupEvents from "./GroupEvents";
 
 function LandingPage() {
   return (
@@ -25,8 +27,18 @@ function LandingPage() {
           <Banner />
           <About />
           <Sponsorship />
-          <Events />
-          {/* */}
+
+          <div className="event my-8  " id="events">
+            <h1 className="sub-heading text-secondary text-bold text-3xl ">
+              EVENTS
+            </h1>
+
+            <OpenEvents />
+
+            <GroupEvents />
+          </div>
+
+          {/*<Events /> */}
           <Prize />
           <Map />
           <Contact />

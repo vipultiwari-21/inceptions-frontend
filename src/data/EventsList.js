@@ -1,16 +1,17 @@
 const EventsList = [
   {
-    id: 7,
-    name: "gravity",
-    to: "/details/gravity",
+    id: 1,
+    name: "gen-geeks",
+    to: "/details/gengeeks",
     description:
-      "Are you an IT student ready to showcase your skills and prove you're the crème de la crème? Look no further, the “Gravity” competition is the perfect opportunity for you to step up and show your potential as IT specialists what you're made of!. It’s time to put your knowledge to the test and show off that brain power with an intriguing rounds.",
-    img: "/icons/manager.svg",
-    direction: "flex-row-reverse",
-    color: "btn-warning",
-    text: "text-warning",
+      "Bring your cognitive skills to the arena as Exception is back with its highly anticipated quiz. Strap in  for a crazy ride into the energetic universe of quizzing.",
+    img: "/icons/quiz.svg",
+    direction: "flex-row",
+    color: "btn-primary",
+    text: "text-primary",
     eventType: "general",
   },
+
   {
     id: 2,
     name: "big bang",
@@ -35,6 +36,31 @@ const EventsList = [
     text: "text-accent",
     eventType: "general",
   },
+  {
+    id: 4,
+    name: "Strike Force",
+    to: "/details/strikeforce",
+    description:
+      "Join us for an exciting gaming event featuring the popular first-person shooter game,Valorant. Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it",
+    img: "/icons/gaming.svg",
+    direction: "flex-row-reverse",
+    color: "btn-warning",
+    text: "text-warning",
+    eventType: "open",
+  },
+
+  {
+    id: 5,
+    name: "Infinity & Beyond",
+    to: "/details/infinity&beyond",
+    description:
+      "Calling all tech wizards and IoT enthusiasts! Get ready to EXCEPTION-ally amaze us with your innovative ideas! Because the one of a kind 'IOT to infinity and beyond!' event is waiting for you to shine BEYOND beliefs. Submit your entries now and let's see what you've got!",
+    img: "/icons/iot.svg",
+    diretion: "flex-row-reverse",
+    color: "btn-accent",
+    text: "text-accent",
+    eventType: "open",
+  },
 
   {
     id: 6,
@@ -48,17 +74,16 @@ const EventsList = [
     text: "text-primary",
     eventType: "general",
   },
-
   {
-    id: 1,
-    name: "gen-geeks",
-    to: "/details/gengeeks",
+    id: 7,
+    name: "gravity",
+    to: "/details/gravity",
     description:
-      "Bring your cognitive skills to the arena as Exception is back with its highly anticipated quiz. Strap in  for a crazy ride into the energetic universe of quizzing.",
-    img: "/icons/quiz.svg",
-    direction: "flex-row",
-    color: "btn-primary",
-    text: "text-primary",
+      "Are you an IT student ready to showcase your skills and prove you're the crème de la crème? Look no further, the “Gravity” competition is the perfect opportunity for you to step up and show your potential as IT specialists what you're made of!. It’s time to put your knowledge to the test and show off that brain power with an intriguing rounds.",
+    img: "/icons/manager.svg",
+    direction: "flex-row-reverse",
+    color: "btn-warning",
+    text: "text-warning",
     eventType: "general",
   },
 
@@ -88,28 +113,15 @@ const EventsList = [
   },
 
   {
-    id: 4,
-    name: "strike force",
-    to: "/details/strikeforce",
+    id: 10,
+    name: "Solveathon",
+    to: "/details/solveathon",
     description:
-      "Join us for an exciting gaming event featuring the popular first-person shooter game,Valorant. Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it",
-    img: "/icons/gaming.svg",
+      "  Solve-a-thon is a solution event focused on building an AI/ML and vision based android application, where enrolled teams will get to solve real time problems that could be planet changing tech. It is an opportunity for students to showcase their skills, learn new technologies and potentially develop a project into a product.?",
+    img: "/icons/solveathon.svg",
     direction: "flex-row-reverse",
-    color: "btn-warning",
-    text: "text-warning",
-    eventType: "open",
-  },
-
-  {
-    id: 5,
-    name: "infinity & beyond",
-    to: "/details/infinity&beyond",
-    description:
-      "Calling all tech wizards and IoT enthusiasts! Get ready to EXCEPTION-ally amaze us with your innovative ideas! Because the one of a kind 'IOT to infinity and beyond!' event is waiting for you to shine BEYOND beliefs. Submit your entries now and let's see what you've got!",
-    img: "/icons/iot.svg",
-    diretion: "flex-row-reverse",
-    color: "btn-accent",
-    text: "text-accent",
+    color: "btn-primary",
+    text: "text-primary",
     eventType: "open",
   },
 ];

@@ -1,7 +1,7 @@
 const EventsList = [
   {
     id: 1,
-    name: "gen-geeks",
+    name: "Gen-geeks",
     to: "/details/gengeeks",
     description:
       "Bring your cognitive skills to the arena as Exception is back with its highly anticipated quiz. Strap in  for a crazy ride into the energetic universe of quizzing.",
@@ -14,7 +14,7 @@ const EventsList = [
 
   {
     id: 2,
-    name: "big bang",
+    name: "Big bang",
     to: "/details/bigbang",
     description:
       "The art of communication is the language of leadership. So hold on to your mics and get the best version of yourself to showcase your orator skills at Exception 2023-BIG BANG",
@@ -26,7 +26,7 @@ const EventsList = [
   },
   {
     id: 3,
-    name: "nebula x",
+    name: "Nebula x",
     to: "/details/nebulax",
     description:
       "Are you ready for the most anticipated event of the year? Yes, you heard it right. The biggest coding fest is knocking at the door. The Nebula X is here So, Get ready ahead of time. Brush up on your concepts, hold your morals high and count down the moments!",
@@ -64,7 +64,7 @@ const EventsList = [
 
   {
     id: 6,
-    name: "constellation",
+    name: "Constellation",
     to: "/details/constellation",
     description:
       "Ideas shouldn't be kept, something must be done about it so bring out your inner creativity and imagination into action here at Exceptions 2023 - Constellation(UI/UX designing)",
@@ -76,7 +76,7 @@ const EventsList = [
   },
   {
     id: 7,
-    name: "gravity",
+    name: "Gravity",
     to: "/details/gravity",
     description:
       "Are you an IT student ready to showcase your skills and prove you're the crème de la crème? Look no further, the “Gravity” competition is the perfect opportunity for you to step up and show your potential as IT specialists what you're made of!. It’s time to put your knowledge to the test and show off that brain power with an intriguing rounds.",
@@ -89,7 +89,7 @@ const EventsList = [
 
   {
     id: 8,
-    name: "zest",
+    name: "Zest",
     to: "/details/zest",
     description:
       "Presenting to you an event which promotes creative ways of thinking to teach technology to common folks. Idea of this event is to project a few basics of technology through a creative medium. Zest is an event where a group of people have to think and come up with an idea to project the specific technology basics to the present crowd. The medium can be a game, video, drama, song or any creative mode. The most entertaining and creative participant wins.",

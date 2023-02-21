@@ -14,7 +14,7 @@ const DetailedEvents = () => {
   });
 
   return (
-    <div className="flex w-screen py-8 lg:h-screen justify-center items-center ">
+    <div className="flex w-screen py-8 lg:h-screen justify-center items-center event-details ">
       <Box
         className="lg:w-10/12  w-full  lg:bg-neutral  flex lg:flex-row flex-col"
         style={{ height: "700px" }}
@@ -52,7 +52,26 @@ const DetailedEvents = () => {
                         {event.name.toUpperCase()}
                       </h4>
                       <img src={event.svg} style={{ width: "150px" }} />
-                      <p className="my-8 text-justify text-md ">
+
+                      {event.prize ? (
+                        <div className="my-8 w-full ">
+                          <span className="text-xl text-center text-secondary ">
+                            Prize details
+                          </span>
+
+                          <ul className="list-none text-justify text-xl flex flex-col w-full items-center text-warning justify-evenly lg:flex-row ">
+                            {event.prize.map((val, index) => {
+                              return (
+                                <li key={index} className="my-3">
+                                  {val.stand} :{val.prize}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
+
+                      <p className="my-5 text-justify text-md flex flex-col text-center leading-loose">
                         {event.description}
                       </p>
 
@@ -69,33 +88,33 @@ const DetailedEvents = () => {
                       ) : null}
 
                       {event.rules ? (
-                        <p className="my-8 ">
+                        <div className="my-8 ">
                           <span className="text-xl text-secondary ">Rules</span>
 
-                          <ul className="list-disc text-left">
+                          <ul className="list-disc text-left my-5 ">
                             {event.rules.map((rule) => {
-                              return <li>{rule}</li>;
+                              return <li className="my-3">{rule}</li>;
                             })}
                           </ul>
-                        </p>
+                        </div>
                       ) : null}
 
                       {event.requirements ? (
-                        <p className="my-8 ">
+                        <div className="my-8 w-full ">
                           <span className="text-xl text-secondary ">
                             Requirements
                           </span>
 
-                          <ul className="list-disc text-left">
+                          <ul className="list-disc text-left my-5">
                             {event.requirements.map((requirement) => {
-                              return <li>{requirement}</li>;
+                              return <li className="my-3">{requirement}</li>;
                             })}
                           </ul>
-                        </p>
+                        </div>
                       ) : null}
 
                       {event.contact ? (
-                        <p className="my-8">
+                        <div className="my-8">
                           <span className="text-xl text-secondary">
                             Contact
                           </span>
@@ -114,7 +133,7 @@ const DetailedEvents = () => {
                               );
                             })}
                           </div>
-                        </p>
+                        </div>
                       ) : null}
                     </Box>
                   );

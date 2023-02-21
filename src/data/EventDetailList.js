@@ -163,6 +163,16 @@ const EventDetailList = [
     id: 7,
     name: "strike force",
     route: "strikeforce",
+    prize: [
+      {
+        stand: "1st",
+        prize: "12000",
+      },
+      {
+        stand: "2nd",
+        prize: "8000",
+      },
+    ],
     description:
       "Join us for an exciting gaming event featuring the popular first-person shooter game, Valorant. Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it. Don't miss out on the chance to prove yourself as a top player in the Valorant community. Register now and get ready to frag!",
     img: "https://i.ibb.co/vBDH3zn/strike-Force.png",
@@ -191,6 +201,16 @@ const EventDetailList = [
     id: 8,
     name: "infinity & beyond",
     route: "infinity&beyond",
+    prize: [
+      {
+        stand: "1st",
+        prize: "5000",
+      },
+      {
+        stand: "2nd",
+        prize: "2000",
+      },
+    ],
     description:
       "Calling all tech-savvy, innovation-loving, and prize-hunting students! Are you ready to show off your skills and prove you're the best in the game? Well, buckle up because we're hosting an IoT competition and it's time to put your knowledge to the test! This is your chance to let your creativity run wild and come up with some mind-blowing solutions using IoT technology. Trust us, this is not an average boring competition, we're talking about cash prizes, recognition, and the opportunity to make a real impact in the world of tech. So, what are you waiting for? Submit your entries and let's see if you got what it takes to be called “IoT's Orbital Overlord”!",
     img: "https://i.ibb.co/m8SxjDF/Digital-nomad-cuate.png",
@@ -236,6 +256,20 @@ const EventDetailList = [
     id: 11,
     name: "SOLVEATHON",
     route: "solveathon",
+    prize: [
+      {
+        stand: "1st",
+        prize: "15000",
+      },
+      {
+        stand: "2nd",
+        prize: "10000",
+      },
+      {
+        stand: "3rd",
+        prize: "5000",
+      },
+    ],
     problemStatement:
       "Water  level detection and marking to estimate the level of water in the storage tanks (overhead / sump). The tanks are plastic and cement tanks.The approaches involve computer vision and machine learning.",
     description:

@@ -14,7 +14,7 @@ const DetailedEvents = () => {
   });
 
   return (
-    <div className="flex w-screen py-8 lg:h-screen justify-center items-center event-details ">
+    <div className="flex w-screen py-8 lg:h-screen justify-center items-center event-details font-bold ">
       <Box
         className="lg:w-10/12  w-full  lg:bg-neutral  flex lg:flex-row flex-col"
         style={{ height: "700px" }}

@@ -14,6 +14,7 @@ import Events from "../LandingPage/Events";
 import Sponsorship from "./Sponsorship";
 import OpenEvents from "./OpenEvents";
 import GroupEvents from "./GroupEvents";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   return (
@@ -36,6 +37,12 @@ function LandingPage() {
             <OpenEvents />
 
             <GroupEvents />
+
+            <Box className="flex justify-center items-center   ">
+              <Link className="btn btn-warning btn-wide " to="/register">
+                Register Now
+              </Link>
+            </Box>
           </div>
 
           {/*<Events /> */}

@@ -271,6 +271,77 @@ const Sidebar = ({
                   />
                 </>
               )}
+
+              {role === "VOLUNTEER" && (
+                <>
+                  <Item
+                    title="Volunteer Profile"
+                    to="/"
+                    icon={<WorkspacesIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Attendance status"
+                    to="/volunteer-attendance"
+                    icon={<GroupsIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </>
+              )}
+
+              {role === "ADMIN" && (
+                <>
+                  <Item
+                    title="Dashboard"
+                    to="/"
+                    icon={<PersonAddAltIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Get All Teams"
+                    to="get-teams"
+                    icon={<PeopleIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="My Tenants"
+                    to="tenants"
+                    icon={<PeopleIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </>
+              )}
+
+              {role === "COORDINATOR" && (
+                <>
+                  <Item
+                    title="Assign Event"
+                    to="/"
+                    icon={<PersonAddAltIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Get All Teams"
+                    to="get-teams"
+                    icon={<PeopleIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="My Tenants"
+                    to="tenants"
+                    icon={<PeopleIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </>
+              )}
             </Box>
           </Menu>
         </SidebarContent>
@@ -385,75 +456,9 @@ const Sidebar = ({
               </>
             )}
 
-            {role === "VOLUNTEER" && (
-              <>
-                <Item
-                  title="Volunteer Profile"
-                  to="/"
-                  icon={<WorkspacesIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="Attendance status"
-                  to="/volunteer-attendance"
-                  icon={<GroupsIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-              </>
-            )}
+            
 
-            {role === "ADMIN" && (
-              <>
-                <Item
-                  title="Dashboard"
-                  to="/"
-                  icon={<PersonAddAltIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="Get All Teams"
-                  to="get-teams"
-                  icon={<PeopleIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="My Tenants"
-                  to="tenants"
-                  icon={<PeopleIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-              </>
-            )}
-            {role === "COORDINATOR" && (
-              <>
-                <Item
-                  title="Assign Event"
-                  to="/"
-                  icon={<PersonAddAltIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="Get All Teams"
-                  to="get-teams"
-                  icon={<PeopleIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-                <Item
-                  title="My Tenants"
-                  to="tenants"
-                  icon={<PeopleIcon />}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-              </>
-            )}
+       
           </Box>
         </Menu> */}
       </ProSidebar>

@@ -11,13 +11,13 @@ import EventsList from "../../data/EventsList";
 
 function GroupEvents() {
   return (
-    <Container maxWidth="xl my-32 text-neutral-content " id="prize">
+    <Container maxWidth="xl my-16 text-neutral-content " id="prize">
       <h1 className="text-center event-header text-xl lg:text-3xl text-success my-5 lg:my-8">
         Group Events (Only for BCA , MCA , BSc and MSc)
       </h1>
 
       <h1 className="text-center event-header text-xl lg:text-3xl text-neutral-content my-8 lg:my-8">
-        Cash prize , General Championship & Exciting cash prize to be won...
+        General Championship , Goodies & Exciting cash prize to be won...
       </h1>
 
       <Grid container spacing={6} className="justify-center">
@@ -41,7 +41,7 @@ function GroupEvents() {
               >
                 <img src={event.img} alt="male" className="img-contact" />
                 <h3 className="text-center text-primary  text-xl text-bold">
-                  {event.name}
+                  {event.name.toUpperCase()}
                 </h3>
                 <Link
                   className="btn btn-warning btn-outline my-3"

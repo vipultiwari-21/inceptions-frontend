@@ -29,7 +29,7 @@ function LandingPage() {
           <About />
           <Sponsorship />
 
-          <div className="event my-8  " id="events">
+          <div className="event" id="events">
             <h1 className="sub-heading text-secondary text-bold text-3xl ">
               EVENTS
             </h1>
@@ -38,8 +38,14 @@ function LandingPage() {
 
             <GroupEvents />
 
-            <Box className="flex justify-center items-center   ">
-              <Link className="btn btn-warning btn-wide " to="/register">
+            <Box className="flex justify-center items-center flex-col">
+              <p className="event-details text-xl my-5 text-neutral-content">
+                Time is ticking on and spaceship is about to launch
+              </p>
+              <Link
+                className="btn btn-warning btn-wide btn-outline "
+                to="/register"
+              >
                 Register Now
               </Link>
             </Box>

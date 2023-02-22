@@ -35,14 +35,23 @@ function Banner() {
                 <h6 className="lg:ml-3">Presents</h6>
               </div>
 
-              <div className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
+              {/*
+             <div className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
                 {" "}
-                <img
+                  <img
                   src={MainLogo}
                   alt="main logo"
                   style={{ width: "800px" }}
-                />
+                /> 
               </div>
+              
+            */}
+
+              <h3 className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
+                {" "}
+                EXCEPTIONS
+                <br /> 2023
+              </h3>
             </div>
 
             {/* Register btn */}

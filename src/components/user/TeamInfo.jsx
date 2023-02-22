@@ -3,7 +3,6 @@ import { Button, MenuItem, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
-import Topbar from "./Topbar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -13,6 +12,7 @@ import Loading from "../../Loading";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import ExcitingImage from "../../assets/svg/excitingNews.svg";
 
 const TeamInfo = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -35,13 +35,36 @@ const TeamInfo = () => {
   const [pageLoading, setPageLoading] = useState(true);
   const [hasOpenEvents, setHasOpenEvents] = useState(false);
 
+  const confirmationMessages = [
+    "Congratulations! Your registration is confirmed for lift-off. Get ready to blast off into space!",
+    "Thank you for joining us on this interstellar journey. Your registration has been confirmed.",
+    "We have liftoff! Your registration is confirmed for the event. We'll see you among the stars!",
+    "Your registration has been confirmed. Prepare for an out-of-this-world experience!",
+    "Get ready to explore the final frontier! Your registration is confirmed for the  event.",
+    "Your registration is confirmed for the event. Get ready to embark on a journey through the cosmos!",
+    "Congratulations! Your registration for the  event has been confirmed. We can't wait to launch with you!",
+    "Prepare for a journey beyond our wildest dreams! Your registration for the  event has been confirmed.",
+    "Your registration has been confirmed for the  event. It's time to take off and soar through the galaxy!",
+    "Get ready to experience the wonders of space! Your registration for the event has been confirmed.",
+    "Your registration is confirmed and mission control is go for launch! Get ready to explore the cosmos.",
+    "We're excited to have you aboard for the event. Your registration has been confirmed.",
+    "Buckle up and prepare for takeoff! Your registration is confirmed for the event.",
+    "Congratulations on your confirmed registration for the event. We can't wait to see you among the stars!",
+    "Your registration has been confirmed, and we're counting down the seconds to launch. See you in space!",
+    "Thank you for joining us on this incredible  adventure. Your registration is confirmed and we're ready for liftoff!",
+    "Your registration is confirmed for the  event. Get ready to witness the awe-inspiring beauty of the universe!",
+    "Get ready to experience the majesty of space! Your registration for the event has been confirmed.",
+    "You're now part of an exclusive group of explorers! Your registration for the event has been confirmed.",
+    "Your registration for the event has been confirmed. Prepare to journey through the stars and explore the unknown.",
+  ];
+
   const getTeamHeadDetails = async () => {
     try {
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_ENDPOINT}/profile/me`
       );
       setTeamHead(data);
-      //console.log(data)
+      //console.log(data);
     } catch (err) {
       Swal.fire({
         title: "Error!",
@@ -141,7 +164,13 @@ const TeamInfo = () => {
     setPageLoading(false);
   };
 
+  const getIsVerified = async () => {
+    const { data } = await axios.get("/payment/is-paid");
+    setIsVerified(false);
+  };
+
   useEffect(() => {
+    getIsVerified();
     getTeamHeadDetails();
     getTeams();
     getOpenEvents();
@@ -187,6 +216,8 @@ const TeamInfo = () => {
         obj
       );
 
+      addTeamLeader();
+
       setIsGCConsidered(true);
       Swal.fire({
         title: "Success!",
@@ -209,7 +240,31 @@ const TeamInfo = () => {
     setLoading(false);
   };
 
-  return !pageLoading ? (
+  return !pageLoading && isVerified ? (
+    <Box
+      m="20px"
+      sx={{ height: "100vh" }}
+      className="flex flex-col justify-center items-center event-details"
+    >
+      <Box>
+        <img
+          src={ExcitingImage}
+          alt="welcome team image"
+          style={{ width: "400px" }}
+        />
+      </Box>
+
+      <h1 className="text-xl lg:text-3xl font-bold">
+        {" "}
+        Welcome Team <br />
+        <span className="text-info">{registeredTeamName}</span>
+      </h1>
+
+      <h1 className="my-5 text-warning text-xl font-bold">
+        {confirmationMessages[Math.floor(Math.random() * 20)]}
+      </h1>
+    </Box>
+  ) : !pageLoading && !isVerified ? (
     <Box
       m="20px"
       sx={{ height: "100vh" }}
@@ -406,14 +461,16 @@ const TeamInfo = () => {
                   {openEvents
                     ? openEvents.map((oe) => {
                         return (
-                          <label key={oe.eventId} className="mx-3 py-3 ">
+                          <label key={oe.eventId} className="mx-3 py-3" s>
                             <Field
                               type="checkbox"
                               name="openEvents"
                               key={oe.eventId}
                               value={oe.name}
                             />
-                            {`${oe.name}`}
+                            <span
+                              style={{ marginLeft: "10px", fontWeight: "bold" }}
+                            >{`${oe.name}`}</span>
                           </label>
                         );
                       })
@@ -481,7 +538,9 @@ const TeamInfo = () => {
                   >
                     Add team mates
                   </Button>
-                ) : null}
+                ) : (
+                  <h1>You have verified</h1>
+                )}
               </Box>
             </form>
           )}

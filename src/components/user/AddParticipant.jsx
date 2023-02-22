@@ -43,6 +43,7 @@ const AddParticipant = () => {
         ? setEventType("group")
         : setEventType("");
     } catch (err) {
+      console.log("GET-EVENTS", err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!! check your internet connectivity",
@@ -56,9 +57,6 @@ const AddParticipant = () => {
     try {
       const { data } = await axios.get("/team/get-team-of-current-user");
       if (data.message == "This user has not registered any teams") {
-        const getAllTeamNames = await axios.get(
-          "/teamNames/get-available-team-names"
-        );
         setTeamRegistered(false);
         setPageLoading(false);
       } else {
@@ -70,6 +68,7 @@ const AddParticipant = () => {
         setPageLoading(false);
       }
     } catch (err) {
+      console.log("GET-availaable details", err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!! check your internet connectivity",
@@ -89,6 +88,7 @@ const AddParticipant = () => {
       //setTeamData(data);
       //console.log(data.length)
     } catch (err) {
+      console.log("GET-team count", err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!! check your internet connectivity",
@@ -103,6 +103,7 @@ const AddParticipant = () => {
       const { data } = await axios.get("/team/get-max-team-members");
       setMaxTeam(data);
     } catch (err) {
+      console.log("GET-max team-members", err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!! check your internet connectivity",

@@ -215,6 +215,7 @@ const EventDetailList = [
         prize: "5000",
       },
     ],
+    mainNotice: ["Participants should get their own laptops"],
     description:
       "Join us for an exciting gaming event featuring the popular first-person shooter game, Valorant. Compete against other players in intense, fast-paced matches and show off your skills on the battlefield. With a prize pool up for grabs, the competition will be fierce, but the thrill of victory will make it all worth it. Don't miss out on the chance to prove yourself as a top player in the Valorant community. Register now and get ready to frag!",
     img: "https://i.ibb.co/vBDH3zn/strike-Force.png",
@@ -334,6 +335,15 @@ const EventDetailList = [
         prize: "5000",
       },
     ],
+
+    mainNotice: [
+      "The result will be announced 1 week after the event",
+      "Three prizes declared but Nimble Vision Pvt Ltd reserves right to limit  1 or 2 based on the score obtained.",
+      "The solutions will be considered for award only if they match evaluation criteria",
+      "After competition winners source code to be shared to Nimble Vision Pvt Ltd with no IP claims",
+      "Participants will recieve a google form after payment , they should submit zip file containing the source code and presentation ",
+    ],
+
     problemStatement:
       "Water  level detection and marking to estimate the level of water in the storage tanks (overhead / sump). The tanks are plastic and cement tanks.The approaches involve computer vision and machine learning.",
     description:
@@ -348,6 +358,7 @@ const EventDetailList = [
       "The decision of the judges is final",
       "The winning team will be awarded based on the criteria specified by the organizers",
       "The teams must comply with the deadline for submissions",
+      "Participants must upload their source code & presentation zip file in the below provided google form on or before 3rd March",
     ],
     contact: [
       {

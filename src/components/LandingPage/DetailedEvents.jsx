@@ -4,6 +4,7 @@ import { Navigate, useParams } from "react-router-dom";
 import EventDetailList from "../../data/EventDetailList";
 import { useMediaQuery } from "@material-ui/core";
 import Solvathon from "/scheduleIcons/zest.svg";
+import ResponsiveAppBar from "./EventNavbar";
 
 const DetailedEvents = () => {
   const isNonMobile = useMediaQuery("(max-width:700px)");
@@ -14,7 +15,7 @@ const DetailedEvents = () => {
   });
 
   return (
-    <div className="flex w-screen py-8 lg:h-screen justify-center items-center event-details font-bold ">
+    <div className="flex w-screen py-8 lg:h-screen justify-center items-center event-details ">
       <Box
         className="lg:w-10/12  w-full  lg:bg-neutral  flex lg:flex-row flex-col"
         style={{ height: "700px" }}
@@ -48,11 +49,14 @@ const DetailedEvents = () => {
                       className="event-detail-container text-neutral font-bold flex flex-col justify-center w-full items-center text-white"
                       key={event.id}
                     >
+                      <Box className="w-full flex justify-center items-center">
+                        <ResponsiveAppBar />
+                      </Box>
+
                       <h4 className="event-name text-3xl lg:text-5xl py-3 text-primary">
                         {event.name.toUpperCase()}
                       </h4>
                       <img src={event.svg} style={{ width: "150px" }} />
-
                       {event.prize ? (
                         <div className="my-8 w-full ">
                           <span className="text-xl text-center text-secondary ">
@@ -70,11 +74,9 @@ const DetailedEvents = () => {
                           </ul>
                         </div>
                       ) : null}
-
                       <p className="my-5 text-justify text-md flex flex-col text-center leading-loose">
                         {event.description}
                       </p>
-
                       {event.problemStatement ? (
                         <>
                           <span className="text-xl text-secondary ">
@@ -86,7 +88,6 @@ const DetailedEvents = () => {
                           </p>
                         </>
                       ) : null}
-
                       {event.rules ? (
                         <div className="my-8 ">
                           <span className="text-xl text-secondary ">Rules</span>
@@ -98,7 +99,19 @@ const DetailedEvents = () => {
                           </ul>
                         </div>
                       ) : null}
+                      {event.mainNotice ? (
+                        <div className="my-8 ">
+                          <span className="text-xl text-warning ">
+                            Important Note
+                          </span>
 
+                          <ul className="list-disc text-left my-5 ">
+                            {event.mainNotice.map((notice) => {
+                              return <li className="my-3">{notice}</li>;
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
                       {event.requirements ? (
                         <div className="my-8 w-full ">
                           <span className="text-xl text-secondary ">
@@ -112,7 +125,6 @@ const DetailedEvents = () => {
                           </ul>
                         </div>
                       ) : null}
-
                       {event.contact ? (
                         <div className="my-8">
                           <span className="text-xl text-secondary">
@@ -122,7 +134,7 @@ const DetailedEvents = () => {
                           <div className="flex flex-col justify-around items-center  w-full lg:flex-row ">
                             {event.contact.map((contacts) => {
                               return (
-                                <ul className="my-3 mx-3">
+                                <ul className="my-3 mx-8">
                                   <li className="text-warning">
                                     {contacts.type}
                                   </li>

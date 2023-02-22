@@ -41,7 +41,7 @@ function GroupEvents() {
               >
                 <img src={event.img} alt="male" className="img-contact" />
                 <h3 className="text-center text-primary  text-xl text-bold">
-                  {event.name}
+                  {event.name.toUpperCase()}
                 </h3>
                 <Link
                   className="btn btn-warning btn-outline my-3"

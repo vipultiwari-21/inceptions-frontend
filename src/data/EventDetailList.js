@@ -4,14 +4,14 @@ const EventDetailList = [
     name: "gravity",
     route: "gravity",
     description:
-      "Are you an IT student ready to showcase your skills and prove you're the crème de la crème? Look no further, the “Gravity” competition is the perfect opportunity for you to step up and show your potential as IT specialists what you're made of! This competition is exclusively for undergraduate and postgraduate students enrolled in BCA or MCA. It's time to put your knowledge to the test and show off that brain power with intriguing rounds. The winner takes home a cash prize and the title of the “Mr/Ms Earth” IT managers in the program. Don't miss out on this chance to make your mark in the industry and show everyone you're the one to watch.",
+      "Are you an IT student ready to showcase your skills and prove you're the crème de la crème? Look no further, the “Gravity” competition is the perfect opportunity for you to step up and show your potential as IT specialists what you're made of! This competition is exclusively for undergraduate and postgraduate students enrolled in BCA, MCA , BSc or MSc. It's time to put your knowledge to the test and show off that brain power with intriguing rounds. The winner takes home a cash prize and the title of the “Mr/Ms Earth” IT managers in the program. Don't miss out on this chance to make your mark in the industry and show everyone you're the one to watch.",
     img: "https://i.ibb.co/zNcjkDP/it.png",
     svg: "/scheduleIcons/gravity.svg",
     rules: [
       "Solo participation.",
       "Dress up at your best with a professional look which will add on to points.",
       "Make sure you are present 10 minutes prior to the stated schedule.",
-      "Participants should be available on both the days(3rd & 4th of March).",
+      "Participants should be available on both the days.",
     ],
     requirements: [
       "Participants should know the basics of OOP's.",
@@ -19,9 +19,16 @@ const EventDetailList = [
     ],
     contact: [
       {
+        type: "Student Coordinator",
         name: "Shireesha KB",
         email: "shireeshakb.mca21@rvce.edu.in",
         phone: "+91 9880063997",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "DR.Deepika K",
+        email: "deepikak@rvce.edu.in",
+        phone: "+91 9886121284",
       },
     ],
   },
@@ -44,9 +51,16 @@ const EventDetailList = [
     ],
     contact: [
       {
+        type: "Student Coordinator",
         name: "Krupa Arjunwadkar",
         email: "krupasa.mca21@rvce.edu.in",
         phone: "+91 9972308056",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "Dr. Vishal C",
+        email: "vishalc@rvce.edu.in",
+        phone: "+91 7019132389",
       },
     ],
   },
@@ -67,9 +81,16 @@ const EventDetailList = [
     requirements: ["Participants should have fair knowledge in all areas."],
     contact: [
       {
+        type: "Student Coordinator",
         name: "Bhakthi Prabhu",
         email: "bhaktiprabhu.mca21@rvce.edu.in",
         phone: "+91 8088308112",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "DR. Mohanaradhya",
+        email: "mohanaradhya@rvce.edu.in",
+        phone: "+91 9916136296",
       },
     ],
   },
@@ -90,9 +111,16 @@ const EventDetailList = [
     requirements: ["Participants should have fair knowledge in all areas."],
     contact: [
       {
+        type: "Student Coordinator",
         name: "Sumanth C R",
         email: "sumanthcr.mca21@rvce.edu.in",
         phone: "+91 789263225",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "Dr. S Anupama Kumar",
+        email: "anupamakumar@rvce.edu.in",
+        phone: "+91 9590062772",
       },
     ],
   },
@@ -117,9 +145,16 @@ const EventDetailList = [
     ],
     contact: [
       {
+        type: "Student Coordinator",
         name: "Aishwarya Kamble",
         email: "aishwaryakk.mca21@rvce.edu.in",
         phone: "+91 7026239982",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "DR. KS Jasmine",
+        email: "jasmineks@rvce.edu.in",
+        phone: "+91 9916101571",
       },
     ],
   },
@@ -153,9 +188,16 @@ const EventDetailList = [
     ],
     contact: [
       {
+        type: "Student Coordinator",
         name: "Indrabhushan Maluche",
         email: "indrabusanam.mca21@rvce.edu.in",
         phone: "+91 7259420108",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "Prof. Saravanan C ",
+        email: "saravananc@rvce.edu.in",
+        phone: "+91 9901037071",
       },
     ],
   },
@@ -166,11 +208,11 @@ const EventDetailList = [
     prize: [
       {
         stand: "1st",
-        prize: "12000",
+        prize: "10000",
       },
       {
         stand: "2nd",
-        prize: "8000",
+        prize: "5000",
       },
     ],
     description:
@@ -191,9 +233,16 @@ const EventDetailList = [
     ],
     contact: [
       {
+        type: "Student Coordinator",
         name: "Sohan Gowda C",
         email: "sohangowdac.mca21@rvce.edu.in",
         phone: "+91 9380023145",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "Dr. Jayasimha SR",
+        email: "jayasimhasr@rvce.edu.in",
+        phone: "+91 8904200327",
       },
     ],
   },
@@ -226,12 +275,20 @@ const EventDetailList = [
       "All solutions must be created during the competition and cannot have been previously developed.",
       "Participants are expected to act ethically and refrain from any illegal or unethical behavior such as hacking or cheating.",
       "Team members should inform one of the organizers before leaving the venue, failure to do so will result in disqualification of the entire team.",
+      "Mandatory IOT Component disclosure will be provided on the day of event which should be accepted and a Refundable amount of Rs. 1000/- is to be paid that will be withheld in case of component damage.",
     ],
     contact: [
       {
+        type: "Student Coordinator",
         name: "Prajwal K",
         email: "prajwalk.mca21@rvce.edu.in",
         phone: "+91 8105830328",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "Dr.B Renuka Prasad",
+        email: "renuka prasadb@rvce.edu.in",
+        phone: "+91 9901945674",
       },
     ],
   },
@@ -242,12 +299,19 @@ const EventDetailList = [
     img: "https://i.ibb.co/SfHsWcW/eventx.png",
     svg: "/scheduleIcons/EventX.svg",
     description: "You never know what we might have in the store?",
+
     contact: [
       {
         type: "Student Coordinator",
         name: "Thejas P",
         email: "thejasp.mca21@rvce.edu.in",
         phone: "+91 8147231746",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "Dr.SS Nagamuthu  Krishnan",
+        email: "ssnk@rvce.edu.in",
+        phone: "+91 9443064452",
       },
     ],
   },

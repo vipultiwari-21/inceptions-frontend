@@ -101,7 +101,7 @@ export default function Schedule() {
           roundName: "Round 1",
           status: "Not Started",
           venue: "Updating Shortly",
-          time: "MAR 3, 11:00 AM-11:45 AM<",
+          time: "MAR 3, 11:00 AM-11:45 AM",
         },
         {
           roundName: "Round 2",

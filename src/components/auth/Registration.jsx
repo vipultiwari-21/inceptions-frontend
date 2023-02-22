@@ -13,6 +13,12 @@ import { State } from "country-state-city";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { Box } from "@mui/system";
 
 function Registration() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -20,6 +26,7 @@ function Registration() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const [accomodation, setAccomodation] = useState(false);
 
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
@@ -53,6 +60,15 @@ function Registration() {
       .required("required")
       .max(6, "Invalid Pincode")
       .min(6, "Invalid Pincode"),
+
+    maleParticipants: yup
+      .string()
+      .required("required")
+      .matches(/^[0-9]*$/, "Enter valid value"),
+    femaleParticipants: yup
+      .string()
+      .required("required")
+      .matches(/^[0-9]*$/, "Enter valid value"),
   });
   const initialValues = {
     email: "",
@@ -64,9 +80,9 @@ function Registration() {
     state: "",
     city: "",
     zip: "",
+    maleParticipants: "",
+    femaleParticipants: "",
   };
-
-  const loginAuth = async (values) => {};
 
   const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
@@ -85,6 +101,8 @@ function Registration() {
           state: values.state,
           city: values.city,
           zip: values.zip,
+          numberOfMaleAccomodations: values.maleParticipants,
+          numberOfFemaleAccomodations: values.femaleParticipants,
         }
       );
 
@@ -401,12 +419,13 @@ function Registration() {
 
                               <div className="mb-4 basis-full lg:basis-1/2">
                                 <TextField
-                                  fullWidth
+                                  fullWidth={!isNonMobile}
                                   variant="filled"
                                   type={showPassword ? "text" : "password"}
                                   label="Password"
                                   onBlur={handleBlur}
                                   onChange={handleChange}
+                                  size="small"
                                   value={values.password}
                                   name="password"
                                   error={
@@ -415,7 +434,6 @@ function Registration() {
                                   helperText={
                                     touched.password && errors.password
                                   }
-                                  size="small"
                                   sx={{
                                     gridColumn: "span 4",
                                     background: "#fff",
@@ -447,6 +465,108 @@ function Registration() {
                                   }}
                                 />
                               </div>
+
+                              <div className="basis-full text-neutral-content ">
+                                <FormControl>
+                                  <FormLabel id="demo-row-radio-buttons-group-label text-warning">
+                                    <span className="text-warning font-bold">
+                                      Accomodation Required ? <br />
+                                      (only for people outside bengaluru &
+                                      charges apply )
+                                    </span>
+                                  </FormLabel>
+                                  <RadioGroup
+                                    row
+                                    aria-labelledby="demo-row-radio-buttons-group-label "
+                                    name="row-radio-buttons-group"
+                                    className="font-bold"
+                                    onChange={(e) => {
+                                      if (e.target.value == "true") {
+                                        setAccomodation(true);
+                                      } else {
+                                        setAccomodation(false);
+                                      }
+                                    }}
+                                  >
+                                    <Box className="w-full">
+                                      <FormControlLabel
+                                        value={true}
+                                        control={
+                                          <Radio sx={{ color: "#f2f2f2" }} />
+                                        }
+                                        label="Required"
+                                      />
+                                      <FormControlLabel
+                                        value={false}
+                                        control={
+                                          <Radio sx={{ color: "#f2f2f2" }} />
+                                        }
+                                        label="Not Required"
+                                      />
+                                    </Box>
+                                  </RadioGroup>
+                                </FormControl>
+                              </div>
+
+                              {accomodation ? (
+                                <>
+                                  <div className="mb-4 basis-full lg:basis-1/2 ">
+                                    <TextField
+                                      fullWidth={!isNonMobile}
+                                      variant="filled"
+                                      type="text"
+                                      label="No. of Male Participants"
+                                      onBlur={handleBlur}
+                                      onChange={handleChange}
+                                      value={values.maleParticipants}
+                                      name="maleParticipants"
+                                      size="large"
+                                      error={
+                                        !!touched.maleParticipants &&
+                                        !!errors.maleParticipants
+                                      }
+                                      helperText={
+                                        touched.maleParticipants &&
+                                        errors.maleParticipants
+                                      }
+                                      sx={{
+                                        gridColumn: "span 4",
+                                        background: "#fff",
+                                        color: "#000",
+                                        borderRadius: "4px",
+                                      }}
+                                    />
+                                  </div>
+
+                                  <div className="mb-4 basis-full lg:basis-1/2 ">
+                                    <TextField
+                                      fullWidth={!isNonMobile}
+                                      variant="filled"
+                                      type="text"
+                                      label="No. of Female Participants"
+                                      onBlur={handleBlur}
+                                      onChange={handleChange}
+                                      value={values.femaleParticipants}
+                                      name="femaleParticipants"
+                                      size="large"
+                                      error={
+                                        !!touched.femaleParticipants &&
+                                        !!errors.femaleParticipants
+                                      }
+                                      helperText={
+                                        touched.totalAccomodation &&
+                                        errors.totalAccomodation
+                                      }
+                                      sx={{
+                                        gridColumn: "span 4",
+                                        background: "#fff",
+                                        color: "#000",
+                                        borderRadius: "4px",
+                                      }}
+                                    />
+                                  </div>
+                                </>
+                              ) : null}
 
                               <div className="text-center pt-1 mb-6 basis-full pb-1">
                                 <button

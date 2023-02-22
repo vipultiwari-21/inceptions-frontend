@@ -236,7 +236,7 @@ const AssignEvent = () => {
                         fontWeight: "bold",
                       }}
                     >
-                      CHECK SENSORS
+                      Get Teammates
                     </Button>
                   )}
                 </Box>

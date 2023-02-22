@@ -78,25 +78,48 @@ const AssignEvent = () => {
       headerName: "First Name",
       flex: 1,
     },
-    {
-      field: "lastName",
-      headerName: "Last Name",
-      flex: 1,
-    },
+    // {
+    //   field: "lastName",
+    //   headerName: "Last Name",
+    //   flex: 1,
+    // },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
     },
-    {
-      field: "usn",
-      headerName: "USN",
-      flex: 1,
-    },
+    // {
+    //   field: "usn",
+    //   headerName: "USN",
+    //   flex: 1,
+    // },
     {
       field: "contactNumber",
       headerName: "Contact Number",
       flex: 1,
+    },
+    {
+      field: "assignEvent",
+      headerName: "Assign Event",
+      flex: 1,
+      renderCell: ({ row, id }) => {
+        let currentMember = {};
+        currentMember = teamMates.filter((member) => member.memberId === id)[0];
+        // console.log("currentMember", currentMember.memberId);
+        return (
+          <>
+            {/* <Link to={currentMember.memberId}> */}
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={console.log(currentMember)}
+            >
+              Assign
+            </Button>
+            {/* </Link> */}
+          </>
+        );
+      },
     },
   ];
 
@@ -174,6 +197,7 @@ const AssignEvent = () => {
               <Box
                 // placeItems="center"
                 // color={colors.grey[100]}
+                color="#fff"
                 gap="30px"
                 mb="2rem"
                 gridTemplateColumns="repeat(4, minmax(0, 1fr))"
@@ -247,7 +271,6 @@ const AssignEvent = () => {
 
         <DataGrid
           className="datagrid"
-          checkboxSelection
           rows={teamMates}
           columns={columns}
           getRowId={(row) => row.memberId}

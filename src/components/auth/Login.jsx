@@ -10,12 +10,12 @@ import { stateModifier } from "../../features/reducers/slice";
 import { accessTokenModifier } from "../../features/reducers/accessToken";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import * as yup from "yup";
 import { Button, Modal, InputAdornment, TextField, Icon } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import axios from "../../features/Interceptors/apiInterceptor";
 
 function Login() {
   const navigate = useNavigate();
@@ -65,7 +65,12 @@ function Login() {
       dispatch(accessTokenModifier(data.accessToken));
       Cookies.set("token", data.accessToken);
       Cookies.set("auth", true);
-      window.location.href = "/";
+      const res = await axios.get("/auth/my-role");
+      if (res.data.role === "PARTICIPANT") {
+        window.location.href = "/team-info";
+      } else {
+        window.location.href = "/";
+      }
       setLoading(false);
     } catch (err) {
       Swal.fire({

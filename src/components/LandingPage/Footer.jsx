@@ -59,10 +59,11 @@ function Footer() {
 
       <Divider sx={{ width: "100%", border: "0.01em solid #ddd" }}></Divider>
 
+      {/* <DeveloperLink /> */}
       <div className="devw-screen bg-neutral text-neutral-content text-center font-bold p-5">
         <p className="text-2xl text-warning">Developed by</p>
         <div className="flex flex-col lg:flex-row text-center text-xl">
-          <span className="mx-3">
+          <span className="mx-3 hover:underline sm:my-1">
             <a
               className="text-neutral-content   cursor-pointer"
               href="https://github.com/akashpunagin"
@@ -71,7 +72,7 @@ function Footer() {
               Akash E Punagin
             </a>
           </span>
-          <span className="mx-3">
+          <span className="mx-3 hover:underline sm:my-1">
             <a
               className="text-neutral-content cursor-pointer"
               href="https://github.com/puneethkumar-v"
@@ -80,7 +81,7 @@ function Footer() {
               Puneeth Kumar V
             </a>
           </span>
-          <span className="mx-3">
+          <span className="mx-3 hover:underline sm:my-1">
             <a
               className="text-neutral-content cursor-pointer"
               href="https://github.com/i-punithgowda"

@@ -35,14 +35,28 @@ function Banner() {
                 <h6 className="lg:ml-3">Presents</h6>
               </div>
 
-              <div className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
+              {/*
+             <div className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
                 {" "}
-                <img
+                  <img
                   src={MainLogo}
                   alt="main logo"
                   style={{ width: "800px" }}
-                />
+                /> 
               </div>
+              
+            */}
+
+              <h3 className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
+                {" "}
+                EXCEPTIONS
+                <br /> 2023
+              </h3>
+
+              {/* Tagline */}
+              <p className="text-neutral-content   sm:text-xl text-2xl text-center lg:text-left  font-extrabold">
+                UNLEASH THE EXCEPTION IN YOU
+              </p>
             </div>
 
             {/* Register btn */}

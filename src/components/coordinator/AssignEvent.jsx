@@ -111,12 +111,12 @@ const AssignEvent = () => {
         // console.log("memeberId", memberId);
         let currentMember = {};
 
-        currentMember = teamMates.map((member) =>
-          console.log("memberid", memberId)
-        );
+        currentMember = teamMates.filter(
+          (member) => member.memberId === memberId
+        )[0];
         console.log("currentMember", currentMember);
         return (
-          <Link to={`${id}`} className={id}>
+          <Link to={`${currentMember.memberId}`} className={id}>
             <Button color="secondary" variant="contained">
               Assign
             </Button>

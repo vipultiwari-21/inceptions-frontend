@@ -57,10 +57,10 @@ function Footer() {
         </div>
       </div>
 
-      <Divider sx={{ width: "100%", border: "0.01em solid #ddd" }}></Divider>
+      <Divider sx={{ width: "80%", border: "0.1em solid #ddd" }}></Divider>
 
       {/* <DeveloperLink /> */}
-      <div className="devw-screen bg-neutral text-neutral-content text-center font-bold p-5">
+      <div className="devw-screen bg-neutral text-neutral-content text-center font-bold p-5 event-details">
         <p className="text-2xl text-warning">Developed by</p>
         <div className="flex flex-col lg:flex-row text-center text-xl">
           <span className="mx-3 hover:underline sm:my-1">

@@ -28,11 +28,35 @@ function ScheduleNavbar() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a href="#solvathon">Solvathon</a>
+              <a href="#solveathon">Solveathon</a>
             </li>
 
             <li>
               <a href="#strikeforce">Strike Force</a>
+            </li>
+            <li>
+              <a href="#infinityandbeyond">Infinity and Beyond</a>
+            </li>
+            <li>
+              <a href="#gengeeks">Gen Geeks</a>
+            </li>
+            <li>
+              <a href="#bigbang">Big Bang</a>
+            </li>
+            <li>
+              <a href="#zest">Zest</a>
+            </li>
+            <li>
+              <a href="#gravity">Gravity</a>
+            </li>
+            <li>
+              <a href="#constellation">Constellation</a>
+            </li>
+            <li>
+              <a href="#nebulax">Nebula X</a>
+            </li>
+            <li>
+              <a href="#mysteryevent">Mystery Event</a>
             </li>
           </ul>
         </div>

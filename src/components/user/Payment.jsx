@@ -30,6 +30,7 @@ function Payment() {
         getSelectedEventDetails();
       }
     } catch (err) {
+      console.log("GET-team-registerd", err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!! check your internet connectivity",
@@ -50,6 +51,7 @@ function Payment() {
         : setIsVerified(false);
       // console.log(data);
     } catch (err) {
+      console.log("GET-is paid", err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!! check your internet connectivity",
@@ -64,6 +66,7 @@ function Payment() {
     try {
       const { data } = await axios.get("/team/get-event-fees-of-team");
       //console.log(data)
+      console.log("Data : ", data);
       setTotalFees(data.totalFees);
 
       const events = await axios.get("/team/get-events-of-team");
@@ -124,6 +127,7 @@ function Payment() {
       //   ? setSelectedEvents(["Group Event"])
       //   : setRegisteredEventType("");
     } catch (err) {
+      console.log("GET-event fees", err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!! check your internet connectivity",

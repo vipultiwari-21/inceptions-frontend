@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import DeerajPropertyLogo from "../../assets/Sponsors/DeerajProperty.png";
 import PepsiLogo from "../../assets/Sponsors/pepsi.png";
 import VarunBeweregesLogo from "../../assets/Sponsors/VB.svg";
+import PrachiDentalClinicLogo from "../../assets/Sponsors/prachi.svg";
 
 function Sponsorship() {
   return (
@@ -77,7 +78,7 @@ function Sponsorship() {
             flexDirection="column"
           >
             <img
-              src={VarunBeweregesLogo}
+              src={PrachiDentalClinicLogo}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}

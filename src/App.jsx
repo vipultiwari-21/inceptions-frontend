@@ -31,6 +31,7 @@ import PaymentInfo from "./components/user/PaymentInfo";
 import Schedule from "./components/LandingPage/Schedule";
 import Rules from "./components/LandingPage/Rules";
 import VerifyPayments from "./components/admin/VerifyPayments";
+import AssignEventForm from "./components/coordinator/AssignEventForm";
 
 function App() {
   const user = Cookies.get("token");
@@ -168,6 +169,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <AssignEvent />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/:id"
+                element={
+                  <ProtectedRoute>
+                    <AssignEventForm />
                   </ProtectedRoute>
                 }
               />

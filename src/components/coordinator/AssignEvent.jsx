@@ -103,21 +103,29 @@ const AssignEvent = () => {
       headerName: "Assign Event",
       flex: 1,
       renderCell: ({ row, id }) => {
+        let memberId = id;
+
+        // console.log("row", row);
+        // console.log("teamMates", teamMates);
+        // teamMates.map((member) => console.log(member));
+        // console.log("memeberId", memberId);
         let currentMember = {};
-        currentMember = teamMates.filter((member) => member.memberId === id)[0];
-        // console.log("currentMember", currentMember.memberId);
+
+        currentMember = teamMates.filter(
+          (member) => member.memberId === memberId
+        )[0];
+        console.log("currentMember", currentMember);
+        axios
+          .post("/teamMember/get-event-of-team-member", {
+            memberId: currentMember.memberId,
+          })
+          .then(({ data }) => console.log(data.message));
         return (
-          <>
-            {/* <Link to={currentMember.memberId}> */}
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={console.log(currentMember)}
-            >
+          <Link to={`${currentMember.memberId}`} className={id}>
+            <Button color="secondary" variant="contained">
               Assign
             </Button>
-            {/* </Link> */}
-          </>
+          </Link>
         );
       },
     },

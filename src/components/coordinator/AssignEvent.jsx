@@ -34,6 +34,9 @@ const AssignEvent = () => {
   const [error, setError] = useState("");
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
+  const [teamId, setTeamId] = useState("");
+
+  console.log(teamName);
 
   const getTeams = async () => {
     const { data } = await axios.get("/team/get");
@@ -58,6 +61,7 @@ const AssignEvent = () => {
     try {
       setLoading(true); //   let obj = { teamId: values.team_id };
       //   console.log("obj", obj);
+      setTeamId(values.team_id);
       const { data } = await axios.post("/team/get-specific-team-details", {
         teamId: values.team_id,
       });

@@ -115,6 +115,11 @@ const AssignEvent = () => {
           (member) => member.memberId === memberId
         )[0];
         console.log("currentMember", currentMember);
+        axios
+          .post("/teamMember/get-event-of-team-member", {
+            memberId: currentMember.memberId,
+          })
+          .then(({ data }) => console.log(data.message));
         return (
           <Link to={`${currentMember.memberId}`} className={id}>
             <Button color="secondary" variant="contained">

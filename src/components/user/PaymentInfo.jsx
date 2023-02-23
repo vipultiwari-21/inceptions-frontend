@@ -82,10 +82,16 @@ function PaymentInfo() {
     image: yup
       .mixed()
       .required("File is required")
+      .test(
+        "fileSize",
+        "File too large",
+        (value) => value === null || (value && value.size <= 512000)
+      )
       .test("fileType", "Upload only jpeg / jpg format", function (value) {
         const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
         return SUPPORTED_FORMATS.includes(value ? value.type : null);
       }),
+
     amountPaid: yup.array().required("required"),
   });
 
@@ -354,8 +360,6 @@ function PaymentInfo() {
 
                     */}
 
-                {/*
-
                 {selectedImage ? (
                   <Box className="w-full my-8 flex items-center justify-center  ">
                     <Box
@@ -373,7 +377,6 @@ function PaymentInfo() {
                     />
                   </Box>
                 ) : null}
-*/}
 
                 <Box
                   display="flex"

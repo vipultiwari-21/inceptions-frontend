@@ -1,78 +1,80 @@
 <!DOCTYPE html>
-<html lang="en"  data-theme="night">
+<html lang="en" data-theme="night">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/E1.png" />
     <link rel="manifest" href="manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+    <meta
+      name="google-site-verification"
+      content="q0gFbt1M-h-xv9HkdEJoplq5UxEKbeXLTwpu8k0IeT4"
+    />
+
     <title>Exceptions - 2023</title>
     <script>
-
       window.onblur = function () {
         document.title = "you went?";
       };
-      
+
       window.onfocus = function () {
         document.title = "Exceptions - 2023";
       };
-          </script>
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
     <script>
+      const headTitleName = document.querySelector(
+        ".responsive-table__head__title--name"
+      );
+      const headTitleStatus = document.querySelector(
+        ".responsive-table__head__title--status"
+      );
+      const headTitleTypes = document.querySelector(
+        ".responsive-table__head__title--types"
+      );
+      const headTitleUpdate = document.querySelector(
+        ".responsive-table__head__title--update"
+      );
+      const headTitleCountry = document.querySelector(
+        ".responsive-table__head__title--country"
+      );
 
-const headTitleName = document.querySelector(
-	".responsive-table__head__title--name"
-);
-const headTitleStatus = document.querySelector(
-	".responsive-table__head__title--status"
-);
-const headTitleTypes = document.querySelector(
-	".responsive-table__head__title--types"
-);
-const headTitleUpdate = document.querySelector(
-	".responsive-table__head__title--update"
-);
-const headTitleCountry = document.querySelector(
-	".responsive-table__head__title--country"
-);
+      // Select tbody text from Dom
+      const bodyTextName = document.querySelectorAll(
+        ".responsive-table__body__text--name"
+      );
+      const bodyTextStatus = document.querySelectorAll(
+        ".responsive-table__body__text--status"
+      );
+      const bodyTextTypes = document.querySelectorAll(
+        ".responsive-table__body__text--types"
+      );
+      const bodyTextUpdate = document.querySelectorAll(
+        ".responsive-table__body__text--update"
+      );
+      const bodyTextCountry = document.querySelectorAll(
+        ".responsive-table__body__text--country"
+      );
 
-// Select tbody text from Dom
-const bodyTextName = document.querySelectorAll(
-	".responsive-table__body__text--name"
-);
-const bodyTextStatus = document.querySelectorAll(
-	".responsive-table__body__text--status"
-);
-const bodyTextTypes = document.querySelectorAll(
-	".responsive-table__body__text--types"
-);
-const bodyTextUpdate = document.querySelectorAll(
-	".responsive-table__body__text--update"
-);
-const bodyTextCountry = document.querySelectorAll(
-	".responsive-table__body__text--country"
-);
+      // Select all tbody table row from Dom
+      const totalTableBodyRow = document.querySelectorAll(
+        ".responsive-table__body .responsive-table__row"
+      );
 
-// Select all tbody table row from Dom
-const totalTableBodyRow = document.querySelectorAll(
-	".responsive-table__body .responsive-table__row"
-);
-
-// Get thead titles and append those into tbody table data items as a "data-title" attribute
-for (let i = 0; i < totalTableBodyRow.length; i++) {
-	bodyTextName[i].setAttribute("data-title", headTitleName.innerText);
-	bodyTextStatus[i].setAttribute("data-title", headTitleStatus.innerText);
-	bodyTextTypes[i].setAttribute("data-title", headTitleTypes.innerText);
-	bodyTextUpdate[i].setAttribute("data-title", headTitleUpdate.innerText);
-	bodyTextCountry[i].setAttribute("data-title", headTitleCountry.innerText);
-}
-
+      // Get thead titles and append those into tbody table data items as a "data-title" attribute
+      for (let i = 0; i < totalTableBodyRow.length; i++) {
+        bodyTextName[i].setAttribute("data-title", headTitleName.innerText);
+        bodyTextStatus[i].setAttribute("data-title", headTitleStatus.innerText);
+        bodyTextTypes[i].setAttribute("data-title", headTitleTypes.innerText);
+        bodyTextUpdate[i].setAttribute("data-title", headTitleUpdate.innerText);
+        bodyTextCountry[i].setAttribute(
+          "data-title",
+          headTitleCountry.innerText
+        );
+      }
     </script>
-
-
   </body>
 </html>

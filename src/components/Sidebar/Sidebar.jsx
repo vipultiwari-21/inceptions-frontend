@@ -308,8 +308,8 @@ const Sidebar = ({
                     setSelected={setSelected}
                   />
                   <Item
-                    title="My Tenants"
-                    to="tenants"
+                    title="Verify Payments"
+                    to="verifyPayments"
                     icon={<PeopleIcon />}
                     selected={selected}
                     setSelected={setSelected}

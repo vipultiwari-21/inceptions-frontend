@@ -52,6 +52,11 @@ function Banner() {
                 EXCEPTIONS
                 <br /> 2023
               </h3>
+
+              {/* Tagline */}
+              <p className="text-neutral-content   sm:text-xl text-2xl text-center lg:text-left  font-extrabold">
+                UNLEASH THE EXCEPTION IN YOU
+              </p>
             </div>
 
             {/* Register btn */}

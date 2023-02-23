@@ -33,6 +33,11 @@ function LandingPage() {
             <h1 className="sub-heading text-secondary text-bold text-3xl ">
               EVENTS
             </h1>
+            <br />
+
+            <Link to="/rules" className="font-bold text-warning underline my-8">
+              Click here for general rules
+            </Link>
 
             <OpenEvents />
 

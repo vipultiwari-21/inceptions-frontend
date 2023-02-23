@@ -216,6 +216,16 @@ function App() {
             }
           />
 
+          {/* Admin Routes */}
+          <Route
+            path="verifyPayments"
+            element={
+              <ProtectedRoute>
+                <VolunteerAttendance />
+              </ProtectedRoute>
+            }
+          />
+
           {/*Backend Routes*/}
 
           <Route

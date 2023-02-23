@@ -180,7 +180,7 @@ const AddParticipant = () => {
                 </h3>
               </li>
 
-              {eventType && eventType == "both" ? (
+              {eventType ? (
                 <li>
                   <h3
                     className={`text-warning my-3 font-bold ${
@@ -189,6 +189,8 @@ const AddParticipant = () => {
                   >
                     {eventType == "both"
                       ? `  Note : Your team must contain atleast 7 members to win General Championship . `
+                      : eventType == "group"
+                      ? `Note : Your team must contain atleast 7 members and maximum of 9 members to win General Championship .`
                       : null}
                   </h3>
                 </li>

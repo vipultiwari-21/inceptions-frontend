@@ -538,9 +538,7 @@ const TeamInfo = () => {
                   >
                     Add team mates
                   </Button>
-                ) : (
-                  <h1>You have verified</h1>
-                )}
+                ) : null}
               </Box>
             </form>
           )}

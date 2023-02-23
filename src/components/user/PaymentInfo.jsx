@@ -83,7 +83,7 @@ function PaymentInfo() {
       .mixed()
       .required("File is required")
       .test("fileType", "Upload only jpeg / jpg format", function (value) {
-        const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg"];
+        const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
         return SUPPORTED_FORMATS.includes(value ? value.type : null);
       }),
     amountPaid: yup.array().required("required"),

@@ -127,6 +127,7 @@ function ResponsiveAppBar() {
                   fontWeight: "bold",
                   ml: { lg: 10 },
                 }}
+                LinkComponent
               >
                 <Link
                   to={

@@ -30,6 +30,7 @@ import Payment from "./components/user/Payment";
 import PaymentInfo from "./components/user/PaymentInfo";
 import Schedule from "./components/LandingPage/Schedule";
 import Rules from "./components/LandingPage/Rules";
+import VerifyPayments from "./components/admin/VerifyPayments";
 
 function App() {
   const user = Cookies.get("token");
@@ -138,37 +139,60 @@ function App() {
             </>
           )}
           {user && role === "ADMIN" && (
-            <Route
-              path="/"
-              element={
-                <>
+            <>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <ProtectedRoute>
+                      <AdminProfile />
+                    </ProtectedRoute>
+                  </>
+                }
+              />
+
+              <Route
+                path="verifyPayments"
+                element={
                   <ProtectedRoute>
-                    <AdminProfile />
+                    <VerifyPayments />
                   </ProtectedRoute>
-                </>
-              }
-            />
+                }
+              />
+            </>
           )}
           {user && role === "COORDINATOR" && (
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <AssignEvent />
-                </ProtectedRoute>
-              }
-            />
+            <>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <AssignEvent />
+                  </ProtectedRoute>
+                }
+              />
+            </>
           )}
 
           {user && role === "VOLUNTEER" && (
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <VolunteerProfile />
-                </ProtectedRoute>
-              }
-            />
+            <>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <VolunteerProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="volunteer-attendance"
+                element={
+                  <ProtectedRoute>
+                    <VolunteerAttendance />
+                  </ProtectedRoute>
+                }
+              />
+            </>
           )}
           {/* {user ? (
             <Route
@@ -205,26 +229,6 @@ function App() {
               <Route exact path="/reset-password" element={<ResetPassword />} />{" "}
             </>
           )}
-
-          {/* Volunteer Routes */}
-          <Route
-            path="volunteer-attendance"
-            element={
-              <ProtectedRoute>
-                <VolunteerAttendance />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* Admin Routes */}
-          <Route
-            path="verifyPayments"
-            element={
-              <ProtectedRoute>
-                <VolunteerAttendance />
-              </ProtectedRoute>
-            }
-          />
 
           {/*Backend Routes*/}
 

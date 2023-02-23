@@ -25,18 +25,6 @@ export default function Schedule() {
           venue: "Updating Shortly",
           time: "MAR 3, 11:00 AM-1:30 PM",
         },
-        {
-          roundName: "Round 2",
-          status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 2:30 PM-3:30 PM",
-        },
-        {
-          roundName: "Round 3",
-          status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 4, 9:00 AM-01:30 PM",
-        },
       ],
     },
 

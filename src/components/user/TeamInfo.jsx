@@ -166,8 +166,8 @@ const TeamInfo = () => {
 
   const getIsVerified = async () => {
     const { data } = await axios.get("/payment/is-paid");
-    console.log("Verificaion : ", data);
-    setIsVerified(data.isPaid);
+
+    setIsVerified(data.isPaid && data.paymentData.isVerified ? true : false);
   };
 
   useEffect(() => {
@@ -229,7 +229,7 @@ const TeamInfo = () => {
       resetForm(initialValues);
       getTeams();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong! please try again :)",

@@ -29,7 +29,7 @@ const UploadComponent = (props) => {
     isDragReject,
     isDragActive,
   } = useDropzone({
-    accept: "image/jpeg , image/jpg",
+    accept: "image/jpeg , image/jpg , image/png",
     onDrop: (acceptedFiles) => {
       setFieldValue("image", acceptedFiles[0]);
       console.log(acceptedFiles[0].name);

@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import DeerajPropertyLogo from "../../assets/Sponsors/DeerajProperty.png";
 import PepsiLogo from "../../assets/Sponsors/pepsi.png";
 import VarunBeweregesLogo from "../../assets/Sponsors/VB.svg";
+import PrachiDentalClinicLogo from "../../assets/Sponsors/prachi.svg";
 
 function Sponsorship() {
   return (
@@ -21,7 +22,7 @@ function Sponsorship() {
       </h1>
 
       <Grid container className="lg:p-20 " spacing={6}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={4}>
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -37,7 +38,7 @@ function Sponsorship() {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={3}>
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -53,7 +54,7 @@ function Sponsorship() {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={3}>
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -62,6 +63,22 @@ function Sponsorship() {
           >
             <img
               src={VarunBeweregesLogo}
+              alt="male"
+              className="img-contact"
+              style={{ width: "150px", height: "150px" }}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <img
+              src={PrachiDentalClinicLogo}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}

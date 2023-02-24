@@ -266,7 +266,7 @@ const EventDetailList = [
     img: "https://i.ibb.co/m8SxjDF/Digital-nomad-cuate.png",
     svg: "/scheduleIcons/iandb.svg",
     rules: [
-      "Team should consist of 2 to maximum 3 participants.",
+      "Team should consist of 2 participants.",
       "Team must be present 20 minutes prior to the scheduled event time for reporting.",
       "A list of available IOT devices will be provided during registration and students are also allowed to bring their own devices that are not present in the list.",
       "Mandatory IOT Component disclosure will be provided online which should be accepted and a Refundable amount of Rs. 1000/- is to be paid that will be withheld in case of component damage.",

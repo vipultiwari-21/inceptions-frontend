@@ -27,6 +27,10 @@ function Rules() {
             <ul className="list-disc text-neutral-content font-bold text-xl text-justify leading-10 ">
               <li>Any number of teams can participate from a college.</li>
               <li>
+                A Team for General Championship must have atleast 6 members and
+                maximum of 9 members.
+              </li>
+              <li>
                 Teams need to remember their allotted team names till the end of
                 the fest.
               </li>

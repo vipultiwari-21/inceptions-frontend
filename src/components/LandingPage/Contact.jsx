@@ -44,7 +44,7 @@ function Contact() {
             </h4>
             <h4 className="text-center text-xl text-bold">
               <LocalPhoneIcon className="mr-3" style={{ color: "#E6E6E6 " }} />
-              <a href="tel:+91-8310193605">+91-8310193605</a>
+              <a href="tel:+91-8310193605">+91 8310193605</a>
             </h4>{" "}
           </Box>
         </Grid>
@@ -75,7 +75,7 @@ function Contact() {
       {/* Overall event co ordinators */}
 
       <h4 className="text-center my-16 text-2xl text-bold ">
-        Overall Event Co-ordinators
+        Overall Events Main Co-ordinators
       </h4>
 
       <Grid container className="lg:px-20" spacing={6}>
@@ -96,7 +96,7 @@ function Contact() {
             </h4>
             <h4 className="text-center text-xl text-bold">
               <LocalPhoneIcon className="mr-3" style={{ color: "#E6E6E6 " }} />
-              <a href="tel:+91-8884601647">+91-8884601647</a>
+              <a href="tel:+91-8884601647">+91 8884601647</a>
             </h4>{" "}
           </Box>
         </Grid>

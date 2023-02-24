@@ -38,10 +38,7 @@ function Rules() {
               <li>ID card provided must be kept appropriately.</li>
               <li>The judge’s decision will be final.</li>
               <li>Carry your college ID cards for verification</li>
-              <li>
-                There is no Restriction on Number of teams participating from a
-                college.
-              </li>
+
               <li>
                 The students participating must report to their respective
                 events on time, <br /> NO DELAY WILL BE ENTERTAINED.

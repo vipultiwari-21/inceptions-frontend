@@ -33,18 +33,47 @@ const GetAllTeams = () => {
   //   const colors = tokens(theme.palette.mode);
   const [teamName, setTeamName] = useState([] || {});
 
+  const getPayment = async (userId) => {
+    try {
+      const { data } = await axios.post("/payment/is-participant-paid", {
+        participantId: userId,
+      });
+
+      if (data.isPaid && data.paymentData.isVerified) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {}
+  };
+
   const getTeams = async () => {
     try {
       const { data } = await axios.get("/team/get");
+      console.log(data);
+
+      const temp1 = await Promise.all(
+        data.map(async (obj) => {
+          return {
+            id: obj.teamId,
+            label: obj.teamName.label,
+            payment: await getPayment(
+              obj.headUser ? obj.headUser.userId : null
+            ),
+          };
+        })
+      );
+
       const temp = data.map((obj) => {
         return {
           id: obj.teamId,
           label: obj.teamName.label,
+          payment: getPayment(),
         };
       });
 
       // allTeams.push(temp);
-      setTeamName(temp);
+      setTeamName(temp1);
     } catch (err) {
       Swal.fire({
         title: "Error!",
@@ -74,6 +103,11 @@ const GetAllTeams = () => {
       headerName: "Team Name",
       flex: 1,
     },
+    {
+      field: "payment",
+      headerName: "Payment",
+      flex: 1,
+    },
 
     {
       field: "route",
@@ -89,7 +123,7 @@ const GetAllTeams = () => {
         return (
           <Link to={`${teamId}`} className={id}>
             <Button color="primary" variant="contained">
-              View Details
+              Details
             </Button>
           </Link>
         );

@@ -88,6 +88,25 @@ const DetailedEvents = () => {
                           </p>
                         </>
                       ) : null}
+
+                      {event.mainNotice ? (
+                        <div className="my-8 ">
+                          <span className="text-xl text-warning ">
+                            Important Note
+                          </span>
+
+                          <ul className="list-disc text-left my-5 ">
+                            {event.mainNotice.map((notice) => {
+                              return (
+                                <li className="my-3 font-bold text-warning">
+                                  {notice}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      ) : null}
+
                       {event.rules ? (
                         <div className="my-8 ">
                           <span className="text-xl text-secondary ">Rules</span>
@@ -99,19 +118,21 @@ const DetailedEvents = () => {
                           </ul>
                         </div>
                       ) : null}
-                      {event.mainNotice ? (
+
+                      {event.prerequisits ? (
                         <div className="my-8 ">
-                          <span className="text-xl text-warning ">
-                            Important Note
+                          <span className="text-xl text-secondary ">
+                            Prerequisites
                           </span>
 
                           <ul className="list-disc text-left my-5 ">
-                            {event.mainNotice.map((notice) => {
-                              return <li className="my-3">{notice}</li>;
+                            {event.prerequisits.map((prerequisit) => {
+                              return <li className="my-3">{prerequisit}</li>;
                             })}
                           </ul>
                         </div>
                       ) : null}
+
                       {event.requirements ? (
                         <div className="my-8 w-full ">
                           <span className="text-xl text-secondary ">

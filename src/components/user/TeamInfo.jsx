@@ -166,8 +166,8 @@ const TeamInfo = () => {
 
   const getIsVerified = async () => {
     const { data } = await axios.get("/payment/is-paid");
-    console.log("Verificaion : ", data);
-    setIsVerified(data.isPaid);
+
+    setIsVerified(data.isPaid && data.paymentData.isVerified ? true : false);
   };
 
   useEffect(() => {

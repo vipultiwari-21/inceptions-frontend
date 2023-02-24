@@ -25,7 +25,7 @@ function Rules() {
               Group Championship
             </h1>
             <ul className="list-disc text-neutral-content font-bold text-xl text-justify leading-10 ">
-              <li>Team Size Minimum 7 and Maximum 10</li>
+              <li>Team Size Minimum 7 and Maximum 9</li>
               <li>Any number of teams can participate from a college.</li>
               <li>
                 Teams need to remember their allotted team names till the end of

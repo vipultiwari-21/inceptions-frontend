@@ -32,6 +32,7 @@ import Schedule from "./components/LandingPage/Schedule";
 import Rules from "./components/LandingPage/Rules";
 import VerifyPayments from "./components/admin/VerifyPayments";
 import AssignEventForm from "./components/coordinator/AssignEventForm";
+import GetSpeificTeam from "./components/admin/GetSpeificTeam";
 
 function App() {
   const user = Cookies.get("token");
@@ -147,6 +148,28 @@ function App() {
                   <>
                     <ProtectedRoute>
                       <AdminProfile />
+                    </ProtectedRoute>
+                  </>
+                }
+              />
+
+              <Route
+                path="/get-teams"
+                element={
+                  <>
+                    <ProtectedRoute>
+                      <GetAllTeams />
+                    </ProtectedRoute>
+                  </>
+                }
+              />
+
+              <Route
+                path="/get-teams/:id"
+                element={
+                  <>
+                    <ProtectedRoute>
+                      <GetSpeificTeam />
                     </ProtectedRoute>
                   </>
                 }

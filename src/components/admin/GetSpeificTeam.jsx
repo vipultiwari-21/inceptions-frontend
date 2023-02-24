@@ -21,91 +21,77 @@ import * as yup from "yup";
 import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
-import Swal from "sweetalert2";
-import "sweetalert2/src/sweetalert2.scss";
+import { useParams } from "react-router-dom";
 
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 // import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 
-const GetAllTeams = () => {
+const GetSpecificTeam = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
-  const [teamName, setTeamName] = useState([] || {});
+  const [loading, setLoading] = useState(false);
+  const [teamMates, setTeamMates] = useState([]);
+  const [error, setError] = useState("");
 
-  const getTeams = async () => {
-    try {
-      const { data } = await axios.get("/team/get");
-      const temp = data.map((obj) => {
-        return {
-          id: obj.teamId,
-          label: obj.teamName.label,
-        };
-      });
-
-      // allTeams.push(temp);
-      setTeamName(temp);
-    } catch (err) {
-      Swal.fire({
-        title: "Error!",
-        text: err,
-        icon: "error",
-      });
-    }
-  };
+  const { id } = useParams();
 
   useEffect(() => {
-    getTeams();
+    getTeamDetails();
   }, []);
 
+  const getTeamDetails = async () => {
+    try {
+      setLoading(true); //   let obj = { teamId: values.team_id };
+      //   console.log("obj", obj);
+      const { data } = await axios.post("/team/get-specific-team-details", {
+        teamId: id,
+      });
+      setTeamMates(data[0].teamMembers);
+      resetForm({ values: initialValues });
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+    }
+
+    setLoading(false);
+  };
+
   const columns = [
-    // {
-    //   field: "headUser",
-    //   headerName: "Team Head",
-    //   flex: 1,
-    // },
+    { field: "memberId", headerName: "Member ID", flex: 1 },
+    {
+      field: "firstName",
+      headerName: "First Name",
+      flex: 1,
+    },
     // {
     //   field: "lastName",
     //   headerName: "Last Name",
     //   flex: 1,
     // },
     {
-      field: "label",
-      headerName: "Team Name",
+      field: "email",
+      headerName: "Email",
       flex: 1,
     },
-
-    {
-      field: "route",
-      headerName: "Details",
-      flex: 1,
-      renderCell: ({ row, id }) => {
-        let teamId = id;
-
-        // console.log("row", row);
-        // console.log("teamMates", teamMates);
-        // teamMates.map((member) => console.log(member));
-        // console.log("memeberId", memberId);
-        return (
-          <Link to={`${teamId}`} className={id}>
-            <Button color="primary" variant="contained">
-              View Details
-            </Button>
-          </Link>
-        );
-      },
-    },
-
     // {
     //   field: "usn",
     //   headerName: "USN",
     //   flex: 1,
     // },
+    {
+      field: "contactNumber",
+      headerName: "Contact Number",
+      flex: 1,
+    },
   ];
 
   return (
     <Box m="20px">
-      <Header title="Get All Team Details" subtitle="List of the all teams" />
+      <Header
+        title="Get Specific Team Details"
+        subtitle="List of the specific teammates"
+      />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -142,9 +128,9 @@ const GetAllTeams = () => {
       >
         <DataGrid
           className="datagrid"
-          rows={teamName}
+          rows={teamMates}
           columns={columns}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row.memberId}
         />
       </Box>
     </Box>
@@ -158,4 +144,4 @@ const initialValues = {
   team_id: "",
 };
 
-export default GetAllTeams;
+export default GetSpecificTeam;

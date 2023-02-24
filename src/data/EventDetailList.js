@@ -265,19 +265,29 @@ const EventDetailList = [
       "Calling all tech-savvy, innovation-loving, and prize-hunting students! Are you ready to show off your skills and prove you're the best in the game? Well, buckle up because we're hosting an IoT competition and it's time to put your knowledge to the test! This is your chance to let your creativity run wild and come up with some mind-blowing solutions using IoT technology. Trust us, this is not an average boring competition, we're talking about cash prizes, recognition, and the opportunity to make a real impact in the world of tech. So, what are you waiting for? Submit your entries and let's see if you got what it takes to be called “IoT's Orbital Overlord”!",
     img: "https://i.ibb.co/m8SxjDF/Digital-nomad-cuate.png",
     svg: "/scheduleIcons/iandb.svg",
+    mainNotice: [
+      "The team should consist of 2 participants.",
+      "Mandatory IOT Component disclosure will be provided on the day of event which should be accepted and a Refundable amount of Rs. 1000/- is to be paid that will be withheld in case of component damage.",
+    ],
     rules: [
-      "Team should consist of 2 participants.",
       "Team must be present 20 minutes prior to the scheduled event time for reporting.",
-      "A list of available IOT devices will be provided during registration and students are also allowed to bring their own devices that are not present in the list.",
-      "Mandatory IOT Component disclosure will be provided online which should be accepted and a Refundable amount of Rs. 1000/- is to be paid that will be withheld in case of component damage.",
-      "Raspberry pi’s provided should be returned as it is, and SD card exchanging will result in team disqualification.",
+      "A list of available IOT devices will be provided during registration and students are also allowed to bring their own devices that are not present on the list.",
+      "Raspberry pi’s provided should be returned as they are, and SD card exchanging will result in team disqualification.",
       "Internet services will be provided where contestants are allowed to search and find solutions.",
       "Participants are supposed to bring their own laptops and charging cords.",
       "All solutions must be created during the competition and cannot have been previously developed.",
       "Participants are expected to act ethically and refrain from any illegal or unethical behavior such as hacking or cheating.",
       "Team members should inform one of the organizers before leaving the venue, failure to do so will result in disqualification of the entire team.",
-      "Mandatory IOT Component disclosure will be provided on the day of event which should be accepted and a Refundable amount of Rs. 1000/- is to be paid that will be withheld in case of component damage.",
     ],
+
+    prerequisits: [
+      "Participants must have a good understanding of python and C++.",
+      "Participants must have prior knowledge of Thingsboard or Node-RED.",
+      "Participants should know about fritzing.",
+      "Participants must have basic knowledge of sensors and actuators. ",
+      "Participants are expected to have an azure account and basic knowledge about instance creation as well as deployment of applications. [will be considered for additional points]",
+    ],
+
     contact: [
       {
         type: "Student Coordinator",
@@ -288,7 +298,7 @@ const EventDetailList = [
       {
         type: "Faculty Coordinator",
         name: "Dr.B Renuka Prasad",
-        email: "renuka prasadb@rvce.edu.in",
+        email: "renukaprasadb@rvce.edu.in",
         phone: "+91 9901945674",
       },
     ],

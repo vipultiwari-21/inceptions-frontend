@@ -119,12 +119,10 @@ const AddParticipant = () => {
 
   const handleFormSubmit = async (values, { resetForm }) => {
     setLoading(true);
-
     try {
       const obj = {
         firstName: values.firstName,
-        lastName: teamHead.lastName,
-        usn: " ",
+        lastName: values.lastName,
         email: values.email,
         contactNumber: values.contactNumber,
       };
@@ -144,6 +142,7 @@ const AddParticipant = () => {
       getMaxTeamMembers();
     } catch (err) {
       // alert(err.data.message)
+      console.log(err);
       Swal.fire({
         title: "Error!",
         text: err.response.data.error,
@@ -151,7 +150,6 @@ const AddParticipant = () => {
         confirmButtonText: "Okay",
       });
     }
-
     setLoading(false);
   };
 

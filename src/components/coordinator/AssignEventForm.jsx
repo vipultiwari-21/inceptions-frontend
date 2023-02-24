@@ -41,9 +41,11 @@ const AssignEventForm = () => {
   const [error, setError] = useState("");
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
-  const [teamId, setTeamId] = useState("");
+  const [teamId, setTeamId] = useState("1");
+  const [selected, setSelected] = useState([]);
 
-  console.log(teamName);
+  // console.log(teamName);
+  console.log(teamMates);
 
   const getTeams = async () => {
     const { data } = await axios.get("/team/get");
@@ -58,11 +60,27 @@ const AssignEventForm = () => {
     setTeamName(temp);
   };
 
+  function handleSelectChange(e) {
+    setTeamId(e.target.value);
+    getTeamMembers();
+  }
+
+  const getTeamMembers = async () => {
+    // setTeamId(values.team_id);
+    // console.log(teamId);
+    const { data } = await axios.post("/team/get-specific-team-details", {
+      teamId: teamId,
+    });
+    // console.log(data[0].teamMembers);
+    setTeamMates(data[0].teamMembers);
+  };
+
   useEffect(() => {
     getTeams();
+    getTeamMembers();
   }, []);
-
-  const handleFormSubmit = async (values, { resetForm }) => {
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
     // try {
     //   setLoading(true);
     //   const existingSensors = [];
@@ -95,20 +113,22 @@ const AssignEventForm = () => {
     //   setError(err.response.data.error);
     // }
 
-    try {
-      setLoading(true); //   let obj = { teamId: values.team_id };
-      //   console.log("obj", obj);
-      setTeamId(values.team_id);
-      const { data } = await axios.post("/team/get-specific-team-details", {
-        teamId: values.team_id,
-      });
-      setTeamMates(data[0].teamMembers);
-      resetForm({ values: initialValues });
-      setLoading(false);
-    } catch (err) {
-      setError(err.message);
-    }
+    // try {
+    //   setLoading(true); //   let obj = { teamId: values.team_id };
+    //   //   console.log("obj", obj);
+    //   setTeamId(values.team_id);
+    //   const { data } = await axios.post("/team/get-specific-team-details", {
+    //     teamId: values.team_id,
+    //   });
+    //   // setTeamMates(data[0].teamMembers);
+    //   console.log(data[0].teamMembers);
+    //   resetForm({ values: initialValues });
+    //   setLoading(false);
+    // } catch (err) {
+    //   setError(err.message);
+    // }
 
+    // console.log(teamId);
     setLoading(false);
   };
 
@@ -142,155 +162,133 @@ const AssignEventForm = () => {
           // alignItems: "center",
         }}
       >
-        <Formik
+        <form
           onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={checkoutSchema}
+          style={{
+            width: "100%",
+            // boxShadow: "7px 7px 9px 0px rgba(0,0,0,0.47)",
+            boxShadow: isNonMobile
+              ? "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
+              : null,
+            maxWidth: "40rem",
+            color: "#e0e0e0",
+            margin: "0 auto",
+            padding: isNonMobile ? "2rem" : null,
+            borderRadius: "6px",
+            background: isNonMobile ? "#1F2A40" : null,
+            // display: "grid",
+            // placeItems: "center",
+            // height: "100%",
+          }}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-          }) => (
-            <form
-              onSubmit={handleSubmit}
+          <Typography
+            // variant={isNonMobile ? "h3" : "h4"}
+            // color={colors.grey[100]}
+            fontWeight="bold"
+            mb="2rem"
+          >
+            SENSORS DETAILS
+          </Typography>
+          {error && (
+            <Box
+              mb="1rem"
+              sx={{
+                color: "#e87c03",
+                display: "flex",
+                // justifyContent: "center",
+                gap: "0.5rem",
+                alignItems: "center",
+                borderRadius: "5px",
+              }}
+              p=".5rem"
+            >
+              <ErrorIcon />
+              {error}
+            </Box>
+          )}
+          <Box
+            // display="grid"
+            // placeItems="center"
+            // color={colors.grey[100]}
+            // gap="30px"
+            // gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+            sx={{
+              "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+            }}
+          >
+            <div
               style={{
-                width: "100%",
-                // boxShadow: "7px 7px 9px 0px rgba(0,0,0,0.47)",
-                boxShadow: isNonMobile
-                  ? "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
-                  : null,
-                maxWidth: "40rem",
-                color: "#e0e0e0",
-                margin: "0 auto",
-                padding: isNonMobile ? "2rem" : null,
-                borderRadius: "6px",
-                background: isNonMobile ? "#1F2A40" : null,
-                // display: "grid",
-                // placeItems: "center",
-                // height: "100%",
+                gridColumn: "span 4",
+                width: "50%",
               }}
             >
-              <Typography
-                // variant={isNonMobile ? "h3" : "h4"}
-                // color={colors.grey[100]}
-                fontWeight="bold"
-                mb="2rem"
+              <InputLabel id="team_id">Team Name</InputLabel>
+              <Select
+                fullWidth
+                variant="filled"
+                // type="text"
+                label="Team ID"
+                // onBlur={handleBlur}
+                onChange={handleSelectChange}
+                value={teamId}
+                name="team_id"
+                labelId="team"
+                id="team_id"
+                // error={!!touched.team_id && !!errors.team_id}
+                // helperText={touched.team_id && errors.team_id}
+                sx={{ gridColumn: "span 4" }}
               >
-                SENSORS DETAILS
-              </Typography>
-              {error && (
-                <Box
-                  mb="1rem"
-                  sx={{
-                    color: "#e87c03",
-                    display: "flex",
-                    // justifyContent: "center",
-                    gap: "0.5rem",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                  }}
-                  p=".5rem"
-                >
-                  <ErrorIcon />
-                  {error}
-                </Box>
-              )}
-              <Box
-                // display="grid"
-                // placeItems="center"
-                // color={colors.grey[100]}
-                // gap="30px"
-                // gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                {teamName
+                  ? teamName.map((eachTeam) => (
+                      <MenuItem value={eachTeam.id} key={eachTeam.id}>
+                        {eachTeam.label}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </div>
+
+            <div style={{ background: "black", color: "white" }}>
+              <InputLabel id="sensor_list" sx={{ marginTop: "1.2rem" }}>
+                Sensors List
+              </InputLabel>
+              <MultiSelect
+                options={teamMates}
+                value={selected}
+                onChange={setSelected}
+                labelledBy="Select"
+              />
+            </div>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt="20px"
+          >
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                type="submit"
+                color="secondary"
+                variant="contained"
                 sx={{
-                  "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                  padding: isNonMobile ? "10px 20px" : null,
+                  width: "100%",
+                  fontSize: isNonMobile ? "16px" : null,
+                  letterSpacing: "0.15rem",
+                  fontWeight: "bold",
                 }}
               >
-                <div
-                  style={{
-                    gridColumn: "span 4",
-                    width: "50%",
-                  }}
-                >
-                  <InputLabel id="team_id">Team Name</InputLabel>
-                  <Select
-                    fullWidth
-                    variant="filled"
-                    // type="text"
-                    label="Team ID"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.team_id}
-                    name="team_id"
-                    labelId="team"
-                    id="team_id"
-                    error={!!touched.team_id && !!errors.team_id}
-                    helperText={touched.team_id && errors.team_id}
-                    sx={{ gridColumn: "span 4" }}
-                  >
-                    {teamName
-                      ? teamName.map((eachTeam) => (
-                          <MenuItem value={eachTeam.id} key={eachTeam.id}>
-                            {eachTeam.label}
-                          </MenuItem>
-                        ))
-                      : null}
-                  </Select>
-                </div>
-
-                {/* <div>
-                  <InputLabel id="sensor_list" sx={{ marginTop: "1.2rem" }}>
-                    Sensors List
-                  </InputLabel>
-                  <MultiSelect
-                    options={allSensorTypes}
-                    value={selected}
-                    onChange={setSelected}
-                    labelledBy="Select"
-                  />
-                </div> */}
-              </Box>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mt="20px"
-              >
-                {loading ? (
-                  <CircularProgress />
-                ) : (
-                  <Button
-                    type="submit"
-                    color="secondary"
-                    variant="contained"
-                    sx={{
-                      padding: isNonMobile ? "10px 20px" : null,
-                      width: "100%",
-                      fontSize: isNonMobile ? "16px" : null,
-                      letterSpacing: "0.15rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    ADD SENSOR
-                  </Button>
-                )}
-              </Box>
-            </form>
-          )}
-        </Formik>
+                ASSIGN
+              </Button>
+            )}
+          </Box>
+        </form>
       </Box>
     </Box>
   );
-};
-
-const checkoutSchema = yup.object().shape({
-  team_id: yup.string().required("required"),
-});
-const initialValues = {
-  team_id: "",
 };
 
 export default AssignEventForm;

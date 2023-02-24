@@ -67,7 +67,7 @@ const DetailedEvents = () => {
                             {event.prize.map((val, index) => {
                               return (
                                 <li key={index} className="my-3">
-                                  {val.stand} :{val.prize}
+                                  {val.stand} :{val.prize} ₹
                                 </li>
                               );
                             })}

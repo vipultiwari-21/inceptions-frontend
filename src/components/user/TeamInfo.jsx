@@ -94,7 +94,6 @@ const TeamInfo = () => {
       const obj = {
         firstName: teamHead.firstName,
         lastName: teamHead.lastName,
-        usn: teamHead.participantDetails.usn,
         email: teamHead.email,
         contactNumber: teamHead.contactNumber,
       };

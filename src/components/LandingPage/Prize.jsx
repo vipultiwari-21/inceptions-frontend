@@ -24,7 +24,7 @@ function Prize() {
           >
             <img src={GeneralChampionship} alt="male" className="img-contact" />
             <h3 className="text-center text-primary  text-xl text-bold">
-              Group Event
+              Group Events
             </h3>
             <h4 className="text-center text-warning my-1 text-xl text-bold flex ">
               ₹3540
@@ -58,7 +58,7 @@ function Prize() {
           >
             <img src={SolveathonImage} alt="male" className="img-contact" />
             <h3 className="text-center text-primary text-xl text-bold">
-              Solvathon
+              Solveathon
             </h3>
             <h4 className="text-center text-warning my-1 text-xl text-bold flex ">
               ₹236

@@ -25,7 +25,10 @@ function Rules() {
               Group Championship
             </h1>
             <ul className="list-disc text-neutral-content font-bold text-xl text-justify leading-10 ">
-              <li>Team Size Minimum 7 and Maximum 9</li>
+              <li>
+                Teams in Group events must be having atleast 7 and maximum of 9
+                participants
+              </li>
               <li>Any number of teams can participate from a college.</li>
               <li>
                 Teams need to remember their allotted team names till the end of
@@ -35,10 +38,7 @@ function Rules() {
               <li>ID card provided must be kept appropriately.</li>
               <li>The judge’s decision will be final.</li>
               <li>Carry your college ID cards for verification</li>
-              <li>
-                There is no Restriction on Number of teams participating from a
-                college.
-              </li>
+
               <li>
                 The students participating must report to their respective
                 events on time, <br /> NO DELAY WILL BE ENTERTAINED.

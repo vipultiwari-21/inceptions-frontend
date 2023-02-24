@@ -119,11 +119,17 @@ const AddParticipant = () => {
 
   const handleFormSubmit = async (values, { resetForm }) => {
     setLoading(true);
-
     try {
+      const obj = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        contactNumber: values.contactNumber,
+      };
+
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}teamMember/add`,
-        values
+        obj
       );
       Swal.fire({
         title: "Success!",
@@ -136,6 +142,7 @@ const AddParticipant = () => {
       getMaxTeamMembers();
     } catch (err) {
       // alert(err.data.message)
+      console.log(err);
       Swal.fire({
         title: "Error!",
         text: err.response.data.error,
@@ -143,7 +150,6 @@ const AddParticipant = () => {
         confirmButtonText: "Okay",
       });
     }
-
     setLoading(false);
   };
 
@@ -315,23 +321,6 @@ const AddParticipant = () => {
                     fullWidth
                     variant="filled"
                     type="text"
-                    label="USN"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.usn}
-                    name="usn"
-                    error={!!touched.usn && !!errors.usn}
-                    helperText={touched.usn && errors.usn}
-                    sx={{ gridColumn: "span 8" }}
-                    InputLabelProps={{ className: "textfield__label" }}
-                    InputProps={{ className: "textfield__label" }}
-                    className="textfield"
-                  />
-
-                  <TextField
-                    fullWidth
-                    variant="filled"
-                    type="text"
                     label="Email"
                     onBlur={handleBlur}
                     onChange={handleChange}
@@ -441,10 +430,6 @@ const checkoutSchema = yup.object().shape({
     .string()
     .required("required")
     .matches("^[a-zA-Z]*$", "Enter valid last Name"),
-  usn: yup
-    .string()
-    .required("required")
-    .matches("^[a-zA-Z0-9]*$", "Enter valid USN"),
   email: yup.string().email("invalid email").required("required"),
   contactNumber: yup
     .string()
@@ -456,7 +441,6 @@ const checkoutSchema = yup.object().shape({
 const initialValues = {
   firstName: "",
   lastName: "",
-  usn: "",
   email: "",
   contactNumber: "",
 };

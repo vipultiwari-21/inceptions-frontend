@@ -61,14 +61,8 @@ function Registration() {
       .max(6, "Invalid Pincode")
       .min(6, "Invalid Pincode"),
 
-    maleParticipants: yup
-      .string()
-      .required("required")
-      .matches(/^[0-9]*$/, "Enter valid value"),
-    femaleParticipants: yup
-      .string()
-      .required("required")
-      .matches(/^[0-9]*$/, "Enter valid value"),
+    maleParticipants: yup.string().matches(/^[0-9]*$/, "Enter valid value"),
+    femaleParticipants: yup.string().matches(/^[0-9]*$/, "Enter valid value"),
   });
   const initialValues = {
     email: "",
@@ -97,12 +91,13 @@ function Registration() {
           contactNumber: values.contactNumber,
           password: values.password,
           collegeName: values.collegeName,
-          usn: " ",
           state: values.state,
           city: values.city,
           zip: values.zip,
-          numberOfMaleAccomodations: values.maleParticipants,
-          numberOfFemaleAccomodations: values.femaleParticipants,
+          numberOfMaleAccomodations:
+            values.maleParticipants != "" ? values.maleParticipants : 0,
+          numberOfFemaleAccomodations:
+            values.femaleParticipants != "" ? values.femaleParticipants : 0,
         }
       );
 

@@ -48,6 +48,7 @@ function Navbar() {
             <li>
               <a href="#prize">Event Fee</a>
             </li>
+
             <li>
               <a href="#contact">Contact us</a>
             </li>
@@ -90,6 +91,9 @@ function Navbar() {
           <li>
             <a href="#events">Events</a>
           </li>
+          <li>
+            <a href="#prize">Event Fee</a>
+          </li>
 
           <li>
             <a href="#venue">Venue</a>
@@ -101,9 +105,6 @@ function Navbar() {
             <a href="#contact">Contact us</a>
           </li>
 
-          <li>
-            <a href="#prize">Event Fee</a>
-          </li>
           <li>
             <Link to="/rules">General Rules</Link>
           </li>

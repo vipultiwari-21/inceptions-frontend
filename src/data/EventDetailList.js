@@ -372,16 +372,16 @@ const EventDetailList = [
     ],
     contact: [
       {
-        type: "Faculty Coordinator",
-        name: "Dr Preethi Patil",
-        email: "preethinpatil@rvce.edu.in",
-        phone: "+91 9900970235",
-      },
-      {
         type: "Student Coordinator",
         name: "Ranjith Kumar J",
         email: "ranjithkj.mca21@rvce.edu.in",
         phone: "+91 8884601647",
+      },
+      {
+        type: "Faculty Coordinator",
+        name: "Dr Preethi Patil",
+        email: "preethinpatil@rvce.edu.in",
+        phone: "+91 9900970235",
       },
     ],
   },

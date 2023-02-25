@@ -41,7 +41,7 @@ const AssignEventForm = () => {
   const [error, setError] = useState("");
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
-  const [teamId, setTeamId] = useState("1");
+  const [teamId, setTeamId] = useState("14");
   const [selected, setSelected] = useState([]);
 
   // console.log(teamName);
@@ -75,11 +75,12 @@ const AssignEventForm = () => {
     let tempArray = [];
     for (let i = 0; i < data[0].teamMembers.length; i++) {
       const getAllData = {
-        label: `${data[0].teamMembers[i].firstname}`,
+        label: `${data[0].teamMembers[i].firstName}`,
         value: `${data[0].teamMembers[i].memberId}`,
       };
       tempArray.push(getAllData);
     }
+    console.log("tempArray", tempArray);
     setTeamMates(tempArray);
   };
 
@@ -264,7 +265,7 @@ const AssignEventForm = () => {
                 options={teamMates}
                 value={selected}
                 onChange={setSelected}
-                labelledBy="Select"
+                labelledBy="Team Members"
               />
             </div>
           </Box>

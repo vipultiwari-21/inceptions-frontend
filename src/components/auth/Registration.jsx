@@ -79,6 +79,22 @@ function Registration() {
   };
 
   const handleFormSubmit = async (values, { setSubmitting, resetForm }) => {
+    const obj = {
+      email: values.email,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      contactNumber: values.contactNumber,
+      password: values.password,
+      collegeName: values.collegeName,
+      state: values.state,
+      city: values.city,
+      zip: values.zip,
+      numberOfMaleAccomodations:
+        values.maleParticipants != "" ? values.maleParticipants : 0,
+      numberOfFemaleAccomodations:
+        values.femaleParticipants != "" ? values.femaleParticipants : 0,
+    };
+
     try {
       setLoading(true);
 

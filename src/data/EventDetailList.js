@@ -373,9 +373,9 @@ const EventDetailList = [
     contact: [
       {
         type: "Student Coordinator",
-        name: "Ranjith Kumar J",
-        email: "ranjithkj.mca21@rvce.edu.in",
-        phone: "+91 8884601647",
+        name: "Rakshith R",
+        email: "rakshithr.mca21@rvce.edu.in",
+        phone: "+91 8792840762",
       },
       {
         type: "Faculty Coordinator",

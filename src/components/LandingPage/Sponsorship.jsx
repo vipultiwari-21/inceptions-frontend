@@ -12,6 +12,7 @@ import KWLogo from "../../assets/Sponsors/kw.png";
 import VarunBeweregesLogo from "../../assets/Sponsors/VB.svg";
 import PrachiDentalClinicLogo from "../../assets/Sponsors/prachi.svg";
 import SriLakshmiConstructor from "../../assets/Sponsors/srilakshmi.svg";
+import KwalityWalls from "../../assets/Sponsors/kwalityWalls.png";
 
 function Sponsorship() {
   return (
@@ -112,7 +113,7 @@ function Sponsorship() {
             flexDirection="column"
           >
             <img
-              src={KWLogo}
+              src={KwalityWalls}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}

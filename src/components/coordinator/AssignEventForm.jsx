@@ -257,10 +257,12 @@ const AssignEventForm = () => {
               </Select>
             </div>
 
-            <div style={{ background: "black", color: "white" }}>
-              <InputLabel id="sensor_list" sx={{ marginTop: "1.2rem" }}>
+            <div
+              style={{ background: "#fff", color: "white", marginTop: "2rem" }}
+            >
+              {/* <InputLabel id="sensor_list" sx={{ marginTop: "1.2rem" }}>
                 Sensors List
-              </InputLabel>
+              </InputLabel> */}
               <MultiSelect
                 options={teamMates}
                 value={selected}

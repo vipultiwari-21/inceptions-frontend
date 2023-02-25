@@ -371,15 +371,22 @@ export default function Schedule() {
   ];
   return (
     <div className="schedule-body">
-      <ScheduleNavbar />
+      <ScheduleNavbar style={{ marginBottom: "5rem" }} />
       {eventsArray.map((event) => {
         return (
-          <div className="container" key={event.id} id={event.id}>
+          <div
+            className="container"
+            key={event.id}
+            id={event.id}
+            style={{ marginTop: "5rem" }}
+            // style={{ padding: "3rem" }}
+          >
             <div
               style={{
                 display: "flex",
                 width: "100%",
-                margin: "5rem 0",
+                // margin: "5rem 0",
+                marginBottom: "1rem",
                 justifyContent: "space-around",
                 alignItems: "center",
                 flexDirection: "column",

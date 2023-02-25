@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import { Box } from "@mui/material";
 import DeerajPropertyLogo from "../../assets/Sponsors/DeerajProperty.png";
 import PepsiLogo from "../../assets/Sponsors/pepsi.svg";
+import KWLogo from "../../assets/Sponsors/kw.png";
 import VarunBeweregesLogo from "../../assets/Sponsors/VB.svg";
 import PrachiDentalClinicLogo from "../../assets/Sponsors/prachi.svg";
 import SriLakshmiConstructor from "../../assets/Sponsors/srilakshmi.svg";
@@ -47,7 +48,7 @@ function Sponsorship() {
             flexDirection="column"
           >
             <img
-              src={DeerajPropertyLogo}
+              src={VarunBeweregesLogo}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}
@@ -63,7 +64,7 @@ function Sponsorship() {
             flexDirection="column"
           >
             <img
-              src={VarunBeweregesLogo}
+              src={DeerajPropertyLogo}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}
@@ -96,6 +97,22 @@ function Sponsorship() {
           >
             <img
               src={SriLakshmiConstructor}
+              alt="male"
+              className="img-contact"
+              style={{ width: "150px", height: "150px" }}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <img
+              src={KWLogo}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}

@@ -284,13 +284,13 @@ export default function Schedule() {
                 flexDirection: "column",
               }}
             >
-              <div>
+              {/* <div>
                 <img
                   src={event.svgPath}
                   alt={event.eventName}
                   style={{ width: "300px", padding: "20px" }}
                 />
-              </div>
+              </div> */}
               <div>
                 <h1 className="text-primary text-xl font-bold">
                   {event.eventName}

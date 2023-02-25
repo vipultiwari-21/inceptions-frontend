@@ -72,7 +72,15 @@ const AssignEventForm = () => {
       teamId: teamId,
     });
     // console.log(data[0].teamMembers);
-    setTeamMates(data[0].teamMembers);
+    let tempArray = [];
+    for (let i = 0; i < data[0].teamMembers.length; i++) {
+      const getAllData = {
+        label: `${data[0].teamMembers[i].firstname}`,
+        value: `${data[0].teamMembers[i].memberId}`,
+      };
+      tempArray.push(getAllData);
+    }
+    setTeamMates(tempArray);
   };
 
   useEffect(() => {

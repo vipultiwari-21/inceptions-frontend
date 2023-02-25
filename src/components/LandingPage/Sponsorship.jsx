@@ -11,6 +11,7 @@ import PepsiLogo from "../../assets/Sponsors/pepsi.png";
 import VarunBeweregesLogo from "../../assets/Sponsors/VB.svg";
 import PrachiDentalClinicLogo from "../../assets/Sponsors/prachi.svg";
 import SriLakshmiConstructor from "../../assets/Sponsors/srilakshmi.svg";
+import KwalityWalls from "../../assets/Sponsors/kwalityWalls.png";
 
 function Sponsorship() {
   return (
@@ -96,6 +97,22 @@ function Sponsorship() {
           >
             <img
               src={SriLakshmiConstructor}
+              alt="male"
+              className="img-contact"
+              style={{ width: "150px", height: "150px" }}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <img
+              src={KwalityWalls}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}

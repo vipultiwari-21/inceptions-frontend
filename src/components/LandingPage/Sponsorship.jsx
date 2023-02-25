@@ -7,7 +7,7 @@ import IoTImage from "../../../public/icons/iot.svg";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/material";
 import DeerajPropertyLogo from "../../assets/Sponsors/DeerajProperty.png";
-import PepsiLogo from "../../assets/Sponsors/pepsi.png";
+import PepsiLogo from "../../assets/Sponsors/pepsi.svg";
 import VarunBeweregesLogo from "../../assets/Sponsors/VB.svg";
 import PrachiDentalClinicLogo from "../../assets/Sponsors/prachi.svg";
 import SriLakshmiConstructor from "../../assets/Sponsors/srilakshmi.svg";

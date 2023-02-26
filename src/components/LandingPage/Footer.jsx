@@ -15,7 +15,7 @@ function Footer() {
         <p className="font-bold">
           RV College of Engineering <br />
         </p>
-        <p>Copyright © 2023 - All right reserved</p>
+        <p>Copyright © 2023 - All rights reserved</p>
       </div>
       <div>
         <div className="grid grid-flow-col gap-4">

@@ -7,11 +7,12 @@ import IoTImage from "../../../public/icons/iot.svg";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/material";
 import DeerajPropertyLogo from "../../assets/Sponsors/DeerajProperty.png";
-import PepsiLogo from "../../assets/Sponsors/pepsi.png";
+import PepsiLogo from "../../assets/Sponsors/pepsi.svg";
+import KWLogo from "../../assets/Sponsors/kw.svg";
 import VarunBeweregesLogo from "../../assets/Sponsors/VB.svg";
 import PrachiDentalClinicLogo from "../../assets/Sponsors/prachi.svg";
 import SriLakshmiConstructor from "../../assets/Sponsors/srilakshmi.svg";
-import KwalityWalls from "../../assets/Sponsors/kwalityWalls.png";
+import KwalityWalls from "../../assets/Sponsors/kw.svg";
 
 function Sponsorship() {
   return (
@@ -48,7 +49,7 @@ function Sponsorship() {
             flexDirection="column"
           >
             <img
-              src={DeerajPropertyLogo}
+              src={VarunBeweregesLogo}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}
@@ -64,7 +65,7 @@ function Sponsorship() {
             flexDirection="column"
           >
             <img
-              src={VarunBeweregesLogo}
+              src={DeerajPropertyLogo}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}

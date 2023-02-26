@@ -196,7 +196,7 @@ function App() {
                 }
               />
               <Route
-                path="/:id"
+                path="/assign"
                 element={
                   <ProtectedRoute>
                     <AssignEventForm />

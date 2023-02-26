@@ -328,7 +328,7 @@ const Sidebar = ({
                   />
                   <Item
                     title="Get All Teams"
-                    to="get-teams"
+                    to="assign"
                     icon={<PeopleIcon />}
                     selected={selected}
                     setSelected={setSelected}

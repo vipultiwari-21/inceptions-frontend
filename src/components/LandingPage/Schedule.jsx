@@ -15,6 +15,19 @@ import ScheduleNavbar from "./ScheduleNavbar";
 export default function Schedule() {
   const eventsArray = [
     {
+      id: "inaugration",
+      svgPath: Solvathon,
+      eventName: "EXCEPTIONS-2023 INAUGRATION",
+      rounds: [
+        {
+          roundName: "Inaugration",
+          status: "Not Started",
+          venue: "IEM AUDITORIUM",
+          time: "MAR 3, 09:00 AM-10:30 AM",
+        },
+      ],
+    },
+    {
       id: "solveathon",
       svgPath: Solvathon,
       eventName: "SOLVEATHON",
@@ -22,8 +35,20 @@ export default function Schedule() {
         {
           roundName: "Round 1",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "AI/ML LAB 2",
           time: "MAR 3, 11:00 AM-1:30 PM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
+        },
+        {
+          roundName: "Round 1 (Continued)",
+          status: "Not Started",
+          venue: "MCA LAB 8",
+          time: "MAR 3, 02:30 PM-05:30 PM",
         },
       ],
     },
@@ -36,19 +61,25 @@ export default function Schedule() {
         {
           roundName: "Round 1",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA LAB 2 and MCA LAB 3",
           time: "MAR 3, 11:00 AM-1:30 PM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
         },
         {
           roundName: "Round 2",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 2:30 PM-3:30 PM",
+          venue: "MCA LAB 2 and MCA LAB 3",
+          time: "MAR 3, 2:30 PM-5:30 PM",
         },
         {
           roundName: "Round 3",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA LAB 2 and MCA LAB 3",
           time: "MAR 4, 9:00 AM-01:30 PM",
         },
       ],
@@ -62,46 +93,70 @@ export default function Schedule() {
         {
           roundName: "Round 1",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA LAB 1",
           time: "MAR 3, 11:00 AM-1:30 PM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
+        },
+        {
+          roundName: "Round 1 (Continued)",
+          status: "Not Started",
+          venue: "MCA LAB 1",
+          time: "MAR 3, 2:30 PM-5:30 PM",
         },
         {
           roundName: "Round 2",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 2:30 PM-3:30 PM",
-        },
-        {
-          roundName: "Round 3",
-          status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA LAB 1",
           time: "MAR 4, 9:00 AM-01:30 PM",
         },
       ],
     },
 
     {
-      id: "gengeeks",
-      svgPath: GenGeeks,
-      eventName: "Gen-Geeks",
+      id: "gravity",
+      svgPath: Gravity,
+      eventName: "GRAVITY",
       rounds: [
         {
           roundName: "Round 1",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 11:00 AM-11:45 AM",
+          venue: "IEM AUDITORIUM",
+          time: "MAR 3, 11:00 AM-12:00 PM",
         },
         {
           roundName: "Round 2",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 2:30 PM-3:30 PM",
+          venue: "IEM AUDITORIUM",
+          time: "MAR 3, 12:00 PM-1:30 PM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
         },
         {
           roundName: "Round 3",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 4, 9:00 AM-11:00 AM",
+          venue: "IEM AUDITORIUM",
+          time: "MAR 3, 2:30 PM-4:30 PM",
+        },
+        {
+          roundName: "Round 4",
+          status: "Not Started",
+          venue: "MCA QUADRANGLE",
+          time: "MAR 3, 9:00 AM-11:00 AM",
+        },
+        {
+          roundName: "Round 5",
+          status: "Not Started",
+          venue: "MCA SEMINAR HALL",
+          time: "MAR 4, 12:00 PM-1:30 PM",
         },
       ],
     },
@@ -114,90 +169,69 @@ export default function Schedule() {
         {
           roundName: "Round 1",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA SEMINAR HALL",
           time: "MAR 3, 11:00 AM-12:00 PM",
         },
         {
           roundName: "Round 2",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA SEMINAR HALL",
           time: "MAR 3, 12:00 PM-1:30 PM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
         },
         {
           roundName: "Round 3",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA SEMINAR HALL",
           time: "MAR 3, 2:30 PM-4:30 PM",
         },
         {
           roundName: "Round 4",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA SEMINAR HALL",
           time: "MAR 4, 9:00 AM-10:30 AM",
         },
         {
           roundName: "Round 5",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MCA SEMINAR HALL",
           time: "MAR 4, 10:30 AM-12:00 PM",
         },
       ],
     },
-
     {
-      id: "zest",
-      svgPath: Zest,
-      eventName: "ZEST",
+      id: "gengeeks",
+      svgPath: GenGeeks,
+      eventName: "Gen-Geeks",
       rounds: [
         {
           roundName: "Round 1",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 11:45 AM-1:30 PM",
+          venue: "MC210",
+          time: "MAR 3, 11:00 AM-11:45 AM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
         },
         {
           roundName: "Round 2",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 4, 11:00 AM-1:30 PM",
-        },
-      ],
-    },
-
-    {
-      id: "gravity",
-      svgPath: Gravity,
-      eventName: "GRAVITY",
-      rounds: [
-        {
-          roundName: "Pre Round",
-          status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 11:00 AM-12:00 PM",
-        },
-        {
-          roundName: "Round 1",
-          status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 12:00 PM-1:30 PM",
-        },
-        {
-          roundName: "Round 2",
-          status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MC210 and MC005",
           time: "MAR 3, 2:30 PM-4:30 PM",
         },
         {
           roundName: "Round 3",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 9:00 AM-10:30 AM",
-        },
-        {
-          roundName: "Round 4",
-          status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 4, 12:30 PM-1:30 PM",
+          venue: "MC210",
+          time: "MAR 4, 9:00 AM-11:00 AM",
         },
       ],
     },
@@ -210,19 +244,25 @@ export default function Schedule() {
         {
           roundName: "Round 1",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MC213",
           time: "MAR 3, 11:00 AM-11:45 AM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
         },
         {
           roundName: "Round 2",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 2:30 PM-3:30 PM",
+          venue: "MC213",
+          time: "MAR 3, 2:30 PM-4:30 PM",
         },
         {
           roundName: "Round 3",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "MC213",
           time: "MAR 4, 9:00 AM-11:00 AM",
         },
       ],
@@ -236,20 +276,52 @@ export default function Schedule() {
         {
           roundName: "Round 1",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 11:00 AM-11:45 AM",
+          venue: "AI/ML LAB 1",
+          time: "MAR 3, 11:00 AM-11:30 AM",
         },
         {
           roundName: "Round 2",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 3, 11:45 AM-1:30 PM",
+          venue: "AI/ML LAB 1",
+          time: "MAR 3, 11:30 AM-1:30 PM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
         },
         {
           roundName: "Round 3",
           status: "Not Started",
-          venue: "Updating Shortly",
-          time: "MAR 4, 10:00 AM-1:00 PM",
+          venue: "AI/ML LAB 1",
+          time: "MAR 4, 9:00 AM-1:00 PM",
+        },
+      ],
+    },
+
+    {
+      id: "zest",
+      svgPath: Zest,
+      eventName: "ZEST",
+      rounds: [
+        {
+          roundName: "Round 1",
+          status: "Not Started",
+          venue: "MC005",
+          time: "MAR 3, 11:30 AM-1:30 PM",
+        },
+        {
+          roundName: "LUNCH BREAK",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 3, 1:30 PM-2:30 PM",
+        },
+        {
+          roundName: "Round 2",
+          status: "Not Started",
+          venue: "MC005",
+          time: "MAR 4, 11:00 AM-1:30 PM",
         },
       ],
     },
@@ -262,35 +334,71 @@ export default function Schedule() {
         {
           roundName: "Round X",
           status: "Not Started",
-          venue: "Updating Shortly",
+          venue: "AMPHITHEATRE",
+          break: "01:30 PM-02:30 PM",
           time: "MAR 3, 4:30 PM-5:30 PM",
+        },
+      ],
+    },
+
+    {
+      id: "valedictory",
+      svgPath: Solvathon,
+      eventName: "EXCEPTIONS-2023 VALEDICTORY",
+      rounds: [
+        {
+          roundName: "Inaugration",
+          status: "Not Started",
+          venue: "IEM AUDITORIUM",
+          time: "MAR 4, 02:30 PM-04:30 PM",
+        },
+      ],
+    },
+
+    {
+      id: "dj",
+      svgPath: Solvathon,
+      eventName: "EXCEPTIONS-2023 DJ",
+      rounds: [
+        {
+          roundName: "DJ",
+          status: "Not Started",
+          venue: "BUS SHELTER",
+          time: "MAR 4, 06:00 PM-09:00 PM",
         },
       ],
     },
   ];
   return (
     <div className="schedule-body">
-      <ScheduleNavbar />
+      <ScheduleNavbar style={{ marginBottom: "5rem" }} />
       {eventsArray.map((event) => {
         return (
-          <div className="container" key={event.id} id={event.id}>
+          <div
+            className="container"
+            key={event.id}
+            id={event.id}
+            style={{ marginTop: "5rem" }}
+            // style={{ padding: "3rem" }}
+          >
             <div
               style={{
                 display: "flex",
                 width: "100%",
-
+                // margin: "5rem 0",
+                marginBottom: "1rem",
                 justifyContent: "space-around",
                 alignItems: "center",
                 flexDirection: "column",
               }}
             >
-              <div>
+              {/* <div>
                 <img
                   src={event.svgPath}
                   alt={event.eventName}
                   style={{ width: "300px", padding: "20px" }}
                 />
-              </div>
+              </div> */}
               <div>
                 <h1 className="text-primary text-xl font-bold">
                   {event.eventName}

@@ -61,7 +61,7 @@ function Footer() {
 
       {/* <DeveloperLink /> */}
       <div className="devw-screen bg-neutral text-neutral-content text-center font-bold p-5 event-details">
-        <p className="text-2xl text-warning">Developed by</p>
+        <p className="text-2xl text-warning">Designed & Developed by</p>
         <div className="flex flex-col lg:flex-row text-center text-xl">
           <span className="mx-3 hover:underline sm:my-1">
             <a

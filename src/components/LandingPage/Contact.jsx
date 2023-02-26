@@ -75,7 +75,7 @@ function Contact() {
       {/* Overall event co ordinators */}
 
       <h4 className="text-center my-16 text-2xl text-bold ">
-        Overall Events Main Co-ordinators
+        Event Co-ordinators
       </h4>
 
       <Grid container className="lg:px-20" spacing={6}>

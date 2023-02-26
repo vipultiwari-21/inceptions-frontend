@@ -103,18 +103,22 @@ const EventDetailList = [
     img: "https://i.ibb.co/6WTZNKx/zest.png",
     svg: "/scheduleIcons/zest.svg",
     rules: [
+      "Participants of total 2 members team size",
       "There will be two rounds.",
       "The judge's decision will be final.",
       "Time limit will be given on the day of the event.",
       "Participants to be present 10 minutes prior to the stated schedule.",
     ],
-    requirements: ["Participants should have fair knowledge in all areas."],
+    requirements: [
+      "Participants should have fair knowledge in technical area.",
+      "Participants should bring their own laptops.",
+    ],
     contact: [
       {
         type: "Student Coordinator",
         name: "Sumanth C R",
         email: "sumanthcr.mca21@rvce.edu.in",
-        phone: "+91 789263225",
+        phone: "+91 7892632252",
       },
       {
         type: "Faculty Coordinator",

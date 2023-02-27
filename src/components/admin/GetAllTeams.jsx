@@ -33,6 +33,18 @@ const GetAllTeams = () => {
   //   const colors = tokens(theme.palette.mode);
   const [teamName, setTeamName] = useState([] || {});
 
+  const getTeamCount = async (teamId) => {
+    try {
+      const { data } = await axios.post("/team/get-specific-team-details", {
+        teamId: teamId,
+      });
+
+      return data[0].teamMembers ? data[0].teamMembers.length : null;
+    } catch (err) {
+      console.log("Error occured!!");
+    }
+  };
+
   const getPayment = async (userId) => {
     try {
       const { data } = await axios.post("/payment/is-participant-paid", {
@@ -45,6 +57,20 @@ const GetAllTeams = () => {
         return false;
       }
     } catch (err) {}
+  };
+
+  const getCollegeOfHeadUser = async (userId) => {
+    try {
+      const { data } = await axios.post("/user/get-user-by-id", {
+        userId: userId,
+      });
+
+      return data.participantDetails
+        ? data.participantDetails.collegeName
+        : null;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const getTeams = async () => {
@@ -60,6 +86,10 @@ const GetAllTeams = () => {
             payment: await getPayment(
               obj.headUser ? obj.headUser.userId : null
             ),
+            college: await getCollegeOfHeadUser(
+              obj.headUser ? obj.headUser.userId : null
+            ),
+            total: await getTeamCount(obj.teamId ? obj.teamId : null),
           };
         })
       );
@@ -101,6 +131,16 @@ const GetAllTeams = () => {
     {
       field: "label",
       headerName: "Team Name",
+      flex: 1,
+    },
+    {
+      field: "college",
+      headerName: "College Name",
+      flex: 1,
+    },
+    {
+      field: "total",
+      headerName: "Total Participants",
       flex: 1,
     },
     {

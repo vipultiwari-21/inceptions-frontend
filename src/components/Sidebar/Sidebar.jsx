@@ -23,6 +23,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import Payment from "@mui/icons-material/Payment";
 import { Info, PaymentOutlined } from "@mui/icons-material";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import { Money, Paid, GroupOutlined } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -252,7 +253,6 @@ const Sidebar = ({
                   />
                 </>
               )}
-
               {role === "VOLUNTEER" && (
                 <>
                   <Item
@@ -271,26 +271,6 @@ const Sidebar = ({
                   />
                 </>
               )}
-
-              {role === "VOLUNTEER" && (
-                <>
-                  <Item
-                    title="Volunteer Profile"
-                    to="/"
-                    icon={<WorkspacesIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                  <Item
-                    title="Attendance status"
-                    to="/volunteer-attendance"
-                    icon={<GroupsIcon />}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                </>
-              )}
-
               {role === "ADMIN" && (
                 <>
                   <Item
@@ -310,13 +290,27 @@ const Sidebar = ({
                   <Item
                     title="Verify Payments"
                     to="verifyPayments"
-                    icon={<PeopleIcon />}
+                    icon={<Paid />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Get Events of team"
+                    to="get-team-events"
+                    icon={<GroupOutlined />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+
+                  <Item
+                    title="Get Teams of Events"
+                    to="get-events-teams"
+                    icon={<GroupOutlined />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                 </>
               )}
-
               {role === "COORDINATOR" && (
                 <>
                   <Item

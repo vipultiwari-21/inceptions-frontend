@@ -33,6 +33,8 @@ import Rules from "./components/LandingPage/Rules";
 import VerifyPayments from "./components/admin/VerifyPayments";
 import AssignEventForm from "./components/coordinator/AssignEventForm";
 import GetSpeificTeam from "./components/admin/GetSpeificTeam";
+import GetEventsOfTeam from "./components/admin/GetEventsOfTeam";
+import GetTeamsOfEvent from "./components/admin/GetTeamsOfEvent";
 
 function App() {
   const user = Cookies.get("token");
@@ -180,6 +182,24 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <VerifyPayments />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="get-team-events"
+                element={
+                  <ProtectedRoute>
+                    <GetEventsOfTeam />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="get-events-teams"
+                element={
+                  <ProtectedRoute>
+                    <GetTeamsOfEvent />
                   </ProtectedRoute>
                 }
               />

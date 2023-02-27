@@ -214,8 +214,9 @@ function Registration() {
                               // height: "100%",
                             }}
                           >
-                            <p className="mb-4 font-bold ">
-                              Lets create an account
+                            <p className="mb-4 font-bold text-warning">
+                              Only team head has to register. You can add
+                              teammates after logging in
                             </p>
                             <div className="flex justify-around items-center  w-full flex-wrap">
                               <div className="mb-4 basis-full lg:basis-1/2 ">

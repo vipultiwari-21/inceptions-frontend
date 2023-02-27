@@ -11,6 +11,7 @@ const AdminProfile = () => {
   const [totalGCTeams, setTotalGCTeams] = useState("");
   const [solvathonTeams, setSolvathonTeams] = useState("");
   const [IoTTeams, setIoTTeams] = useState("");
+  const [strikeForce, setStrikeForce] = useState("");
 
   const fetchAllData = async () => {
     try {
@@ -20,6 +21,14 @@ const AdminProfile = () => {
         return val.isGCConsidered;
       });
       setTotalGCTeams(filteredData.length);
+
+      const OpenEventsCount = await axios.get(
+        "/admin/get-open-event-total-teams"
+      );
+      console.log(OpenEventsCount);
+      setSolvathonTeams(OpenEventsCount.data.solvathon);
+      setIoTTeams(OpenEventsCount.data.infinityAndBeyond);
+      setStrikeForce(OpenEventsCount.data.strikeForce);
     } catch (err) {}
   };
 
@@ -103,7 +112,7 @@ const AdminProfile = () => {
               <div className="card-body">
                 <h2 className="card-title">Total teams in Solvathon</h2>
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">20</span>
+                  <span className="text-7xl">{solvathonTeams}</span>
                 </div>
               </div>
             </div>
@@ -121,7 +130,7 @@ const AdminProfile = () => {
               <div className="card-body">
                 <h2 className="card-title">Total teams in Strike Force</h2>
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">20</span>
+                  <span className="text-7xl">{strikeForce}</span>
                 </div>
               </div>
             </div>
@@ -141,7 +150,7 @@ const AdminProfile = () => {
                   Total teams in Infinity and beyond
                 </h2>
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">20</span>
+                  <span className="text-7xl">{IoTTeams}</span>
                 </div>
               </div>
             </div>

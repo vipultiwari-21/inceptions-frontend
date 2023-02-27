@@ -11,7 +11,6 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
 // import { tokens } from "../theme";
 import { useState, useEffect } from "react";
 // import { mockDataTeam } from "../data/mockData";
@@ -22,6 +21,9 @@ import * as yup from "yup";
 import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
+import { DataGrid } from "@mui/x-data-grid";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -54,29 +56,55 @@ const VolunteerAttendance = () => {
     getTeams();
   }, []);
 
-  const handleFormSubmit = async (values, { resetForm }) => {
-    // console.log(values);
-    // dispatch(adminregister(values));
+  const handleChange = async (val) => {
     try {
-      setLoading(true);
-      console.log("values", values);
       //   let obj = { teamId: values.team_id };
       //   console.log("obj", obj);
       const { data } = await axios.post("/team/get-specific-team-details", {
-        teamId: values.team_id,
+        teamId: val,
       });
 
-      resetForm({ values: initialValues });
-      setLoading(false);
+      const temp = data[0].teamMembers.map((obj) => {
+        return {
+          id: obj.memberId,
+          firstName: obj.firstName,
+        };
+      });
+
+      setTeamMates(temp);
     } catch (err) {
       console.log(err);
       setError(err.message);
     }
   };
 
+  const handlePresent = async (memberId) => {
+    try {
+      const { data } = await axios.post("/teamMember/update-attendence", {
+        memberId: memberId,
+        isPresent: true,
+      });
+
+      //console.log(data);
+
+      Swal.fire({
+        title: "Success!",
+        text: data.status,
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
+    } catch (err) {
+      Swal.fire({
+        title: "Error!",
+        text: err,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+    }
+  };
+
   const columns = [
     // { field: "sl_no", headerName: "SL. NO" },
-    { field: "memberId", headerName: "Member ID", flex: 1 },
     // {
     //   field: "user",
     //   headerName: "User Name",
@@ -91,14 +119,30 @@ const VolunteerAttendance = () => {
       // headerAlign: "left",
       // align: "left",
     },
+
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Participant status",
       flex: 1,
-      // type: "number",
-      // headerAlign: "left",
-      // align: "left",
+      renderCell: ({ row, id }) => {
+        let memberId = id;
+
+        // console.log("row", row);
+        // console.log("teamMates", teamMates);
+        // teamMates.map((member) => console.log(member));
+        // console.log("memeberId", memberId);
+        return (
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => handlePresent(memberId)}
+          >
+            Update attendance
+          </Button>
+        );
+      },
     },
+
     // {
     //   field: "phone",
     //   headerName: "Phone Number",
@@ -151,120 +195,66 @@ const VolunteerAttendance = () => {
           },
         }}
       >
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={checkoutSchema}
+        <TextField
+          select
+          label="Select Team Name"
+          variant="filled"
+          color="primary"
+          InputLabelProps={{ className: "textfield__label" }}
+          InputProps={{ className: "textfield__label" }}
+          className="textfield  w-72 lg:w-96"
+          onChange={(e) => handleChange(e.target.value)}
         >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              {error && (
-                <Box
-                  mb="1rem"
-                  sx={{
-                    color: "#e87c03",
-                    display: "flex",
-                    // justifyContent: "center",
-                    gap: "0.5rem",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                  }}
-                  p=".5rem"
-                >
-                  <ErrorIcon />
-                  {error}
-                </Box>
-              )}
-              <Box
-                // placeItems="center"
-                // color={colors.grey[100]}
-                gap="30px"
-                mb="2rem"
-                gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                sx={{
-                  display: "flex",
-                  "& > div": {
-                    gridColumn: isNonMobile ? undefined : "span 4",
-                  },
-                }}
-              >
-                <div
-                  style={{
-                    gridColumn: "span 4",
-                    width: "50%",
-                  }}
-                >
-                  <TextField
-                    select
-                    InputLabelProps={{ className: "textfield__label" }}
-                    InputProps={{ className: "textfield__label" }}
-                    className="textfield"
-                    fullWidth
-                    variant="filled"
-                    // type="text"
-                    label="Team ID"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.team_id}
-                    name="team_id"
-                    labelId="team"
-                    id="team_id"
-                    error={!!touched.team_id && !!errors.team_id}
-                    helperText={touched.team_id && errors.team_id}
-                    sx={{ gridColumn: "span 4" }}
-                  >
-                    {teamName
-                      ? teamName.map((eachTeam) => (
-                          <MenuItem value={eachTeam.id} key={eachTeam.id}>
-                            {eachTeam.label}
-                          </MenuItem>
-                        ))
-                      : null}
-                  </TextField>
-                </div>
-                <Box
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  mt="20px"
-                >
-                  {loading ? (
-                    <CircularProgress />
-                  ) : (
-                    <Button
-                      type="submit"
-                      color="secondary"
-                      variant="contained"
-                      sx={{
-                        padding: isNonMobile ? "10px 20px" : null,
-                        width: "100%",
-                        fontSize: isNonMobile ? "16px" : null,
-                        letterSpacing: "0.15rem",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      CHECK SENSORS
-                    </Button>
-                  )}
-                </Box>
-              </Box>
-            </form>
-          )}
-        </Formik>
+          {teamName
+            ? teamName.map((eachTeam) => (
+                <MenuItem value={eachTeam.id} key={eachTeam.id}>
+                  {eachTeam.label}
+                </MenuItem>
+              ))
+            : null}
+        </TextField>
 
-        <DataGrid
-          checkboxSelection
-          rows={teamMates}
-          columns={columns}
-          getRowId={(row) => row.memberId}
-        />
+        <Box
+          m="40px 0 0 0"
+          height="75vh"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+            },
+            "& .name-column--cell": {
+              color: "#94e2cd !important",
+              // color: colors.greenAccent[300],
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              // backgroundColor: colors.blueAccent[700],
+              backgroundColor: "#3e4396",
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: "#1F2A40",
+              // backgroundColor: colors.primary[400],
+            },
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+              backgroundColor: "#3e4396",
+              // backgroundColor: colors.blueAccent[700],
+            },
+            "& .MuiCheckbox-root": {
+              color: "#b7ebde !important",
+              // color: `${colors.greenAccent[200]} !important`,
+            },
+          }}
+        >
+          <DataGrid
+            className="datagrid"
+            rows={teamMates}
+            columns={columns}
+            getRowId={(row) => row.id}
+          />
+        </Box>
       </Box>
     </Box>
   );

@@ -109,14 +109,14 @@ function VerifyPayments() {
         overflow: "hidden",
         padding: "20px",
       }}
-      className="flex justify-center items-center flex-col"
+      className="flex justify-center items-center flex-col overflow-auto"
     >
       <Header
         title="Verify Payments"
         subtitle="Have a look at screenshot uploaded by participant and verify their payment"
       />
 
-      <Box className="w-full my-8 ">
+      <Box className="w-full my-8 h-full">
         <Formik onSubmit={handleFormSubmit} initialValues={initialValues}>
           {({
             values,
@@ -206,10 +206,7 @@ function VerifyPayments() {
                     <Box
                       component="img"
                       sx={{
-                        height: 1200,
-                        width: 500,
-                        maxHeight: { xs: 200, md: 167, lg: 450 },
-                        maxWidth: { xs: 200, md: 250, lg: 450 },
+                        width: "300px",
                         margin: 0,
                         padding: 0,
                       }}

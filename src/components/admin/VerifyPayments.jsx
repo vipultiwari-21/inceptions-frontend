@@ -206,7 +206,7 @@ function VerifyPayments() {
                     <Box
                       component="img"
                       sx={{
-                        height: 300,
+                        height: 1200,
                         width: 500,
                         maxHeight: { xs: 200, md: 167, lg: 450 },
                         maxWidth: { xs: 200, md: 250, lg: 450 },

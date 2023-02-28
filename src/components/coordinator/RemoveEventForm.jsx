@@ -33,7 +33,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // import { CheckboxWithLabel } from "formik-material-ui";
 import { MultiSelect } from "react-multi-select-component";
 
-const AssignEventForm = () => {
+const RemoveEventForm = () => {
   const theme = useTheme();
   // const isNonMobile = useMediaQuery("(min-width:650px)");
   let arr = [];
@@ -63,28 +63,28 @@ const AssignEventForm = () => {
     setTeamName(temp);
   };
 
-  const getEvents = async () => {
-    const { data } = await axios.get("/event/get-short");
-    // console.log("events list", data);
-    let tempArray1 = [];
-    let tempArray2 = [];
-    for (let i = 0; i < data.detailedEvents.length; i++) {
-      const getAllData = {
-        eventId: `${data.detailedEvents[i].eventId}`,
-        name: `${data.detailedEvents[i].name}`,
-      };
-      tempArray1.push(getAllData);
-    }
-    // console.log("tempArray", tempArray);
-    tempArray2 = [
-      ...tempArray1,
-      {
-        eventId: String(data.mysteryEvent.eventId),
-        name: data.mysteryEvent.eventName,
-      },
-    ];
-    setEvents(tempArray2);
-  };
+  // const getEvents = async () => {
+  //   const { data } = await axios.get("/event/get-short");
+  //   // console.log("events list", data);
+  //   let tempArray1 = [];
+  //   let tempArray2 = [];
+  //   for (let i = 0; i < data.detailedEvents.length; i++) {
+  //     const getAllData = {
+  //       eventId: `${data.detailedEvents[i].eventId}`,
+  //       name: `${data.detailedEvents[i].name}`,
+  //     };
+  //     tempArray1.push(getAllData);
+  //   }
+  //   // console.log("tempArray", tempArray);
+  //   tempArray2 = [
+  //     ...tempArray1,
+  //     {
+  //       eventId: String(data.mysteryEvent.eventId),
+  //       name: data.mysteryEvent.eventName,
+  //     },
+  //   ];
+  //   setEvents(tempArray2);
+  // };
 
   function handleTeamSelectChange(e) {
     console.log("TARGET VALUE", e.target.value);
@@ -92,10 +92,10 @@ const AssignEventForm = () => {
     getTeamMembers(String(e.target.value));
   }
 
-  function handleEventSelectChange(e) {
-    console.log("EVENT ID", e.target.value);
-    setEventId(String(e.target.value));
-  }
+  // function handleEventSelectChange(e) {
+  //   console.log("EVENT ID", e.target.value);
+  //   setEventId(String(e.target.value));
+  // }
 
   const getTeamMembers = async (teamId) => {
     // setTeamId(values.team_id);
@@ -119,7 +119,7 @@ const AssignEventForm = () => {
   useEffect(() => {
     getTeams();
     getTeamMembers();
-    getEvents();
+    // getEvents();
   }, []);
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -178,23 +178,19 @@ const AssignEventForm = () => {
         setLoading(true);
 
         const { data } = await axios.post(
-          "/teamMember/add-team-member-to-event",
+          "/teamMember/remove-team-member-from-event",
           {
-            eventId,
             memberId: member.value,
             teamId,
           }
         );
-        console.log({ eventId, memberId: member.value, teamId });
-        console.log("data", data);
         setLoading(false);
         Swal.fire({
           title: "Success!",
-          text: "Teammates added to the Event Successfully",
+          text: "Teammates removed from the Event Successfully",
           icon: "success",
           confirmButtonText: "Okay",
         });
-        setEventId("");
         setTeamId("");
         setSelected([]);
       } catch (err) {
@@ -204,6 +200,7 @@ const AssignEventForm = () => {
           icon: "error",
           confirmButtonText: "Okay",
         });
+        setLoading(false);
       }
     });
   };
@@ -327,40 +324,6 @@ const AssignEventForm = () => {
                 />
               </div>
             </div>
-
-            <div
-              style={{
-                marginTop: "2rem",
-              }}
-            >
-              <InputLabel id="team_id" style={{ color: "#fff" }}>
-                Event Name
-              </InputLabel>
-              <Select
-                style={{ backgroundColor: "#fff", textAlign: "left" }}
-                fullWidth
-                variant="filled"
-                // type="text"
-                label="Event ID"
-                // onBlur={handleBlur}
-                onChange={handleEventSelectChange}
-                value={eventId}
-                name="event_id"
-                labelId="event"
-                id="event_id"
-                // error={!!touched.team_id && !!errors.team_id}
-                // helperText={touched.team_id && errors.team_id}
-                sx={{ gridColumn: "span 4" }}
-              >
-                {events
-                  ? events.map((event) => (
-                      <MenuItem value={event.eventId} key={event.eventId}>
-                        {event.name}
-                      </MenuItem>
-                    ))
-                  : null}
-              </Select>
-            </div>
           </Box>
           <Box
             display="flex"
@@ -383,7 +346,7 @@ const AssignEventForm = () => {
                   fontWeight: "bold",
                 }}
               >
-                ASSIGN
+                REMOVE
               </Button>
             )}
           </Box>
@@ -393,4 +356,4 @@ const AssignEventForm = () => {
   );
 };
 
-export default AssignEventForm;
+export default RemoveEventForm;

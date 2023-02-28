@@ -18,6 +18,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from "yup";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
@@ -31,7 +32,6 @@ const AssignEvent = () => {
   //   const colors = tokens(theme.palette.mode);
   const [loading, setLoading] = useState(false);
   const [teamMates, setTeamMates] = useState([]);
-  const [error, setError] = useState("");
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
   const [teamId, setTeamId] = useState("");
@@ -68,8 +68,19 @@ const AssignEvent = () => {
       setTeamMates(data[0].teamMembers);
       resetForm({ values: initialValues });
       setLoading(false);
+      // Swal.fire({
+      //   title: "Success!",
+      //   text: "Teammates added to the Event Successfully",
+      //   icon: "success",
+      //   confirmButtonText: "Okay",
+      // });
     } catch (err) {
-      setError(err.message);
+      Swal.fire({
+        title: "Error!",
+        text: err.response.data.error,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
     }
 
     setLoading(false);
@@ -189,23 +200,6 @@ const AssignEvent = () => {
             handleSubmit,
           }) => (
             <form onSubmit={handleSubmit}>
-              {error && (
-                <Box
-                  mb="1rem"
-                  sx={{
-                    color: "#e87c03",
-                    display: "flex",
-                    // justifyContent: "center",
-                    gap: "0.5rem",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                  }}
-                  p=".5rem"
-                >
-                  <ErrorIcon />
-                  {error}
-                </Box>
-              )}
               <Box
                 // placeItems="center"
                 // color={colors.grey[100]}
@@ -226,8 +220,11 @@ const AssignEvent = () => {
                     width: "50%",
                   }}
                 >
-                  <InputLabel id="team_id">Team Name</InputLabel>
+                  <InputLabel id="team_id" style={{ color: "#fff" }}>
+                    Team Name
+                  </InputLabel>
                   <Select
+                    style={{ backgroundColor: "#fff", textAlign: "left" }}
                     fullWidth
                     variant="filled"
                     // type="text"

@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from "yup";
 import ErrorIcon from "@mui/icons-material/Error";
+import { GridToolbar } from "@mui/x-data-grid";
+
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 
@@ -66,11 +68,18 @@ const EventwiseList = () => {
       setLoading(true); //   let obj = { teamId: values.team_id };
       //   console.log("obj", obj);
       setTeamId(values.team_id);
-      const { data } = await axios.post("/team/get-specific-team-details", {
+      //   const { data } = await axios.post("/team/get-specific-team-details", {
+      //     teamId: values.team_id,
+      //   });
+
+      const { data } = await axios.post("/teamMember/get-by-eventId", {
+        eventId: values.event_id,
         teamId: values.team_id,
       });
-      setTeamMates(data[0].teamMembers);
-      resetForm({ values: initialValues });
+      console.log("data", data);
+      setTeamMates(data);
+      //   setTeamMates(data[0].teamMembers);
+      //   resetForm({ values: initialValues });
       setLoading(false);
     } catch (err) {
       setError(err.message);
@@ -250,11 +259,14 @@ const EventwiseList = () => {
                 <div
                   style={{
                     gridColumn: "span 4",
-                    width: "50%",
+                    width: "20%",
                   }}
                 >
-                  <InputLabel id="team_id">Team Name</InputLabel>
+                  <InputLabel id="team_id" style={{ color: "#fff" }}>
+                    Team Name
+                  </InputLabel>
                   <Select
+                    style={{ backgroundColor: "#fff", textAlign: "left" }}
                     fullWidth
                     variant="filled"
                     // type="text"
@@ -280,7 +292,8 @@ const EventwiseList = () => {
                 </div>
                 <div
                   style={{
-                    marginTop: "2rem",
+                    gridColumn: "span 4",
+                    width: "20%",
                   }}
                 >
                   <InputLabel id="event_id" style={{ color: "#fff" }}>
@@ -294,7 +307,7 @@ const EventwiseList = () => {
                     label="Event ID"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    value={eventId}
+                    value={values.event_id}
                     name="event_id"
                     labelId="event"
                     id="event_id"
@@ -346,6 +359,7 @@ const EventwiseList = () => {
           rows={teamMates}
           columns={columns}
           getRowId={(row) => row.memberId}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>

@@ -38,14 +38,16 @@ const AssignEventForm = () => {
   let arr = [];
   const [loading, setLoading] = useState(false);
   const [teamMates, setTeamMates] = useState([]);
+  const [events, setEvents] = useState([]);
   const [error, setError] = useState("");
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
-  const [teamId, setTeamId] = useState("14");
+  const [teamId, setTeamId] = useState("");
   const [selected, setSelected] = useState([]);
 
+  // console.log(events);
   // console.log(teamName);
-  console.log(teamMates);
+  // console.log(teamMates);
 
   const getTeams = async () => {
     const { data } = await axios.get("/team/get");
@@ -60,12 +62,36 @@ const AssignEventForm = () => {
     setTeamName(temp);
   };
 
+  const getEvents = async () => {
+    const { data } = await axios.get("/event/get-short");
+    // console.log("events list", data);
+    let tempArray1 = [];
+    let tempArray2 = [];
+    for (let i = 0; i < data.detailedEvents.length; i++) {
+      const getAllData = {
+        eventId: `${data.detailedEvents[i].eventId}`,
+        name: `${data.detailedEvents[i].name}`,
+      };
+      tempArray1.push(getAllData);
+    }
+    // console.log("tempArray", tempArray);
+    tempArray2 = [
+      ...tempArray1,
+      {
+        eventId: String(data.mysteryEvent.eventId),
+        name: data.mysteryEvent.eventName,
+      },
+    ];
+    setEvents(tempArray2);
+  };
+
   function handleSelectChange(e) {
-    setTeamId(e.target.value);
-    getTeamMembers();
+    console.log("TARGET VALUE", e.target.value);
+    setTeamId(String(e.target.value));
+    getTeamMembers(String(e.target.value));
   }
 
-  const getTeamMembers = async () => {
+  const getTeamMembers = async (teamId) => {
     // setTeamId(values.team_id);
     // console.log(teamId);
     const { data } = await axios.post("/team/get-specific-team-details", {
@@ -80,13 +106,14 @@ const AssignEventForm = () => {
       };
       tempArray.push(getAllData);
     }
-    console.log("tempArray", tempArray);
+    // console.log("tempArray", tempArray);
     setTeamMates(tempArray);
   };
 
   useEffect(() => {
     getTeams();
     getTeamMembers();
+    getEvents();
   }, []);
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -138,6 +165,13 @@ const AssignEventForm = () => {
     // }
 
     // console.log(teamId);
+
+    const obj = {
+      teamId,
+      selected,
+      eventId,
+    };
+    console.log(obj);
     setLoading(false);
   };
 
@@ -159,8 +193,8 @@ const AssignEventForm = () => {
   return (
     <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
       <Header
-        title="Add Sensors"
-        subtitle="Fill up the form with the Sensors list"
+        title="Assign Teamnates to the event"
+        subtitle="Fill up the form with the Team, Team Members and Event"
       />
       <Box
         m="20px"
@@ -196,7 +230,7 @@ const AssignEventForm = () => {
             fontWeight="bold"
             mb="2rem"
           >
-            SENSORS DETAILS
+            ASSIGNING DETAILS
           </Typography>
           {error && (
             <Box
@@ -226,13 +260,16 @@ const AssignEventForm = () => {
             }}
           >
             <div
-              style={{
-                gridColumn: "span 4",
-                width: "50%",
-              }}
+            // style={{
+            //   gridColumn: "span 4",
+            //   width: "50%",
+            // }}
             >
-              <InputLabel id="team_id">Team Name</InputLabel>
+              <InputLabel id="team_id" style={{ color: "#fff" }}>
+                Team Name
+              </InputLabel>
               <Select
+                style={{ backgroundColor: "#fff", textAlign: "left" }}
                 fullWidth
                 variant="filled"
                 // type="text"
@@ -257,18 +294,56 @@ const AssignEventForm = () => {
               </Select>
             </div>
 
+            <div>
+              <InputLabel
+                id="members_list"
+                sx={{ marginTop: "1.2rem", color: "#fff", marginTop: "2rem" }}
+              >
+                Team Members
+              </InputLabel>
+              <div style={{ background: "#fff", color: "#000" }}>
+                <MultiSelect
+                  style={{ color: "pink" }}
+                  options={teamMates}
+                  value={selected}
+                  onChange={setSelected}
+                  labelledBy="Team Members"
+                />
+              </div>
+            </div>
+
             <div
-              style={{ background: "#fff", color: "white", marginTop: "2rem" }}
+              style={{
+                marginTop: "2rem",
+              }}
             >
-              {/* <InputLabel id="sensor_list" sx={{ marginTop: "1.2rem" }}>
-                Sensors List
-              </InputLabel> */}
-              <MultiSelect
-                options={teamMates}
-                value={selected}
-                onChange={setSelected}
-                labelledBy="Team Members"
-              />
+              <InputLabel id="team_id" style={{ color: "#fff" }}>
+                Team Name
+              </InputLabel>
+              <Select
+                style={{ backgroundColor: "#fff", textAlign: "left" }}
+                fullWidth
+                variant="filled"
+                // type="text"
+                label="Team ID"
+                // onBlur={handleBlur}
+                onChange={handleSelectChange}
+                value={teamId}
+                name="team_id"
+                labelId="team"
+                id="team_id"
+                // error={!!touched.team_id && !!errors.team_id}
+                // helperText={touched.team_id && errors.team_id}
+                sx={{ gridColumn: "span 4" }}
+              >
+                {events
+                  ? events.map((event) => (
+                      <MenuItem value={event.eventId} key={event.eventId}>
+                        {event.name}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
             </div>
           </Box>
           <Box

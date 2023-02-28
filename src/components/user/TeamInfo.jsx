@@ -283,6 +283,20 @@ const TeamInfo = () => {
         team name carefully
       </h3>
 
+      <h3
+        className={`text-warning my-3 font-bold ${
+          isNonMobile ? "text-center" : "text-left"
+        }`}
+      >
+        Important: If you are only interested in group events, select group
+        event , if you are only interested in open event, select open event. If
+        you are interested in both select Group + Open event, below. <br />{" "}
+        <br />
+        If you select Group + Open , you have to choose sufficient team members
+        as suggested in next section. Conflicts between events will not be
+        entertained
+      </h3>
+
       <Box
         m="20px"
         sx={{

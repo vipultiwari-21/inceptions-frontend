@@ -25,7 +25,11 @@ const AdminProfile = () => {
       const OpenEventsCount = await axios.get(
         "/admin/get-open-event-total-teams"
       );
-      console.log(OpenEventsCount);
+      // console.log(OpenEventsCount);
+
+      const TotalFees = await axios.get("/admin/get-total-fees");
+      console.log(TotalFees.data);
+      setTotalAmount(TotalFees.data);
       setSolvathonTeams(OpenEventsCount.data.solvathon);
       setIoTTeams(OpenEventsCount.data.infinityAndBeyond);
       setStrikeForce(OpenEventsCount.data.strikeForce);
@@ -59,7 +63,7 @@ const AdminProfile = () => {
                 <h2 className="card-title text-center">Total team count</h2>
 
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">{totalTeams}</span>
+                  <span className="text-5xl">{totalTeams}</span>
                 </div>
               </div>
             </div>
@@ -77,7 +81,7 @@ const AdminProfile = () => {
                 <h2 className="card-title">Total Amount</h2>
 
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">{totalAmount}</span>
+                  <span className="text-5xl ">{totalAmount} ₹</span>
                 </div>
               </div>
             </div>
@@ -94,7 +98,7 @@ const AdminProfile = () => {
               <div className="card-body">
                 <h2 className="card-title">Total teams in group event</h2>
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">{totalGCTeams}</span>
+                  <span className="text-5xl">{totalGCTeams}</span>
                 </div>
               </div>
             </div>
@@ -112,7 +116,7 @@ const AdminProfile = () => {
               <div className="card-body">
                 <h2 className="card-title">Total teams in Solvathon</h2>
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">{solvathonTeams}</span>
+                  <span className="text-5xl">{solvathonTeams}</span>
                 </div>
               </div>
             </div>
@@ -130,7 +134,7 @@ const AdminProfile = () => {
               <div className="card-body">
                 <h2 className="card-title">Total teams in Strike Force</h2>
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">{strikeForce}</span>
+                  <span className="text-5xl">{strikeForce}</span>
                 </div>
               </div>
             </div>
@@ -150,7 +154,7 @@ const AdminProfile = () => {
                   Total teams in Infinity and beyond
                 </h2>
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-7xl">{IoTTeams}</span>
+                  <span className="text-5xl">{IoTTeams}</span>
                 </div>
               </div>
             </div>

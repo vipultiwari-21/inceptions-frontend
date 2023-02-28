@@ -68,9 +68,11 @@ const VolunteerAttendance = () => {
         return {
           id: obj.memberId,
           firstName: obj.firstName,
+          participantStatus: obj.isPresent,
+          contactNumber: obj.contactNumber,
+          email: obj.email,
         };
       });
-
       setTeamMates(temp);
     } catch (err) {
       console.log(err);
@@ -94,9 +96,10 @@ const VolunteerAttendance = () => {
         confirmButtonText: "Okay",
       });
     } catch (err) {
+      console.log(err);
       Swal.fire({
         title: "Error!",
-        text: err,
+        text: err.response.data.error,
         icon: "error",
         confirmButtonText: "Okay",
       });
@@ -121,8 +124,34 @@ const VolunteerAttendance = () => {
     },
 
     {
+      field: "contactNumber",
+      headerName: "Contact Number",
+      flex: 1,
+      // type: "number",
+      // headerAlign: "left",
+      // align: "left",
+    },
+    {
+      field: "email",
+      headerName: "Email ID",
+      flex: 1,
+      // type: "number",
+      // headerAlign: "left",
+      // align: "left",
+    },
+
+    {
+      field: "participantStatus",
+      headerName: "Participant Attendance",
+      flex: 1,
+      // type: "number",
+      // headerAlign: "left",
+      // align: "left",
+    },
+
+    {
       field: "status",
-      headerName: "Participant status",
+      headerName: "Participant Status",
       flex: 1,
       renderCell: ({ row, id }) => {
         let memberId = id;

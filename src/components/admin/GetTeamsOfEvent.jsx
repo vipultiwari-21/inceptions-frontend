@@ -4,6 +4,8 @@ import Header from "../Sidebar/Header";
 import { TextField, MenuItem } from "@mui/material";
 import axios from "../../features/Interceptors/apiInterceptor";
 import { DataGrid } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function GetTeamsOfEvent() {
   const [events, setEvents] = useState([]);
@@ -71,7 +73,7 @@ function GetTeamsOfEvent() {
         // teamMates.map((member) => console.log(member));
         // console.log("memeberId", memberId);
         return (
-          <Link to={`${teamId}`} className={id}>
+          <Link to={`/get-teams/${teamId}`} className={id}>
             <Button color="primary" variant="contained">
               Details
             </Button>

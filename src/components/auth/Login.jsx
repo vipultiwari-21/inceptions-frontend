@@ -16,6 +16,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import axios from "../../features/Interceptors/apiInterceptor";
+import Loading from "../../Loading";
 
 function Login() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
 
   const checkoutSchema = yup.object().shape({
     email: yup.string().email("invalid email").required("required"),
@@ -75,9 +77,41 @@ function Login() {
     } catch (err) {
       Swal.fire({
         title: "Error!",
-        text: err.response.data.error,
+        text:
+          err.response.data.error +
+          " do you want us to resend confirmation email",
         icon: "error",
-        confirmButtonText: "Okay",
+        confirmButtonText: "Yes",
+        showDenyButton: true,
+        denyButtonText: "No",
+      }).then(async (data) => {
+        if (data.isConfirmed) {
+          setPageLoading(true);
+          try {
+            await axios.post(
+              `${
+                import.meta.env.VITE_API_ENDPOINT
+              }auth/send-confirmation-email`,
+              {
+                userId: err.response.data.user.userId,
+              }
+            );
+            Swal.fire({
+              title: "Success!",
+              text: "We have sent you a confirmation email, please verify your email before logging in",
+              icon: "success",
+              confirmButtonText: "Okay",
+            });
+          } catch (err) {
+            Swal.fire({
+              title: "Error!",
+              text: err.response.data.error,
+              icon: "error",
+              confirmButtonText: "Okay",
+            });
+          }
+          setPageLoading(false);
+        }
       });
       setLoading(false);
     }
@@ -86,7 +120,7 @@ function Login() {
     resetForm();
   };
 
-  return (
+  return !pageLoading ? (
     <Container maxWidth="xl">
       <Background />
       <section className="h-full gradient-form  md:h-screen login-container text-center">
@@ -259,6 +293,8 @@ function Login() {
         </div>
       </section>
     </Container>
+  ) : (
+    <Loading />
   );
 }
 

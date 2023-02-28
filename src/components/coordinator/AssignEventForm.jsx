@@ -43,6 +43,7 @@ const AssignEventForm = () => {
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
   const [teamId, setTeamId] = useState("");
+  const [eventId, setEventId] = useState("");
   const [selected, setSelected] = useState([]);
 
   // console.log(events);
@@ -85,10 +86,15 @@ const AssignEventForm = () => {
     setEvents(tempArray2);
   };
 
-  function handleSelectChange(e) {
+  function handleTeamSelectChange(e) {
     console.log("TARGET VALUE", e.target.value);
     setTeamId(String(e.target.value));
     getTeamMembers(String(e.target.value));
+  }
+
+  function handleEventSelectChange(e) {
+    console.log("EVENT ID", e.target.value);
+    setEventId(String(e.target.value));
   }
 
   const getTeamMembers = async (teamId) => {
@@ -275,7 +281,7 @@ const AssignEventForm = () => {
                 // type="text"
                 label="Team ID"
                 // onBlur={handleBlur}
-                onChange={handleSelectChange}
+                onChange={handleTeamSelectChange}
                 value={teamId}
                 name="team_id"
                 labelId="team"
@@ -318,20 +324,20 @@ const AssignEventForm = () => {
               }}
             >
               <InputLabel id="team_id" style={{ color: "#fff" }}>
-                Team Name
+                Event Name
               </InputLabel>
               <Select
                 style={{ backgroundColor: "#fff", textAlign: "left" }}
                 fullWidth
                 variant="filled"
                 // type="text"
-                label="Team ID"
+                label="Event ID"
                 // onBlur={handleBlur}
-                onChange={handleSelectChange}
-                value={teamId}
-                name="team_id"
-                labelId="team"
-                id="team_id"
+                onChange={handleEventSelectChange}
+                value={eventId}
+                name="event_id"
+                labelId="event"
+                id="event_id"
                 // error={!!touched.team_id && !!errors.team_id}
                 // helperText={touched.team_id && errors.team_id}
                 sx={{ gridColumn: "span 4" }}

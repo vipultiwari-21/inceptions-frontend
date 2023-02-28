@@ -289,8 +289,9 @@ const TeamInfo = () => {
         }`}
       >
         Important: If you are only interested in group events, select group
-        event <span className="text-accent">(only for MCA and BCA)</span> ,{" "}
-        <br />
+        event{" "}
+        <span className="text-accent">(only for MCA , BCA , BSc and MSc)</span>{" "}
+        , <br />
         If you are only interested in open event, select open event.{" "}
         <span className="text-accent">
           (For all branches of UG and PG)

@@ -328,8 +328,8 @@ const Sidebar = ({
                     setSelected={setSelected}
                   />
                   <Item
-                    title="My Tenants"
-                    to="tenants"
+                    title="Eventwise List"
+                    to="eventwise"
                     icon={<PeopleIcon />}
                     selected={selected}
                     setSelected={setSelected}

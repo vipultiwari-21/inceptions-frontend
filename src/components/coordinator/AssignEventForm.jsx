@@ -16,6 +16,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 import { Field, Formik } from "formik";
 import * as yup from "yup";
 import React, { useEffect } from "react";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 // import Topbar from "./Topbar";
 // import { tokens } from "../theme";
 import { useDispatch } from "react-redux";
@@ -171,14 +172,34 @@ const AssignEventForm = () => {
     // }
 
     // console.log(teamId);
+    // console.log(obj);
 
-    const obj = {
-      teamId,
-      selected,
-      eventId,
-    };
-    console.log(obj);
-    setLoading(false);
+    selected.map((member) => {
+      try {
+        setLoading(true);
+
+        // const { data } = axios.post("/teamMember/add-team-member-to-event", {
+        //   eventId,
+        //   memberId: member.value,
+        //   teamId,
+        // });
+        console.log({ eventId, memberId: member.value, teamId });
+        setLoading(false);
+        Swal.fire({
+          title: "Success!",
+          text: "We have sent you a confirmation email, please verify your email before logging in",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
+      } catch (err) {
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.error,
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      }
+    });
   };
 
   // const options = [

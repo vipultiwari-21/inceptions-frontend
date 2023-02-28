@@ -16,6 +16,7 @@ const EventDetailList = [
     requirements: [
       "Participants should know the basics of OOP's.",
       "Participants should carry a laptop.",
+      "Laptop's should have one running IDE (preferably VS Code with C, Java, Python extensions added)",
     ],
     contact: [
       {

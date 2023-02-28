@@ -60,7 +60,7 @@ const AdminProfile = () => {
           >
             <div className="card w-72 bg-primary text-primary-content">
               <div className="card-body">
-                <h2 className="card-title text-center">Total team count</h2>
+                <h2 className="card-title text-center">Total teams</h2>
 
                 <div className="card-actions w-full flex justify-center items-center">
                   <span className="text-5xl">{totalTeams}</span>
@@ -78,10 +78,10 @@ const AdminProfile = () => {
           >
             <div className="card w-72 bg-primary text-primary-content">
               <div className="card-body">
-                <h2 className="card-title">Total Amount</h2>
+                <h2 className="card-title">Total Participants</h2>
 
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-5xl ">{totalAmount} ₹</span>
+                  <span className="text-5xl ">{totalAmount} </span>
                 </div>
               </div>
             </div>

@@ -6,6 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Toolbar,
   Typography,
   useMediaQuery,
   useTheme,
@@ -23,6 +24,7 @@ import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 import Swal from "sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
+import { GridToolbar } from "@mui/x-data-grid";
 
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -219,6 +221,7 @@ const GetAllTeams = () => {
           rows={teamName}
           columns={columns}
           getRowId={(row) => row.id}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>

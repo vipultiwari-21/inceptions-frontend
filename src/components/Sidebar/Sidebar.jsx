@@ -320,14 +320,14 @@ const Sidebar = ({
               {role === "COORDINATOR" && (
                 <>
                   <Item
-                    title="Assign Event"
+                    title="Team Details"
                     to="/"
                     icon={<PersonAddAltIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />
                   <Item
-                    title="Get All Teams"
+                    title="Assign"
                     to="assign"
                     icon={<PeopleIcon />}
                     selected={selected}

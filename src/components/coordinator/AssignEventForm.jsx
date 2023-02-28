@@ -42,9 +42,10 @@ const AssignEventForm = () => {
   const [error, setError] = useState("");
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
-  const [teamId, setTeamId] = useState("14");
+  const [teamId, setTeamId] = useState("");
   const [selected, setSelected] = useState([]);
 
+  // console.log(events);
   // console.log(teamName);
   // console.log(teamMates);
 
@@ -64,16 +65,33 @@ const AssignEventForm = () => {
   const getEvents = async () => {
     const { data } = await axios.get("/event/get-short");
     // console.log("events list", data);
-    setEvents(data);
+    let tempArray1 = [];
+    let tempArray2 = [];
+    for (let i = 0; i < data.detailedEvents.length; i++) {
+      const getAllData = {
+        eventId: `${data.detailedEvents[i].eventId}`,
+        name: `${data.detailedEvents[i].name}`,
+      };
+      tempArray1.push(getAllData);
+    }
+    // console.log("tempArray", tempArray);
+    tempArray2 = [
+      ...tempArray1,
+      {
+        eventId: String(data.mysteryEvent.eventId),
+        name: data.mysteryEvent.eventName,
+      },
+    ];
+    setEvents(tempArray2);
   };
 
   function handleSelectChange(e) {
-    console.log(e.target.value);
-    setTeamId(e.target.value);
-    getTeamMembers();
+    console.log("TARGET VALUE", e.target.value);
+    setTeamId(String(e.target.value));
+    getTeamMembers(String(e.target.value));
   }
 
-  const getTeamMembers = async () => {
+  const getTeamMembers = async (teamId) => {
     // setTeamId(values.team_id);
     // console.log(teamId);
     const { data } = await axios.post("/team/get-specific-team-details", {
@@ -147,6 +165,13 @@ const AssignEventForm = () => {
     // }
 
     // console.log(teamId);
+
+    const obj = {
+      teamId,
+      selected,
+      eventId,
+    };
+    console.log(obj);
     setLoading(false);
   };
 
@@ -205,7 +230,7 @@ const AssignEventForm = () => {
             fontWeight="bold"
             mb="2rem"
           >
-            SENSORS DETAILS
+            ASSIGNING DETAILS
           </Typography>
           {error && (
             <Box

@@ -6,6 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Toolbar,
   Typography,
   useMediaQuery,
   useTheme,
@@ -23,6 +24,8 @@ import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 import Swal from "sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
+import { GridToolbar } from "@mui/x-data-grid";
+import Loading from "../../Loading";
 
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -32,6 +35,7 @@ const GetAllTeams = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
   const [teamName, setTeamName] = useState([] || {});
+  const [pageLoading, setPageLoading] = useState(false);
 
   const getTeamCount = async (teamId) => {
     try {
@@ -74,6 +78,7 @@ const GetAllTeams = () => {
   };
 
   const getTeams = async () => {
+    setPageLoading(true);
     try {
       const { data } = await axios.get("/team/get");
       console.log(data);
@@ -111,6 +116,8 @@ const GetAllTeams = () => {
         icon: "error",
       });
     }
+
+    setPageLoading(false);
   };
 
   useEffect(() => {
@@ -177,7 +184,7 @@ const GetAllTeams = () => {
     // },
   ];
 
-  return (
+  return !pageLoading ? (
     <Box m="20px">
       <Header title="Get All Team Details" subtitle="List of the all teams" />
       <Box
@@ -219,9 +226,12 @@ const GetAllTeams = () => {
           rows={teamName}
           columns={columns}
           getRowId={(row) => row.id}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 };
 

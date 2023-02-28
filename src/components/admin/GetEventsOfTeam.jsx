@@ -4,6 +4,7 @@ import Header from "../Sidebar/Header";
 import { TextField, MenuItem } from "@mui/material";
 import axios from "../../features/Interceptors/apiInterceptor";
 import { DataGrid } from "@mui/x-data-grid";
+import { GridToolbar } from "@mui/x-data-grid";
 
 function GetEventsOfTeam() {
   const [eventsOfTeam, setEventsOfTeam] = useState([]);
@@ -159,6 +160,7 @@ function GetEventsOfTeam() {
           rows={eventsOfTeam}
           columns={columns}
           getRowId={(row) => row.id}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>

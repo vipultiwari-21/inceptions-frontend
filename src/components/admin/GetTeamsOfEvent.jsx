@@ -6,6 +6,7 @@ import axios from "../../features/Interceptors/apiInterceptor";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { GridToolbar } from "@mui/x-data-grid";
 
 function GetTeamsOfEvent() {
   const [events, setEvents] = useState([]);
@@ -28,7 +29,7 @@ function GetTeamsOfEvent() {
   const handleChange = async (val) => {
     try {
       const { data } = await axios.post("/event/get-teams-of-event", {
-        eventId: 2,
+        eventId: val,
       });
 
       const temp = data.map((obj) => {
@@ -163,6 +164,7 @@ function GetTeamsOfEvent() {
           rows={teams}
           columns={columns}
           getRowId={(row) => row.id}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>

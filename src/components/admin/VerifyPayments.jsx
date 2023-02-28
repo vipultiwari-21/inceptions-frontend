@@ -202,25 +202,6 @@ function VerifyPayments() {
                 />
 
                 {selectedTeamScreenshot ? (
-                  <Box className="w-full my-8 flex items-center justify-center  ">
-                    <Box
-                      component="img"
-                      sx={{
-                        width: "300px",
-                        margin: 0,
-                        padding: 0,
-                      }}
-                      alt="The house from the offer."
-                      src={
-                        selectedTeamScreenshot
-                          ? URL.createObjectURL(selectedTeamScreenshot)
-                          : ""
-                      }
-                    />
-                  </Box>
-                ) : null}
-
-                {selectedTeamScreenshot ? (
                   <button
                     className={`btn btn-outline btn-warning ${
                       isLoading ? "loading" : ""
@@ -229,6 +210,27 @@ function VerifyPayments() {
                     Verify Payment
                   </button>
                 ) : null}
+
+                <Box sx={{ height: "300px", width: "500px", overflow: "auto" }}>
+                  {selectedTeamScreenshot ? (
+                    <Box className="w-full my-8 flex items-center justify-center  ">
+                      <Box
+                        component="img"
+                        sx={{
+                          width: "100%",
+                          margin: 0,
+                          padding: 0,
+                        }}
+                        alt="The house from the offer."
+                        src={
+                          selectedTeamScreenshot
+                            ? URL.createObjectURL(selectedTeamScreenshot)
+                            : ""
+                        }
+                      />
+                    </Box>
+                  ) : null}
+                </Box>
               </Box>
             </form>
           )}

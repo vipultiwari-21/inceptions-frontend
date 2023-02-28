@@ -4,43 +4,51 @@ import Header from "../Sidebar/Header";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 import axios from "../../features/Interceptors/apiInterceptor";
+import Loading from "../../Loading";
 
 const AdminProfile = () => {
   const [totalTeams, setTotalTeams] = useState("");
-  const [totalAmount, setTotalAmount] = useState("");
+  const [totalParticipants, setTotalParticipants] = useState("");
   const [totalGCTeams, setTotalGCTeams] = useState("");
   const [solvathonTeams, setSolvathonTeams] = useState("");
   const [IoTTeams, setIoTTeams] = useState("");
   const [strikeForce, setStrikeForce] = useState("");
+  const [pageLoading, setPageLoading] = useState(false);
 
   const fetchAllData = async () => {
+    setPageLoading(true);
     try {
       const { data } = await axios.get("/team/get");
       setTotalTeams(data.length);
       const filteredData = data.filter((val) => {
         return val.isGCConsidered;
       });
+
       setTotalGCTeams(filteredData.length);
 
       const OpenEventsCount = await axios.get(
         "/admin/get-open-event-total-teams"
       );
-      // console.log(OpenEventsCount);
-
-      const TotalFees = await axios.get("/admin/get-total-fees");
-      console.log(TotalFees.data);
-      setTotalAmount(TotalFees.data);
       setSolvathonTeams(OpenEventsCount.data.solvathon);
       setIoTTeams(OpenEventsCount.data.infinityAndBeyond);
       setStrikeForce(OpenEventsCount.data.strikeForce);
+      //console.log("lmao : ", OpenEventsCount);
+
+      const getTotalParticipants = await axios.get(
+        "/admin/get-total-team-members"
+      );
+      setTotalParticipants(getTotalParticipants.data);
+
+      setTotalAmount(TotalFees.data);
     } catch (err) {}
+    setPageLoading(false);
   };
 
   useEffect(() => {
     fetchAllData();
   }, []);
 
-  return (
+  return !pageLoading ? (
     <Box
       m="20px"
       sx={{
@@ -60,7 +68,7 @@ const AdminProfile = () => {
           >
             <div className="card w-72 bg-primary text-primary-content">
               <div className="card-body">
-                <h2 className="card-title text-center">Total team count</h2>
+                <h2 className="card-title text-center">Total teams</h2>
 
                 <div className="card-actions w-full flex justify-center items-center">
                   <span className="text-5xl">{totalTeams}</span>
@@ -78,10 +86,10 @@ const AdminProfile = () => {
           >
             <div className="card w-72 bg-primary text-primary-content">
               <div className="card-body">
-                <h2 className="card-title">Total Amount</h2>
+                <h2 className="card-title">Total Participants</h2>
 
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-5xl ">{totalAmount} ₹</span>
+                  <span className="text-5xl ">{totalParticipants} </span>
                 </div>
               </div>
             </div>
@@ -162,6 +170,8 @@ const AdminProfile = () => {
         </Grid>
       </Grid>
     </Box>
+  ) : (
+    <Loading />
   );
 };
 

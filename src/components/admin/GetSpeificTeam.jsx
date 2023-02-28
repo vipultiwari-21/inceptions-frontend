@@ -22,6 +22,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 import { useParams } from "react-router-dom";
+import { GridToolbar } from "@mui/x-data-grid";
 
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -131,6 +132,7 @@ const GetSpecificTeam = () => {
           rows={teamMates}
           columns={columns}
           getRowId={(row) => row.memberId}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>

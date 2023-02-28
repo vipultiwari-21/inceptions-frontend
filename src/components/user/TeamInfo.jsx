@@ -289,8 +289,14 @@ const TeamInfo = () => {
         }`}
       >
         Important: If you are only interested in group events, select group
-        event , if you are only interested in open event, select open event. If
-        you are interested in both select Group + Open event, below. <br />{" "}
+        event <span className="text-accent">(only for MCA and BCA)</span> ,{" "}
+        <br />
+        If you are only interested in open event, select open event.{" "}
+        <span className="text-accent">
+          (For all branches of UG and PG)
+        </span>{" "}
+        <br />
+        If you are interested in both select Group + Open event, below. <br />{" "}
         <br />
         If you select Group + Open , you have to choose sufficient team members
         as suggested in next section. Conflicts between events will not be

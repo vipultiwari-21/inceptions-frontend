@@ -63,6 +63,20 @@ const GetAllTeams = () => {
     } catch (err) {}
   };
 
+  const getIsPaid = async (userId) => {
+    try {
+      const { data } = await axios.post("/payment/is-participant-paid", {
+        participantId: userId,
+      });
+
+      if (data.isPaid) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {}
+  };
+
   const getCollegeOfHeadUser = async (userId) => {
     try {
       const { data } = await axios.post("/user/get-user-by-id", {
@@ -88,6 +102,7 @@ const GetAllTeams = () => {
           return {
             id: obj.teamId,
             label: obj.teamName.label,
+            isPaid: await getIsPaid(obj.headUser ? obj.headUser.userId : null),
             payment: await getPayment(
               obj.headUser ? obj.headUser.userId : null
             ),
@@ -97,6 +112,7 @@ const GetAllTeams = () => {
             total: await getTeamCount(obj.teamId ? obj.teamId : null),
             teamHead: obj.headUser ? obj.headUser.firstName : null,
             contactNumber: obj.headUser ? obj.headUser.contactNumber : null,
+            isGCConsidered: obj.isGCConsidered,
           };
         })
       );
@@ -165,9 +181,22 @@ const GetAllTeams = () => {
       headerName: "Contact Number",
       flex: 1,
     },
+
+    {
+      field: "isGCConsidered",
+      headerName: "Group Events",
+      flex: 1,
+    },
+
+    {
+      field: "isPaid",
+      headerName: "Payment status",
+      flex: 1,
+    },
+
     {
       field: "payment",
-      headerName: "Payment",
+      headerName: "Payment Verification",
       flex: 1,
     },
 

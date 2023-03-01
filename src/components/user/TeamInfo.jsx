@@ -268,7 +268,7 @@ const TeamInfo = () => {
     <Box
       m="20px"
       sx={{ overflow: "auto" }}
-      className="flex flex-col justify-center items-center"
+      className="flex flex-col justify-center items-center h-full"
     >
       <Header
         title="Add Team"

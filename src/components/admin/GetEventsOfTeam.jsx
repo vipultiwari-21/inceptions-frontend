@@ -124,6 +124,7 @@ function GetEventsOfTeam() {
       <Box
         m="40px 0 0 0"
         height="75vh"
+        width="100%"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",

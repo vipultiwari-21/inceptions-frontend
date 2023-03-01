@@ -9,6 +9,8 @@ import Loading from "../../Loading";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { useNavigate } from "react-router";
+import { DataGrid } from "@mui/x-data-grid";
+import { GridToolbar } from "@mui/x-data-grid";
 
 function UserProfile() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -24,7 +26,16 @@ function UserProfile() {
         setIsRegistered(false);
       } else {
         const { data } = await axios.get(`/teamMember/get`);
-        setTeamMembers(data);
+
+        const temp = data.map((obj) => {
+          return {
+            id: obj.teamMemberId,
+            firstName: obj.firstName,
+            email: obj.email,
+            contactNumber: obj.contactNumber,
+          };
+        });
+        setTeamMembers(temp);
 
         setIsRegistered(true);
         // console.log("Team mambers : ", data);
@@ -43,6 +54,88 @@ function UserProfile() {
   useEffect(() => {
     getTeam();
   }, []);
+
+  const handleDelete = async (val) => {
+    console.log(val);
+
+    try {
+      const { data } = await axios.post("/teamMember/delete", {
+        memberId: val,
+      });
+
+      Swal.fire({
+        title: "Success!",
+        text: "Deleted Succesfully",
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
+      getTeam();
+    } catch (err) {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong",
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+    }
+  };
+
+  const columns = [
+    // {
+    //   field: "headUser",
+    //   headerName: "Team Head",
+    //   flex: 1,
+    // },
+    // {
+    //   field: "lastName",
+    //   headerName: "Last Name",
+    //   flex: 1,
+    // },
+    {
+      field: "firstName",
+      headerName: "First Name",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email ID",
+      flex: 1,
+    },
+    {
+      field: "contactNumber",
+      headerName: "Contact Number",
+      flex: 1,
+    },
+
+    {
+      field: "route",
+      headerName: "Details",
+      flex: 1,
+      renderCell: ({ row, id }) => {
+        let teamMemberId = id;
+
+        // console.log("row", row);
+        // console.log("teamMates", teamMates);
+        // teamMates.map((member) => console.log(member));
+        // console.log("memeberId", memberId);
+        return (
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => handleDelete(teamMemberId)}
+          >
+            Delete
+          </Button>
+        );
+      },
+    },
+
+    // {
+    //   field: "usn",
+    //   headerName: "USN",
+    //   flex: 1,
+    // },
+  ];
 
   return !pageLoading ? (
     isRegistered ? (
@@ -72,41 +165,49 @@ function UserProfile() {
           </Box>
         )}
 
-        {teamMembers.length > 0 ? (
-          <Box className="overflow-x-auto " sx={{ padding: "20px" }}>
-            <table className="table w-full overflow-x-auto">
-              <thead>
-                <tr>
-                  <th
-                    className="bg-primary font-bold text-neutral"
-                    style={{ zIndex: "-9999" }}
-                  ></th>
-                  <th className="bg-primary font-bold text-neutral">Name</th>
-                  <th className="bg-primary font-bold text-neutral">
-                    Phone number
-                  </th>
-                  <th className="bg-primary font-bold text-neutral">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {teamMembers
-                  ? teamMembers.map((member) => {
-                      return (
-                        <>
-                          <tr key={member.id}>
-                            <td>{member.teamMemberId}</td>
-                            <td>{member.firstName}</td>
-                            <td>{member.contactNumber}</td>
-                            <td>{member.email}</td>
-                          </tr>
-                        </>
-                      );
-                    })
-                  : null}
-              </tbody>
-            </table>
-          </Box>
-        ) : null}
+        <Box
+          m="40px 0 0 0"
+          height="75vh"
+          width="100%"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+            },
+            "& .name-column--cell": {
+              color: "#94e2cd !important",
+              // color: colors.greenAccent[300],
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              // backgroundColor: colors.blueAccent[700],
+              backgroundColor: "#3e4396",
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: "#1F2A40",
+              // backgroundColor: colors.primary[400],
+            },
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+              backgroundColor: "#3e4396",
+              // backgroundColor: colors.blueAccent[700],
+            },
+            "& .MuiCheckbox-root": {
+              color: "#b7ebde !important",
+              // color: `${colors.greenAccent[200]} !important`,
+            },
+          }}
+        >
+          <DataGrid
+            className="datagrid"
+            rows={teamMembers}
+            columns={columns}
+            getRowId={(row) => row.id}
+            components={{ Toolbar: GridToolbar }}
+          />
+        </Box>
       </Box>
     ) : (
       <Box

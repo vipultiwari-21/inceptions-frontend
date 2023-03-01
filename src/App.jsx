@@ -37,6 +37,7 @@ import GetEventsOfTeam from "./components/admin/GetEventsOfTeam";
 import GetTeamsOfEvent from "./components/admin/GetTeamsOfEvent";
 import EventwiseList from "./components/coordinator/EventwiseList";
 import RemoveEventForm from "./components/coordinator/RemoveEventForm";
+import AllowedEmail from "./components/admin/AllowedEmail";
 
 function App() {
   const user = Cookies.get("token");
@@ -202,6 +203,15 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <GetTeamsOfEvent />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="add-allowed-emails"
+                element={
+                  <ProtectedRoute>
+                    <AllowedEmail />
                   </ProtectedRoute>
                 }
               />

@@ -95,6 +95,8 @@ const GetAllTeams = () => {
               obj.headUser ? obj.headUser.userId : null
             ),
             total: await getTeamCount(obj.teamId ? obj.teamId : null),
+            teamHead: obj.headUser ? obj.headUser.firstName : null,
+            contactNumber: obj.headUser ? obj.headUser.contactNumber : null,
           };
         })
       );
@@ -103,6 +105,7 @@ const GetAllTeams = () => {
         return {
           id: obj.teamId,
           label: obj.teamName.label,
+
           payment: getPayment(),
         };
       });
@@ -148,6 +151,18 @@ const GetAllTeams = () => {
     {
       field: "total",
       headerName: "Total Participants",
+      flex: 1,
+    },
+
+    {
+      field: "teamHead",
+      headerName: "Team Head Name",
+      flex: 1,
+    },
+
+    {
+      field: "contactNumber",
+      headerName: "Contact Number",
       flex: 1,
     },
     {

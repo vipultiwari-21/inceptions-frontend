@@ -104,7 +104,9 @@ const AdminProfile = () => {
           >
             <div className="card w-72 bg-primary text-primary-content">
               <div className="card-body">
-                <h2 className="card-title">Total teams in group event</h2>
+                <h2 className="card-title">
+                  Total teams in Group + Open event
+                </h2>
                 <div className="card-actions w-full flex justify-center items-center">
                   <span className="text-5xl">{totalGCTeams}</span>
                 </div>

@@ -24,6 +24,7 @@ import Payment from "@mui/icons-material/Payment";
 import { Info, PaymentOutlined } from "@mui/icons-material";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { Money, Paid, GroupOutlined } from "@mui/icons-material";
+import AddTaskIcon from "@mui/icons-material/AddTask";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   return (
@@ -306,6 +307,14 @@ const Sidebar = ({
                     title="Get Teams of Events"
                     to="get-events-teams"
                     icon={<GroupOutlined />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+
+                  <Item
+                    title="Allowed emails"
+                    to="add-allowed-emails"
+                    icon={<AddTaskIcon />}
                     selected={selected}
                     setSelected={setSelected}
                   />

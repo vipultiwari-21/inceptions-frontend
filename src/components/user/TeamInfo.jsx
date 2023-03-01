@@ -267,7 +267,7 @@ const TeamInfo = () => {
   ) : !pageLoading && !isVerified ? (
     <Box
       m="20px"
-      sx={{ height: "100vh" }}
+      sx={{ overflow: "auto" }}
       className="flex flex-col justify-center items-center"
     >
       <Header

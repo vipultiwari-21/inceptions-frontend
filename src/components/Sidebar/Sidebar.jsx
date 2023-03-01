@@ -329,8 +329,22 @@ const Sidebar = ({
                     setSelected={setSelected}
                   />
                   <Item
-                    title="My Tenants"
-                    to="tenants"
+                    title="Remove"
+                    to="remove"
+                    icon={<PeopleIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Eventwise List"
+                    to="eventwise"
+                    icon={<PeopleIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="Get Teams of Event"
+                    to="get-events-teams"
                     icon={<PeopleIcon />}
                     selected={selected}
                     setSelected={setSelected}

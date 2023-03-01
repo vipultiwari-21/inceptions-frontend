@@ -35,6 +35,8 @@ import AssignEventForm from "./components/coordinator/AssignEventForm";
 import GetSpeificTeam from "./components/admin/GetSpeificTeam";
 import GetEventsOfTeam from "./components/admin/GetEventsOfTeam";
 import GetTeamsOfEvent from "./components/admin/GetTeamsOfEvent";
+import EventwiseList from "./components/coordinator/EventwiseList";
+import RemoveEventForm from "./components/coordinator/RemoveEventForm";
 import AllowedEmail from "./components/admin/AllowedEmail";
 
 function App() {
@@ -231,6 +233,40 @@ function App() {
                   <ProtectedRoute>
                     <AssignEventForm />
                   </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/remove"
+                element={
+                  <ProtectedRoute>
+                    <RemoveEventForm />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/eventwise"
+                element={
+                  <ProtectedRoute>
+                    <EventwiseList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="get-events-teams"
+                element={
+                  <ProtectedRoute>
+                    <GetTeamsOfEvent />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/get-teams/:id"
+                element={
+                  <>
+                    <ProtectedRoute>
+                      <GetSpeificTeam />
+                    </ProtectedRoute>
+                  </>
                 }
               />
             </>

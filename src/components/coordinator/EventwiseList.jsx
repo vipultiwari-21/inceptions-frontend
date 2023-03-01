@@ -18,8 +18,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from "yup";
-import Swal from "sweetalert2/dist/sweetalert2.js";
 import ErrorIcon from "@mui/icons-material/Error";
+import { GridToolbar } from "@mui/x-data-grid";
+
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
 
@@ -27,16 +28,20 @@ import Header from "../Sidebar/Header";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 // import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 
-const AssignEvent = () => {
+const EventwiseList = () => {
   //   const theme = useTheme();
   //   const colors = tokens(theme.palette.mode);
   const [loading, setLoading] = useState(false);
   const [teamMates, setTeamMates] = useState([]);
+  const [error, setError] = useState("");
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
   const [teamId, setTeamId] = useState("");
+  const [eventId, setEventId] = useState("");
+  const [events, setEvents] = useState([]);
 
-  console.log(teamName);
+  //   console.log(teamName);
+  //   console.log("events", events);
 
   const getTeams = async () => {
     const { data } = await axios.get("/team/get");
@@ -53,37 +58,57 @@ const AssignEvent = () => {
 
   useEffect(() => {
     getTeams();
+    getEvents();
   }, []);
 
   const handleFormSubmit = async (values, { resetForm }) => {
-    // console.log(values);
+    console.log(values);
     // dispatch(adminregister(values));
     try {
       setLoading(true); //   let obj = { teamId: values.team_id };
       //   console.log("obj", obj);
       setTeamId(values.team_id);
-      const { data } = await axios.post("/team/get-specific-team-details", {
+      //   const { data } = await axios.post("/team/get-specific-team-details", {
+      //     teamId: values.team_id,
+      //   });
+
+      const { data } = await axios.post("/teamMember/get-by-eventId", {
+        eventId: values.event_id,
         teamId: values.team_id,
       });
-      setTeamMates(data[0].teamMembers);
-      resetForm({ values: initialValues });
+      console.log("data", data);
+      setTeamMates(data);
+      //   setTeamMates(data[0].teamMembers);
+      //   resetForm({ values: initialValues });
       setLoading(false);
-      // Swal.fire({
-      //   title: "Success!",
-      //   text: "Teammates added to the Event Successfully",
-      //   icon: "success",
-      //   confirmButtonText: "Okay",
-      // });
     } catch (err) {
-      Swal.fire({
-        title: "Error!",
-        text: err.response.data.error,
-        icon: "error",
-        confirmButtonText: "Okay",
-      });
+      setError(err.message);
     }
 
     setLoading(false);
+  };
+
+  const getEvents = async () => {
+    const { data } = await axios.get("/event/get-short");
+    // console.log("events list", data);
+    let tempArray1 = [];
+    let tempArray2 = [];
+    for (let i = 0; i < data.detailedEvents.length; i++) {
+      const getAllData = {
+        eventId: `${data.detailedEvents[i].eventId}`,
+        name: `${data.detailedEvents[i].name}`,
+      };
+      tempArray1.push(getAllData);
+    }
+    // console.log("tempArray", tempArray);
+    tempArray2 = [
+      ...tempArray1,
+      {
+        eventId: String(data.mysteryEvent.eventId),
+        name: data.mysteryEvent.eventName,
+      },
+    ];
+    setEvents(tempArray2);
   };
 
   const columns = [
@@ -200,6 +225,23 @@ const AssignEvent = () => {
             handleSubmit,
           }) => (
             <form onSubmit={handleSubmit}>
+              {error && (
+                <Box
+                  mb="1rem"
+                  sx={{
+                    color: "#e87c03",
+                    display: "flex",
+                    // justifyContent: "center",
+                    gap: "0.5rem",
+                    alignItems: "center",
+                    borderRadius: "5px",
+                  }}
+                  p=".5rem"
+                >
+                  <ErrorIcon />
+                  {error}
+                </Box>
+              )}
               <Box
                 // placeItems="center"
                 // color={colors.grey[100]}
@@ -217,7 +259,7 @@ const AssignEvent = () => {
                 <div
                   style={{
                     gridColumn: "span 4",
-                    width: "50%",
+                    width: "20%",
                   }}
                 >
                   <InputLabel id="team_id" style={{ color: "#fff" }}>
@@ -243,6 +285,40 @@ const AssignEvent = () => {
                       ? teamName.map((eachTeam) => (
                           <MenuItem value={eachTeam.id} key={eachTeam.id}>
                             {eachTeam.label}
+                          </MenuItem>
+                        ))
+                      : null}
+                  </Select>
+                </div>
+                <div
+                  style={{
+                    gridColumn: "span 4",
+                    width: "20%",
+                  }}
+                >
+                  <InputLabel id="event_id" style={{ color: "#fff" }}>
+                    Event Name
+                  </InputLabel>
+                  <Select
+                    style={{ backgroundColor: "#fff", textAlign: "left" }}
+                    fullWidth
+                    variant="filled"
+                    // type="text"
+                    label="Event ID"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.event_id}
+                    name="event_id"
+                    labelId="event"
+                    id="event_id"
+                    error={!!touched.event_id && !!errors.event_id}
+                    helperText={touched.event_id && errors.event_id}
+                    sx={{ gridColumn: "span 4" }}
+                  >
+                    {events
+                      ? events.map((event) => (
+                          <MenuItem value={event.eventId} key={event.eventId}>
+                            {event.name}
                           </MenuItem>
                         ))
                       : null}
@@ -283,6 +359,7 @@ const AssignEvent = () => {
           rows={teamMates}
           columns={columns}
           getRowId={(row) => row.memberId}
+          components={{ Toolbar: GridToolbar }}
         />
       </Box>
     </Box>
@@ -291,9 +368,11 @@ const AssignEvent = () => {
 
 const checkoutSchema = yup.object().shape({
   team_id: yup.string().required("required"),
+  event_id: yup.string().required("required"),
 });
 const initialValues = {
   team_id: "",
+  event_id: "",
 };
 
-export default AssignEvent;
+export default EventwiseList;

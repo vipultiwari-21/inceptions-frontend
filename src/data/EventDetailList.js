@@ -16,6 +16,7 @@ const EventDetailList = [
     requirements: [
       "Participants should know the basics of OOP's.",
       "Participants should carry a laptop.",
+      "Laptop's should have one running IDE (preferably VS Code with C, Java, Python extensions added)",
     ],
     contact: [
       {
@@ -356,7 +357,7 @@ const EventDetailList = [
       "Three prizes declared but Nimble Vision Pvt Ltd reserves right to limit  1 or 2 based on the score obtained.",
       "The solutions will be considered for award only if they match evaluation criteria",
       "After competition winners source code to be shared to Nimble Vision Pvt Ltd with no IP claims",
-      "Participants will recieve a google form after payment , they should submit zip file containing the source code and presentation ",
+      "Participants will recieve a google form after payment , they should submit zip file containing the source code and presentation on or before 3rd MARCH 2023 ",
     ],
 
     problemStatement:
@@ -373,7 +374,7 @@ const EventDetailList = [
       "The decision of the judges is final",
       "The winning team will be awarded based on the criteria specified by the organizers",
       "The teams must comply with the deadline for submissions",
-      "Participants must upload their source code & presentation zip file in the below provided google form on or before 3rd March",
+      "Participants must upload their source code & presentation zip file in the below provided google form on or before 3rd March 2023",
     ],
     contact: [
       {

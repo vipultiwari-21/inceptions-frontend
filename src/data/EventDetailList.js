@@ -231,6 +231,7 @@ const EventDetailList = [
       "On who wins a coin flip. Attackers/Defenders side will also be contingent on a separate coinflip.",
     ],
     requirements: [
+      "A team must cotain 5 members",
       "Participants should get their own laptops",
       "Participants should have a Riot Vanguard Valorant account",
       "Participants should bring their own accessories (Keyboards, Mouse, Earphones)",

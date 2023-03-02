@@ -17,6 +17,7 @@ function VerifyPayments() {
     useState("");
   const [selectedTeamScreenshot, setSelectedTeamScreenshot] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [actualFees, setActualFees] = useState("");
 
   const fetchData = async () => {
     try {
@@ -42,11 +43,16 @@ function VerifyPayments() {
 
   const handleFormSubmit = async () => {
     setIsLoading(true);
+
+    console.log("hello");
+
     try {
       const { data } = await axios.post("/payment/update-verification", {
         isVerified: true,
         participantId: selectedUserID,
       });
+
+      console.log(selectedUserID);
 
       Swal.fire({
         title: "Success!",
@@ -90,6 +96,7 @@ function VerifyPayments() {
 
       // const blob = new Blob([data], { type: "plain/text" });
       //console.log(blob);
+
       setSelectedTeamScreenshot(imageTransaction.data);
     } catch (err) {
       // console.log(err);

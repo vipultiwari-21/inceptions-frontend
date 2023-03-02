@@ -295,7 +295,7 @@ export default function Schedule() {
           roundName: "Round 3",
           status: "Not Started",
           venue: "AI/ML LAB 1",
-          time: "MAR 4, 9:00 AM-1:00 PM",
+          time: "MAR 4, 10:00 AM-12:00 PM",
         },
       ],
     },

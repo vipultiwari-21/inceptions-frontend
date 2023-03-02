@@ -38,6 +38,8 @@ import GetTeamsOfEvent from "./components/admin/GetTeamsOfEvent";
 import EventwiseList from "./components/coordinator/EventwiseList";
 import RemoveEventForm from "./components/coordinator/RemoveEventForm";
 import AllowedEmail from "./components/admin/AllowedEmail";
+import ScoreForm from "./components/admin/ScoreForm";
+import ScoreBoard from "./components/admin/ScoreBoard";
 
 function App() {
   const user = Cookies.get("token");
@@ -212,6 +214,22 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <AllowedEmail />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="update-score"
+                element={
+                  <ProtectedRoute>
+                    <ScoreForm />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="score-board"
+                element={
+                  <ProtectedRoute>
+                    <ScoreBoard />
                   </ProtectedRoute>
                 }
               />

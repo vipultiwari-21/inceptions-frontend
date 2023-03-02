@@ -14,6 +14,8 @@ const AdminProfile = () => {
   const [IoTTeams, setIoTTeams] = useState("");
   const [strikeForce, setStrikeForce] = useState("");
   const [pageLoading, setPageLoading] = useState(false);
+  const [totalGroupEvents, setTotalGroupEvents] = useState("");
+  const [totalGCParticipants, setTotalGCParticipants] = useState("");
 
   const fetchAllData = async () => {
     setPageLoading(true);
@@ -29,17 +31,23 @@ const AdminProfile = () => {
       const OpenEventsCount = await axios.get(
         "/admin/get-open-event-total-teams"
       );
-      setSolvathonTeams(OpenEventsCount.data.solvathon);
-      setIoTTeams(OpenEventsCount.data.infinityAndBeyond);
-      setStrikeForce(OpenEventsCount.data.strikeForce);
-      //console.log("lmao : ", OpenEventsCount);
-
       const getTotalParticipants = await axios.get(
         "/admin/get-total-team-members"
       );
+
+      setSolvathonTeams(OpenEventsCount.data.solvathon);
+      setIoTTeams(OpenEventsCount.data.infinityAndBeyond);
+      setStrikeForce(OpenEventsCount.data.strikeForce);
       setTotalParticipants(getTotalParticipants.data);
 
-      setTotalAmount(TotalFees.data);
+      const onlyGCTeams = await axios.get("/admin/get-group-event-total-teams");
+      setTotalGroupEvents(onlyGCTeams.data);
+
+      const onlyGCParticipants = await axios.get(
+        "/admin/get-total-team-members-of-group-events"
+      );
+
+      setTotalGCParticipants(onlyGCParticipants.data);
     } catch (err) {}
     setPageLoading(false);
   };
@@ -115,7 +123,7 @@ const AdminProfile = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -133,7 +141,7 @@ const AdminProfile = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -151,7 +159,7 @@ const AdminProfile = () => {
           </Box>
         </Grid>
 
-        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -165,6 +173,24 @@ const AdminProfile = () => {
                 </h2>
                 <div className="card-actions w-full flex justify-center items-center">
                   <span className="text-5xl">{IoTTeams}</span>
+                </div>
+              </div>
+            </div>
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <div className="card w-72 bg-primary text-primary-content">
+              <div className="card-body">
+                <h2 className="card-title">Total teams only in group events</h2>
+                <div className="card-actions w-full flex justify-center items-center">
+                  <span className="text-5xl">{totalGroupEvents}</span>
                 </div>
               </div>
             </div>

@@ -310,6 +310,7 @@ const Sidebar = ({
                     selected={selected}
                     setSelected={setSelected}
                   />
+<<<<<<< HEAD
 
                   <Item
                     title="Allowed emails"
@@ -332,6 +333,8 @@ const Sidebar = ({
                     selected={selected}
                     setSelected={setSelected}
                   />
+=======
+>>>>>>> c957f52f11c15e611431a0bc4dff77fd4ebfae3b
                 </>
               )}
               {role === "COORDINATOR" && (

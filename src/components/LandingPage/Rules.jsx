@@ -62,6 +62,7 @@ function Rules() {
                 Participants from the group events cannot participate in the
                 open events.
               </li>
+              <li></li>
               <li>
                 Open events will not be considered for General Championships.
               </li>

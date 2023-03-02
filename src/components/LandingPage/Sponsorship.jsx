@@ -65,39 +65,7 @@ function Sponsorship() {
             flexDirection="column"
           >
             <img
-              src={DeerajPropertyLogo}
-              alt="male"
-              className="img-contact"
-              style={{ width: "150px", height: "150px" }}
-            />
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-          >
-            <img
               src={PrachiDentalClinicLogo}
-              alt="male"
-              className="img-contact"
-              style={{ width: "150px", height: "150px" }}
-            />
-          </Box>
-        </Grid>
-
-        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-          >
-            <img
-              src={SriLakshmiConstructor}
               alt="male"
               className="img-contact"
               style={{ width: "150px", height: "150px" }}
@@ -129,11 +97,39 @@ function Sponsorship() {
             flexDirection="column"
           >
             <img
-              src={Sp}
+              src={SriLakshmiConstructor}
               alt="male"
               className="img-contact"
-              style={{ width: "200px", height: "150px" }}
+              style={{ width: "150px", height: "150px" }}
             />
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <img
+              src={DeerajPropertyLogo}
+              alt="male"
+              className="img-contact"
+              style={{ width: "150px", height: "150px" }}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            sx={{ textAlign: "center", fontSize: "1.8rem", color: "#fff" }}
+          >
+            MCA <br />
+            ALUMNIS
           </Box>
         </Grid>
 
@@ -150,18 +146,22 @@ function Sponsorship() {
             TECH
           </Box>
         </Grid>
-      </Grid>
-      <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          flexDirection="column"
-          sx={{ textAlign: "center", fontSize: "1.8rem", color: "#fff" }}
-        >
-          MCA <br />
-          ALUMNIS
-        </Box>
+
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <img
+              src={Sp}
+              alt="male"
+              className="img-contact"
+              style={{ width: "200px", height: "150px" }}
+            />
+          </Box>
+        </Grid>
       </Grid>
     </Container>
   );

@@ -316,6 +316,7 @@ const EventDetailList = [
     img: "https://i.ibb.co/SfHsWcW/eventx.png",
     svg: "/scheduleIcons/EventX.svg",
     description: "You never know what we might have in the store?",
+    mainNotice: ["Total participants that can participate in this event is 7"],
 
     contact: [
       {

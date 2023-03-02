@@ -68,6 +68,10 @@ const VolunteerAttendance = () => {
         teamId: val,
       });
 
+      const checkStatus = (obj) => {
+        return obj.participantStatus == true;
+      };
+
       const temp = data[0].teamMembers.map((obj) => {
         return {
           id: obj.memberId,
@@ -77,7 +81,8 @@ const VolunteerAttendance = () => {
           email: obj.email,
         };
       });
-      // console.log("asd", temp);
+      console.log("asd", temp.every(checkStatus));
+      setPresentState(temp.every(checkStatus));
       setTeamMates(temp);
     } catch (err) {
       console.log(err);

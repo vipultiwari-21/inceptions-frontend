@@ -16,35 +16,27 @@ function ScoreBoard() {
     try {
       const { data } = await axios.get("/team/get");
       //   setEvents(data);
-      console.log("data", data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllTeams();
-  }, []);
-
-  const handleChange = async (val) => {
-    try {
-      const { data } = await axios.post("/event/get-teams-of-event", {
-        eventId: val,
-      });
-
-      const temp = data.map((obj) => {
-        return {
-          id: obj.teamId,
-          label: obj.teamName.label,
+      let tempArray = [];
+      //   console.log("data", data);
+      for (let i = 0; i < data.length; i++) {
+        const getAllData = {
+          teamId: `${data[i].teamId}`,
+          teamName: `${data[i].teamName.label}`,
+          college: `${data[i].teamHeadDetails.collegeName}`,
+          score: `${data[i].score}`,
         };
-      });
-
-      //console.log(data);
-      setTeams(temp);
+        tempArray.push(getAllData);
+      }
+      console.log("tempArray", tempArray);
+      setTeams(tempArray);
     } catch (err) {
       console.log(err);
     }
   };
+
+  fetchAllTeams();
+  //   useEffect(() => {
+  //   }, []);
 
   const columns = [
     // {
@@ -58,8 +50,18 @@ function ScoreBoard() {
     //   flex: 1,
     // },
     {
-      field: "label",
+      field: "teamName",
       headerName: "Team Name",
+      flex: 1,
+    },
+    {
+      field: "college",
+      headerName: "College",
+      flex: 1,
+    },
+    {
+      field: "score",
+      headerName: "Current Score",
       flex: 1,
     },
     // {
@@ -142,7 +144,7 @@ function ScoreBoard() {
           className="datagrid"
           rows={teams}
           columns={columns}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row.teamId}
           components={{ Toolbar: GridToolbar }}
         />
       </Box>

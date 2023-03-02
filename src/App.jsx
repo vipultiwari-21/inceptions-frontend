@@ -308,6 +308,17 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
+              <Route
+                path="/get-teams/:id"
+                element={
+                  <>
+                    <ProtectedRoute>
+                      <GetSpeificTeam />
+                    </ProtectedRoute>
+                  </>
+                }
+              />
             </>
           )}
           {/* {user ? (

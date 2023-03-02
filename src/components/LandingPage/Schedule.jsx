@@ -150,7 +150,7 @@ export default function Schedule() {
           roundName: "Round 4",
           status: "Not Started",
           venue: "MCA QUADRANGLE",
-          time: "MAR 3, 9:00 AM-11:00 AM",
+          time: "MAR 4, 9:00 AM-11:00 AM",
         },
         {
           roundName: "Round 5",

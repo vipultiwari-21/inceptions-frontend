@@ -11,7 +11,6 @@ import { GridToolbar } from "@mui/x-data-grid";
 function ScoreBoard() {
   const [events, setEvents] = useState([]);
   const [teams, setTeams] = useState([]);
-  const [count, setCount] = useState(1);
 
   const fetchAllTeams = async () => {
     try {
@@ -19,25 +18,16 @@ function ScoreBoard() {
       //   setEvents(data);
       let tempArray = [];
       //   console.log("data", data);
-
-      const newArray = data.filter(
-        (team) => team.isGCConsidered === true && team.score > 10
-      );
-      console.log("newArray", newArray);
-      //   console.log("tempArray", tempArray);
-      for (let i = 0; i < newArray.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         const getAllData = {
-          //   slno: setCount((prevCount) => prevCount + 1),
-          slno: count,
-          teamId: `${newArray[i].teamId}`,
-          teamName: `${newArray[i].teamName.label}`,
-          teamHeadUserFirstName: `${newArray[i].headUser.firstName}`,
-          teamHeadUserContact: `${newArray[i].headUser.contactNumber}`,
-          college: `${newArray[i].teamHeadDetails.collegeName}`,
-          score: `${newArray[i].score}`,
+          teamId: `${data[i].teamId}`,
+          teamName: `${data[i].teamName.label}`,
+          college: `${data[i].teamHeadDetails.collegeName}`,
+          score: `${data[i].score}`,
         };
         tempArray.push(getAllData);
       }
+      console.log("tempArray", tempArray);
       setTeams(tempArray);
     } catch (err) {
       console.log(err);
@@ -60,11 +50,6 @@ function ScoreBoard() {
     //   flex: 1,
     // },
     {
-      field: "slno",
-      headerName: "Prize",
-      flex: 1,
-    },
-    {
       field: "teamName",
       headerName: "Team Name",
       flex: 1,
@@ -72,16 +57,6 @@ function ScoreBoard() {
     {
       field: "college",
       headerName: "College",
-      flex: 1,
-    },
-    {
-      field: "teamHeadUserFirstName",
-      headerName: "Team Head Name",
-      flex: 1,
-    },
-    {
-      field: "teamHeadUserContact",
-      headerName: "Team Head Contact",
       flex: 1,
     },
     {
@@ -126,8 +101,8 @@ function ScoreBoard() {
       className="flex justify-center items-center flex-col"
     >
       <Header
-        title="SCORE BOARD"
-        subtitle="TOP 5 TEAMS TO WIN THE GENERAL CHAMPIONSHIP"
+        title="Teams of specific event"
+        subtitle="View all teams of each event"
       />
 
       <Box

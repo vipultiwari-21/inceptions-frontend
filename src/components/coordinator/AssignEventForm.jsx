@@ -32,6 +32,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgress from "@material-ui/core/CircularProgress";
 // import { CheckboxWithLabel } from "formik-material-ui";
 import { MultiSelect } from "react-multi-select-component";
+import Loading from "../../Loading";
 
 const AssignEventForm = () => {
   const theme = useTheme();
@@ -45,12 +46,14 @@ const AssignEventForm = () => {
   const [teamId, setTeamId] = useState("");
   const [eventId, setEventId] = useState("");
   const [selected, setSelected] = useState([]);
+  const [pageLoading, setPageLoading] = useState(false);
 
   // console.log(events);
   // console.log(teamName);
   // console.log(teamMates);
 
   const getTeams = async () => {
+    setPageLoading(true);
     const { data } = await axios.get("/team/get");
     const temp = data.map((obj) => {
       return {
@@ -61,9 +64,11 @@ const AssignEventForm = () => {
 
     // allTeams.push(temp);
     setTeamName(temp);
+    setPageLoading(false);
   };
 
   const getEvents = async () => {
+    setPageLoading(true);
     const { data } = await axios.get("/event/get-short");
     // console.log("events list", data);
     let tempArray1 = [];
@@ -84,6 +89,7 @@ const AssignEventForm = () => {
       },
     ];
     setEvents(tempArray2);
+    setPageLoading(false);
   };
 
   function handleTeamSelectChange(e) {
@@ -223,7 +229,7 @@ const AssignEventForm = () => {
   //   },
   // ];
 
-  return (
+  return !pageLoading ? (
     <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
       <Header
         title="Assign Teamnates to the event"
@@ -390,6 +396,8 @@ const AssignEventForm = () => {
         </form>
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 };
 

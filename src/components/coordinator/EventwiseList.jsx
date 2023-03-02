@@ -23,6 +23,7 @@ import { GridToolbar } from "@mui/x-data-grid";
 
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
+import Loading from "../../Loading";
 
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -39,11 +40,13 @@ const EventwiseList = () => {
   const [teamId, setTeamId] = useState("");
   const [eventId, setEventId] = useState("");
   const [events, setEvents] = useState([]);
+  const [pageLoading, setPageLoading] = useState(false);
 
   //   console.log(teamName);
   //   console.log("events", events);
 
   const getTeams = async () => {
+    setPageLoading(true);
     const { data } = await axios.get("/team/get");
     const temp = data.map((obj) => {
       return {
@@ -54,6 +57,7 @@ const EventwiseList = () => {
 
     // allTeams.push(temp);
     setTeamName(temp);
+    setPageLoading(false);
   };
 
   useEffect(() => {
@@ -89,6 +93,7 @@ const EventwiseList = () => {
   };
 
   const getEvents = async () => {
+    setPageLoading(true);
     const { data } = await axios.get("/event/get-short");
     // console.log("events list", data);
     let tempArray1 = [];
@@ -109,6 +114,7 @@ const EventwiseList = () => {
       },
     ];
     setEvents(tempArray2);
+    setPageLoading(false);
   };
 
   const columns = [
@@ -171,7 +177,7 @@ const EventwiseList = () => {
     // },
   ];
 
-  return (
+  return !pageLoading ? (
     <Box m="20px">
       <Header
         title="Get Specific Team Details"
@@ -225,23 +231,6 @@ const EventwiseList = () => {
             handleSubmit,
           }) => (
             <form onSubmit={handleSubmit}>
-              {error && (
-                <Box
-                  mb="1rem"
-                  sx={{
-                    color: "#e87c03",
-                    display: "flex",
-                    // justifyContent: "center",
-                    gap: "0.5rem",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                  }}
-                  p=".5rem"
-                >
-                  <ErrorIcon />
-                  {error}
-                </Box>
-              )}
               <Box
                 // placeItems="center"
                 // color={colors.grey[100]}
@@ -363,6 +352,8 @@ const EventwiseList = () => {
         />
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 };
 

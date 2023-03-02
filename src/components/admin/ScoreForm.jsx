@@ -32,6 +32,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgress from "@material-ui/core/CircularProgress";
 // import { CheckboxWithLabel } from "formik-material-ui";
 import { MultiSelect } from "react-multi-select-component";
+import Loading from "../../Loading";
 function ScoreForm() {
   let arr = [];
   const [loading, setLoading] = useState(false);
@@ -42,6 +43,7 @@ function ScoreForm() {
   const [teamId, setTeamId] = useState("");
   const [eventId, setEventId] = useState("");
   const [selected, setSelected] = useState([]);
+  const [pageLoading, setPageLoading] = useState(false);
 
   const checkoutSchema = yup.object().shape({
     team_id: yup.string().required("required"),
@@ -53,6 +55,7 @@ function ScoreForm() {
   };
 
   const getTeams = async () => {
+    setPageLoading(true);
     const { data } = await axios.get("/team/get");
     const temp = data.map((obj) => {
       return {
@@ -63,6 +66,7 @@ function ScoreForm() {
 
     // allTeams.push(temp);
     setTeamName(temp);
+    setPageLoading(false);
   };
 
   useEffect(() => {
@@ -103,6 +107,7 @@ function ScoreForm() {
         icon: "success",
         confirmButtonText: "Okay",
       });
+      setLoading(false);
       resetForm();
     } catch (err) {
       Swal.fire({
@@ -111,10 +116,11 @@ function ScoreForm() {
         icon: "error",
         confirmButtonText: "Okay",
       });
+      setLoading(false);
     }
   };
 
-  return (
+  return !pageLoading ? (
     <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
       <Header
         title="Update GC Team Scores"
@@ -163,7 +169,7 @@ function ScoreForm() {
               }}
             >
               <p className="mb-4 font-bold" style={{ color: "#fff" }}>
-                UPDATE SCORE
+                Update the score
               </p>
               <div className="mb-4">
                 <InputLabel
@@ -210,7 +216,7 @@ function ScoreForm() {
                     marginBottom: ".5rem",
                   }}
                 >
-                  Score
+                  Update Score
                 </InputLabel>
                 <TextField
                   type="text"
@@ -255,6 +261,8 @@ function ScoreForm() {
         </Formik>
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 }
 

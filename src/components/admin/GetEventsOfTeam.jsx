@@ -5,17 +5,21 @@ import { TextField, MenuItem } from "@mui/material";
 import axios from "../../features/Interceptors/apiInterceptor";
 import { DataGrid } from "@mui/x-data-grid";
 import { GridToolbar } from "@mui/x-data-grid";
+import Loading from "../../Loading";
 
 function GetEventsOfTeam() {
   const [eventsOfTeam, setEventsOfTeam] = useState([]);
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState("");
+  const [pageLoading, setPageLoading] = useState(false);
 
   const getAllEvents = async () => {
     try {
+      setPageLoading(true);
       const { data } = await axios.get("/team/get");
       console.log(data);
       setTeams(data);
+      setPageLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -84,7 +88,7 @@ function GetEventsOfTeam() {
     // },
   ];
 
-  return (
+  return !pageLoading ? (
     <Box
       m="20px"
       sx={{
@@ -165,6 +169,8 @@ function GetEventsOfTeam() {
         />
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 }
 

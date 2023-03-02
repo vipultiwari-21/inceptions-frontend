@@ -71,11 +71,10 @@ function Banner() {
 
             {/* Countdown */}
 
-            <h3 className="text-xl lg:text-2xl text-center lg:text-left my-3  uppercase font-extrabold mt-8 text-neutral-content sm:text-neutral-content">
-              Ready to take off in:
-            </h3>
-            <div className="ml-12 md:ml-32 lg:ml-0">
-              <Countdown />
+            <h3 className="text-xl lg:text-2xl text-center lg:text-left my-3 text-warning uppercase font-extrabold mt-8 "></h3>
+            <div className="ml-12 md:ml-32 lg:ml-0 text-2xl font-bold text-warning">
+              Prepare to be blown away by the sheer magnificence of our Magnum
+              Opus!
             </div>
           </div>
 

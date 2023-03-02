@@ -7,36 +7,47 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { GridToolbar } from "@mui/x-data-grid";
+import Loading from "../../Loading";
 
 function ScoreBoard() {
   const [events, setEvents] = useState([]);
   const [teams, setTeams] = useState([]);
+  const [count, setCount] = useState(1);
+  const [pageLoading, setPageLoading] = useState(false);
 
   const fetchAllTeams = async () => {
     try {
+      setPageLoading(true);
       const { data } = await axios.get("/team/get");
       //   setEvents(data);
       let tempArray = [];
       //   console.log("data", data);
-      for (let i = 0; i < data.length; i++) {
+      const newArray = data.filter(
+        (team) => team.isGCConsidered === true && team.score > 10
+      );
+      console.log("newArray", newArray);
+      for (let i = 0; i < newArray.length; i++) {
         const getAllData = {
-          teamId: `${data[i].teamId}`,
-          teamName: `${data[i].teamName.label}`,
-          college: `${data[i].teamHeadDetails.collegeName}`,
-          score: `${data[i].score}`,
+          teamId: `${newArray[i].teamId}`,
+          teamName: `${newArray[i].teamName.label}`,
+          college: `${newArray[i].teamHeadDetails.collegeName}`,
+          headUserFirstName: `${newArray[i].headUser.firstName}`,
+          headUserContact: `${newArray[i].headUser.contactNumber}`,
+          score: `${newArray[i].score}`,
         };
         tempArray.push(getAllData);
       }
-      console.log("tempArray", tempArray);
+      //   console.log("tempArray", tempArray);
       setTeams(tempArray);
+      setPageLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
 
-  fetchAllTeams();
-  //   useEffect(() => {
-  //   }, []);
+  useEffect(() => {
+    fetchAllTeams();
+  }, []);
 
   const columns = [
     // {
@@ -57,6 +68,16 @@ function ScoreBoard() {
     {
       field: "college",
       headerName: "College",
+      flex: 1,
+    },
+    {
+      field: "headUserFirstName",
+      headerName: "Team Head",
+      flex: 1,
+    },
+    {
+      field: "headUserContact",
+      headerName: "Contact",
       flex: 1,
     },
     {
@@ -92,7 +113,7 @@ function ScoreBoard() {
     // },
   ];
 
-  return (
+  return !pageLoading ? (
     <Box
       m="20px"
       sx={{
@@ -101,8 +122,8 @@ function ScoreBoard() {
       className="flex justify-center items-center flex-col"
     >
       <Header
-        title="Teams of specific event"
-        subtitle="View all teams of each event"
+        title="SCORE BOARD"
+        subtitle="TOP 5 TEAMS OF GENERAL CHAMPIONSHIP"
       />
 
       <Box
@@ -149,6 +170,8 @@ function ScoreBoard() {
         />
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 }
 

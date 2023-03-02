@@ -310,6 +310,28 @@ const Sidebar = ({
                     selected={selected}
                     setSelected={setSelected}
                   />
+
+                  <Item
+                    title="Allowed emails"
+                    to="add-allowed-emails"
+                    icon={<AddTaskIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="UPDATE SCORE"
+                    to="update-score"
+                    icon={<AddTaskIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                  <Item
+                    title="SCORE BOARD"
+                    to="score-board"
+                    icon={<AddTaskIcon />}
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
                 </>
               )}
               {role === "COORDINATOR" && (

@@ -22,6 +22,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import ErrorIcon from "@mui/icons-material/Error";
 import axios from "../../features/Interceptors/apiInterceptor";
 import Header from "../Sidebar/Header";
+import Loading from "../../Loading";
 
 // import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 // import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
@@ -35,10 +36,12 @@ const AssignEvent = () => {
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
   const [teamId, setTeamId] = useState("");
+  const [pageLoading, setPageLoading] = useState(false);
 
   console.log(teamName);
 
   const getTeams = async () => {
+    setPageLoading(true);
     const { data } = await axios.get("/team/get");
     const temp = data.map((obj) => {
       return {
@@ -49,6 +52,7 @@ const AssignEvent = () => {
 
     // allTeams.push(temp);
     setTeamName(temp);
+    setPageLoading(false);
   };
 
   useEffect(() => {
@@ -146,7 +150,7 @@ const AssignEvent = () => {
     // },
   ];
 
-  return (
+  return !pageLoading ? (
     <Box m="20px">
       <Header
         title="Get Specific Team Details"
@@ -286,6 +290,8 @@ const AssignEvent = () => {
         />
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 };
 

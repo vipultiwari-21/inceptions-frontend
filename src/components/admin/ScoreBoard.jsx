@@ -4,21 +4,41 @@ import Header from "../Sidebar/Header";
 import { TextField, MenuItem } from "@mui/material";
 import axios from "../../features/Interceptors/apiInterceptor";
 import { DataGrid } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 import { GridToolbar } from "@mui/x-data-grid";
 import Loading from "../../Loading";
 
-function GetEventsOfTeam() {
-  const [eventsOfTeam, setEventsOfTeam] = useState([]);
+function ScoreBoard() {
+  const [events, setEvents] = useState([]);
   const [teams, setTeams] = useState([]);
-  const [selectedTeam, setSelectedTeam] = useState("");
+  const [count, setCount] = useState(1);
   const [pageLoading, setPageLoading] = useState(false);
 
-  const getAllEvents = async () => {
+  const fetchAllTeams = async () => {
     try {
       setPageLoading(true);
       const { data } = await axios.get("/team/get");
-      console.log(data);
-      setTeams(data);
+      //   setEvents(data);
+      let tempArray = [];
+      //   console.log("data", data);
+      const newArray = data.filter(
+        (team) => team.isGCConsidered === true && team.score > 10
+      );
+      console.log("newArray", newArray);
+      for (let i = 0; i < newArray.length; i++) {
+        const getAllData = {
+          teamId: `${newArray[i].teamId}`,
+          teamName: `${newArray[i].teamName.label}`,
+          college: `${newArray[i].teamHeadDetails.collegeName}`,
+          headUserFirstName: `${newArray[i].headUser.firstName}`,
+          headUserContact: `${newArray[i].headUser.contactNumber}`,
+          score: `${newArray[i].score}`,
+        };
+        tempArray.push(getAllData);
+      }
+      //   console.log("tempArray", tempArray);
+      setTeams(tempArray);
       setPageLoading(false);
     } catch (err) {
       console.log(err);
@@ -26,30 +46,8 @@ function GetEventsOfTeam() {
   };
 
   useEffect(() => {
-    getAllEvents();
+    fetchAllTeams();
   }, []);
-
-  const handleChange = async (e) => {
-    try {
-      const { data } = await axios.post("/team/get-events-of-specific-team", {
-        teamId: e.target.value,
-      });
-
-      const temp = data.map((obj) => {
-        return {
-          id: obj.eventId,
-          label: obj.eventName,
-          maxTeamSize: obj.eventMaxTeamSize,
-          isOpenEvent: obj.eventIsOpenEvent,
-        };
-      });
-
-      //console.log(data);
-      setEventsOfTeam(temp);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const columns = [
     // {
@@ -62,24 +60,51 @@ function GetEventsOfTeam() {
     //   headerName: "Last Name",
     //   flex: 1,
     // },
-
     {
-      field: "id",
-      headerName: "Event Id",
-      flex: 1,
-    },
-
-    {
-      field: "label",
+      field: "teamName",
       headerName: "Team Name",
       flex: 1,
     },
-
     {
-      field: "isOpenEvent",
-      headerName: "Is Open Event",
+      field: "college",
+      headerName: "College",
       flex: 1,
     },
+    {
+      field: "headUserFirstName",
+      headerName: "Team Head",
+      flex: 1,
+    },
+    {
+      field: "headUserContact",
+      headerName: "Contact",
+      flex: 1,
+    },
+    {
+      field: "score",
+      headerName: "Current Score",
+      flex: 1,
+    },
+    // {
+    //   field: "route",
+    //   headerName: "Details",
+    //   flex: 1,
+    //   renderCell: ({ row, id }) => {
+    //     let teamId = id;
+
+    //     // console.log("row", row);
+    //     // console.log("teamMates", teamMates);
+    //     // teamMates.map((member) => console.log(member));
+    //     // console.log("memeberId", memberId);
+    //     return (
+    //       <Link to={`/get-teams/${teamId}`} className={id}>
+    //         <Button color="primary" variant="contained">
+    //           Details
+    //         </Button>
+    //       </Link>
+    //     );
+    //   },
+    // },
 
     // {
     //   field: "usn",
@@ -97,33 +122,9 @@ function GetEventsOfTeam() {
       className="flex justify-center items-center flex-col"
     >
       <Header
-        title="Events of specific team"
-        subtitle="View all events of each team"
+        title="SCORE BOARD"
+        subtitle="TOP 5 TEAMS OF GENERAL CHAMPIONSHIP"
       />
-
-      <TextField
-        select
-        label="Select Team Name"
-        variant="filled"
-        color="primary"
-        InputLabelProps={{ className: "textfield__label" }}
-        InputProps={{ className: "textfield__label" }}
-        className="textfield  w-72 lg:w-96"
-        onChange={(e) => {
-          handleChange(e);
-        }}
-      >
-        {teams
-          ? teams.map((eachTeam) => (
-              <MenuItem
-                value={eachTeam.teamId ? eachTeam.teamId : null}
-                key={eachTeam.teamId ? eachTeam.teamId : null}
-              >
-                {eachTeam.teamName ? eachTeam.teamName.label : null}
-              </MenuItem>
-            ))
-          : null}
-      </TextField>
 
       <Box
         m="40px 0 0 0"
@@ -162,9 +163,9 @@ function GetEventsOfTeam() {
       >
         <DataGrid
           className="datagrid"
-          rows={eventsOfTeam}
+          rows={teams}
           columns={columns}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row.teamId}
           components={{ Toolbar: GridToolbar }}
         />
       </Box>
@@ -174,4 +175,4 @@ function GetEventsOfTeam() {
   );
 }
 
-export default GetEventsOfTeam;
+export default ScoreBoard;

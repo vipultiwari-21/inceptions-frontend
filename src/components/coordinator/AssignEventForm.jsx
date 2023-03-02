@@ -32,6 +32,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import CircularProgress from "@material-ui/core/CircularProgress";
 // import { CheckboxWithLabel } from "formik-material-ui";
 import { MultiSelect } from "react-multi-select-component";
+import Loading from "../../Loading";
 
 const AssignEventForm = () => {
   const theme = useTheme();
@@ -45,12 +46,14 @@ const AssignEventForm = () => {
   const [teamId, setTeamId] = useState("");
   const [eventId, setEventId] = useState("");
   const [selected, setSelected] = useState([]);
+  const [pageLoading, setPageLoading] = useState(false);
 
   // console.log(events);
   // console.log(teamName);
   // console.log(teamMates);
 
   const getTeams = async () => {
+    setPageLoading(true);
     const { data } = await axios.get("/team/get");
     const temp = data.map((obj) => {
       return {
@@ -61,9 +64,11 @@ const AssignEventForm = () => {
 
     // allTeams.push(temp);
     setTeamName(temp);
+    setPageLoading(false);
   };
 
   const getEvents = async () => {
+    setPageLoading(true);
     const { data } = await axios.get("/event/get-short");
     // console.log("events list", data);
     let tempArray1 = [];
@@ -84,6 +89,7 @@ const AssignEventForm = () => {
       },
     ];
     setEvents(tempArray2);
+    setPageLoading(false);
   };
 
   function handleTeamSelectChange(e) {
@@ -223,7 +229,7 @@ const AssignEventForm = () => {
   //   },
   // ];
 
-  return (
+  return !pageLoading ? (
     <Box m="20px" sx={{ height: isNonMobile ? "90vh" : "100%" }}>
       <Header
         title="Assign Teamnates to the event"
@@ -276,12 +282,56 @@ const AssignEventForm = () => {
             }}
           >
             <div
-            // style={{
-            //   gridColumn: "span 4",
-            //   width: "50%",
-            // }}
+              style={{
+                marginTop: "2rem",
+                textAlign: "left",
+                marginBottom: "1rem",
+              }}
             >
-              <InputLabel id="team_id" style={{ color: "#fff" }}>
+              <InputLabel
+                id="team_id"
+                style={{ color: "#fff", marginBottom: ".5rem" }}
+              >
+                Event Name
+              </InputLabel>
+              <Select
+                style={{ backgroundColor: "#fff", textAlign: "left" }}
+                fullWidth
+                variant="filled"
+                // type="text"
+                label="Event ID"
+                // onBlur={handleBlur}
+                onChange={handleEventSelectChange}
+                value={eventId}
+                name="event_id"
+                labelId="event"
+                id="event_id"
+                // error={!!touched.team_id && !!errors.team_id}
+                // helperText={touched.team_id && errors.team_id}
+                sx={{ gridColumn: "span 4" }}
+              >
+                {events
+                  ? events.map((event) => (
+                      <MenuItem value={event.eventId} key={event.eventId}>
+                        {event.name}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </div>
+            <div
+              style={{
+                marginBottom: "1rem",
+              }}
+            >
+              <InputLabel
+                id="team_id"
+                style={{
+                  color: "#fff",
+                  textAlign: "left",
+                  marginBottom: ".5rem",
+                }}
+              >
                 Team Name
               </InputLabel>
               <Select
@@ -310,10 +360,10 @@ const AssignEventForm = () => {
               </Select>
             </div>
 
-            <div>
+            <div style={{ textAlign: "left" }}>
               <InputLabel
                 id="members_list"
-                sx={{ marginTop: "1.2rem", color: "#fff", marginTop: "2rem" }}
+                sx={{ color: "#fff", marginBottom: ".5rem" }}
               >
                 Team Members
               </InputLabel>
@@ -326,40 +376,6 @@ const AssignEventForm = () => {
                   labelledBy="Team Members"
                 />
               </div>
-            </div>
-
-            <div
-              style={{
-                marginTop: "2rem",
-              }}
-            >
-              <InputLabel id="team_id" style={{ color: "#fff" }}>
-                Event Name
-              </InputLabel>
-              <Select
-                style={{ backgroundColor: "#fff", textAlign: "left" }}
-                fullWidth
-                variant="filled"
-                // type="text"
-                label="Event ID"
-                // onBlur={handleBlur}
-                onChange={handleEventSelectChange}
-                value={eventId}
-                name="event_id"
-                labelId="event"
-                id="event_id"
-                // error={!!touched.team_id && !!errors.team_id}
-                // helperText={touched.team_id && errors.team_id}
-                sx={{ gridColumn: "span 4" }}
-              >
-                {events
-                  ? events.map((event) => (
-                      <MenuItem value={event.eventId} key={event.eventId}>
-                        {event.name}
-                      </MenuItem>
-                    ))
-                  : null}
-              </Select>
             </div>
           </Box>
           <Box
@@ -390,6 +406,8 @@ const AssignEventForm = () => {
         </form>
       </Box>
     </Box>
+  ) : (
+    <Loading />
   );
 };
 

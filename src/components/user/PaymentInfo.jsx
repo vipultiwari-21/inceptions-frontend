@@ -128,6 +128,7 @@ function PaymentInfo() {
 
       verifyPayment();
     } catch (err) {
+      console.log(err);
       Swal.fire({
         title: "Error!",
         text: "Something went wrong!! please try again!",

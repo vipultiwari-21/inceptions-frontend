@@ -10,6 +10,7 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Switch,
 } from "@mui/material";
 // import { tokens } from "../theme";
 import { useState, useEffect } from "react";
@@ -37,6 +38,8 @@ const VolunteerAttendance = () => {
   const [error, setError] = useState("");
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
+  const [selectedTeam, setSelectedTeam] = useState("");
+  const [presentState, setPresentState] = useState(false);
 
   const getTeams = async () => {
     const { data } = await axios.get("/team/get");
@@ -57,6 +60,7 @@ const VolunteerAttendance = () => {
   }, []);
 
   const handleChange = async (val) => {
+    setSelectedTeam(val);
     try {
       //   let obj = { teamId: values.team_id };
       //   console.log("obj", obj);
@@ -73,6 +77,7 @@ const VolunteerAttendance = () => {
           email: obj.email,
         };
       });
+      // console.log("asd", temp);
       setTeamMates(temp);
     } catch (err) {
       console.log(err);
@@ -80,11 +85,11 @@ const VolunteerAttendance = () => {
     }
   };
 
-  const handlePresent = async (memberId) => {
+  const handlePresent = async (memberId, status) => {
     try {
       const { data } = await axios.post("/teamMember/update-attendence", {
         memberId: memberId,
-        isPresent: true,
+        isPresent: status,
       });
 
       //console.log(data);
@@ -100,6 +105,28 @@ const VolunteerAttendance = () => {
       Swal.fire({
         title: "Error!",
         text: err.response.data.error,
+        icon: "error",
+        confirmButtonText: "Okay",
+      });
+    }
+  };
+
+  const entireTeamPresent = async () => {
+    try {
+      const { data } = await axios.post("/team/mark-team-attendance", {
+        teamId: selectedTeam,
+        isPresent: presentState,
+      });
+      Swal.fire({
+        title: "Success!",
+        text: data.status,
+        icon: "success",
+        confirmButtonText: "Okay",
+      });
+    } catch (err) {
+      Swal.fire({
+        title: "Error!",
+        text: "Error occured",
         icon: "error",
         confirmButtonText: "Okay",
       });
@@ -156,18 +183,25 @@ const VolunteerAttendance = () => {
       renderCell: ({ row, id }) => {
         let memberId = id;
 
+        let status = row.participantStatus;
+
         // console.log("row", row);
         // console.log("teamMates", teamMates);
         // teamMates.map((member) => console.log(member));
         // console.log("memeberId", memberId);
         return (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => handlePresent(memberId)}
-          >
-            Update attendance
-          </Button>
+          // <Button
+          //   color="primary"
+          //   variant="contained"
+          //   onClick={() => handlePresent(memberId)}
+          // >
+          //   Update attendance
+          // </Button>
+
+          <Switch
+            onChange={(e) => handlePresent(memberId, e.target.checked)}
+            checked={status}
+          />
         );
       },
     },
@@ -242,6 +276,13 @@ const VolunteerAttendance = () => {
               ))
             : null}
         </TextField>
+
+        <button
+          className="btn btn-outline btn-warning m-5"
+          onClick={entireTeamPresent}
+        >
+          {`${presentState ? "Set team present" : "Set team absent"}`}
+        </button>
 
         <Box
           m="40px 0 0 0"

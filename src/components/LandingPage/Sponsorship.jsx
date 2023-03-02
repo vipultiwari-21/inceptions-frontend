@@ -24,7 +24,6 @@ function Sponsorship() {
       >
         OUR SPONSORS
       </h1>
-
       <Grid container className="lg:p-20 " spacing={6}>
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
           <Box
@@ -137,6 +136,32 @@ function Sponsorship() {
             />
           </Box>
         </Grid>
+
+        <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+            sx={{ textAlign: "justify", fontSize: "1.8rem", color: "#fff" }}
+          >
+            CHARVI <br />
+            GLOBAL <br />
+            TECH
+          </Box>
+        </Grid>
+      </Grid>
+      <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          sx={{ textAlign: "center", fontSize: "1.8rem", color: "#fff" }}
+        >
+          MCA <br />
+          ALUMNIS
+        </Box>
       </Grid>
     </Container>
   );

@@ -16,6 +16,9 @@ const AdminProfile = () => {
   const [pageLoading, setPageLoading] = useState(false);
   const [totalGroupEvents, setTotalGroupEvents] = useState("");
   const [totalGCParticipants, setTotalGCParticipants] = useState("");
+  const [solvathonPaid, setSolvathonPaid] = useState(0);
+  const [StrikeForcePaid, setStrikeForcePaid] = useState(0);
+  const [IotPaid, setIotPaid] = useState(0);
 
   const fetchAllData = async () => {
     setPageLoading(true);
@@ -39,6 +42,9 @@ const AdminProfile = () => {
       setIoTTeams(OpenEventsCount.data.infinityAndBeyond);
       setStrikeForce(OpenEventsCount.data.strikeForce);
       setTotalParticipants(getTotalParticipants.data);
+      setStrikeForcePaid(OpenEventsCount.data.strikeForcePaidTeams);
+      setSolvathonPaid(OpenEventsCount.data.solvathonPaidTeams);
+      setIotPaid(OpenEventsCount.data.infinityAndBeyondPaidTeams);
 
       const onlyGCTeams = await axios.get("/admin/get-group-event-total-teams");
       setTotalGroupEvents(onlyGCTeams.data);
@@ -65,9 +71,12 @@ const AdminProfile = () => {
       className="flex justify-center items-center flex-col"
     >
       <Header title="Welcome Admin" subtitle="Dashboard" />
+      <h2 className="text-2xl text-left font-bold w-full ml-8">
+        General Updates
+      </h2>
 
       <Grid container className="lg:px-20 py-8 overflow-auto mt-5" spacing={6}>
-        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -85,7 +94,7 @@ const AdminProfile = () => {
             </div>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -103,7 +112,7 @@ const AdminProfile = () => {
             </div>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
           <Box
             display="flex"
             justifyContent="center"
@@ -112,9 +121,7 @@ const AdminProfile = () => {
           >
             <div className="card w-72 bg-primary text-primary-content">
               <div className="card-body">
-                <h2 className="card-title">
-                  Total teams in Group + Open event
-                </h2>
+                <h2 className="card-title">Teams in group+open events</h2>
                 <div className="card-actions w-full flex justify-center items-center">
                   <span className="text-5xl">{totalGCTeams}</span>
                 </div>
@@ -122,6 +129,25 @@ const AdminProfile = () => {
             </div>
           </Box>
         </Grid>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <div className="card w-72 bg-primary text-primary-content">
+              <div className="card-body">
+                <h2 className="card-title">Total teams only in group events</h2>
+                <div className="card-actions w-full flex justify-center items-center">
+                  <span className="text-5xl">{totalGroupEvents}</span>
+                </div>
+              </div>
+            </div>
+          </Box>
+        </Grid>
+
+        <h1 className="text-2xl font-bold text-center">Open Events</h1>
 
         <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
           <Box
@@ -178,8 +204,12 @@ const AdminProfile = () => {
             </div>
           </Box>
         </Grid>
-
-        <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
+      </Grid>
+      <h1 className="text-2xl font-bold text-left  ml-8 w-full">
+        Payment Status
+      </h1>
+      <Grid container className="lg:px-20 py-8 overflow-auto mt-5" spacing={6}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
           <Box
             display="flex"
             justifyContent="center"
@@ -188,9 +218,45 @@ const AdminProfile = () => {
           >
             <div className="card w-72 bg-primary text-primary-content">
               <div className="card-body">
-                <h2 className="card-title">Total teams only in group events</h2>
+                <h2 className="card-title">Total Paid in Solvathon</h2>
                 <div className="card-actions w-full flex justify-center items-center">
-                  <span className="text-5xl">{totalGroupEvents}</span>
+                  <span className="text-5xl">{solvathonPaid}</span>
+                </div>
+              </div>
+            </div>
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <div className="card w-72 bg-primary text-primary-content">
+              <div className="card-body">
+                <h2 className="card-title">Total Paid in Strike Force</h2>
+                <div className="card-actions w-full flex justify-center items-center">
+                  <span className="text-5xl">{StrikeForcePaid}</span>
+                </div>
+              </div>
+            </div>
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <div className="card w-72 bg-primary text-primary-content">
+              <div className="card-body">
+                <h2 className="card-title">Total Paid in Infinity & beyond</h2>
+                <div className="card-actions w-full flex justify-center items-center">
+                  <span className="text-5xl">{IotPaid}</span>
                 </div>
               </div>
             </div>

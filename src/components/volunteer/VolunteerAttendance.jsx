@@ -39,7 +39,7 @@ const VolunteerAttendance = () => {
   const isNonMobile = useMediaQuery("(min-width:650px)");
   const [teamName, setTeamName] = useState([] || {});
   const [selectedTeam, setSelectedTeam] = useState("");
-  const [presentState, setPresentState] = useState(false);
+  const [presentState, setPresentState] = useState(true);
 
   const getTeams = async () => {
     const { data } = await axios.get("/team/get");
@@ -58,6 +58,36 @@ const VolunteerAttendance = () => {
   useEffect(() => {
     getTeams();
   }, []);
+
+  const fetchTeamStatus = async () => {
+    try {
+      //   let obj = { teamId: values.team_id };
+      //   console.log("obj", obj);
+      const { data } = await axios.post("/team/get-specific-team-details", {
+        teamId: selectedTeam,
+      });
+
+      const checkStatus = (obj) => {
+        return obj.participantStatus == true;
+      };
+
+      const temp = data[0].teamMembers.map((obj) => {
+        return {
+          id: obj.memberId,
+          firstName: obj.firstName,
+          participantStatus: obj.isPresent,
+          contactNumber: obj.contactNumber,
+          email: obj.email,
+        };
+      });
+      // console.log("asd", temp.every(checkStatus));
+      setPresentState(temp.every(checkStatus));
+      setTeamMates(temp);
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+    }
+  };
 
   const handleChange = async (val) => {
     setSelectedTeam(val);
@@ -90,37 +120,11 @@ const VolunteerAttendance = () => {
     }
   };
 
-  const handlePresent = async (memberId, status) => {
-    try {
-      const { data } = await axios.post("/teamMember/update-attendence", {
-        memberId: memberId,
-        isPresent: status,
-      });
-
-      //console.log(data);
-
-      Swal.fire({
-        title: "Success!",
-        text: data.status,
-        icon: "success",
-        confirmButtonText: "Okay",
-      });
-    } catch (err) {
-      console.log(err);
-      Swal.fire({
-        title: "Error!",
-        text: err.response.data.error,
-        icon: "error",
-        confirmButtonText: "Okay",
-      });
-    }
-  };
-
   const entireTeamPresent = async () => {
     try {
       const { data } = await axios.post("/team/mark-team-attendance", {
         teamId: selectedTeam,
-        isPresent: presentState,
+        isPresent: !presentState,
       });
       Swal.fire({
         title: "Success!",
@@ -128,6 +132,8 @@ const VolunteerAttendance = () => {
         icon: "success",
         confirmButtonText: "Okay",
       });
+
+      handleChange(selectedTeam);
     } catch (err) {
       Swal.fire({
         title: "Error!",
@@ -225,44 +231,20 @@ const VolunteerAttendance = () => {
 
   return (
     <Box m="20px">
-      <Header
-        title="Get Specific Team Details"
-        subtitle="List of the specific teammates"
-      />
       <Box
         m="40px 0 0 0"
-        height="75vh"
+        height="100vh"
         sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .name-column--cell": {
-            color: "#94e2cd !important",
-            // color: colors.greenAccent[300],
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            // backgroundColor: colors.blueAccent[700],
-            backgroundColor: "#3e4396",
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: "#1F2A40",
-            // backgroundColor: colors.primary[400],
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: "#3e4396",
-            // backgroundColor: colors.blueAccent[700],
-          },
-          "& .MuiCheckbox-root": {
-            color: "#b7ebde !important",
-            // color: `${colors.greenAccent[200]} !important`,
-          },
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
         }}
       >
+        <Header
+          title="Get Specific Team Details"
+          subtitle="List of the specific teammates"
+        />
         <TextField
           select
           label="Select Team Name"
@@ -286,50 +268,8 @@ const VolunteerAttendance = () => {
           className="btn btn-outline btn-warning m-5"
           onClick={entireTeamPresent}
         >
-          {`${presentState ? "Set team present" : "Set team absent"}`}
+          {`${!presentState ? "Set team present" : "Set team absent"}`}
         </button>
-
-        <Box
-          m="40px 0 0 0"
-          height="75vh"
-          sx={{
-            "& .MuiDataGrid-root": {
-              border: "none",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none",
-            },
-            "& .name-column--cell": {
-              color: "#94e2cd !important",
-              // color: colors.greenAccent[300],
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              // backgroundColor: colors.blueAccent[700],
-              backgroundColor: "#3e4396",
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-virtualScroller": {
-              backgroundColor: "#1F2A40",
-              // backgroundColor: colors.primary[400],
-            },
-            "& .MuiDataGrid-footerContainer": {
-              borderTop: "none",
-              backgroundColor: "#3e4396",
-              // backgroundColor: colors.blueAccent[700],
-            },
-            "& .MuiCheckbox-root": {
-              color: "#b7ebde !important",
-              // color: `${colors.greenAccent[200]} !important`,
-            },
-          }}
-        >
-          <DataGrid
-            className="datagrid"
-            rows={teamMates}
-            columns={columns}
-            getRowId={(row) => row.id}
-          />
-        </Box>
       </Box>
     </Box>
   );

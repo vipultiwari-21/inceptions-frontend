@@ -282,12 +282,56 @@ const AssignEventForm = () => {
             }}
           >
             <div
-            // style={{
-            //   gridColumn: "span 4",
-            //   width: "50%",
-            // }}
+              style={{
+                marginTop: "2rem",
+                textAlign: "left",
+                marginBottom: "1rem",
+              }}
             >
-              <InputLabel id="team_id" style={{ color: "#fff" }}>
+              <InputLabel
+                id="team_id"
+                style={{ color: "#fff", marginBottom: ".5rem" }}
+              >
+                Event Name
+              </InputLabel>
+              <Select
+                style={{ backgroundColor: "#fff", textAlign: "left" }}
+                fullWidth
+                variant="filled"
+                // type="text"
+                label="Event ID"
+                // onBlur={handleBlur}
+                onChange={handleEventSelectChange}
+                value={eventId}
+                name="event_id"
+                labelId="event"
+                id="event_id"
+                // error={!!touched.team_id && !!errors.team_id}
+                // helperText={touched.team_id && errors.team_id}
+                sx={{ gridColumn: "span 4" }}
+              >
+                {events
+                  ? events.map((event) => (
+                      <MenuItem value={event.eventId} key={event.eventId}>
+                        {event.name}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </div>
+            <div
+              style={{
+                marginBottom: "1rem",
+              }}
+            >
+              <InputLabel
+                id="team_id"
+                style={{
+                  color: "#fff",
+                  textAlign: "left",
+                  marginBottom: ".5rem",
+                }}
+              >
                 Team Name
               </InputLabel>
               <Select
@@ -316,10 +360,10 @@ const AssignEventForm = () => {
               </Select>
             </div>
 
-            <div>
+            <div style={{ textAlign: "left" }}>
               <InputLabel
                 id="members_list"
-                sx={{ marginTop: "1.2rem", color: "#fff", marginTop: "2rem" }}
+                sx={{ color: "#fff", marginBottom: ".5rem" }}
               >
                 Team Members
               </InputLabel>
@@ -332,40 +376,6 @@ const AssignEventForm = () => {
                   labelledBy="Team Members"
                 />
               </div>
-            </div>
-
-            <div
-              style={{
-                marginTop: "2rem",
-              }}
-            >
-              <InputLabel id="team_id" style={{ color: "#fff" }}>
-                Event Name
-              </InputLabel>
-              <Select
-                style={{ backgroundColor: "#fff", textAlign: "left" }}
-                fullWidth
-                variant="filled"
-                // type="text"
-                label="Event ID"
-                // onBlur={handleBlur}
-                onChange={handleEventSelectChange}
-                value={eventId}
-                name="event_id"
-                labelId="event"
-                id="event_id"
-                // error={!!touched.team_id && !!errors.team_id}
-                // helperText={touched.team_id && errors.team_id}
-                sx={{ gridColumn: "span 4" }}
-              >
-                {events
-                  ? events.map((event) => (
-                      <MenuItem value={event.eventId} key={event.eventId}>
-                        {event.name}
-                      </MenuItem>
-                    ))
-                  : null}
-              </Select>
             </div>
           </Box>
           <Box

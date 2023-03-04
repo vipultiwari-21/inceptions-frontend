@@ -241,6 +241,7 @@ const RemoveEventForm = () => {
         });
         setTeamId("");
         setSelected([]);
+        setEventId("");
       } catch (err) {
         Swal.fire({
           title: "Error!",

@@ -220,13 +220,15 @@ function Payment() {
           </Box>
 
           <Box className="">
-            <a
+            {/*
+           <a
               className="btn btn-warning btn-outline"
               href="https://rzp.io/l/saPTXGGI"
               target="_blank"
             >
               Proceed to Payment
             </a>
+          */}
           </Box>
         </Box>
       )

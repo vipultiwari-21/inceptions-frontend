@@ -43,7 +43,8 @@ function LandingPage() {
 
             <GroupEvents />
 
-            <Box className="flex justify-center items-center flex-col">
+            {/**
+              <Box className="flex justify-center items-center flex-col">
               <p className="event-details text-xl my-5 text-success">
                 Time is ticking on and spaceship is about to launch
               </p>
@@ -54,6 +55,7 @@ function LandingPage() {
                 Register Now
               </Link>
             </Box>
+          */}
           </div>
 
           {/*<Events /> */}

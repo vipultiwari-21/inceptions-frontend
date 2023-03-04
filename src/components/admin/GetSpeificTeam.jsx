@@ -65,6 +65,11 @@ const GetSpecificTeam = () => {
       headerName: "First Name",
       flex: 1,
     },
+    {
+      field: "lastName",
+      headerName: "Last Name",
+      flex: 1,
+    },
     // {
     //   field: "lastName",
     //   headerName: "Last Name",

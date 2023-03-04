@@ -431,10 +431,7 @@ export default function Schedule() {
                       <td className="responsive-table__body__text responsive-table__body__text--name">
                         {round.roundName}
                       </td>
-                      <td className="responsive-table__body__text responsive-table__body__text--status">
-                        <span className="status-indicator status-indicator--new"></span>
-                        {round.status}
-                      </td>
+
                       <td className="responsive-table__body__text responsive-table__body__text--types">
                         {round.venue}{" "}
                       </td>

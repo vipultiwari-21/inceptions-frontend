@@ -60,21 +60,12 @@ function Banner() {
             </div>
 
             {/* Register btn */}
-            <div className="w-100 flex justify-center align-center lg:justify-start">
-              <Link
-                to="/register"
-                className="btn btn-wide align-center btn-outline btn-warning my-8 btn-md lg:btn-lg"
-              >
-                JOIN US NOW
-              </Link>
-            </div>
 
             {/* Countdown */}
 
             <h3 className="text-xl lg:text-2xl text-center lg:text-left my-3 text-warning uppercase font-extrabold mt-8 "></h3>
             <div className="ml-12 md:ml-32 lg:ml-0 text-2xl font-bold text-warning">
-              Prepare to be blown away by the sheer magnificence of our Magnum
-              Opus!
+              Registrations Closed!!
             </div>
           </div>
 

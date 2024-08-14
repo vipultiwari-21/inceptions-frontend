@@ -352,7 +352,7 @@ const TeamInfo = () => {
                 fontWeight="bold"
                 mb="2rem"
               >
-                EXCEPTIONS - 2023
+                INCEPTIONS - 2023
               </Typography>
               {error && (
                 <Box

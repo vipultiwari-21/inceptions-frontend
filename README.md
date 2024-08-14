@@ -1,17 +1,17 @@
-# EXCEPTIONS 2023
+# INCEPTIONS 2023
 
 ## Contribution Guidelines
 
 Clone the repository:
 
 ```sh
-git clone https://github.com/puneethkumar-v/exceptions-frontend.git
+git clone https://github.com/vipultiwari-21/inceptions-frontend.git
 ```
 
 ## Change the directory into the project directory:
 
 ```sh
-cd exceptions-frontend
+cd inceptions-frontend
 ```
 
 ## Install all the dependencies:

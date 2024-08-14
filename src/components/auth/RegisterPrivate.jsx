@@ -100,7 +100,7 @@ function RegisterPrivate() {
                           className="text-xl font-semibold  mb-3 pb-1 text-primary"
                           style={{ fontFamily: "Orbitron" }}
                         >
-                          EXCEPTIONS - 2023
+                          INCEPTIONS - 2023
                         </h4>
                       </div>
                       <Formik

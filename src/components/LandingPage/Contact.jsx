@@ -35,16 +35,16 @@ function Contact() {
             flexDirection="column"
           >
             <img src={MaleAstronaut} alt="male" className="img-contact" />
-            <h3 className="text-center  text-xl text-bold">NITHIN</h3>
+            <h3 className="text-center  text-xl text-bold">Vipul Tiwari</h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#E6E6E6  " }} />
-              <a href="mailto:nithin.mca21@rvce.edu.in">
-                nithin.mca21@rvce.edu.in
+              <a href="mailto:vipultiwari.mca21@rvce.edu.in">
+                vipultiwari.mca21@rvce.edu.in
               </a>
             </h4>
             <h4 className="text-center text-xl text-bold">
               <LocalPhoneIcon className="mr-3" style={{ color: "#E6E6E6 " }} />
-              <a href="tel:+91-8310193605">+91 8310193605</a>
+              <a href="tel:+91-8310193605">+91 8282893303</a>
             </h4>{" "}
           </Box>
         </Grid>
@@ -57,16 +57,16 @@ function Contact() {
             flexDirection="column"
           >
             <img src={FemaleAstronaut} alt="male" className="img-contact" />
-            <h3 className="text-center  text-xl text-bold">SANJANA AVADHANI</h3>
+            <h3 className="text-center  text-xl text-bold">ABC</h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#E6E6E6" }} />
-              <a href="mailto:sanjanaga.mca21@rvce.edu.in">
-                sanjanaga.mca21@rvce.edu.in
+              <a href="mailto:abc.mca21@rvce.edu.in">
+                abc.mca21@rvce.edu.in
               </a>
             </h4>
             <h4 className="text-center text-xl text-bold">
               <LocalPhoneIcon className="mr-3" style={{ color: "#E6E6E6" }} />
-              <a href="tel:+91 99010 91362">+91 99010 91362</a>
+              <a href="tel:+91 99010 91362">+91 0000000000</a>
             </h4>
           </Box>
         </Grid>
@@ -87,16 +87,16 @@ function Contact() {
             flexDirection="column"
           >
             <img src={MaleAstronaut2} alt="male" className="img-contact" />
-            <h3 className="text-center  text-xl text-bold">RANJITH KUMAR J</h3>
+            <h3 className="text-center  text-xl text-bold">Dummy </h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#E6E6E6  " }} />
-              <a href="mailto:ranjithkj.mca21@rvce.edu.in">
-                ranjithkj.mca21@rvce.edu.in
+              <a href="mailto:dummy.mca21@rvce.edu.in">
+                dummy.mca21@rvce.edu.in
               </a>
             </h4>
             <h4 className="text-center text-xl text-bold">
               <LocalPhoneIcon className="mr-3" style={{ color: "#E6E6E6 " }} />
-              <a href="tel:+91-8884601647">+91 8884601647</a>
+              <a href="tel:+91-8884601647">+91 9999999999</a>
             </h4>{" "}
           </Box>
         </Grid>
@@ -109,16 +109,16 @@ function Contact() {
             flexDirection="column"
           >
             <img src={FemaleAstronaut2} alt="male" className="img-contact" />
-            <h3 className="text-center  text-xl text-bold">DAIZY DSOUZA</h3>
+            <h3 className="text-center  text-xl text-bold">Dummy name</h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#E6E6E6" }} />
-              <a href="mailto:sanjanaga.mca21@rvce.edu.in">
-                daizyd.mca21@rvce.edu.in
+              <a href="mailto:dummy_name.mca21@rvce.edu.in">
+                dummy_name.mca21@rvce.edu.in
               </a>
             </h4>
             <h4 className="text-center text-xl text-bold">
               <LocalPhoneIcon className="mr-3" style={{ color: "#E6E6E6" }} />
-              <a href="tel:+91 99010 91362">+91 99010 91362</a>
+              <a href="tel:+91 99010 91362">+91 8282893303</a>
             </h4>
           </Box>
         </Grid>
@@ -145,8 +145,8 @@ function Contact() {
             </h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#E6E6E6  " }} />
-              <a href="mailto:savitas.sheelavant@rvce.edu.in">
-                savitas.sheelavant@rvce.edu.in
+              <a href="mailto:ss.sheelavant@rvce.edu.in">
+                ss@rvce.edu.in
               </a>
             </h4>
           </Box>
@@ -167,8 +167,8 @@ function Contact() {
             </h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#E6E6E6" }} />
-              <a href="mailto:andhedharani@rvce.edu.in">
-                andhedharani@rvce.edu.in
+              <a href="mailto:ad@rvce.edu.in">
+                ad@rvce.edu.in
               </a>
             </h4>
           </Box>
@@ -186,7 +186,7 @@ function Contact() {
             <h3 className="text-center  text-xl text-bold">Dr. SAVITHA R</h3>
             <h4 className="text-center my-1 text-xl text-bold flex ">
               <EmailIcon className="mr-3" style={{ color: "#E6E6E6" }} />
-              <a href="mailto:savithar@rvce.edu.in">savithar@rvce.edu.in</a>
+              <a href="mailto:sr@rvce.edu.in">sr@rvce.edu.in</a>
             </h4>
           </Box>
         </Grid>

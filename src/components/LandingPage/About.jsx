@@ -64,7 +64,7 @@ function About() {
 
       <Container maxWidth=" my-16 text-neutral-content" id="about">
         <h1 className="sub-heading text-secondary text-bold text-3xl ">
-          ABOUT EXCEPTIONS
+          ABOUT INCEPTIONS
         </h1>
 
         {/*

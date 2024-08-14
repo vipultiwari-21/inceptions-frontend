@@ -49,7 +49,7 @@ function Banner() {
 
               <h3 className="text-4xl headings  text-primary  sm:text-4xl md:text-6xl lg:text-7xl title ">
                 {" "}
-                EXCEPTIONS
+                INCEPTIONS
                 <br /> 2023
               </h3>
 

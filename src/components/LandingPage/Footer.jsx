@@ -63,7 +63,7 @@ function Footer() {
       <div className="devw-screen bg-neutral text-neutral-content text-center font-bold p-5 event-details">
         <p className="text-2xl text-warning">Designed & Developed by</p>
         <div className="flex flex-col lg:flex-row text-center text-xl">
-          <span className="mx-3 hover:underline sm:my-1">
+          {/* <span className="mx-3 hover:underline sm:my-1">
             <a
               className="text-neutral-content   cursor-pointer"
               href="https://github.com/akashpunagin"
@@ -71,17 +71,17 @@ function Footer() {
             >
               Akash E Punagin
             </a>
-          </span>
+          </span> */}
           <span className="mx-3 hover:underline sm:my-1">
             <a
               className="text-neutral-content cursor-pointer"
-              href="https://github.com/puneethkumar-v"
+              href="https://github.com/vipultiwari-21"
               target="_blank"
             >
-              Puneeth Kumar V
+              Vipul Tiwari
             </a>
           </span>
-          <span className="mx-3 hover:underline sm:my-1">
+          {/* <span className="mx-3 hover:underline sm:my-1">
             <a
               className="text-neutral-content cursor-pointer"
               href="https://github.com/i-punithgowda"
@@ -89,7 +89,7 @@ function Footer() {
             >
               Punith Gowda S P
             </a>
-          </span>
+          </span> */}
         </div>
       </div>
     </footer>
